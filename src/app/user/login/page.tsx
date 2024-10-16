@@ -1,13 +1,28 @@
+"use client"
 import InputField from "@/components/InputField";
 import logo from "../../../images/Logo.png";
 import Image from "next/image";
-import mailicon from "../../../images/icons/mail-icon.svg";
-import passwordopenicon from "../../../images/icons/passwordopen-icon.svg";
+import mailicon from "../../../images/icons/mail.svg";
+import passwordopenicon from "../../../images/icons/eye.svg";
 import Button from "@/components/Button";
 import Link from "next/link";
+import { useFormik } from "formik";
+import { validationSchemaLogin } from "@/app/validation";
 type Props = {};
 
 const LoginPage = (props: Props) => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
+    validationSchema: validationSchemaLogin,
+    onSubmit: (values) => {
+      console.log("Form data:", values);
+      // Add your login logic here
+    },
+  });
   return (
     <div>
       <div className="w-full pt-[106px] lg:pt-24 flex flex-col gap-4 lg:gap-[57.2px] lg:mb-[242px]">
@@ -22,35 +37,56 @@ const LoginPage = (props: Props) => {
               <p className=" text-sm lg:text-base text-[#989FAD] mt-[14px]">
                 Welcome back! Let’s get you into Sendeet
               </p>
-              <div className="flex flex-col mt-10 gap-4">
-                <InputField
-                  iconSrc={mailicon}
-                  inputType="email"
-                  label="Work Email Address"
-                  placeholder="example@companyname.com"
-                />
-                <InputField
-                  iconSrc={passwordopenicon}
-                  inputType="email"
-                  label="Password"
-                  placeholder="*********"
-                />
-              </div>
-              <div className="flex text-[#009BE1] items-end justify-end w-full mt-[8px]">
-                <Link
-                  href={"/"}
-                  className="text-right font-medium leading-5 text-sm"
-                >
-                  Forgot Password?
-                </Link>
-              </div>
-              <div className="mt-8">
-                <Button />
-              </div>
+              <form onSubmit={formik.handleSubmit} className="w-full">
+             
+                <div className="flex flex-col mt-10 gap-4">
+                  <InputField
+                    iconSrc={mailicon}
+                    inputType="email"
+                    label="Work Email Address"
+                    id="email"
+                    name="email"
+                    placeholder="example@companyname.com"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={Boolean(formik.touched.email && formik.errors.email)}
+                    errorText={formik.errors.email}
+                  />
+                  <InputField
+                    iconSrc={passwordopenicon}
+                    inputType="email"
+                    label="Password"
+                    id="password"
+                    name="password"
+                    placeholder="*********"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={Boolean(
+                      formik.touched.password && formik.errors.password
+                    )}
+                    errorText={formik.errors.password}
+                  />
+                </div>
+                <div className="flex text-[#009BE1] items-end justify-end w-full mt-[8px]">
+                  <Link
+                    href={"/"}
+                    className="text-right font-medium leading-5 text-sm"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
+                <div className="mt-8">
+                  <Button text="Continue" />
+                </div>
+              </form>
               <div className="flex items-center mt-10 justify-center gap-1">
-                <p className="text-[#667085]  text-sm leading-[20px]  lg:text-base  lg:leading-[20.3px]">Are you new here?</p>
+                <p className="text-[#667085]  text-sm leading-[20px]  lg:text-base  lg:leading-[20.3px]">
+                  Are you new here?
+                </p>
                 <Link
-                  href={"/"}
+                  href={"/user/signup"}
                   className="text-[#009BE1] text-sm leading-[20px] lg:leading-[20.3px] lg:text-base font-semibold"
                 >
                   Create Account
