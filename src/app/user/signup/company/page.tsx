@@ -1,26 +1,41 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useFormik } from "formik";
+import { useFormik, FormikProps } from "formik";
 import { validationSchemaCompany } from "@/app/validation";
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import SelectField from "@/components/SelectField";
-
 import Modal from "../Modal";
 import { employeeCountOptions, industryOptions, subscriberRangeOptions } from "@/utils/data";
 
-const Company = () => {
+
+interface FormValues {
+  brn: string;
+  industry: string;
+  employeeCount: string;
+  subscriberRange: string;
+}
+
+
+interface DropdownStates {
+  industry: boolean;
+  employeeCount: boolean;
+  subscriberRange: boolean;
+}
+
+const Company: React.FC = () => {
   const router = useRouter();
-  const [dropdownStates, setDropdownStates] = useState({
+
+  const [dropdownStates, setDropdownStates] = useState<DropdownStates>({
     industry: false,
     employeeCount: false,
     subscriberRange: false,
   });
 
-  const [isModalOpen, setModalOpen] = useState(false); // Modal visibility state
+  const [isModalOpen, setModalOpen] = useState<boolean>(false); // Modal visibility state
 
-  const formik = useFormik({
+  const formik: FormikProps<FormValues> = useFormik<FormValues>({
     initialValues: {
       brn: "",
       industry: "",
@@ -30,29 +45,30 @@ const Company = () => {
     validationSchema: validationSchemaCompany,
     onSubmit: (values) => {
       console.log(values);
-      setModalOpen(true); 
+      setModalOpen(true);
     },
   });
 
-  const toggleDropdown = (field: keyof typeof dropdownStates) => {
+  const toggleDropdown = (field: keyof DropdownStates) => {
     setDropdownStates((prev) => ({
       ...prev,
       [field]: !prev[field],
       // Close other dropdowns when opening one
-      ...(Object.keys(prev) as Array<keyof typeof dropdownStates>).reduce(
+      ...(Object.keys(prev) as Array<keyof DropdownStates>).reduce(
         (acc, key) => {
           if (key !== field) acc[key] = false;
           return acc;
         },
-        {} as typeof dropdownStates
+        {} as DropdownStates
       ),
     }));
   };
 
-  const handleSelect = (field: keyof typeof dropdownStates, value: string) => {
+  const handleSelect = (field: keyof FormValues, value: string) => {
     formik.setFieldValue(field, value);
     setDropdownStates((prev) => ({ ...prev, [field]: false })); // Close the dropdown
   };
+
   
   return (
     <div className="mt-10 px-6 lg:px-7 mb-10">
@@ -126,8 +142,8 @@ const Company = () => {
             }
             name="subscriberRange"
           />
-          <Button className="mt-8" text="Finish setup" type="submit" />
         </div>
+          <Button className="mt-8" text="Finish setup" type="submit" />
       </form>
     </div>
   );

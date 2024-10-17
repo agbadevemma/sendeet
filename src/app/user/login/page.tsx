@@ -20,7 +20,7 @@ const LoginPage = (props: Props) => {
     validationSchema: validationSchemaLogin,
     onSubmit: (values) => {
       console.log("Form data:", values);
-      // Add your login logic here
+    
     },
   });
   return (
@@ -71,7 +71,7 @@ const LoginPage = (props: Props) => {
                 </div>
                 <div className="flex text-[#009BE1] items-end justify-end w-full mt-[8px]">
                   <Link
-                    href={"/"}
+                    href={"/user/forgotpassword"}
                     className="text-right font-medium leading-5 text-sm"
                   >
                     Forgot Password?

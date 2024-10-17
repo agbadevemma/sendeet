@@ -24,7 +24,9 @@ const Checkbox = ({
     <div className={`${className}`}>
       <div
         className={`rounded-[6px] border border-solid cursor-pointer ${
-          checked ? "bg-[#E6F7FE] border-[#00AAF7] text-[#00AAF7] px-[3px]" : "border-[#D0D5DD]"
+          checked
+            ? "bg-[#E6F7FE] border-[#00AAF7] text-[#00AAF7] px-[3px]"
+            : "border-[#D0D5DD]"
         }  h-[20px] w-[20px]  flex items-center justify-center`}
       >
         {checked && (
@@ -37,6 +39,24 @@ const Checkbox = ({
           >
             <path
               d="M11.6666 3.5L5.24992 9.91667L2.33325 7"
+              stroke="#00AAF7"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        )}
+
+        {indeterminate && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="2"
+            viewBox="0 0 12 2"
+            fill="none"
+          >
+            <path
+              d="M1.91675 1H10.0834"
               stroke="#00AAF7"
               stroke-width="2"
               stroke-linecap="round"
