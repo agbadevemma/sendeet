@@ -6,7 +6,7 @@ type Props = {
   name?: string;
   checked?: boolean;
   indeterminate?: boolean; // Add indeterminate prop
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   className?: string;
 };
@@ -16,26 +16,34 @@ const Checkbox = ({
   name,
   checked = false, // Default to false
   indeterminate = false, // Default to false (not indeterminate)
-  onChange,
+  onClick,
   onBlur,
   className,
 }: Props) => {
   return (
     <div className={`${className}`}>
-      <div className="">
-        <input
-          type="checkbox"
-          id={id}
-          name={name}
-          // Use ref to directly manipulate DOM for indeterminate state
-          checked={checked} // Controlled checkbox state
-          onChange={onChange}
-          onBlur={onBlur}
-          className={`w-4 h-4 peer cursor-pointer border form-checkbox focus:ring-0 ${
-            checked || indeterminate ? "border-blue-500" : "border-gray-300"
-          } rounded-[4px]`}
-        />
-        
+      <div
+        className={`rounded-[6px] border border-solid cursor-pointer ${
+          checked ? "bg-[#E6F7FE] border-[#00AAF7] text-[#00AAF7] px-[3px]" : "border-[#D0D5DD]"
+        }  h-[20px] w-[20px]  flex items-center justify-center`}
+      >
+        {checked && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+          >
+            <path
+              d="M11.6666 3.5L5.24992 9.91667L2.33325 7"
+              stroke="#00AAF7"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        )}
       </div>
     </div>
   );

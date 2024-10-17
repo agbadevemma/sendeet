@@ -39,7 +39,11 @@ const InputField = ({
         <label htmlFor="" className=" text-[#101928]  text-sm lg:text-base ">
           {label}
         </label>
-        <div className="flex group-focus-within:border-[#B0E5FD]  rounded-lg gap-3 items-center justify-between border border-solid  border-[#D0D5DD] p-4">
+        <div
+          className={`flex  ${
+            error ? "border-[#D42620] " : "border-[#D0D5DD] group-focus-within:border-[#B0E5FD] "
+          } rounded-lg gap-3 items-center justify-between border border-solid   p-4`}
+        >
           <input
             type={inputType}
             id={id}
@@ -55,7 +59,7 @@ const InputField = ({
           )}
         </div>
       </div>
-      {error && <p className="text-xs text-red-500">{errorText}</p>}
+      {error && <p className="text-xs text-[#D42620]">{errorText}</p>}
     </div>
   );
 };

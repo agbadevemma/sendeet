@@ -22,11 +22,11 @@ export default function DashboardLayout({
             <Image src={logo} alt="logo" className=" w-32 mx-auto lg:mx-0  " />
             <div className="lg:mt-[57.6px] mt-8">
               <div className="w-fit gap-4 mx-auto lg:mx-0 lg:pl-8 flex">
-              <Link
-                  href={"/user/signup"}className="flex items-center gap-[10px]">
-                  
+                <Link
+                  href={"/user/signup"}
+                  className="flex items-center gap-[10px]"
+                >
                   <p
-                 
                     className={`max-w-[67px] text-xs lg:text-sm   w-full ${
                       pathname === "/user/signup"
                         ? "text-[#00AAF7]"
@@ -42,7 +42,9 @@ export default function DashboardLayout({
                   )}
                 </Link>
                 <Link
-                  href={"/user/signup/basic-info"} className="flex items-center gap-[10px]">
+                  href={"/user/signup/basic-info"}
+                  className="flex items-center gap-[10px]"
+                >
                   <p
                     className={`max-w-[67px] text-xs lg:text-sm   w-full ${
                       pathname === "/user/signup/basic-info"
@@ -59,7 +61,9 @@ export default function DashboardLayout({
                   )}
                 </Link>
                 <Link
-                  href={"/user/signup/company"}  className="flex items-center gap-[10px]">
+                  href={"/user/signup/company"}
+                  className="flex items-center gap-[10px]"
+                >
                   <p
                     className={`max-w-[67px] text-xs lg:text-sm   w-full ${
                       pathname === "/user/signup/company"
@@ -76,15 +80,11 @@ export default function DashboardLayout({
                     <Image src={arrowinactive} alt="icon" />
                   )}{" "}
                 </Link>{" "}
-               
-                <Link
-                  href={"/user/signup/company"} className={` text-xs lg:text-sm    ${
-                      pathname === "/user/signup/finish-setup"
-                        ? "text-[#00AAF7]"
-                        : "text-[#989FAD]"
-                    }`}>
+                <p
+                  className={` text-xs lg:text-sm    ${"text-[#989FAD]"}`}
+                >
                   Finish setup
-                </Link>
+                </p>
               </div>
 
               {children}

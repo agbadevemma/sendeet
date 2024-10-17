@@ -9,11 +9,14 @@ import location from "../../../../images/icons/map-marker.svg";
 import building from "../../../../images/icons/building-5.svg";
 import globe from "../../../../images/icons/globe.svg";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type Props = {};
 
 const FinishSetup = (props: Props) => {
   const router = useRouter();
+  const [isModalOpen, setModalOpen] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -116,14 +119,16 @@ const FinishSetup = (props: Props) => {
             />
           </div>
           <div className="flex flex-col">
-            <div className="mt-[8px] gap-2 flex items-center text-[#383E49]">
+            <div
+              onClick={() => {
+                formik.setFieldValue("hasWebsite", !formik.values.hasWebsite);
+              }}
+              className="mt-[8px] gap-2 flex items-center text-[#383E49]"
+            >
               <Checkbox
                 id="hasWebsite"
                 name="hasWebsite"
                 checked={formik.values.hasWebsite}
-                onChange={(e) => {
-                  formik.setFieldValue("hasWebsite", e.target.checked);
-                }}
               />{" "}
               <p className=" text-[#383E49] text-sm">I don’t have a website</p>
             </div>

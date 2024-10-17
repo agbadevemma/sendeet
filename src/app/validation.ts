@@ -25,7 +25,7 @@ export const validationSchemaBasicInfo = Yup.object({
     .min(2, "Last name must be at least 2 characters"),
   companyName: Yup.string().required("Company name is required"),
   companyAddress: Yup.string().required("Company address is required"),
-  website: Yup.string().url("Invalid URL").notRequired(),
+  website: Yup.string().url("Invalid URL").required(),
   hasWebsite: Yup.boolean(),
 });
 
@@ -35,4 +35,10 @@ export const validationSchemaCompany = Yup.object({
     .matches(/^[0-9]+$/, "Must be only digits")
     .min(2, "Business Registration Number must be at least 2 digits")
     .max(20, "Business Registration Number must not exceed 20 digits"),
+
+  industry: Yup.string().required("Industry is required"),
+
+  employeeCount: Yup.string().required("Employee count is required"),
+
+  subscriberRange: Yup.string().required("Subscriber range is required"),
 });
