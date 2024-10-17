@@ -5,6 +5,7 @@ import Image from "next/image";
 import arrowactive from "../../../images/icons/chevron-right-active.svg";
 import arrowinactive from "../../../images/icons/chevron-right-inactive.svg";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 export default function DashboardLayout({
   children,
 }: {
@@ -21,43 +22,47 @@ export default function DashboardLayout({
             <Image src={logo} alt="logo" className=" w-32 mx-auto lg:mx-0  " />
             <div className="lg:mt-[57.6px] mt-8">
               <div className="w-fit gap-4 mx-auto lg:mx-0 lg:pl-8 flex">
-                <p className="flex items-center gap-[10px]">
+              <Link
+                  href={"/user/signup"}className="flex items-center gap-[10px]">
                   
                   <p
-                    className={`max-w-[67px] text-sm   w-full ${
-                      pathname == "/user/signup"
+                 
+                    className={`max-w-[67px] text-xs lg:text-sm   w-full ${
+                      pathname === "/user/signup"
                         ? "text-[#00AAF7]"
                         : "text-[#989FAD]"
                     }`}
                   >
                     Account
                   </p>
-                  {pathname == "/user/signup" ? (
-                    <Image src={arrowactive} alt="cool" />
+                  {pathname === "/user/signup" ? (
+                    <Image src={arrowactive} alt="icon" />
                   ) : (
-                    <Image src={arrowinactive} alt="cool" />
+                    <Image src={arrowinactive} alt="icon" />
                   )}
-                </p>
-                <p className="flex items-center gap-[10px]">
+                </Link>
+                <Link
+                  href={"/user/signup/basic-info"} className="flex items-center gap-[10px]">
                   <p
-                    className={`max-w-[67px] text-sm   w-full ${
-                      pathname == "/user/signup/basic-info"
+                    className={`max-w-[67px] text-xs lg:text-sm   w-full ${
+                      pathname === "/user/signup/basic-info"
                         ? "text-[#00AAF7]"
                         : "text-[#989FAD]"
                     }`}
                   >
                     Basic info
                   </p>
-                  {pathname == "/user/signup/basic-info" ? (
-                    <Image src={arrowactive} alt="cool" />
+                  {pathname === "/user/signup/basic-info" ? (
+                    <Image src={arrowactive} alt="icon" />
                   ) : (
-                    <Image src={arrowinactive} alt="cool" />
+                    <Image src={arrowinactive} alt="icon" />
                   )}
-                </p>
-                <p className="flex items-center gap-[10px]">
+                </Link>
+                <Link
+                  href={"/user/signup/company"}  className="flex items-center gap-[10px]">
                   <p
-                    className={`max-w-[67px] text-sm   w-full ${
-                      pathname == "/user/signup/company"
+                    className={`max-w-[67px] text-xs lg:text-sm   w-full ${
+                      pathname === "/user/signup/company"
                         ? "text-[#00AAF7]"
                         : "text-[#989FAD]"
                     }`}
@@ -65,20 +70,21 @@ export default function DashboardLayout({
                     {" "}
                     Company
                   </p>{" "}
-                  {pathname == "/user/signup/company" ? (
-                    <Image src={arrowactive} alt="cool" />
+                  {pathname === "/user/signup/company" ? (
+                    <Image src={arrowactive} alt="icon" />
                   ) : (
-                    <Image src={arrowinactive} alt="cool" />
+                    <Image src={arrowinactive} alt="icon" />
                   )}{" "}
-                </p>{" "}
+                </Link>{" "}
                
-                <p className={` text-sm    ${
-                      pathname == "/user/signup/finish-setup"
+                <Link
+                  href={"/user/signup/company"} className={` text-xs lg:text-sm    ${
+                      pathname === "/user/signup/finish-setup"
                         ? "text-[#00AAF7]"
                         : "text-[#989FAD]"
                     }`}>
                   Finish setup
-                </p>
+                </Link>
               </div>
 
               {children}

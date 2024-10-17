@@ -3,3 +3,14 @@
 @tailwind utilities;
 
 /* styles.css */
+/* Remove arrows from number input for Webkit browsers (Chrome, Safari, newer versions of Opera) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove arrows from number input for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

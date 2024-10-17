@@ -25,7 +25,7 @@ export default function RootLayout({
       <body
         className={` antialiased ${inter.className}`}
       >
-        <NextTopLoader />
+        <NextTopLoader showSpinner={false}  />
         {children}
       </body>
     </html>

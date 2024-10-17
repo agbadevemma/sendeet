@@ -9,10 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       boxShadow: {
-        'button-skeu': '0px 1px 2px 0px rgba(16, 24, 40, 0.24), 0px 0px 0px 1px #00AAF7',
+        "button-skeu":
+          "0px 1px 2px 0px rgba(16, 24, 40, 0.24), 0px 0px 0px 1px #00AAF7",
       },
       backgroundImage: {
-        'button-skeu': 'linear-gradient(180deg, rgba(255, 255, 255, 0.20) 14.55%, rgba(0, 121, 175, 0.20) 100%), #00AAF7',
+        "button-skeu":
+          "linear-gradient(180deg, rgba(255, 255, 255, 0.20) 14.55%, rgba(0, 121, 175, 0.20) 100%), #00AAF7",
       },
       colors: {
         background: "var(--background)",
@@ -20,6 +22,11 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      // only generate global styles
+      strategy: "class", // only generate classes
+    }),
+  ],
 };
 export default config;

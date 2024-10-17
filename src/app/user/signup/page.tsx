@@ -9,10 +9,12 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import { validationSchema } from "@/app/validation";
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const Signup = (props: Props) => {
+  const router=useRouter()
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -20,7 +22,9 @@ const Signup = (props: Props) => {
     },
     validationSchema,
     onSubmit: (values) => {
+      router.push('/user/signup/basic-info')
       console.log(values);
+
     },
   });
 
@@ -73,7 +77,7 @@ const Signup = (props: Props) => {
               />
               <div className="flex  flex-wrap items-center gap-2 mt-2">
                 <div
-                  className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm text-[#101928] ${
+                  className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm  ${
                     hasEightCharacters
                       ? "border-[#0F973D] text-[#0F973D] bg-[#ECFDF3]"
                       : "border-[#D0D3D9] border-[0.5px]  text-[#101928]"
@@ -82,7 +86,7 @@ const Signup = (props: Props) => {
                   8 characters
                 </div>
                 <div
-                  className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm text-[#101928] ${
+                  className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm  ${
                     hasUppercase
                       ? "border-[#0F973D] text-[#0F973D] bg-[#ECFDF3]"
                       : "border-[#D0D3D9] border-[0.5px]  text-[#101928]"
@@ -91,7 +95,7 @@ const Signup = (props: Props) => {
                   1 uppercase letter
                 </div>
                 <div
-                  className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm text-[#101928] ${
+                  className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm ${
                     hasNumber
                       ? "border-[#0F973D] text-[#0F973D] bg-[#ECFDF3]"
                       : "border-[#D0D3D9] border-[0.5px]  text-[#101928]"
@@ -100,7 +104,7 @@ const Signup = (props: Props) => {
                   1 number
                 </div>
                 <div
-                  className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm text-[#101928] ${
+                  className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm  ${
                     hasSpecialChar
                       ? "border-[#0F973D] text-[#0F973D] bg-[#ECFDF3]"
                       : "border-[#D0D3D9] border-[0.5px]  text-[#101928]"

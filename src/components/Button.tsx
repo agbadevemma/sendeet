@@ -5,17 +5,11 @@ type Props = {
   text: string;
   onClick?: () => void;
   iconSrc?: string;
-  className?: string;
-  type?: "submit" | "reset" | "button";
+  className?:string
+  type?:"submit" | "reset" | "button" 
 };
 
-const Button = ({
-  text = "Continue",
-  onClick,
-  iconSrc,
-  className,
-  type = "submit",
-}: Props) => {
+const Button = ({ text = "Continue", onClick, iconSrc, className, type="submit" }: Props) => {
   return (
     <div>
       {" "}

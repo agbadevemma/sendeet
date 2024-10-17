@@ -6,7 +6,7 @@ type Props = {
   label: string;
   inputType: string;
   placeholder: string;
-  iconSrc: string;
+  iconSrc?: string;
   id?: string;
   name?: string;
   value?: string;
@@ -14,6 +14,7 @@ type Props = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
   errorText?: string;
+  className?: string;
 };
 
 const InputField = ({
@@ -26,14 +27,16 @@ const InputField = ({
   name,
   onChange,
   onBlur,
-  error = false, 
+  error = false,
   errorText,
+
+  className,
 }: Props) => {
   return (
-    <div>
+    <div className={`${className}`}>
       {" "}
-      <div className="flex flex-col gap-1 group">
-        <label htmlFor="" className="  text-sm lg:text-base text-[#101928]">
+      <div className={`flex flex-col gap-1 group `}>
+        <label htmlFor="" className=" text-[#101928]  text-sm lg:text-base ">
           {label}
         </label>
         <div className="flex group-focus-within:border-[#B0E5FD]  rounded-lg gap-3 items-center justify-between border border-solid  border-[#D0D5DD] p-4">
@@ -47,7 +50,9 @@ const InputField = ({
             onChange={onChange}
             onBlur={onBlur}
           />
-          <Image src={iconSrc} alt={`${label} icon`} width={20} height={20} />
+          {iconSrc && (
+            <Image src={iconSrc} alt={`${label} icon`} width={20} height={20} />
+          )}
         </div>
       </div>
       {error && <p className="text-xs text-red-500">{errorText}</p>}
