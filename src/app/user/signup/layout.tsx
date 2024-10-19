@@ -1,6 +1,9 @@
 "use client";
 import logo from "../../../images/Logo.png";
-import bg from "../../../images/signup/bg.png";
+import bg1 from "../../../images/signup/bg1.png";
+import bg2 from "../../../images/signup/bg2.png";
+import bg3 from "../../../images/signup/bg3.png";
+import card from "../../../images/signup/card.png";
 import Image from "next/image";
 import arrowactive from "../../../images/icons/chevron-right-active.svg";
 import arrowinactive from "../../../images/icons/chevron-right-inactive.svg";
@@ -80,9 +83,7 @@ export default function DashboardLayout({
                     <Image src={arrowinactive} alt="icon" />
                   )}{" "}
                 </Link>{" "}
-                <p
-                  className={` text-xs lg:text-sm    ${"text-[#989FAD]"}`}
-                >
+                <p className={` text-xs lg:text-sm    ${"text-[#989FAD]"}`}>
                   Finish setup
                 </p>
               </div>
@@ -91,9 +92,56 @@ export default function DashboardLayout({
             </div>
           </div>
         </div>
-        <div className=" w-full lg:flex hidden py-[20px] pr-[20px] flex-row-reverse ">
-          {" "}
-          <Image src={bg} alt="logo" className="min-h-screen   flex-1  " />
+        <div className=" relative w-full lg:flex hidden py-[20px]  pr-[20px] flex-row-reverse ">
+          {pathname === "/user/signup" && (
+            <Image src={bg1} alt="logo" className="min-h-screen   flex-1  " />
+          )}
+          {pathname === "/user/signup/basic-info" && (
+            <Image src={bg1} alt="logo" className="min-h-screen   flex-1  " />
+          )}
+          {pathname === "/user/signup/company" && (
+            <Image src={bg1} alt="logo" className="min-h-screen   flex-1  " />
+          )}
+          <div className="absolute  mx-auto flex flex-col gap-[80px] left-0 right-0">
+            <Image
+              src={card}
+              alt="logo"
+              className=" object-contain  left-0 right-0 mx-auto mt-[126px] "
+            />
+            <div className="mx-auto  flex flex-col gap-y-[14px] w-full max-w-[437px] text-white ">
+              <p className=" text-center font-medium text-2xl">
+                Engage Smarter, Notify Faster{" "}
+              </p>
+              <p className="text-center text-base font-medium">
+                Effortlessly manage customer interactions and campaign analytics
+                at a glance
+              </p>
+            </div>
+            <div className="w-fit  gap-[4px] mx-auto  flex ">
+              <div
+                className={` ${
+                  pathname === "/user/signup"
+                    ? "bg-[#004768] rounded-[12px] w-[18px] h-[7px]"
+                    : "bg-[#E6F7FE] w-[7px] h-[7px] rounded-full"
+                } `}
+              ></div>
+              <div
+                className={` ${
+                  pathname === "/user/signup/basic-info"
+                    ? "bg-[#004768] rounded-[12px] w-[18px] h-[7px]"
+                    : "bg-[#E6F7FE] w-[7px] h-[7px] rounded-full"
+                }  `}
+              ></div>
+              <div
+                className={`  ${
+                  pathname === "/user/signup/company"
+                    ? "bg-[#004768] rounded-[12px] w-[18px] h-[7px]"
+                    : "bg-[#E6F7FE] w-[7px] h-[7px] rounded-full"
+                } 
+                `}
+              ></div>
+            </div>
+          </div>
         </div>
       </div>{" "}
     </section>
