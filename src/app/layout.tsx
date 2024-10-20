@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
-
-
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,11 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={` antialiased ${inter.className}`}
-      >
-        <NextTopLoader showSpinner={false}  />
+    <html lang={`en  ${inter.className}`}>
+      <body className={` antialiased `}>
+        <NextTopLoader showSpinner={false} />
         {children}
       </body>
     </html>

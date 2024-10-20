@@ -25,7 +25,7 @@ const Checkbox = ({
       <div
         className={`rounded-[6px] border border-solid cursor-pointer ${
           checked
-            ? "bg-[#E6F7FE] border-[#00AAF7] text-[#00AAF7] px-[3px]"
+            ? "bg-[#E6F7FE] border-[#00AAF7] text-primary-500 px-[3px]"
             : "border-[#D0D5DD]"
         }  h-[20px] w-[20px]  flex items-center justify-center`}
       >

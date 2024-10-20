@@ -2,7 +2,7 @@
 import IconHolder from "@/components/IconHolder";
 import React from "react";
 import lock from "../../../images/icons/lock.svg";
-import Button from "@/components/Button";
+import Button from "@/components/buttons/OnboardingButton";
 import InputField from "@/components/InputField";
 import mailicon from "../../../images/icons/mail.svg";
 import arrowleft from "../../../images/icons/arrow-left.svg";
@@ -24,7 +24,7 @@ const ForgotPassword = (props: Props) => {
     validationSchema: ForgotPasswordSchema,
     onSubmit: (values) => {
       console.log("Form values:", values);
-      router.push("/user/checkmail")
+      router.push("/checkmail")
     },
   });
   return (
@@ -32,10 +32,10 @@ const ForgotPassword = (props: Props) => {
       <div className="pt-[96px] pb-[48px] px-[32px] min-h-screen">
         <div className="w-full max-w-[456px] mx-auto flex flex-col items-center">
           <IconHolder src={lock} className={``} />
-          <p className="text-[#101928] mt-6 font-semibold lg:leading-[38px] text-2xl lg:text-[30px]">
+          <p className=" mt-6 font-semibold text-display-xs  lg:text-display-md">
             Forgot password?
           </p>
-          <p className="text-[#667085] mt-2 lg:mt-3 text-base">
+          <p className="text-grey-500 mt-2 lg:mt-3 text-md">
             No worries, we’ll send you reset instructions.
           </p>
           <form
@@ -57,11 +57,11 @@ const ForgotPassword = (props: Props) => {
             <Button text="Reset Password" type="submit" />
           </form>
           <Link
-            href={"/user/login"}
+            href={"login"}
             className="flex items-center gap-[8px] mt-[32px] w-fit mx-auto"
           >
             <Image src={arrowleft} alt="arrow" />{" "}
-            <span className="text-[#667085] font-medium  text-sm">
+            <span className="text-grey-500 font-medium  text-sm">
               Back to log in
             </span>
           </Link>

@@ -18,12 +18,12 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const pathname = usePathname();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const backgrounds: StaticImageData[] = [bg1, bg2, bg3];
+  const backgrounds: StaticImageData[] = [ bg1, bg2,bg3];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % backgrounds.length);
-    }, 3500); // Change slide every 5 seconds
+    }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -32,7 +32,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     <Link href={href} className="flex items-center gap-[10px]">
       <p
         className={`max-w-[67px] text-xs lg:text-sm w-full ${
-          pathname === href ? "text-[#00AAF7]" : "text-[#989FAD]"
+          pathname === href ? "text-primary-500" : "text-grey-300"
         }`}
       >
         {text}
@@ -49,10 +49,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <Image src={logo} alt="logo" className="w-32 mx-auto lg:mx-0" />
             <div className="lg:mt-[57.6px] mt-8">
               <div className="w-fit gap-4 mx-auto lg:mx-0 lg:pl-8 flex">
-                {renderNavLink("/user/signup", "Account")}
-                {renderNavLink("/user/signup/basic-info", "Basic info")}
-                {renderNavLink("/user/signup/company", "Company")}
-                <p className="text-xs lg:text-sm text-[#989FAD]">
+                {renderNavLink("/signup", "Account")}
+                {renderNavLink("/signup/basic-info", "Basic info")}
+                {renderNavLink("/signup/company", "Company")}
+                <p className="text-xs lg:text-sm text-grey-300">
                   Finish setup
                 </p>
               </div>
@@ -60,17 +60,18 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </div>
           </div>
         </div>
-        <div className="relative w-full rounded-[24px] px-[20px] lg:flex hidden  my-[20px]  flex-row-reverse overflow-hidden mr-[20px]">
-      {backgrounds.map((bg, index) => (
+        <div className="relative  w-full px-[20px] my-[20px] lg:flex hidden   flex-row-reverse overflow-hidden mr-[20px]">
+          {backgrounds.map((bg, index) => (
             <Image
               key={index}
               src={bg}
               alt={`background ${index + 1}`}
-              className={`w-full  rounded-[24px] top-0 right-0  absolute mb-32  object-fill  transition-opacity duration-1000 ${
-                index === currentSlide ? "opacity-100" : "opacity-0"
+              className={`w-full  h-full rounded-[24px] object-cover   min-h-screen  transition-opacity duration-1000 ${
+                index === currentSlide ? "block" : "hidden"
               }`}
             />
           ))}
+
           <div className="absolute w-fit mx-auto flex flex-col gap-[80px] left-0 right-0 z-10">
             <Image
               src={card}
@@ -81,7 +82,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <p className="text-center font-medium text-2xl">
                 Engage Smarter, Notify Faster
               </p>
-              <p className="text-center text-base font-medium">
+              <p className="text-center text-md font-medium">
                 Effortlessly manage customer interactions and campaign analytics
                 at a glance
               </p>
@@ -101,7 +102,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </div>
       </div>
-
+      <div className="mt"></div>
     </section>
   );
 }

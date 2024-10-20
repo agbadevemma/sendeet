@@ -36,19 +36,21 @@ const InputField = ({
     <div className={`${className}`}>
       {" "}
       <div className={`flex flex-col gap-1 group `}>
-        <label htmlFor="" className=" text-[#101928]  text-sm lg:text-base ">
+        <label htmlFor="" className="text-sm lg:text-md">
           {label}
         </label>
         <div
           className={`flex  ${
-            error ? "border-[#D42620] " : "border-[#D0D5DD] group-focus-within:border-[#B0E5FD] "
+            error
+              ? "border-error-500 "
+              : "border-grey-100 group-focus-within:border-primary-100 "
           } rounded-lg gap-3 items-center justify-between border border-solid   p-4`}
         >
           <input
             type={inputType}
             id={id}
             name={name}
-            className="w-full focus:outline-none text-sm lg:text-base"
+            className="w-full focus:outline-none text-sm lg:text-md"
             placeholder={placeholder}
             value={value}
             onChange={onChange}
@@ -59,7 +61,7 @@ const InputField = ({
           )}
         </div>
       </div>
-      {error && <p className="text-xs text-[#D42620]">{errorText}</p>}
+      {error && <p className="text-xs text-error-500">{errorText}</p>}
     </div>
   );
 };

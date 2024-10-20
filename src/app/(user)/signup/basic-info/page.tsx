@@ -1,6 +1,6 @@
 "use client";
 import { validationSchemaBasicInfo } from "@/app/validation";
-import Button from "@/components/Button";
+import Button from "@/components/buttons/OnboardingButton";
 import Checkbox from "@/components/Checkbox";
 import InputField from "@/components/InputField";
 import { useFormik } from "formik";
@@ -35,7 +35,7 @@ const FinishSetup = () => {
     },
     validationSchema: validationSchemaBasicInfo,
     onSubmit: () => {
-      router.push("/user/signup/company");
+      router.push("/signup/company");
     },
   });
 
@@ -47,10 +47,10 @@ const FinishSetup = () => {
 
   return (
     <div className="mt-10 px-[24px] lg:px-[28px] mb-10">
-      <p className="text-[#101928] text-[24px] lg:leading-[38px] lg:text-3xl font-medium">
+      <p className="text-display-xs lg:text-display-sm font-semibold " >
         Let’s setup your account
       </p>
-      <p className="lg:text-base text-sm leading-[20px] font-normal text-[#989FAD] mt-[14px]">
+      <p className="lg:text-md text-sm font-normal text-grey-300 mt-3.5">
         First, we need to know a few things about you
       </p>
       <form onSubmit={formik.handleSubmit} className="w-full">
@@ -138,10 +138,10 @@ const FinishSetup = () => {
               name="hasWebsite"
               checked={formik.values.hasWebsite}
             />
-            <p className="text-sm">I don’t have a website</p>
+            <p className="text-sm text-gray-800">I don’t have a website</p>
           </div>
           {formik.touched.hasWebsite && formik.errors.hasWebsite && (
-            <p className="text-red-500 text-sm mt-2">
+            <p className="text-error-500 text-sm mt-2">
               {formik.errors.hasWebsite}
             </p>
           )}

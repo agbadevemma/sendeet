@@ -2,7 +2,7 @@
 import IconHolder from "@/components/IconHolder";
 import React from "react";
 import lock from "../../../images/icons/lock.svg";
-import Button from "@/components/Button";
+import Button from "@/components/buttons/OnboardingButton";
 import InputField from "@/components/InputField";
 import mailicon from "../../../images/icons/mail.svg";
 import arrowleft from "../../../images/icons/arrow-left.svg";
@@ -24,7 +24,7 @@ const CreateNewPassword = (props: Props) => {
     validationSchema: ForgotPasswordSchema,
     onSubmit: (values) => {
       console.log("Form values:", values);
-      router.push("/user/checkmail");
+      router.push("/passwordreset");
     },
   });
 
@@ -38,10 +38,10 @@ const CreateNewPassword = (props: Props) => {
       <div className="pt-[96px] pb-[48px] px-[32px] min-h-screen">
         <div className="w-full max-w-[456px] mx-auto flex flex-col items-center">
           <IconHolder src={lock} className={``} />
-          <p className="text-[#101928] mt-6 font-semibold lg:leading-[38px] text-2xl lg:text-[30px]">
-            Set new password
+          <p className=" mt-6 font-semibold   text-display-xs lg:text-display-sm">
+            Set new password 
           </p>
-          <p className="text-[#667085] mt-2 lg:mt-3 text-base text-center">
+          <p className="text-grey-500 mt-2 lg:mt-3 text-md text-center">
             Your new password must be different to previously used passwords.
           </p>
           <form action="" onSubmit={formik.handleSubmit}>
@@ -64,37 +64,37 @@ const CreateNewPassword = (props: Props) => {
                 />
                 <div className="flex  flex-wrap lg:flex-nowrap items-center gap-2 mt-2">
                   <div
-                    className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm  ${
+                    className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${
                       hasEightCharacters
-                        ? "border-[#0F973D] text-[#0F973D] bg-[#ECFDF3]"
-                        : "border-[#D0D3D9] border-[0.5px]  text-[#101928]"
+                        ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                        : "border-grey-100 border-[0.5px]  "
                     }`}
                   >
                     8 characters
                   </div>
                   <div
-                    className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm  ${
+                    className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${
                       hasUppercase
-                        ? "border-[#0F973D] text-[#0F973D] bg-[#ECFDF3]"
-                        : "border-[#D0D3D9] border-[0.5px]  text-[#101928]"
+                        ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                        : "border-grey-100 border-[0.5px]  "
                     }`}
                   >
                     1 uppercase letter
                   </div>
                   <div
-                    className={`p-[6px] border-[#D0D3D9] border-[0.5px] rounded-lg text-sm ${
+                    className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm ${
                       hasNumber
-                        ? "border-[#0F973D] text-[#0F973D] bg-[#ECFDF3]"
-                        : "border-[#D0D3D9] border-[0.5px]  text-[#101928]"
+                        ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                        : "border-grey-100 border-[0.5px]  "
                     }`}
                   >
                     1 number
                   </div>
                   <div
-                    className={`p-[6px] -mr-2 border-[#D0D3D9] border-[0.5px] rounded-lg text-sm  ${
+                    className={`p-[6px] -mr-2 border-grey-100 border-[0.5px] rounded-lg text-sm  ${
                       hasSpecialChar
-                        ? "border-[#0F973D] text-[#0F973D] bg-[#ECFDF3]"
-                        : "border-[#D0D3D9] border-[0.5px]  text-[#101928]"
+                        ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                        : "border-grey-100 border-[0.5px]  "
                     }`}
                   >
                     1 special character
@@ -109,11 +109,11 @@ const CreateNewPassword = (props: Props) => {
               />
           </form>
           <Link
-            href={"/user/login"}
+            href={"/login"}
             className="flex items-center gap-[8px] mt-[32px] w-fit mx-auto"
           >
             <Image src={arrowleft} alt="arrow" />{" "}
-            <span className="text-[#667085] font-medium  text-sm">
+            <span className="text-grey-500 font-medium  text-sm">
               Back to log in
             </span>
           </Link>
