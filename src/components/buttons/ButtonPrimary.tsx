@@ -64,7 +64,7 @@ const Button = ({
 
             ${
               type === "secondary" &&
-              "s hover:bg-grey-50 cart text-grey-800 hover:from-transparent hover:to-transparent  border border-white border-solid  bg-gradient-to-b from-white to-white/60 hover:shadow-none shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] focus:bg-primary-700 hover:shadow-transparent focus:shadow-transparent disabled:bg-primary-100 disabled:from-transparent disabled:to-transparent   disabled:shadow-transparent"
+              " hover:border-grey-50 hover:bg-[#F9FAFB]  text-grey-800 hover:from-transparent hover:to-transparent  border border-white border-solid  bg-gradient-to-b from-white to-white/60 hover:shadow-none shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] focus:shadow-[0px_0px_0px_4px_#F2F4F7] hover:shadow-transparent focus:border-grey-100  disabled:from-transparent disabled:to-transparent   disabled:shadow-transparent disabled:border-grey-50 disabled:text-grey-300 disabled:bg-white "
             }
            w-full  rounded-lg flex items-center justify-center gap-2    ${className}`}
         aria-label={text}
