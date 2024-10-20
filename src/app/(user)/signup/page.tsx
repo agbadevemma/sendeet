@@ -5,16 +5,17 @@ import arrow from "../../../images/icons/chevron-white.svg";
 import InputField from "@/components/InputField";
 import mailicon from "../../../images/icons/mail.svg";
 import passwordopenicon from "../../../images/icons/eye.svg";
-import Button from "@/components/buttons/OnboardingButton";
+
 import Link from "next/link";
 import { validationSchema } from "@/app/validation";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
+import Button from "@/components/buttons/Button";
 
 type Props = {};
 
 const Signup = (props: Props) => {
-  const router=useRouter()
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -22,9 +23,8 @@ const Signup = (props: Props) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      router.push('signup/basic-info')
+      router.push("signup/basic-info");
       console.log(values);
-
     },
   });
 
@@ -115,12 +115,16 @@ const Signup = (props: Props) => {
               </div>
             </div>
           </div>
-          <Button text="Basic Info" iconSrc={arrow} className="mt-[32px]" />
+          <Button
+            text="Basic Info"
+            size="lg"
+            type="primary"
+            iconSrc={arrow}
+            className="mt-[32px]"
+          />
         </form>
         <div className="flex items-center mt-10 justify-center gap-1">
-          <p className="text-grey-500  text-sm   ">
-            Already registered?
-          </p>
+          <p className="text-grey-500  text-sm   ">Already registered?</p>
           <Link
             href={"login"}
             className="text-primary-600 text-sm  font-semibold"
