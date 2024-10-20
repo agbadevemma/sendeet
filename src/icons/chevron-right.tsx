@@ -4,7 +4,7 @@ type Props = {
     color?: string;
   };
 
-const ChevronIcon =  ({ color="black" }: Props) => {
+const ChevronRightIcon =  ({ color="black" }: Props) => {
    
   return (
     <div>
@@ -24,4 +24,4 @@ const ChevronIcon =  ({ color="black" }: Props) => {
   );
 };
 
-export default ChevronIcon;
+export default ChevronRightIcon;
