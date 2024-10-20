@@ -4,11 +4,12 @@ import logo from "../../../images/Logo.png";
 import Image from "next/image";
 import mailicon from "../../../images/icons/mail.svg";
 import passwordopenicon from "../../../images/icons/eye.svg";
-import Button from "@/components/buttons/OnboardingButton";
+
 import Link from "next/link";
 import { useFormik } from "formik";
 import { validationSchemaLogin } from "@/app/validation";
 import { useRouter } from "next/navigation";
+import Button from "@/components/buttons/Button";
 type Props = {};
 
 const LoginPage = (props: Props) => {
@@ -77,14 +78,15 @@ const LoginPage = (props: Props) => {
                     Forgot Password?
                   </Link>
                 </div>
-                <div className="mt-8">
-                  <Button text="Continue" />
-                </div>
+                <Button
+                  text="Continue"
+                  className="mt-8"
+                  size="lg"
+                  type="primary"
+                />
               </form>
               <div className="flex items-center mt-10 justify-center gap-1">
-                <p className="text-grey-500  text-sm   ">
-                  Are you new here?
-                </p>
+                <p className="text-grey-500  text-sm   ">Are you new here?</p>
                 <Link
                   href={"signup"}
                   className="text-primary-600 text-sm  font-semibold"
