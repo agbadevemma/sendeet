@@ -16,7 +16,8 @@ type Props = {
   icon_style?: "" | "leading-icon" | "trailing icon" | "icon-only";
   text?: string;
   onClick?: () => void;
-  iconSrc?: string;
+  iconComponent?: React.ReactNode;
+  iconcolor?: string;
   className?: string;
 };
 
@@ -26,7 +27,8 @@ const Button = ({
   size = "sm",
   disabled = false,
   icon_style = "", //when there is no icon style and icon at all
-  iconSrc,
+  iconComponent,
+  iconcolor,
   className,
   type = "secondary",
 }: Props) => {
@@ -38,7 +40,7 @@ const Button = ({
         disabled={disabled}
         className={`font-semibold 
            ${size == "sm" && "text-sm font-medium  py-[8px] px-[16px]"}
-            ${size == "lg" && "text-md font-medium  py-[16px] px-[24px]"}
+            ${size == "lg" && "text-md font-semibold py-[16px] px-[24px]"}
              ${
                size == "sm" && icon_style === "icon-only" ? "text-sm  p-2 " : ""
              }
@@ -54,12 +56,12 @@ const Button = ({
               ${
                 size == "lg" &&
                 (icon_style === "leading-icon" || "trailing icon")
-                  ? "text-sm font-semibold py-[16px]"
+                  ? "text-md font-semibold py-[16px]"
                   : ""
               }
            ${
              type === "primary" &&
-             " hover:bg-primary-600 bg-primary-500  hover:from-transparent hover:to-transparent  text-white from-white/[0.2] to-[#0079AF33]/[0.2]  bg-gradient-to-b focus:bg-primary-700 hover:shadow-transparent focus:shadow-transparent disabled:bg-primary-100 disabled:from-transparent disabled:to-transparent  shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.24),_0px_0px_0px_1px_#00AAF7] disabled:shadow-transparent"
+             " hover:bg-primary-600 bg-primary-500  hover:from-transparent hover:to-transparent  text-white from-white/[0.2] to-[#0079AF33]/[0.2]  bg-gradient-to-b focus:bg-primary-700 hover:shadow-transparent  focus:to-transparent focus:from-transparent focus:shadow-transparent disabled:bg-primary-100 disabled:from-transparent disabled:to-transparent  shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.24),_0px_0px_0px_1px_#00AAF7] disabled:shadow-transparent"
            }
 
             ${
@@ -69,12 +71,10 @@ const Button = ({
            w-full  rounded-lg flex items-center justify-center gap-2    ${className}`}
         aria-label={text}
       >
-        {text}dfsadfa
-        {iconSrc && (
-          <span className="mr-2">
-            <Image alt="icon" src={iconSrc} />
-          </span>
-        )}
+        {iconComponent && icon_style === "leading-icon" && iconComponent}
+        {text}
+
+        {iconComponent && icon_style === "trailing icon" && iconComponent}
       </button>
     </div>
   );

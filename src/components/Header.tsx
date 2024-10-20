@@ -1,8 +1,9 @@
 import React from "react";
 import SearchInput from "./SearchInput";
 
-import SearchIcon from "@/icons/SearchIcon";
-import Button from "./buttons/ButtonPrimary";
+
+import Button from "./buttons/Button";
+import SearchIcon from "@/icons/search-icon";
 
 type Props = {
   size?: "sm" | "lg";

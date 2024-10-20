@@ -1,6 +1,6 @@
 "use client";
 import { validationSchemaBasicInfo } from "@/app/validation";
-import Button from "@/components/buttons/OnboardingButton";
+
 import Checkbox from "@/components/Checkbox";
 import InputField from "@/components/InputField";
 import { useFormik } from "formik";
@@ -10,6 +10,8 @@ import building from "../../../../images/icons/building-5.svg";
 import globe from "../../../../images/icons/globe.svg";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Button from "@/components/buttons/Button";
+import ChevronIcon from "@/icons/chevron-right";
 
 type FormValues = {
   firstName: string;
@@ -47,7 +49,7 @@ const FinishSetup = () => {
 
   return (
     <div className="mt-10 px-[24px] lg:px-[28px] mb-10">
-      <p className="text-display-xs lg:text-display-sm font-semibold " >
+      <p className="text-display-xs lg:text-display-sm font-semibold ">
         Let’s setup your account
       </p>
       <p className="lg:text-md text-sm font-normal text-grey-300 mt-3.5">
@@ -147,7 +149,15 @@ const FinishSetup = () => {
           )}
         </div>
 
-        <Button className="mt-8" text="Company details" iconSrc={arrow} />
+        <Button
+          text="Company details"
+          // iconSrc={arrow}
+          iconComponent={<ChevronIcon color="white"/>}
+          icon_style="leading-icon"
+          size="lg"
+          type="primary"
+          className="mt-8"
+        />
       </form>
     </div>
   );

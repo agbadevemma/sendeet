@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFormik, FormikProps } from "formik";
 import { validationSchemaCompany } from "@/app/validation";
-import Button from "@/components/buttons/OnboardingButton";
+
 import InputField from "@/components/InputField";
 import SelectField from "@/components/SelectField";
 import Modal from "../Modal";
@@ -12,6 +12,7 @@ import {
   industryOptions,
   subscriberRangeOptions,
 } from "@/utils/data";
+import Button from "@/components/buttons/Button";
 
 interface FormValues {
   brn: string;
@@ -79,11 +80,11 @@ const Company: React.FC = () => {
         <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       </>
       {/* company page*/}
-      <p className="text-display-xs lg:text-display-sm font-semibold " >
-      More info about your company
+      <p className="text-display-xs lg:text-display-sm font-semibold ">
+        More info about your company
       </p>
       <p className="lg:text-md text-sm  font-normal text-grey-300 mt-3.5">
-      Now we need some details about your company
+        Now we need some details about your company
       </p>
       <form onSubmit={formik.handleSubmit} className="w-full">
         <div className="flex flex-col gap-y-8 mt-10">
@@ -148,7 +149,8 @@ const Company: React.FC = () => {
             name="subscriberRange"
           />
         </div>
-        <Button className="mt-8" text="Finish setup" type="submit" />
+
+        <Button text="Finish setup" size="lg" type="primary" className="mt-8" />
       </form>
     </div>
   );

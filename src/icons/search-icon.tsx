@@ -4,7 +4,7 @@ type Props = {
   color: string;
 };
 
-const searchicon = ({ color }: Props) => {
+const SearchIcon = ({ color }: Props) => {
   return (
     <div>
       <svg
@@ -25,4 +25,4 @@ const searchicon = ({ color }: Props) => {
   );
 };
 
-export default searchicon;
+export default SearchIcon;
