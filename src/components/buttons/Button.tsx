@@ -42,12 +42,8 @@ const Button = ({
         className={`font-semibold 
            ${size == "sm" && "text-sm font-medium  py-[8px] px-[16px]"}
             ${size == "lg" && "text-md font-semibold py-[16px] px-[24px]"}
-             ${
-               size == "sm" && icon_style === "icon-only" ? "text-sm  p-2 " : ""
-             }
-             ${
-               size == "lg" && icon_style === "icon-only" ? "text-sm  p-4 " : ""
-             }
+             ${size == "sm" && icon_style === "icon-only" ? " p-2 " : ""}
+             ${size == "lg" && icon_style === "icon-only" ? " p-4 " : ""}
               ${
                 size == "sm" &&
                 (icon_style === "leading-icon" || "trailing icon")
@@ -83,15 +79,14 @@ const Button = ({
                 " bg-error-500 text-white hover:bg-error-400 focus:bg-error-700  disabled:bg-grey-100 "
               }
                ${
-                type === "border-destructive" &&
-                "border-[1.5px] border-solid border-error-500 text-error-500 hover:bg-error-50 hover:text-error-600 focus:border-error-700 focus:border-[2px]  focus:bg-error-50 disabled:border-grey-50 disabled:bg-white disabled:text-grey-200  "
-              }
+                 type === "border-destructive" &&
+                 "border-[1.5px] border-solid border-error-500 text-error-500 hover:bg-error-50 hover:text-error-600 focus:border-error-700 focus:border-[2px]  focus:bg-error-50 disabled:border-grey-50 disabled:bg-white disabled:text-grey-200  "
+               }
            w-full  rounded-lg flex items-center justify-center gap-2    ${className}`}
         aria-label={text}
       >
         {iconComponent && icon_style === "leading-icon" && iconComponent}
-        {text}
-
+        {icon_style === "icon-only" ? iconComponent : text}
         {iconComponent && icon_style === "trailing icon" && iconComponent}
       </button>
     </div>

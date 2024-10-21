@@ -4,7 +4,7 @@ import Image from "next/image";
 
 type Props = {
   placeholder: string;
-  iconSrc?: React.ReactNode; 
+  icon?: React.ReactNode;
   id?: string;
   name?: string;
   value?: string;
@@ -15,7 +15,7 @@ type Props = {
 
 const SearchInput = ({
   placeholder,
-  iconSrc,
+  icon,
   id = "",
   value,
   name,
@@ -24,17 +24,17 @@ const SearchInput = ({
   className,
 }: Props) => {
   return (
-    <div className={`${className} max-w-[487px]`}>
+    <div className={`${className} w-full max-w-[200px] lg:max-w-[487px] group`}>
       {" "}
       <div
-        className={`flex  ${"border-[#D0D5DD] group-focus-within:border-[#B0E5FD] "} rounded-lg gap-3 items-center justify-between border border-solid   py-[10px] px-[14px]`}
+        className={`flex   ${"border-[#D0D5DD] group-focus-within:shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05),_0px_0px_0px_4px_#E6F7FE]  group-focus-within:border-[#8AD8FB] "} rounded-lg gap-3 items-center justify-between border border-solid   py-[10px] px-[14px]`}
       >
-         {iconSrc && iconSrc} {/* Render the SVG */}
+        {icon && icon} {/* Render the SVG */}
         <input
           type={"text"}
           id={id}
           name={name}
-          className="w-full focus:outline-none text-sm lg:text-md"
+          className="w-full focus:outline-none text-sm lg:text-md "
           placeholder={placeholder}
           value={value}
           onChange={onChange}
