@@ -19,7 +19,7 @@ export default function DashboardLayout({
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-hidden w-full">
         <Header />
-        {children}
+        <div className="px-7 w-full mt-6"> {children}</div>
       </div>
     </div>
   );
