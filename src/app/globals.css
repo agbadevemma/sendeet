@@ -37,3 +37,6 @@ html{
   @apply text-gray-900;
 }
 
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
