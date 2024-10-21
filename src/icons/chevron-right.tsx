@@ -1,17 +1,20 @@
 import React from "react";
 
 type Props = {
-    color?: string;
-  };
+  color: string;
+  width?: number;  // Optional width prop
+  height?: number; // Optional height prop
+};
 
-const ChevronRightIcon =  ({ color="black" }: Props) => {
+
+const ChevronRightIcon =  ({ color="black", width=24, height=24 }: Props) => {
    
   return (
     <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
+        width={width}
+        height={height}
         viewBox="0 0 24 24"
         fill="none"
       >

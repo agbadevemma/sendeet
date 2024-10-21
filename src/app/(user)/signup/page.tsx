@@ -120,7 +120,8 @@ const Signup = (props: Props) => {
             text="Basic Info"
             size="lg"
             type="primary"
-            iconComponent={<ChevronRightIcon color="white" />}
+            icon_style="trailing icon"
+            iconComponent={<ChevronRightIcon color="#fff" />}
             className="mt-[32px]"
           />
         </form>

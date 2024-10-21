@@ -151,9 +151,8 @@ const FinishSetup = () => {
 
         <Button
           text="Company details"
-          // iconSrc={arrow}
-          iconComponent={<ChevronIcon color="white"/>}
-          icon_style="leading-icon"
+          iconComponent={<ChevronIcon color="white" />}
+          icon_style="trailing icon"
           size="lg"
           type="primary"
           className="mt-8"

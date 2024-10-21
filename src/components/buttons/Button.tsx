@@ -8,8 +8,9 @@ type Props = {
     | "secondary"
     | "tertiary"
     | "text"
-    | "greys"
-    | "destructive";
+    | "grey"
+    | "destructive"
+    | "border-destructive";
 
   disabled?: boolean;
   state?: "default" | "hover" | "focused" | "disabled";
@@ -68,6 +69,23 @@ const Button = ({
               type === "secondary" &&
               " hover:border-grey-50 hover:bg-[#F9FAFB]  text-grey-800 hover:from-transparent hover:to-transparent  border border-white border-solid  bg-gradient-to-b from-white to-white/60 hover:shadow-none shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] focus:shadow-[0px_0px_0px_4px_#F2F4F7] hover:shadow-transparent focus:border-grey-100  disabled:from-transparent disabled:to-transparent   disabled:shadow-transparent disabled:border-grey-50 disabled:text-grey-300 disabled:bg-white "
             }
+            ${
+              type === "tertiary" &&
+              " bg-white text-primary-600 hover:bg-primary-50 hover:text-primary-500 focus:bg-white focus:text-primary-800 disabled:bg-white disabled:text-grey-200 "
+            }
+
+              ${
+                type === "grey" &&
+                " bg-grey-500 text-white hover:bg-grey-800 focus:bg-grey-900  disabled:bg-grey-100 "
+              }
+              ${
+                type === "destructive" &&
+                " bg-error-500 text-white hover:bg-error-400 focus:bg-error-700  disabled:bg-grey-100 "
+              }
+               ${
+                type === "border-destructive" &&
+                "border-[1.5px] border-solid border-error-500 text-error-500 hover:bg-error-50 hover:text-error-600 focus:border-error-700 focus:border-[2px]  focus:bg-error-50 disabled:border-grey-50 disabled:bg-white disabled:text-grey-200  "
+              }
            w-full  rounded-lg flex items-center justify-center gap-2    ${className}`}
         aria-label={text}
       >
