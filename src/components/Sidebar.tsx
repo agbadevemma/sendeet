@@ -20,7 +20,7 @@ const Sidebar = (props: Props) => {
 
   return (
     <div>
-      <div className="h-screen hover:overflow-y-auto sidebar bg-white border-grey-100 border lg:flex flex-col w-[272px] hidden ">
+      <div className="h-screen pb-20 hover:overflow-y-auto sidebar bg-white border-grey-100 border lg:flex flex-col w-[272px] hidden ">
         <div className="px-[24px] py-3.5">
           <Image src={logo} alt="logo" className="w-32" />
         </div>
