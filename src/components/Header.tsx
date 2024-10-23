@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import SearchInput from "./SearchInput";
 
 import Button from "./buttons/Button";
@@ -7,21 +7,26 @@ import LightingBorderIcon from "@/icons/lighting-border";
 import BellBorderIcon from "@/icons/bell-border";
 import Image from "next/image";
 import profile from "../images/profile.jpg";
+import AlignJustify from "@/icons/align-justify";
 
 type Props = {
-  size?: "sm" | "lg";
-  type?: "secondary";
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Header = (props: Props) => {
+const Header = ({ setIsOpen }: Props) => {
   return (
     <div>
-      <div className="w-full  py-[14px] px-2 lg:px-[28px] flex items-center border-b border-grey-100 justify-between">
+      <div className="w-full  py-[14px] px-4 md:px-7 lg:px-[28px] flex   lg:gap-0 items-center border-b border-grey-100 justify-between">
         <SearchInput
           placeholder="Search keyword..."
-          className=""
+          className="hidden lg:block"
           icon={<SearchIcon color={"#858D9D"} />}
         />
+        <div onClick={() => setIsOpen((prev) => !prev)}  className="lg:hidden block">
+        
+          <AlignJustify color="black" />
+        </div>
+
         <div className=" flex gap-1.5 lg:gap-3 items-center">
           <Button
             text="Getting Started"

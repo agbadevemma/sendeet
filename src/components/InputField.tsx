@@ -14,6 +14,7 @@ type Props = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
   errorText?: string;
+  icon?: React.ReactNode;
   className?: string;
 };
 
@@ -29,7 +30,7 @@ const InputField = ({
   onBlur,
   error = false,
   errorText,
-
+  icon,
   className,
 }: Props) => {
   return (
@@ -59,6 +60,7 @@ const InputField = ({
           {iconSrc && (
             <Image src={iconSrc} alt={`${label} icon`} width={20} height={20} />
           )}
+          {icon && icon}
         </div>
       </div>
       {error && <p className="text-xs text-error-500">{errorText}</p>}

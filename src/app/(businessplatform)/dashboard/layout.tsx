@@ -8,18 +8,21 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import { boolean } from "yup";
+import { useState } from "react";
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="flex h-screen overflow-hidden w-full">
-      <Sidebar />
+      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="flex flex-col flex-1 overflow-hidden w-full">
-        <Header />
-        <div className="h-screen overflow-auto px-7 pt-6 pb-20">
+        <Header setIsOpen={setIsOpen} />
+        <div className="h-screen overflow-auto px-4 md:px-8 lg:px-7 pt-6 pb-20">
           <div className=" w-full"> {children}</div>
         </div>
       </div>

@@ -18,6 +18,8 @@ import illustration from "../../../images/illustration2.svg";
 import Graph from "@/components/Graph";
 import DotV from "@/icons/dot-v";
 import Campaign from "@/components/Campaign";
+import ArrowLeft from "@/icons/arrow-left";
+import ArrowRight from "@/icons/arrow-right";
 
 type Props = {};
 
@@ -25,7 +27,7 @@ const page = (props: Props) => {
   const available: boolean = true;
   return (
     <div className="w-full pb-32">
-      <div className="flex justify-between items-center ">
+      <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
         <div className="flex items-center gap-4">
           <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <Elements color="black" />
@@ -55,9 +57,9 @@ const page = (props: Props) => {
       </div>
 
       <div className="mt-[27px]  w-full">
-        <div className="flex gap-6 w-full">
-          <div className="flex flex-col gap-5 w-full max-w-[361px] ">
-            <div className="p-4   w-full flex items-center justify-between border-solid bg-white border border-[#E4E7EC] rounded-xl ">
+        <div className="flex  flex-col-reverse  lg:flex-row gap-6 w-full">
+          <div className="flex flex-col  gap-5 w-full lg:max-w-[361px]  ">
+            <div className="p-4 hidden   w-full lg:flex items-center justify-between border-solid bg-white border border-[#E4E7EC] rounded-xl ">
               <div className="flex flex-col gap-2">
                 <span className="text text-sm">Total Messages Sent</span>
                 <span className="text-[#344054] text-xl font-semibold">0</span>
@@ -75,8 +77,7 @@ const page = (props: Props) => {
             <div className="px-4 py-[22px]  w-full  border rounded-xl">
               <span className="text-lg font-medium">Quick Actions</span>
               <div className="flex  flex-col mt-[39.5px]">
-                <div className="">
-                  {" "}
+                <div className="w-full">
                   <div className="flex justify-between items-center ">
                     <div className="flex gap-4">
                       <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
@@ -128,7 +129,24 @@ const page = (props: Props) => {
             </div>
           </div>
           <div className="flex flex-col w-full gap-5">
-            <div className="flex items-center gap-3 w-full">
+            <div className="flex flex-col lg:flex-row items-center gap-3 w-full">
+              <div className="p-4 lg:hidden    w-full flex items-center justify-between border-solid bg-white border border-[#E4E7EC] rounded-xl ">
+                <div className="flex flex-col gap-2">
+                  <span className="text text-sm">Total Messages Sent</span>
+                  <span className="text-[#344054] text-xl font-semibold">
+                    0
+                  </span>
+                  <div className="flex items-center gap-[6px]">
+                    <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                      -%
+                    </div>
+                    <span className="text-grey-400 text-xs">No data</span>
+                  </div>
+                </div>
+                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]">
+                  <Message color="#667085" />
+                </div>
+              </div>
               <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
                 <div className="flex flex-col gap-2">
                   <span className="text text-sm">Delivered</span>
@@ -212,17 +230,16 @@ const page = (props: Props) => {
           </div>
         </div>
       </div>
-
       <div className=" w-full  h-32 mb-32   mt-5 ">
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex flex-col gap-2 lg:flex-row lg:gap-0 lg:items-center justify-between">
           {" "}
-          <div className="flex flex-col ">
+          <div className="flex flex-col w-full">
             <p className="text-lg font-medium">Recent Campaign Performance</p>
             <p className="text-sm text-grey-500">
               Keep track of recent campaigns and their statistics
             </p>
           </div>
-          <div className="flex items-center gap-[18px]">
+          <div className="flex items-center gap-[18px] w-full">
             <Button
               size="sm"
               text="Filters"
@@ -260,6 +277,27 @@ const page = (props: Props) => {
               icon_style="leading-icon"
               text="New Campaign"
               iconComponent={<Plus color="#fff" />}
+            />
+          </div>
+        )}
+        {!available && (
+          <div className=" flex items-center justify-between mt-8 rounded rounded-t-lg px-[24px] py-[11px]">
+            <Button
+              text="Previous"
+              icon_style="leading-icon"
+              iconComponent={<ArrowLeft color="#48505E" />}
+            />
+            <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center bg-[#E6F7FE] h-10 w-10 text-primary-500 rounded-lg">1</div>
+              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">2</div>   <div className="flex items-center justify-center  h-10 w-10  rounded-lg">3</div>
+              .....
+              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">6</div>   <div className="flex items-center justify-center  h-10 w-10  rounded-lg">7</div>
+              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">8</div>
+            </div>
+            <Button
+              text="Next"
+              icon_style="trailing icon"
+              iconComponent={<ArrowRight color="#48505E" />}
             />
           </div>
         )}
