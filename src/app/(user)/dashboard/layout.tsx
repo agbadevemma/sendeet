@@ -15,11 +15,13 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
   return (
-    <div className="flex min-h-screen overflow-hidden w-full">
+    <div className="flex h-screen overflow-hidden w-full">
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-hidden w-full">
         <Header />
-        <div className="px-7 w-full mt-6"> {children}</div>
+        <div className="h-screen overflow-auto px-7 pt-6 pb-20">
+          <div className=" w-full"> {children}</div>
+        </div>
       </div>
     </div>
   );

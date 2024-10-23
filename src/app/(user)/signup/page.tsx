@@ -11,7 +11,7 @@ import { validationSchema } from "@/app/validation";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import Button from "@/components/buttons/Button";
-import ChevronRightIcon from "@/icons/chevron-right";
+import ChevronRight from "@/icons/chevron-right";
 
 type Props = {};
 
@@ -121,7 +121,7 @@ const Signup = (props: Props) => {
             size="lg"
             type="primary"
             icon_style="trailing icon"
-            iconComponent={<ChevronRightIcon color="#fff" />}
+            iconComponent={<ChevronRight color="#fff" />}
             className="mt-[32px]"
           />
         </form>

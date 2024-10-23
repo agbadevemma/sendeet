@@ -11,7 +11,9 @@ const IconLink = ({
   label: string;
 }) => {
   const pathName = usePathname();
-  const isActive = pathName.startsWith(href); // Updated to use startsWith
+  const isActive =
+    href === "/dashboard" ? pathName === href : pathName.startsWith(href); // Updated to use startsWith
+
   return (
     <Link
       href={href}
@@ -26,4 +28,4 @@ const IconLink = ({
     </Link>
   );
 };
-  export default IconLink
+export default IconLink;

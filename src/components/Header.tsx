@@ -29,9 +29,6 @@ const Header = (props: Props) => {
             size="sm"
             iconComponent={<LightingBorderIcon color="black" />}
           />
-          {/* <div className="h-10 w-10 flex items-center justify-center rounded-lg shadow-sm">
-            <BellBorderIcon color="black" />
-          </div> */}
           <Button
             icon_style="icon-only"
             size="lg"

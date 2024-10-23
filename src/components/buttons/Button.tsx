@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 type Props = {
-  size?: "sm" | "lg";
+  size?: "sm" | "md" | "lg";
   type?:
     | "primary"
     | "secondary"
@@ -43,12 +43,17 @@ const Button = ({
            ${
              size == "sm" &&
              icon_style === "txt" &&
-             "text-sm font-medium  py-[8px] px-[16px]"
+             "text-sm font-medium  py-[8px] px-[6px]"
            }
             ${
-              size == "lg" &&
+              size == "md" &&
               icon_style === "txt" &&
-              "text-md font-semibold py-[16px] px-[24px]"
+              "text-sm font-medium  py-[10px] px-[16px] text-nowrap"
+            }
+            ${
+              size === "lg" &&
+              icon_style === "txt" &&
+              "text-md font-semibold py-4 px-6"
             }
              ${size == "sm" && icon_style === "icon-only" ? " p-2 " : ""}
              ${
@@ -63,9 +68,9 @@ const Button = ({
                   : ""
               }
               ${
-                (size == "lg" &&
-                (icon_style === "leading-icon" || "trailing icon"))
-                  ? "text-md font-semibold  py-[8px] px-[9px]"
+                size == "lg" &&
+                (icon_style === "leading-icon" || "trailing icon")
+                  ? "text-md font-semibold  p-4"
                   : ""
               }
            ${

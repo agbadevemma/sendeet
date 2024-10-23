@@ -7,7 +7,7 @@ type Props = {
 };
 
 
-const ChevronRightIcon =  ({ color="black", width=24, height=24 }: Props) => {
+const ChevronRight =  ({ color="black", width=24, height=24 }: Props) => {
    
   return (
     <div>
@@ -27,4 +27,4 @@ const ChevronRightIcon =  ({ color="black", width=24, height=24 }: Props) => {
   );
 };
 
-export default ChevronRightIcon;
+export default ChevronRight;
