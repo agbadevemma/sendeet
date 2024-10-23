@@ -18,7 +18,7 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <div className="flex h-screen overflow-hidden w-full">
+    <div className="flex h-screen overflow-hidden w-full bg-[#FCFCFD]">
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="flex flex-col flex-1 overflow-hidden w-full">
         <Header setIsOpen={setIsOpen} />

@@ -70,7 +70,7 @@ const page = (props: Props) => {
                   <span className="text-grey-400 text-xs">No data</span>
                 </div>
               </div>
-              <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]">
+              <div className="rounded-full p-[10px] border border-solid border-[#E4E7EC]">
                 <Message color="#667085" />
               </div>
             </div>
