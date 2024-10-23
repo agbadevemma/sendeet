@@ -21,34 +21,20 @@ interface ChartData {
   amt: number;
 }
 const data: ChartData[] = [
-  { name: "Jan", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Feb", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Mar", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Apr", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "May", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Jun", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Jul", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Aug", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Sep", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Oct", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Nov", subscribers: 0, unsubscribers: 0, amt: 0 },
-  { name: "Dec", subscribers: 0, unsubscribers: 0, amt: 0 },
+    { name: "Jan", subscribers: 4000, unsubscribers: 2400, amt: 2400 },
+    { name: "Feb", subscribers: 3000, unsubscribers: 1398, amt: 2210 },
+    { name: "Mar", subscribers: 2000, unsubscribers: 9800, amt: 2290 },
+    { name: "Apr", subscribers: 2780, unsubscribers: 3908, amt: 2000 },
+    { name: "May", subscribers: 1890, unsubscribers: 4800, amt: 2181 },
+    { name: "Jun", subscribers: 2390, unsubscribers: 3800, amt: 2500 },
+    { name: "Jul", subscribers: 3490, unsubscribers: 4300, amt: 2100 },
+    { name: "Aug", subscribers: 4000, unsubscribers: 2400, amt: 2400 },
+    { name: "Sep", subscribers: 3000, unsubscribers: 1398, amt: 2210 },
+    { name: "Oct", subscribers: 2000, unsubscribers: 9800, amt: 2290 },
+    { name: "Nov", subscribers: 2780, unsubscribers: 3908, amt: 2000 },
+    { name: "Dec", subscribers: 1890, unsubscribers: 4800, amt: 2181 },
 ];
 
-// const data: ChartData[] = [
-//     { name: "Jan", subscribers: 3000, unsubscribers: 1500, amt: 4500 },
-//     { name: "Feb", subscribers: 2000, unsubscribers: 1000, amt: 3000 },
-//     { name: "Mar", subscribers: 4000, unsubscribers: 2000, amt: 6000 },
-//     { name: "Apr", subscribers: 2500, unsubscribers: 1200, amt: 3700 },
-//     { name: "May", subscribers: 3500, unsubscribers: 1800, amt: 5300 },
-//     { name: "Jun", subscribers: 4500, unsubscribers: 2000, amt: 6500 },
-//     { name: "Jul", subscribers: 3800, unsubscribers: 1900, amt: 5700 },
-//     { name: "Aug", subscribers: 3200, unsubscribers: 1600, amt: 4800 },
-//     { name: "Sep", subscribers: 2700, unsubscribers: 1400, amt: 4100 },
-//     { name: "Oct", subscribers: 4100, unsubscribers: 2100, amt: 6200 },
-//     { name: "Nov", subscribers: 3300, unsubscribers: 1700, amt: 5000 },
-//     { name: "Dec", subscribers: 5000, unsubscribers: 2200, amt: 7200 },
-//   ];
 
 const formatNumber = (value: number) => {
   return value.toLocaleString();
@@ -96,7 +82,7 @@ const Graph = (props: Props) => {
           <XAxis
             dataKey="name"
             tick={{ fontSize: 12, fill: "#667085" }}
-            axisLine={{ stroke: allZero ? "#00AAF7" : "#8884d8" }}
+            axisLine={{ stroke: allZero ? "#00AAF7" : "#F2F4F7" }}
             tickLine={false}
           />
           <YAxis

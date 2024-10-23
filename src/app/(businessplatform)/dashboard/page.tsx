@@ -16,10 +16,13 @@ import img from "../../../images/illustration.svg";
 import Image from "next/image";
 import illustration from "../../../images/illustration2.svg";
 import Graph from "@/components/Graph";
+import DotV from "@/icons/dot-v";
+import Campaign from "@/components/Campaign";
 
 type Props = {};
 
 const page = (props: Props) => {
+  const available: boolean = true;
   return (
     <div className="w-full pb-32">
       <div className="flex justify-between items-center ">
@@ -189,7 +192,9 @@ const page = (props: Props) => {
               <div className="flex item-center  justify-between mt-1 ">
                 <div className="flex items-center gap-4">
                   <span className="text-3xl">0</span>
-                  <div className="py-[2px] pl-[10px] pr-[8px] bg-[#F2F4F7] text-[#344054] rounded-2xl">-%</div>
+                  <div className="py-[2px] pl-[10px] pr-[8px] bg-[#F2F4F7] text-[#344054] rounded-2xl">
+                    -%
+                  </div>
                 </div>
                 <div className="flex self-end items-center gap-[13px]">
                   <div className="flex items-center gap-2">
@@ -231,17 +236,33 @@ const page = (props: Props) => {
             />
           </div>
         </div>
-        <div className="mt-[74px] flex flex-col items-center ">
-          <Image src={illustration} alt="images" className="mx-auto" />
-          <p className="text-lg font-semibold mt-1">
-            Ready to start your first campaign ?
-          </p>
-          <p className=" text-[#475367] mt-1 text-sm">
-            Tap the button below to start and <br /> share content with your
-            contacts
-          </p>
-          <Button size="sm" type="primary" className="mt-7 " icon_style="leading-icon" text="New Campaign" iconComponent={<Plus color="#fff"/>}/>
-        </div>
+        {!available ? (
+          <div className="mt-6">
+            <div className="w-full flex flex-col gap-4">
+              <Campaign />
+              <Campaign /> <Campaign /> <Campaign /> <Campaign />
+            </div>
+          </div>
+        ) : (
+          <div className="mt-[74px] flex flex-col items-center ">
+            <Image src={illustration} alt="images" className="mx-auto" />
+            <p className="text-lg font-semibold mt-1">
+              Ready to start your first campaign ?
+            </p>
+            <p className=" text-[#475367] mt-1 text-sm">
+              Tap the button below to start and <br /> share content with your
+              contacts
+            </p>
+            <Button
+              size="sm"
+              type="primary"
+              className="mt-7 "
+              icon_style="leading-icon"
+              text="New Campaign"
+              iconComponent={<Plus color="#fff" />}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
