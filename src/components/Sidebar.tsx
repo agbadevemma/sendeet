@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`h-screen pb-20 hover:overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[70%] md:w-[40%] lg:w-full  lg:max-w-[272px] `}
+          className={`h-screen pb-20 overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[70%] md:w-[40%] lg:w-full  lg:max-w-[272px] `}
         >
           <div className="px-[24px] py-3.5">
             <Image src={logo} alt="logo" className="w-32" />
