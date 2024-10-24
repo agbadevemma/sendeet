@@ -56,7 +56,7 @@ const LoginPage = (props: Props) => {
                   />
                   <InputField
                     iconSrc={passwordopenicon}
-                    inputType="email"
+                    inputType="password"
                     label="Password"
                     id="password"
                     name="password"
