@@ -20,6 +20,7 @@ import DotV from "@/icons/dot-v";
 import Campaign from "@/components/Campaign";
 import ArrowLeft from "@/icons/arrow-left";
 import ArrowRight from "@/icons/arrow-right";
+import Link from "next/link";
 
 type Props = {};
 
@@ -41,12 +42,6 @@ const page = (props: Props) => {
         </div>
 
         <div className="flex  gap-3">
-          <Button
-            size="sm"
-            iconComponent={<Calendar color="#383E49" />}
-            icon_style="leading-icon"
-            text="Select dates"
-          />
           <Button
             size="sm"
             iconComponent={<FileDownload color="#383E49" />}
@@ -83,12 +78,12 @@ const page = (props: Props) => {
                       <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                         <LoudSpeaker color="black" />
                       </div>
-                      <div className="flex flex-col gap-1">
+                      <Link href={"/dashboard/campaigns"} className="flex flex-col gap-1">
                         <span className="text-md font-medium">
                           Create Campaign
                         </span>
                         <span className="text-sm">Start a new campaign</span>
-                      </div>
+                      </Link >
                     </div>
                     <ChevronRight color="#667185" />
                   </div>
@@ -204,7 +199,7 @@ const page = (props: Props) => {
             <div className="p-6  w-full border rounded-xl h-full">
               <div className="flex  items-center gap-4">
                 <p className="text-lg font-medium w-full">Audience Growth</p>
-                <Button icon_style="txt" size="md" text="12 Months" />
+                <Button icon_style="txt" size="md" text="View Report" />
               </div>
               <p className="text-grey-500 text-base">Total Subscribers</p>
               <div className="flex item-center  justify-between mt-1 ">
@@ -288,11 +283,25 @@ const page = (props: Props) => {
               iconComponent={<ArrowLeft color="#48505E" />}
             />
             <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center bg-[#E6F7FE] h-10 w-10 text-primary-500 rounded-lg">1</div>
-              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">2</div>   <div className="flex items-center justify-center  h-10 w-10  rounded-lg">3</div>
+              <div className="flex items-center justify-center bg-[#E6F7FE] h-10 w-10 text-primary-500 rounded-lg">
+                1
+              </div>
+              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
+                2
+              </div>{" "}
+              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
+                3
+              </div>
               .....
-              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">6</div>   <div className="flex items-center justify-center  h-10 w-10  rounded-lg">7</div>
-              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">8</div>
+              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
+                6
+              </div>{" "}
+              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
+                7
+              </div>
+              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
+                8
+              </div>
             </div>
             <Button
               text="Next"
