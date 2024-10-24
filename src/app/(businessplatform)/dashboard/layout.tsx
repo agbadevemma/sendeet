@@ -22,7 +22,7 @@ export default function DashboardLayout({
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="flex flex-col flex-1 overflow-hidden w-full">
         <Header setIsOpen={setIsOpen} />
-        <div className="h-screen overflow-auto px-4 md:px-8 lg:px-7 pt-6 pb-20">
+        <div className="h-screen overflow-auto w-full px-4 md:px-8 lg:px-7 pt-6 pb-20">
           <div className=" w-full"> {children}</div>
         </div>
       </div>

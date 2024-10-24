@@ -22,11 +22,11 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
     <div className="">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`w-full bg-black/20 z-50   ${isOpen ? "fixed" : "hidden lg:block"} `}
+        className={`w-full bg-black/20 z-50   ${isOpen ? "fixed" : "hidden xl:block"} `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`h-screen pb-20 hover:overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[70%] lg:w-[272px]  `}
+          className={`h-screen pb-20 hover:overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[70%] md:w-[40%] lg:w-full  lg:max-w-[272px] `}
         >
           <div className="px-[24px] py-3.5">
             <Image src={logo} alt="logo" className="w-32" />
@@ -34,7 +34,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
           <div className="max-w-[240px] h-px bg-[#F0F1F3] mx-auto w-full"></div>
 
           <div className="w-full px-4 mt-5">
-            <div className="mx-auto rounded-lg border-grey-50 bg-[#F9FAFB] shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.10)] border border-solid p-3 flex items-center justify-between cursor-pointer">
+            <div className="mx-auto rounded-lg gap-4 border-grey-50 bg-[#F9FAFB] shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.10)] border border-solid p-3 flex items-center justify-between cursor-pointer">
               <div className="flex items-center">
                 <Image src={dashlogo} alt="logo" />
                 <div className="flex flex-col ml-3">

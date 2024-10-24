@@ -10,7 +10,8 @@ import Money1 from "@/icons/money-1";
 import Plus from "@/icons/plus";
 import { initialTransactions, Transaction } from "@/utils/data";
 import React, { useState } from "react";
-import illustration from "../../../../images/creditillustration.svg"
+import illustration from "../../../../images/creditillustration.svg";
+import Image from "next/image";
 
 type Props = {};
 
@@ -111,7 +112,7 @@ const Credits = (props: Props) => {
           </div>
         </div>
 
-        <div className="flex w-full mx-auto px-6 overflow-auto mt-[18px]  max-h-[814px] ">
+        <div className="flex flex-col w-full mx-auto px-6 overflow-auto mt-[18px]  max-h-[814px] ">
           <table className="w-full">
             <thead className="text-grey-600 rounded sticky top-0 z-10">
               <tr className="bg-[#F9FAFB]">
@@ -119,7 +120,7 @@ const Credits = (props: Props) => {
                   className="pl-6 pr-2 py-2 rounded-s-lg"
                   onClick={() => handleSort("code")}
                 >
-                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                  <div className="flex items-center text-nowrap gap-2 text-sm text-[#5D6679] font-medium w-full cursor-pointer">
                     Transaction code{" "}
                     <div
                       className={` transition-transform duration-300   ${
@@ -134,7 +135,7 @@ const Credits = (props: Props) => {
                   </div>
                 </th>
                 <th className="p-2" onClick={() => handleSort("date")}>
-                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                  <div className="flex items-center text-nowrap gap-2 text-sm text-[#5D6679] font-medium w-full cursor-pointer">
                     Date{" "}
                     <div
                       className={` transition-transform duration-300   ${
@@ -152,7 +153,7 @@ const Credits = (props: Props) => {
                   className="p-2"
                   onClick={() => handleSort("creditPurchased")}
                 >
-                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                  <div className="flex items-center text-nowrap gap-2 text-sm text-[#5D6679] font-medium w-full cursor-pointer">
                     Credit purchased{" "}
                     <div
                       className={` transition-transform duration-300   ${
@@ -167,7 +168,7 @@ const Credits = (props: Props) => {
                   </div>
                 </th>
                 <th className="p-2" onClick={() => handleSort("description")}>
-                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                  <div className="flex items-center text-nowrap gap-2 text-sm text-[#5D6679] font-medium w-full cursor-pointer">
                     Description{" "}
                     <div
                       className={` transition-transform duration-300   ${
@@ -182,7 +183,7 @@ const Credits = (props: Props) => {
                   </div>
                 </th>
                 <th className="p-2" onClick={() => handleSort("creditUsed")}>
-                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                  <div className="flex items-center text-nowrap gap-2 text-sm text-[#5D6679] font-medium w-full cursor-pointer">
                     Credit used{" "}
                     <div
                       className={` transition-transform duration-300   ${
@@ -197,62 +198,78 @@ const Credits = (props: Props) => {
                   </div>
                 </th>
                 <th className="p-2 rounded-e-lg">
-                  <div className="flex items-center text-nowrap">Status</div>
+                  <div className="flex items-center text-nowrap text-sm text-[#5D6679] font-medium">Status</div>
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {transactions.length == 0
-                ? <div className="w-full h-80 flex items-center justify-center">
-Image/
-                </div>
-                : transactions.map((transaction, index) => (
-                    <tr
-                      key={transaction.code}
-                      className="border-b border-b-grey-50 hover:bg-gray-50"
-                    >
-                      <td className="font-medium text-grey-800 p-4 pl-6">
-                        {transaction.code}
-                      </td>
-                      <td className="font-medium text-grey-800 p-2 pr-8">
-                        {transaction.date}
-                      </td>
-                      <td className="font-medium text-grey-800 p-2">
-                        {transaction.creditPurchased}
-                      </td>
-                      <td className="font-medium text-grey-800 p-2">
-                        {transaction.description}
-                      </td>
-                      <td className="font-medium text-grey-800 p-2">
-                        {transaction.creditUsed}
-                      </td>
-                      <td className="font-medium text-grey-800 p-2">
-                        <div className="flex gap-x-6 justify-start">
-                          <div className="w-[94px]">
-                            {" "}
-                            <p
-                              className={`flex items-center min-h-[24px]   justify-center font-medium py-[2px] text-sm px-[10px] rounded-2xl ${
-                                transaction.status === "successful"
-                                  ? "bg-success-50 text-success-800 w-[94px]"
-                                  : transaction.status === "pending"
-                                  ? "text-warning-700 bg-warning-50  w-[94px]"
-                                  : "bg-red-50 text-red-800 w-[61px]"
-                              }`}
-                            >
-                              {transaction.status === "pending"
-                                ? "In Progress"
-                                : transaction.status}
-                            </p>
-                          </div>
-                          <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
-                            <DotV color="#101928" />
-                          </div>
+            {transactions.length != 0 && (
+              <tbody>
+                {transactions.map((transaction, index) => (
+                  <tr
+                    key={transaction.code}
+                    className="border-b border-b-grey-50 hover:bg-gray-50"
+                  >
+                    <td className="font-medium text-grey-800 p-4 pl-6">
+                      {transaction.code}
+                    </td>
+                    <td className="font-medium text-grey-800 p-2 pr-8">
+                      {transaction.date}
+                    </td>
+                    <td className="font-medium text-grey-800 p-2">
+                      {transaction.creditPurchased}
+                    </td>
+                    <td className="font-medium text-grey-800 p-2">
+                      {transaction.description}
+                    </td>
+                    <td className="font-medium text-grey-800 p-2">
+                      {transaction.creditUsed}
+                    </td>
+                    <td className="font-medium text-grey-800 p-2">
+                      <div className="flex gap-x-6 justify-start">
+                        <div className="w-[94px]">
+                          {" "}
+                          <p
+                            className={`flex items-center min-h-[24px]   justify-center font-medium py-[2px] text-sm px-[10px] rounded-2xl ${
+                              transaction.status === "successful"
+                                ? "bg-success-50 text-success-800 w-[94px]"
+                                : transaction.status === "pending"
+                                ? "text-warning-700 bg-warning-50  w-[94px]"
+                                : "bg-red-50 text-red-800 w-[61px]"
+                            }`}
+                          >
+                            {transaction.status === "pending"
+                              ? "In Progress"
+                              : transaction.status}
+                          </p>
                         </div>
-                      </td>
-                    </tr>
-                  ))}
-            </tbody>
+                        <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
+                          <DotV color="#101928" />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </table>
+          {transactions.length == 0 && (
+            <div className="w-full h-80 flex flex-col  mt-32 mb-32 items-center justify-center mx-auto">
+              <Image src={illustration} alt="img" className="mx-auto" />
+              <p className="text-lg font-semibold">Oops....nothing to see here</p>
+              <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
+                Tap the button below to top up credits and share content with
+                your contacts
+              </p>
+              <Button
+                size="sm"
+                iconComponent={<Plus color="#fff" />}
+                icon_style="leading-icon"
+                type="primary"
+                className="mt-7"
+                text="Top up Credits"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
