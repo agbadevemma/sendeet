@@ -1,3 +1,4 @@
+"use client";
 import Button from "@/components/buttons/Button";
 import ArrowUp from "@/icons/arrow-up";
 import Calendar from "@/icons/calendar";
@@ -7,45 +8,40 @@ import FilterAlt from "@/icons/filter-alt";
 import IconStack from "@/icons/icon-stack";
 import Money1 from "@/icons/money-1";
 import Plus from "@/icons/plus";
-import React from "react";
+import { initialTransactions, Transaction } from "@/utils/data";
+import React, { useState } from "react";
+import illustration from "../../../../images/creditillustration.svg"
 
 type Props = {};
 
 const Credits = (props: Props) => {
-  interface Transaction {
-    code: string;
-    date: string;
-    creditPurchased: string;
-    description: string;
-    creditUsed: string;
-    status: "successful" | "pending" | "failed";
-  }
-  const transactions: Transaction[] = [
-    {
-      code: "TXN12345",
-      date: "10/10/24",
-      creditPurchased: "500",
-      description: "Purchased 500 credits",
-      creditUsed: "-",
-      status: "successful",
-    },
-    {
-      code: "TXN12346",
-      date: "10/11/24",
-      creditPurchased: "1000",
-      description: "Purchased 1000 credits",
-      creditUsed: "-",
-      status: "successful",
-    },
-    {
-      code: "TXN12347",
-      date: "10/12/24",
-      creditPurchased: "200",
-      description: "Purchased 200 credits",
-      creditUsed: "50",
-      status: "pending",
-    },
-  ];
+  const [transactions, setTransactions] =
+    useState<Transaction[]>(initialTransactions);
+  const [sortConfig, setSortConfig] = useState<{
+    key: keyof Transaction;
+    direction: "asc" | "desc";
+  } | null>(null);
+
+  const handleSort = (key: keyof Transaction) => {
+    let direction: "asc" | "desc" = "asc";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "asc"
+    ) {
+      direction = "desc";
+    }
+
+    const sortedTransactions = [...transactions].sort((a, b) => {
+      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
+      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    setSortConfig({ key, direction });
+    setTransactions(sortedTransactions);
+  };
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
@@ -114,84 +110,150 @@ const Credits = (props: Props) => {
             />
           </div>
         </div>
-      </div>
-      <div className="flex w-full mx-auto px-6 overflow-auto mt-[18px]">
-        <table className=" w-full">
-          <thead className="text-grey-600 rounded">
-            <tr className="bg-[#F9FAFB]">
-              <th className=" pl-6 pr-2 py-2  rounded-s-lg">
-                <div className="flex items-center text-nowrap gap-2 w-full">
-                  Transaction code <ArrowUp color="#5D6679" />
-                </div>
-              </th>
-              <th className=" p-2">
-                <div className="flex items-center text-nowrap gap-2 w-full">
-                  Date
-                  <ArrowUp color="#5D6679" />
-                </div>
-              </th>
-              <th className="p-2">
-                <div className="flex items-center text-nowrap gap-2">
-                  Credit purchased <ArrowUp color="#5D6679" />
-                </div>
-              </th>
-              <th className="p-2">
-                <div className="flex items-center text-nowrap gap-2">
-                  Description <ArrowUp color="#5D6679" />
-                </div>
-              </th>
-              <th className="p-2">
-                <div className="flex items-center text-nowrap gap-2">
-                  Credit used <ArrowUp color="#5D6679" />
-                </div>
-              </th>
-              <th className="p-2 rounded-e-lg">
-                <div className="flex items-center text-nowrap">Status</div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((transaction, index) => (
-              <tr
-                key={transaction.code}
-                className="border-b border-b-grey-50 hover:bg-gray-50"
-              >
-                <td className="font-medium text-grey-800 p-4 pl-6">
-                  {transaction.code}
-                </td>
-                <td className="font-medium text-grey-800 p-2 pr-8">
-                  {transaction.date}
-                </td>
-                <td className="font-medium text-grey-800 p-2">
-                  {transaction.creditPurchased}
-                </td>
-                <td className="font-medium text-grey-800 p-2">
-                  {transaction.description}
-                </td>
-                <td className="font-medium text-grey-800 p-2">
-                  {transaction.creditUsed}
-                </td>
-                <td className="font-medium text-grey-800 p-2">
-                  <div className="flex gap-x-2">
-                    <p
-                      className={`flex items-center  min-h-[24px] w-[94px] justify-center font-medium py-[2px] text-sm px-[10px] rounded-2xl
-                  ${
-                    transaction.status === "successful"
-                      ? "bg-success-50 text-success-800"
-                      : "bg-yellow-50 text-yellow-800"
-                  }`}
+
+        <div className="flex w-full mx-auto px-6 overflow-auto mt-[18px]  max-h-[814px] ">
+          <table className="w-full">
+            <thead className="text-grey-600 rounded sticky top-0 z-10">
+              <tr className="bg-[#F9FAFB]">
+                <th
+                  className="pl-6 pr-2 py-2 rounded-s-lg"
+                  onClick={() => handleSort("code")}
+                >
+                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                    Transaction code{" "}
+                    <div
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "code" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
                     >
-                      {transaction.status}
-                    </p>
-                    <div className="h-8 w-8 p-2 flex items-center rounded-lg border border-[#E4E7EC]">
-                      <DotV color="#101928" />
+                      <ArrowUp color={"#5D6679"} />
                     </div>
                   </div>
-                </td>
+                </th>
+                <th className="p-2" onClick={() => handleSort("date")}>
+                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                    Date{" "}
+                    <div
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "date" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th
+                  className="p-2"
+                  onClick={() => handleSort("creditPurchased")}
+                >
+                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                    Credit purchased{" "}
+                    <div
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "creditPurchased" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2" onClick={() => handleSort("description")}>
+                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                    Description{" "}
+                    <div
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "description" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2" onClick={() => handleSort("creditUsed")}>
+                  <div className="flex items-center text-nowrap gap-2 w-full cursor-pointer">
+                    Credit used{" "}
+                    <div
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "creditUsed" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2 rounded-e-lg">
+                  <div className="flex items-center text-nowrap">Status</div>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {transactions.length == 0
+                ? <div className="w-full h-80 flex items-center justify-center">
+Image/
+                </div>
+                : transactions.map((transaction, index) => (
+                    <tr
+                      key={transaction.code}
+                      className="border-b border-b-grey-50 hover:bg-gray-50"
+                    >
+                      <td className="font-medium text-grey-800 p-4 pl-6">
+                        {transaction.code}
+                      </td>
+                      <td className="font-medium text-grey-800 p-2 pr-8">
+                        {transaction.date}
+                      </td>
+                      <td className="font-medium text-grey-800 p-2">
+                        {transaction.creditPurchased}
+                      </td>
+                      <td className="font-medium text-grey-800 p-2">
+                        {transaction.description}
+                      </td>
+                      <td className="font-medium text-grey-800 p-2">
+                        {transaction.creditUsed}
+                      </td>
+                      <td className="font-medium text-grey-800 p-2">
+                        <div className="flex gap-x-6 justify-start">
+                          <div className="w-[94px]">
+                            {" "}
+                            <p
+                              className={`flex items-center min-h-[24px]   justify-center font-medium py-[2px] text-sm px-[10px] rounded-2xl ${
+                                transaction.status === "successful"
+                                  ? "bg-success-50 text-success-800 w-[94px]"
+                                  : transaction.status === "pending"
+                                  ? "text-warning-700 bg-warning-50  w-[94px]"
+                                  : "bg-red-50 text-red-800 w-[61px]"
+                              }`}
+                            >
+                              {transaction.status === "pending"
+                                ? "In Progress"
+                                : transaction.status}
+                            </p>
+                          </div>
+                          <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
+                            <DotV color="#101928" />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
