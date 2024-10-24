@@ -78,12 +78,15 @@ const page = (props: Props) => {
                       <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                         <LoudSpeaker color="black" />
                       </div>
-                      <Link href={"/dashboard/campaigns"} className="flex flex-col gap-1">
+                      <Link
+                        href={"/dashboard/campaigns"}
+                        className="flex flex-col gap-1"
+                      >
                         <span className="text-md font-medium">
                           Create Campaign
                         </span>
                         <span className="text-sm">Start a new campaign</span>
-                      </Link >
+                      </Link>
                     </div>
                     <ChevronRight color="#667185" />
                   </div>
@@ -111,12 +114,15 @@ const page = (props: Props) => {
                     <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                       <Plus color="black" />
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <Link
+                      href={"/dashboard/credits"}
+                      className="flex flex-col gap-1"
+                    >
                       <span className="text-md font-medium">
                         Top up Credits
                       </span>
                       <span className="text-sm">Get more Sendeet credits</span>
-                    </div>
+                    </Link>
                   </div>
                   <ChevronRight color="#667185" />
                 </div>
@@ -199,7 +205,9 @@ const page = (props: Props) => {
             <div className="p-6  w-full border rounded-xl h-full">
               <div className="flex  items-center gap-4">
                 <p className="text-lg font-medium w-full">Audience Growth</p>
-                <Button icon_style="txt" size="md" text="View Report" />
+                <Link href={"/dashboard/audience"}>
+                  <Button icon_style="txt" size="md" text="View Report" />
+                </Link>
               </div>
               <p className="text-grey-500 text-base">Total Subscribers</p>
               <div className="flex item-center  justify-between mt-1 ">
@@ -265,14 +273,16 @@ const page = (props: Props) => {
               Tap the button below to start and <br /> share content with your
               contacts
             </p>
-            <Button
-              size="sm"
-              type="primary"
-              className="mt-7 "
-              icon_style="leading-icon"
-              text="New Campaign"
-              iconComponent={<Plus color="#fff" />}
-            />
+            <Link href={"/dashboard/campaigns"}>
+              <Button
+                size="sm"
+                type="primary"
+                className="mt-7 "
+                icon_style="leading-icon"
+                text="New Campaign"
+                iconComponent={<Plus color="#fff" />}
+              />
+            </Link>
           </div>
         )}
         {!available && (
