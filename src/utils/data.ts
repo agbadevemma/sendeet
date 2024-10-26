@@ -41,6 +41,25 @@ export const subscriberRangeOptions: Option[] = [
   { value: "100001+", label: "100,001+ subscribers" },
 ];
 
+export const statusOptions: Option[] = [
+  { value: "active", label: "Active" },
+  { value: "inactive", label: "Inactive" },
+  { value: "pending", label: "Pending" },
+  { value: "archived", label: "Archived" },
+  { value: "draft", label: "Draft" },
+];
+
+export const sortOptions: Option[] = [
+  { value: "newest", label: "Newest First" },
+  { value: "oldest", label: "Oldest First" },
+  { value: "name_asc", label: "Name A-Z" },
+  { value: "name_desc", label: "Name Z-A" },
+  { value: "updated_at", label: "Last Updated" },
+  { value: "created_at", label: "Date Created" },
+  { value: "priority_high", label: "Priority (High to Low)" },
+  { value: "priority_low", label: "Priority (Low to High)" },
+];
+
 export interface Transaction {
   code: string;
   date: string;
@@ -50,6 +69,14 @@ export interface Transaction {
   status: "successful" | "pending" | "failed";
 }
 
+export interface Campaign {
+  campaign: string;
+  date: string;
+  delivered: string;
+  open: string;
+  clicked: string;
+  status: "Draft" | "Active" | "Completed";
+}
 // export const initialTransactions: Transaction[] = [
 //   {
 //     code: "TXN12345",
@@ -139,13 +166,51 @@ export interface Transaction {
 //     creditUsed: "300",
 //     status: "failed",
 //   },
-  
-  
- 
+
 // ];
 
+export const initialTransactions: Transaction[] = [];
 
-export const initialTransactions: Transaction[] = [
-  
- 
+export const initialCampaign: Campaign[] = [
+  {
+    campaign: "Tech requirements about the fund.pdf",
+    clicked: "89.5%",
+    date: "02/10/24",
+    delivered: "25",
+    open: "6",
+    status: "Draft",
+  },
+
+  {
+    campaign: "Tech requirements about the fund.pdf",
+    clicked: "89.5%",
+    date: "02/10/24",
+    delivered: "25",
+    open: "6",
+    status: "Active",
+  },
+  {
+    campaign: "Tech requirements about the fund.pdf",
+    clicked: "89.5%",
+    date: "02/10/24",
+    delivered: "25",
+    open: "6",
+    status: "Active",
+  },
+  {
+    campaign: "Tech requirements about the fund.pdf",
+    clicked: "89.5%",
+    date: "02/10/24",
+    delivered: "25",
+    open: "6",
+    status: "Active",
+  },
+  {
+    campaign: "Tech requirements about the fund.pdf",
+    clicked: "89.5%",
+    date: "02/10/24",
+    delivered: "25",
+    open: "6",
+    status: "Completed",
+  },
 ];
