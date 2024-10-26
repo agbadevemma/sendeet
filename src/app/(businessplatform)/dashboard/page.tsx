@@ -17,7 +17,7 @@ import Image from "next/image";
 import illustration from "../../../images/illustration2.svg";
 import Graph from "@/components/Graph";
 import DotV from "@/icons/dot-v";
-import Campaign from "@/components/Campaign";
+import Campaign from "@/components/CampaignSelectField";
 import ArrowLeft from "@/icons/arrow-left";
 import ArrowRight from "@/icons/arrow-right";
 import Link from "next/link";
