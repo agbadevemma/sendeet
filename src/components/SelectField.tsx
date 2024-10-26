@@ -15,6 +15,7 @@ interface SelectFieldProps {
   error?: boolean;
   errorText?: string;
   name: string;
+  icon?: React.ReactNode;
 }
 
 const SelectField: React.FC<SelectFieldProps> = ({
@@ -26,6 +27,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   options = [],
   onSelect,
   value,
+  icon,
   error = false,
   errorText = "",
   name,
@@ -61,7 +63,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
         <label className="text-[#344054] text-sm lg:text-md">{label}</label>
         <div
           className={`flex justify-between items-center gap-2 rounded-lg px-3.5 py-2.5 border ${
-            error && "border-[#D42620]"  
+            error && "border-[#D42620]"
           } ${
             isOpen
               ? "shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05),_0px_0px_0px_4px_#E6F7FE]  border-[#8AD8FB]"
@@ -70,11 +72,12 @@ const SelectField: React.FC<SelectFieldProps> = ({
           onClick={onToggle}
         >
           <div
-            className={`text-md w-full ${
+            className={`text-md w-full flex gap-2  items-center ${
               selectedOption ? "text-[#344054]" : "text-[#B9BDC7]"
             }`}
           >
-            {selectedOption ? selectedOption.label : placeholder}
+            {icon && <span>{icon}</span>}
+            <span>{selectedOption ? selectedOption.label : placeholder}</span>
           </div>
           <Image
             src={arrowdown}
