@@ -21,10 +21,11 @@ const Checkbox = ({
   className,
 }: Props) => {
   return (
-    <div className={`${className}`}>
+    <div onClick={onClick} className={`${className}`}>
+      
       <div
         className={`rounded-[6px] border border-solid cursor-pointer ${
-          checked
+          checked||indeterminate
             ? "bg-[#E6F7FE] border-[#00AAF7] text-primary-500 px-[3px]"
             : "border-[#D0D5DD]"
         }  h-[20px] w-[20px]  flex items-center justify-center`}
