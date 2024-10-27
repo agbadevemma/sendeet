@@ -4,7 +4,9 @@ type Props = {}
 
 const Setup = (props: Props) => {
   return (
-    <div>Setup</div>
+    <div>
+      <p className="text-lg font-semibold">1. Setup Campaign Details</p>
+    </div>
   )
 }
 
