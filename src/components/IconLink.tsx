@@ -20,7 +20,7 @@ const IconLink = ({
       className={`w-full ${
         isActive
           ? "border border-solid border-primary-600 text-primary-600 bg-blue-50"
-          : "hover:bg-grey-50 text-gray-500"
+          : "hover:bg-[#f4f4f4] ease-in-out duration-500 text-gray-500"
       } cursor-pointer rounded-lg gap-3 py-3 px-4 flex items-center`}
     >
       <IconComponent color={isActive ? "#00AAF7" : "#858D9D"} />
