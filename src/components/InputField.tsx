@@ -10,6 +10,7 @@ type Props = {
   id?: string;
   name?: string;
   value?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
@@ -28,6 +29,7 @@ const InputField = ({
   name,
   onChange,
   onBlur,
+  onClick,
   error = false,
   errorText,
   icon,
@@ -60,7 +62,10 @@ const InputField = ({
           {iconSrc && (
             <Image src={iconSrc} alt={`${label} icon`} width={20} height={20} />
           )}
-          {icon && icon}
+          <div onClick={onClick} className={`${onClick && "cursor-pointer"}`}>
+            {" "}
+            {icon && icon}
+          </div>
         </div>
       </div>
       {error && <p className="text-xs text-error-500">{errorText}</p>}
