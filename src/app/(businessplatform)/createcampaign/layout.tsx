@@ -67,7 +67,7 @@ export default function CreateLayout({
               color={pathname === "/createcampaign" ? "#0079AF" : "#383E49"}
             />
             <span
-              className={`${
+              className={` font-medium ${
                 pathname === "/createcampaign"
                   ? "text-primary-700"
                   : "text-grey-800"
@@ -90,7 +90,7 @@ export default function CreateLayout({
               }
             />
             <span
-              className={`${
+              className={` font-medium ${
                 pathname === "/createcampaign/compose"
                   ? "text-primary-700"
                   : "text-grey-800"
@@ -113,7 +113,7 @@ export default function CreateLayout({
               }
             />
             <span
-              className={`${
+              className={` font-medium ${
                 pathname === "/createcampaign/schedule"
                   ? "text-primary-700"
                   : "text-grey-800"
@@ -136,7 +136,7 @@ export default function CreateLayout({
               }
             />
             <span
-              className={`${
+              className={` font-medium ${
                 pathname === "/createcampaign/review"
                   ? "text-primary-700"
                   : "text-grey-800"
@@ -147,6 +147,7 @@ export default function CreateLayout({
           </div>
         </div>
       </div>
+   <div className="max-w-[680px] w-full mx-auto mt-8">   {children}</div>
     </div>
   );
 }
