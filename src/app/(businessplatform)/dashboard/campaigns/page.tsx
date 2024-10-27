@@ -23,6 +23,7 @@ import SendAlt from "@/icons/send-alt";
 import Multiply from "@/icons/multiply";
 import bg from "../../../../images/campaignbg.png";
 import { CampaignInterface, initialCampaign } from "@/utils/data";
+import Link from "next/link";
 
 type Props = {};
 
@@ -216,12 +217,15 @@ const Campaign = (props: Props) => {
               </p>
             </div>
           </div>
-          <Button
-            text="Continue"
-            type="primary"
-            size="sm"
-            className="mt-10 mb-8"
-          />
+          <Link href={"/createcampaign"}>
+            {" "}
+            <Button
+              text="Continue"
+              type="primary"
+              size="sm"
+              className="mt-10 mb-8"
+            />
+          </Link>
         </div>
       </div>
 
@@ -238,7 +242,7 @@ const Campaign = (props: Props) => {
             </p>
           </div>
         </div>
-        <div className="flex  gap-3">
+        <div className="flex  gap-3 mt-4 lg:mt-0">
           <Button
             size="sm"
             iconComponent={<FileDownload color="#383E49" />}
@@ -257,7 +261,7 @@ const Campaign = (props: Props) => {
       </div>
 
       <div className="flex mt-[25px] w-full border border-[#E4E7EC] rounded-xl flex-col">
-        <div className="flex px-11 gap-12 border-t border-t-grey-50 h-[62px] items-end">
+        <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12 border-t border-t-grey-50 h-[62px] items-end">
           {tabs.map((tab, index) => (
             <div
               onClick={() => handleTabClick(tab.id)}
