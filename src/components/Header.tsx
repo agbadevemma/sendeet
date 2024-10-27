@@ -4,7 +4,7 @@ import SearchInput from "./SearchInput";
 import Button from "./buttons/Button";
 import SearchIcon from "@/icons/search-icon";
 import LightingBorderIcon from "@/icons/lighting-border";
-import BellBorderIcon from "@/icons/bell-border";
+import BellBorder from "@/icons/bell-border";
 import Image from "next/image";
 import profile from "../images/profile.jpg";
 import AlignJustify from "@/icons/align-justify";
@@ -37,7 +37,7 @@ const Header = ({ setIsOpen }: Props) => {
           <Button
             icon_style="icon-only"
             size="lg"
-            iconComponent={<BellBorderIcon color="black" />}
+            iconComponent={<BellBorder color="black" />}
           />
           <Image
             src={profile}
