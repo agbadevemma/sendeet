@@ -8,15 +8,7 @@ import FilterAlt from "@/icons/filter-alt";
 import IconStack from "@/icons/icon-stack";
 import Money1 from "@/icons/money-1";
 import Plus from "@/icons/plus";
-import {
-  Campaign,
-  initialCampaign,
-  initialTransactions,
-  sortOptions,
-  statusOptions,
-  Transaction,
-} from "@/utils/data";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import illustration from "../../../../images/creditillustration.svg";
 import Image from "next/image";
 import LoudSpeaker from "@/icons/loudspeaker";
@@ -30,19 +22,22 @@ import SearchIcon from "@/icons/search-icon";
 import SendAlt from "@/icons/send-alt";
 import Multiply from "@/icons/multiply";
 import bg from "../../../../images/campaignbg.png";
+import { CampaignInterface, initialCampaign } from "@/utils/data";
 
 type Props = {};
 
-const Credits = (props: Props) => {
+const Campaign = (props: Props) => {
   const [statusValue, setStatusValue] = useState("");
   const [sortValue, setSortValue] = useState("");
-  const [Campaigns, setCampaigns] = useState<Campaign[]>(initialCampaign);
+  const [campaigns, setCampaigns] =
+    useState<CampaignInterface[]>(initialCampaign);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortConfig, setSortConfig] = useState<{
-    key: keyof Campaign;
+    key: keyof CampaignInterface;
     direction: "asc" | "desc";
   } | null>(null);
 
-  const handleSort = (key: keyof Campaign) => {
+  const handleSort = (key: keyof CampaignInterface) => {
     let direction: "asc" | "desc" = "asc";
     if (
       sortConfig &&
@@ -52,7 +47,7 @@ const Credits = (props: Props) => {
       direction = "desc";
     }
 
-    const sortedCampaigns = [...Campaigns].sort((a, b) => {
+    const sortedCampaigns = [...campaigns].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
@@ -62,70 +57,32 @@ const Credits = (props: Props) => {
     setCampaigns(sortedCampaigns);
   };
 
-  interface DropdownStates {
-    status: boolean;
-    sort: boolean;
-  }
-  const [dropdownStates, setDropdownStates] = useState<DropdownStates>({
-    status: false,
-    sort: false,
-  });
-  const handleSelect = (field: string, value: string) => {
-    setDropdownStates((prev) => ({ ...prev, [field]: false })); // Close the dropdown
-    if (field == "status") {
-      setStatusValue(value);
-    } else {
-      setSortValue(value);
-    }
-  };
-  const toggleDropdown = (field: keyof DropdownStates) => {
-    setDropdownStates((prev) => ({
-      ...prev,
-      [field]: !prev[field],
-      // Close other dropdowns when opening one
-      ...(Object.keys(prev) as Array<keyof DropdownStates>).reduce(
-        (acc, key) => {
-          if (key !== field) acc[key] = false;
-          return acc;
-        },
-        {} as DropdownStates
-      ),
-    }));
-  };
-  // for the tabs all active completed
   interface TabItem {
     id: number;
     title: string;
     value: number;
     isActive: boolean;
   }
-  const [tabs, setTabs] = useState<Array<TabItem>>([
-    {
-      id: 1,
-      title: "All",
-      value: 0,
-      isActive: true,
-    },
-    {
-      id: 2,
-      title: "Active",
-      value: 0,
-      isActive: false,
-    },
-    {
-      id: 3,
-      title: "Completed",
-      value: 0,
-      isActive: false,
-    },
-    {
-      id: 4,
-      title: "Drafts",
-      value: 0,
-      isActive: false,
-    },
-  ]);
+  const activeCount = useMemo(
+    () => campaigns.filter((campaign) => campaign.status === "Active").length,
+    [campaigns]
+  );
+  const completedCount = useMemo(
+    () =>
+      campaigns.filter((campaign) => campaign.status === "Completed").length,
+    [campaigns]
+  );
+  const draftCount = useMemo(
+    () => campaigns.filter((campaign) => campaign.status === "Draft").length,
+    [campaigns]
+  );
 
+  const [tabs, setTabs] = useState<Array<TabItem>>([
+    { id: 1, title: "All", value: campaigns.length, isActive: true },
+    { id: 2, title: "Active", value: activeCount, isActive: false },
+    { id: 3, title: "Completed", value: completedCount, isActive: false },
+    { id: 4, title: "Drafts", value: draftCount, isActive: false },
+  ]);
   // Function to handle tab switching
   const handleTabClick = (selectedId: number) => {
     setTabs(
@@ -140,15 +97,27 @@ const Credits = (props: Props) => {
 
   // Function to handle "select all" checkbox
   const handleSelectAll = () => {
-    if (selectedItems.length < Campaigns.length) {
+    if (selectedItems.length < campaigns.length) {
       // Select all campaigns
-      setSelectedItems(Campaigns.map((_, index) => index));
+      setSelectedItems(campaigns.map((_, index) => index));
     } else {
       // Deselect all
       setSelectedItems([]);
     }
   };
-
+  const getFilteredCampaigns = () => {
+    const activeTab = tabs.find((tab) => tab.isActive)?.title;
+    return campaigns.filter((campaign) => {
+      const matchesSearch = campaign.campaign
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      const matchesTab =
+        activeTab === "All" ||
+        campaign.status === activeTab ||
+        campaign.status === "Draft";
+      return matchesSearch && matchesTab;
+    });
+  };
   // Function to handle individual checkbox selection
   const handleSelectItem = (index: number) => {
     setSelectedItems((prev) => {
@@ -164,18 +133,40 @@ const Credits = (props: Props) => {
 
   // Calculate header checkbox state
   const isAllSelected =
-    Campaigns.length > 0 && selectedItems.length === Campaigns.length;
+    campaigns.length > 0 && selectedItems.length === campaigns.length;
   const isIndeterminate =
-    selectedItems.length > 0 && selectedItems.length < Campaigns.length;
+    selectedItems.length > 0 && selectedItems.length < campaigns.length;
+  const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
   return (
     <div>
-      {/*  create message */}
-      {/* <div className="fixed w-full h-screen flex items-center justify-end p-4 bg-black/20 top-0 left-0 z-50 ">
-        <div className="h-full bg-white max-w-[475px] w-full rounded-xl p-6">
-          <div className="flex justify-end items-center ">
-            {" "}
-            <div className="flex items-center p-2 w-fit rounded-lg  justify-center border border-[#E4E7EC]">
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        className={`fixed w-full h-screen flex items-center justify-end  bg-black/20 top-0 left-0 z-50  p-4   transition-all duration-500 ${
+          isOpen ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className={`h-full bg-white  max-w-[475px] sidebar  py overflow-auto w-full rounded-xl mt   transition-all duration-500 p-6   ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex justify-end items-center mt-2  cursor-pointer">
+            <div
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex items-center p-2 w-fit rounded-lg  justify-center border border-[#E4E7EC]"
+            >
               <Multiply color="#5D6679" />
             </div>
           </div>
@@ -185,17 +176,55 @@ const Credits = (props: Props) => {
               MESSAGE TYPE
             </span>
           </div>
-          <div className="overflow-auto ma h-full mt-8 rounded-xl bg-[#F2F4F7]">
-            <div className="s">
-              <p className="text-grey-500">Select a message type</p>
-              <p className="text-sm">
+          <div className="overflow-auto h-full py-9 max-h-[490px] justify-between gap-4 flex flex-col h-43  p-4 px-4 mt-10 rounded-xl bg-[#F2F4F7]">
+            <div className="">
+              <p className="text-grey-800 text-sm font-medium">
+                Marketing Message
+              </p>
+              <p className="text-sm text-grey-500">
+                Automate follow-ups and provide essential updates to your
+                customers. Perfect for order confirmations, account alerts, and
+                delivery tracking.
+              </p>
+            </div>
+            <div className="">
+              <p className="text-grey-800 text-sm font-medium">
+                Utility Message
+              </p>
+              <p className="text-sm text-grey-500">
                 Choose a campaign type to fit your goal. This will affect
                 message format, engagement options, and billing.
               </p>
             </div>
+            <div className="">
+              <p className="text-grey-800 text-sm font-medium">
+                Authentication Message
+              </p>
+              <p className="text-sm text-grey-500">
+                Securely verify user identities with one-time passcodes. Ideal
+                for account verification, password resets, and login challenges.
+              </p>
+            </div>
+            <div className="">
+              <p className="text-grey-800 text-sm font-medium">
+                Service Message
+              </p>
+              <p className="text-sm text-grey-500">
+                Provide seamless customer support by addressing inquiries and
+                resolving issues. Use this for real-time assistance, feedback
+                collection, or issue resolution.
+              </p>
+            </div>
           </div>
+          <Button
+            text="Continue"
+            type="primary"
+            size="sm"
+            className="mt-10 mb-8"
+          />
         </div>
-      </div> */}
+      </div>
+
       {/* The whole page */}
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
         <div className="flex items-center gap-4">
@@ -204,7 +233,7 @@ const Credits = (props: Props) => {
           </div>
           <div className="flex flex-col gap-1">
             <p className="text-lg font-semibold">Campaigns</p>
-            <p className="text-sm text-grey-500">
+            <p className="text-sm text-grey-800">
               Create and manage campaigns for your business
             </p>
           </div>
@@ -218,6 +247,7 @@ const Credits = (props: Props) => {
           />
           <Button
             size="sm"
+            onClick={() => setIsOpen(!isOpen)}
             iconComponent={<Plus color="#fff" />}
             icon_style="leading-icon"
             type="primary"
@@ -227,30 +257,6 @@ const Credits = (props: Props) => {
       </div>
 
       <div className="flex mt-[25px] w-full border border-[#E4E7EC] rounded-xl flex-col">
-        <div className="flex  w-full gap-8 px-7 h-[104px] items-center ">
-          <CampaignSelectField
-            label="Status"
-            placeholder="Campaign Status"
-            isOpen={dropdownStates.status}
-            onSelect={(value) => handleSelect("status", value)}
-            name="status"
-            value={statusValue}
-            options={statusOptions}
-            onToggle={() => toggleDropdown("status")}
-            icon={<Clock color="#858D9D" />}
-          />
-          <CampaignSelectField
-            label="Sort by"
-            placeholder="Campaign Status"
-            isOpen={dropdownStates.sort}
-            onSelect={(value) => handleSelect("sort", value)}
-            name="sort"
-            value={sortValue}
-            options={sortOptions}
-            onToggle={() => toggleDropdown("sort")}
-            icon={<Flag color="#858D9D" />}
-          />
-        </div>
         <div className="flex px-11 gap-12 border-t border-t-grey-50 h-[62px] items-end">
           {tabs.map((tab, index) => (
             <div
@@ -262,7 +268,7 @@ const Credits = (props: Props) => {
               }`}
             >
               <span
-                className={tab.isActive ? "text-primary-400" : "text-grey-500"}
+                className={tab.isActive ? "text-primary-400" : "text-grey-800"}
               >
                 {tab.title}
               </span>
@@ -276,11 +282,15 @@ const Credits = (props: Props) => {
 
       <div className="rounded-xl mt-7  h-full w-full border border-[#E4E7EC] ">
         <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
-          <div className="text-lg font-medium">10 Campaigns</div>
+          <div className="text-lg font-medium">
+            {campaigns.length} Campaigns
+          </div>
 
           <div className="shadow-xs">
             <SearchInput
               placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               icon={<SearchIcon color="#667085" />}
             />
           </div>
@@ -381,9 +391,9 @@ const Credits = (props: Props) => {
                 </th>
               </tr>
             </thead>
-            {Campaigns.length != 0 && (
+            {campaigns.length != 0 && (
               <tbody>
-                {Campaigns.map((campaign, index) => (
+                {getFilteredCampaigns().map((campaign, index) => (
                   <tr
                     key={index}
                     className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
@@ -445,7 +455,7 @@ const Credits = (props: Props) => {
               </tbody>
             )}
           </table>
-          {Campaigns.length == 0 && (
+          {campaigns.length == 0 && (
             <div className="w-full h-80 flex flex-col  mt-32 mb-32 items-center justify-center mx-auto">
               <Image src={illustration} alt="img" className="mx-auto" />
               <p className="text-lg font-semibold">
@@ -471,4 +481,4 @@ const Credits = (props: Props) => {
   );
 };
 
-export default Credits;
+export default Campaign;
