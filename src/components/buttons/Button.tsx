@@ -58,18 +58,20 @@ const Button = ({
              ${size == "sm" && icon_style === "icon-only" ? " p-2 " : ""}
              ${
                size == "lg" && icon_style === "icon-only"
-                 ? "h-10 w-10 flex justify-center items-center"
+                 ? "h-10 w-10 p-2 flex justify-center items-center"
                  : ""
              }
               ${
                 size == "sm" &&
-                (icon_style === "leading-icon" || "trailing icon")
+                (icon_style === "leading-icon" ||
+                  icon_style === "trailing icon")
                   ? "text-sm font-semibold py-[8px] px-[12px]"
                   : ""
               }
               ${
                 size == "lg" &&
-                (icon_style === "leading-icon" || "trailing icon")
+                (icon_style === "leading-icon" ||
+                  icon_style === "trailing icon")
                   ? "text-md font-semibold  p-4"
                   : ""
               }
