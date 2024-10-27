@@ -12,10 +12,15 @@ import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import Button from "@/components/buttons/Button";
 import ChevronRight from "@/icons/chevron-right";
+import Eye from "@/icons/eye";
+import EyeSlash from "@/icons/eye-slash";
+import Message from "@/icons/message";
+import Mail from "@/icons/mail";
 
 type Props = {};
 
 const Signup = (props: Props) => {
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -50,7 +55,8 @@ const Signup = (props: Props) => {
           <div className="mt-[40px] flex flex-col gap-4">
             <InputField
               label="Work Email Address"
-              iconSrc={mailicon}
+             
+              icon={<Mail color="#667085"/>}
               placeholder="email@company"
               inputType="email"
               id="email"
@@ -63,8 +69,15 @@ const Signup = (props: Props) => {
             />
             <div className="flex flex-col ">
               <InputField
-                iconSrc={passwordopenicon}
-                inputType="text"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+                icon={
+                  passwordVisible ? (
+                    <Eye color="#667085" />
+                  ) : (
+                    <EyeSlash width={20} height={20} color="#667085" />
+                  )
+                }
+                inputType={passwordVisible ? "text" : "password"}
                 label="Password"
                 name="password"
                 error={Boolean(
