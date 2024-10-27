@@ -95,9 +95,9 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   label="Settings"
                 />
                 <IconLink
-                  href="/dashboard/messages"
+                  href="/dashboard/help-center"
                   IconComponent={Messages}
-                  label="Messages"
+                  label="Help Center"
                 />
               </div>
             </div>
