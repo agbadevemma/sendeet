@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-
+import  miscellaneousReducer from "../lib/slices/miscellaneousSlice"
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: {
+        miscellaneous: miscellaneousReducer,
+    },
   })
 }
 

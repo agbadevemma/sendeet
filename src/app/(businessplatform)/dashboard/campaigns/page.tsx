@@ -24,6 +24,8 @@ import Multiply from "@/icons/multiply";
 import bg from "../../../../images/campaignbg.png";
 import { CampaignInterface, initialCampaign } from "@/utils/data";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { toggleModal } from "@/lib/slices/miscellaneousSlice";
 
 type Props = {};
 
@@ -149,23 +151,25 @@ const Campaign = (props: Props) => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
+  const isModalOpen = useAppSelector((state) => state.miscellaneous.isModalOpen);
+  const dispatch = useAppDispatch();
   return (
     <div>
       <div
-        onClick={() => setIsOpen(!isOpen)}
+       onClick={() => dispatch(toggleModal())}
         className={`fixed w-full h-screen flex items-center justify-end  bg-black/20 top-0 left-0 z-50  p-4   transition-all duration-500 ${
-          isOpen ? "visible opacity-100" : "invisible opacity-0"
+         isModalOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
         <div
           onClick={(e) => e.stopPropagation()}
           className={`h-full bg-white  max-w-[475px] sidebar  py overflow-auto w-full rounded-xl mt   transition-all duration-500 p-6   ${
-            isOpen ? "translate-x-0" : "translate-x-full"
+            isModalOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex justify-end items-center mt-2  cursor-pointer">
             <div
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => dispatch(toggleModal())}
               className="flex items-center p-2 w-fit rounded-lg  justify-center border border-[#E4E7EC]"
             >
               <Multiply color="#5D6679" />
@@ -251,7 +255,7 @@ const Campaign = (props: Props) => {
           />
           <Button
             size="sm"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => dispatch(toggleModal())}
             iconComponent={<Plus color="#fff" />}
             icon_style="leading-icon"
             type="primary"

@@ -1,3 +1,4 @@
+"use client"
 import Button from "@/components/buttons/Button";
 import SearchInput from "@/components/SearchInput";
 import Calendar from "@/icons/calendar";
@@ -20,11 +21,14 @@ import Campaign from "@/components/Campaign";
 import ArrowLeft from "@/icons/arrow-left";
 import ArrowRight from "@/icons/arrow-right";
 import Link from "next/link";
+import { useAppDispatch } from "@/lib/hooks";
+import { openModal } from "@/lib/slices/miscellaneousSlice";
 
 type Props = {};
 
 const page = (props: Props) => {
   const available: boolean = true;
+  const dispatch = useAppDispatch();
   return (
     <div className="w-full pb-32">
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
@@ -255,11 +259,11 @@ const page = (props: Props) => {
             />
           </div>
         </div>
-        {available ? (
+        {!available ? (
           <div className="mt-6">
             <div className="w-full flex flex-col gap-4">
               <Campaign />
-              <Campaign /> <Campaign /> 
+              <Campaign /> <Campaign />
             </div>
           </div>
         ) : (
@@ -272,7 +276,10 @@ const page = (props: Props) => {
               Tap the button below to start and <br /> share content with your
               contacts
             </p>
-            <Link href={"/dashboard/campaigns"}>
+            <Link
+              onClick={() => dispatch(openModal())}
+              href={"/dashboard/campaigns"}
+            >
               <Button
                 size="sm"
                 type="primary"
