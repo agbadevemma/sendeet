@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={`en  ${inter.className}`}>
-      <body className={` antialiased `}>
+    <html lang={`en`}>
+      <body className={` antialiased  ${inter.className} `}>
         <NextTopLoader showSpinner={false} />
         {children}
       </body>
