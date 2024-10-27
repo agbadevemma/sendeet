@@ -10,6 +10,7 @@ import bg3 from "../../../images/signup/bg3.png";
 import card from "../../../images/signup/card2.svg";
 import arrowactive from "../../../images/icons/chevron-right-active.svg";
 import arrowinactive from "../../../images/icons/chevron-right-inactive.svg";
+import ChevronRight from "@/icons/chevron-right";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -29,7 +30,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   }, []);
 
   const renderNavLink = (href: string, text: string) => (
-    <Link href={href} className="flex items-center gap-[10px]">
+    <div className="flex items-center gap-[10px]">
       <p
         className={`max-w-[67px] text-xs lg:text-sm w-full ${
           pathname === href ? "text-primary-500" : "text-grey-300"
@@ -37,8 +38,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       >
         {text}
       </p>
-      <Image src={pathname === href ? arrowactive : arrowinactive} alt="icon" />
-    </Link>
+      <ChevronRight width={16} height={16} color={pathname === href ?"#00AAF7":"#B9BDC7" }/>
+      
+    </div>
   );
 
   return (
@@ -60,7 +62,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </div>
           </div>
         </div>
-        <div className="relative  w-full px-[20px] my-[20px] lg:flex hidden   flex-row-reverse overflow-hidden mr-[20px]">
+        <div className="relative  w-full px-[20px] my-[20px] lg:flex hidden   flex-row-reverse overflow-hidden ">
           {backgrounds.map((bg, index) => (
             <Image
               key={index}
@@ -72,11 +74,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             />
           ))}
 
-          <div className="absolute w-fit mx-auto flex flex-col gap-[80px] left-0 right-0 z-10">
+          <div className="absolute w-fit lg:px-14 xl:px-0 mx-auto flex flex-col gap-[80px] left-0 right-0 z-10">
             <Image
               src={card}
               alt="logo"
-              className="object-contain left-0 right-0 mx-auto mt-[126px]"
+              className="object-contain lg: xl-full left-0 right-0 mx-auto mt-[126px]"
             />
             <div className="mx-auto flex flex-col gap-y-[14px] w-full max-w-[437px] text-white">
               <p className="text-center font-medium text-2xl">
