@@ -402,7 +402,7 @@ const Campaign = (props: Props) => {
                     key={index}
                     className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
                   >
-                    <td className="text-sm font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
+                    <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
                       <Checkbox
                         checked={selectedItems.includes(index)}
                         onClick={() => handleSelectItem(index)}
@@ -442,7 +442,7 @@ const Campaign = (props: Props) => {
                                 campaign.status === "Draft"
                                   ? "bg-[#667085] "
                                   : campaign.status === "Active"
-                                  ? "bg-warning-500   w-full"
+                                  ? "bg-warning-500 "
                                   : "bg-success-500"
                               }`}
                             ></div>{" "}

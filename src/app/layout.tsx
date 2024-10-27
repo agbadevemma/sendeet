@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import StoreProvider from "./StoreProvider";
 
 const inter = Inter({
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
@@ -20,9 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={`en`}>
+
       <body className={` antialiased  ${inter.className} `}>
         <NextTopLoader showSpinner={false} />
-        {children}
+        <StoreProvider> {children}</StoreProvider>
       </body>
     </html>
   );
