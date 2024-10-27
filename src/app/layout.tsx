@@ -5,7 +5,6 @@ import NextTopLoader from "nextjs-toploader";
 import StoreProvider from "./StoreProvider";
 
 const inter = Inter({
-  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
