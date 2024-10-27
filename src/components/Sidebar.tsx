@@ -19,17 +19,15 @@ type Props = {
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
   return (
-    <div className="">
+    <div  className="">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
         className={`w-full bg-black/20 z-50 fixed  xl:static  transition-all duration-500  ${
-          isOpen
-            ? "visible "
-            : "invisible  xl:visible xl:opacity-100"
+          isOpen ? "visible " : "invisible  xl:visible xl:opacity-100"
         } `}
       >
         <div
-          onClick={(e) => e.stopPropagation()}
+          
           className={`h-screen pb-20 overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[60%] md:w-[40%] lg:w-full  lg:max-w-[272px] transition-all duration-500    ${
             isOpen ? "-translate-x-0" : "-translate-x-full xl:translate-x-0"
           } `}
