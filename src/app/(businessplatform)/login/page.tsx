@@ -10,9 +10,14 @@ import { useFormik } from "formik";
 import { validationSchemaLogin } from "@/app/validation";
 import { useRouter } from "next/navigation";
 import Button from "@/components/buttons/Button";
+import Eye from "@/icons/eye";
+import { useState } from "react";
+import EyeSlash from "@/icons/eye-slash";
+import Mail from "@/icons/mail";
 type Props = {};
 
 const LoginPage = (props: Props) => {
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -42,7 +47,7 @@ const LoginPage = (props: Props) => {
               <form onSubmit={formik.handleSubmit} className="w-full">
                 <div className="flex flex-col mt-10 gap-4">
                   <InputField
-                    iconSrc={mailicon}
+                    icon={<Mail color="#667085" />}
                     inputType="email"
                     label="Work Email Address"
                     id="email"
@@ -55,8 +60,15 @@ const LoginPage = (props: Props) => {
                     errorText={formik.errors.email}
                   />
                   <InputField
-                    iconSrc={passwordopenicon}
-                    inputType="password"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    icon={
+                      passwordVisible ? (
+                        <Eye color="#667085" />
+                      ) : (
+                        <EyeSlash width={20} height={20} color="#667085" />
+                      )
+                    }
+                    inputType={passwordVisible ? "text" : "password"}
                     label="Password"
                     id="password"
                     name="password"
