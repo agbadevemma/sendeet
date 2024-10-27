@@ -69,7 +69,7 @@ export interface Transaction {
   status: "successful" | "pending" | "failed";
 }
 
-export interface Campaign {
+export interface CampaignInterface {
   campaign: string;
   date: string;
   delivered: string;
@@ -171,46 +171,45 @@ export interface Campaign {
 
 export const initialTransactions: Transaction[] = [];
 
-export const initialCampaign: Campaign[] = [
+export const initialCampaign: CampaignInterface[] = [
   {
-    campaign: "Tech requirements about the fund.pdf",
-    clicked: "89.5%",
+    campaign: "Tech requirements for Fund A.pdf",
+    clicked: "75%",
     date: "02/10/24",
-    delivered: "25",
-    open: "6",
+    delivered: "30",
+    open: "10",
     status: "Draft",
   },
-
   {
-    campaign: "Tech requirements about the fund.pdf",
+    campaign: "Financial Analysis for Fund B.pdf",
     clicked: "89.5%",
-    date: "02/10/24",
-    delivered: "25",
-    open: "6",
+    date: "03/10/24",
+    delivered: "50",
+    open: "20",
     status: "Active",
   },
   {
-    campaign: "Tech requirements about the fund.pdf",
-    clicked: "89.5%",
-    date: "02/10/24",
-    delivered: "25",
-    open: "6",
+    campaign: "Market Research Report.pdf",
+    clicked: "92%",
+    date: "04/10/24",
+    delivered: "60",
+    open: "18",
     status: "Active",
   },
   {
-    campaign: "Tech requirements about the fund.pdf",
-    clicked: "89.5%",
-    date: "02/10/24",
-    delivered: "25",
-    open: "6",
+    campaign: "Investment Strategy Overview.pdf",
+    clicked: "85%",
+    date: "05/10/24",
+    delivered: "55",
+    open: "25",
     status: "Active",
   },
   {
-    campaign: "Tech requirements about the fund.pdf",
-    clicked: "89.5%",
-    date: "02/10/24",
-    delivered: "25",
-    open: "6",
+    campaign: "Tech requirements for Fund C.pdf",
+    clicked: "78%",
+    date: "06/10/24",
+    delivered: "45",
+    open: "15",
     status: "Completed",
   },
 ];

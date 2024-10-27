@@ -22,11 +22,17 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
     <div className="">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`w-full bg-black/20 z-50   ${isOpen ? "fixed" : "hidden xl:block"} `}
+        className={`w-full bg-black/20 z-50 fixed  lg:static  transition-all duration-500  ${
+          isOpen
+            ? "visible "
+            : "invisible  xl:visible xl:opacity-100"
+        } `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`h-screen pb-20 overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[70%] md:w-[40%] lg:w-full  lg:max-w-[272px] `}
+          className={`h-screen pb-20 overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[60%] md:w-[40%] lg:w-full  lg:max-w-[272px] transition-all duration-500    ${
+            isOpen ? "-translate-x-0" : "-translate-x-full xl:translate-x-0"
+          } `}
         >
           <div className="px-[24px] py-3.5">
             <Image src={logo} alt="logo" className="w-32" />
