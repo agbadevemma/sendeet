@@ -16,8 +16,7 @@ import img from "../../../images/illustration.svg";
 import Image from "next/image";
 import illustration from "../../../images/illustration2.svg";
 import Graph from "@/components/Graph";
-import DotV from "@/icons/dot-v";
-import Campaign from "@/components/CampaignSelectField";
+import Campaign from "@/components/Campaign";
 import ArrowLeft from "@/icons/arrow-left";
 import ArrowRight from "@/icons/arrow-right";
 import Link from "next/link";
@@ -256,11 +255,11 @@ const page = (props: Props) => {
             />
           </div>
         </div>
-        {!available ? (
+        {available ? (
           <div className="mt-6">
             <div className="w-full flex flex-col gap-4">
               <Campaign />
-              <Campaign /> <Campaign /> <Campaign /> <Campaign />
+              <Campaign /> <Campaign /> 
             </div>
           </div>
         ) : (
