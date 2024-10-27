@@ -7,6 +7,12 @@ export const validationSchema = Yup.object({
     .required("Email is required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[0-9]/, "Password must contain at least one number")
+    .matches(
+      /[@$!%*?&]/,
+      "Password must contain at least one special character"
+    )
     .required("Password is required"),
 });
 
@@ -49,9 +55,4 @@ export const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
 });
 
-// Types for inferred schemas
-export type ValidationSchemaType = Yup.InferType<typeof validationSchema>;
-export type ValidationSchemaLoginType = Yup.InferType<typeof validationSchemaLogin>;
-export type ValidationSchemaBasicInfoType = Yup.InferType<typeof validationSchemaBasicInfo>;
-export type ValidationSchemaCompanyType = Yup.InferType<typeof validationSchemaCompany>;
-export type ForgotPasswordSchemaType = Yup.InferType<typeof ForgotPasswordSchema>;
+
