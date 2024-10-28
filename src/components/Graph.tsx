@@ -21,20 +21,19 @@ interface ChartData {
   amt: number;
 }
 const data: ChartData[] = [
-    { name: "Jan", subscribers: 4000, unsubscribers: 2400, amt: 2400 },
-    { name: "Feb", subscribers: 3000, unsubscribers: 1398, amt: 2210 },
-    { name: "Mar", subscribers: 2000, unsubscribers: 9800, amt: 2290 },
-    { name: "Apr", subscribers: 2780, unsubscribers: 3908, amt: 2000 },
-    { name: "May", subscribers: 1890, unsubscribers: 4800, amt: 2181 },
-    { name: "Jun", subscribers: 2390, unsubscribers: 3800, amt: 2500 },
-    { name: "Jul", subscribers: 3490, unsubscribers: 4300, amt: 2100 },
-    { name: "Aug", subscribers: 4000, unsubscribers: 2400, amt: 2400 },
-    { name: "Sep", subscribers: 3000, unsubscribers: 1398, amt: 2210 },
-    { name: "Oct", subscribers: 2000, unsubscribers: 9800, amt: 2290 },
-    { name: "Nov", subscribers: 2780, unsubscribers: 3908, amt: 2000 },
-    { name: "Dec", subscribers: 1890, unsubscribers: 4800, amt: 2181 },
+  { name: "Jan", subscribers: 4000, unsubscribers: 2400, amt: 2400 },
+  { name: "Feb", subscribers: 3000, unsubscribers: 1398, amt: 2210 },
+  { name: "Mar", subscribers: 2000, unsubscribers: 9800, amt: 2290 },
+  { name: "Apr", subscribers: 2780, unsubscribers: 3908, amt: 2000 },
+  { name: "May", subscribers: 1890, unsubscribers: 4800, amt: 2181 },
+  { name: "Jun", subscribers: 2390, unsubscribers: 3800, amt: 2500 },
+  { name: "Jul", subscribers: 3490, unsubscribers: 4300, amt: 2100 },
+  { name: "Aug", subscribers: 4000, unsubscribers: 2400, amt: 2400 },
+  { name: "Sep", subscribers: 3000, unsubscribers: 1398, amt: 2210 },
+  { name: "Oct", subscribers: 2000, unsubscribers: 9800, amt: 2290 },
+  { name: "Nov", subscribers: 2780, unsubscribers: 3908, amt: 2000 },
+  { name: "Dec", subscribers: 1890, unsubscribers: 4800, amt: 2181 },
 ];
-
 
 const formatNumber = (value: number) => {
   return value.toLocaleString();
@@ -92,7 +91,15 @@ const Graph = (props: Props) => {
             tickFormatter={formatNumber}
             tickLine={false}
           />
-          {!allZero && <Tooltip />}
+          {!allZero && (
+            <Tooltip
+              contentStyle={{
+                borderRadius: "10px",
+                border: "none",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.15)",
+              }}
+            />
+          )}
 
           <Area
             type="monotone"

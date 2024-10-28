@@ -17,6 +17,7 @@ type Props = {
   errorText?: string;
   icon?: React.ReactNode;
   className?: string;
+  size:"sm"|"lg"
 };
 
 const InputField = ({
@@ -33,13 +34,14 @@ const InputField = ({
   error = false,
   errorText,
   icon,
+  size="lg",
   className,
 }: Props) => {
   return (
     <div className={`${className}`}>
       {" "}
       <div className={`flex flex-col gap-1 group `}>
-        <label htmlFor="" className="text-sm lg:text-md">
+        <label htmlFor="" className={`text-sm lg:text-md ${size==="sm"?"font-medium":"font-normal"}`}>
           {label}
         </label>
         <div
@@ -47,7 +49,7 @@ const InputField = ({
             error
               ? "border-error-500 "
               : "border-grey-100 group-focus-within:border-primary-100 "
-          } rounded-lg gap-3 items-center justify-between border border-solid   p-4`}
+          } rounded-lg gap-3 items-center justify-between border border-solid   ${size==="lg"?"p-4":"px-[14px] py-[10px]"}`}
         >
           <input
             type={inputType}
