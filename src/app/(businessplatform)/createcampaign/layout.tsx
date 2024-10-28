@@ -147,7 +147,7 @@ export default function CreateLayout({
           </div>
         </div>
       </div>
-   <div className="max-w-[640px] w-full mx-auto mt-8">   {children}</div>
+   <div className="max-w-[640px] w-full mx-auto mt-8 bg-[#FCFCFD] h-screen">   {children}</div>
     </div>
   );
 }
