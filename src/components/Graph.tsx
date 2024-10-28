@@ -94,7 +94,7 @@ const Graph = (props: Props) => {
           {!allZero && (
             <Tooltip
               contentStyle={{
-                borderRadius: "10px",
+                borderRadius: "8px",
                 border: "none",
                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.15)",
               }}
