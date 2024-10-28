@@ -34,6 +34,19 @@ export const employeeCountOptions: Option[] = [
   { value: "201+", label: "201+ employees" },
 ];
 
+export const messageTypeOptions: Option[] = [
+  { value: "Marketing", label: "Marketing" },
+  { value: "Utility", label: "Utility" },
+  { value: "Authentication", label: "Authentication" },
+  { value: "Service", label: "Service" },
+];
+
+export const targetAudienceOptions: Option[] = [
+  { value: "All Contacts", label: "All Contacts" },
+  { value: "Custom Selection", label: "Custom Selection" },
+ 
+];
+
 export const subscriberRangeOptions: Option[] = [
   { value: "0-1000", label: "0-1,000 subscribers" },
   { value: "1001-10000", label: "1,001-10,000 subscribers" },
