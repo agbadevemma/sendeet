@@ -17,7 +17,7 @@ type Props = {
   errorText?: string;
   icon?: React.ReactNode;
   className?: string;
-  size:"sm"|"lg"
+  size?:"sm"|"lg"
 };
 
 const InputField = ({
@@ -55,7 +55,7 @@ const InputField = ({
             type={inputType}
             id={id}
             name={name}
-            className="w-full focus:outline-none text-sm lg:text-md"
+            className="w-full focus:outline-none text-sm lg:text-md bg-transparent"
             placeholder={placeholder}
             value={value}
             onChange={onChange}
