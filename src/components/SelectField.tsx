@@ -63,11 +63,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
         <label className="text-[#344054] text-sm lg:text-md">{label}</label>
         <div
           className={`flex justify-between items-center gap-2 rounded-lg px-3.5 py-2.5 border ${
-            error && "border-[#D42620]"
+            error ? "border-[#D42620]" : "border-grey-100"
           } ${
             isOpen
               ? "shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05),_0px_0px_0px_4px_#E6F7FE]  border-[#8AD8FB]"
-              : "shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border-grey-100 "
+              : "shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)]  "
           } cursor-pointer ${className}`}
           onClick={onToggle}
         >

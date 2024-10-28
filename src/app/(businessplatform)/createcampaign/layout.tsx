@@ -40,7 +40,7 @@ export default function CreateLayout({
           />
         </div>
       </div>
-      <div className="w-full flex flex-col gap-8 lg:gap-10 xl:gap-24 lg:flex-row  border py-[18px] px-4 lg:px-10 xl:px-10 border-grey-100 border-t-transparent ">
+      <div className="w-full flex flex-col gap-8 lg:gap-10 xl:gap-24 lg:flex-row  border py-[18px] px-4 lg:px-10 xl:px-10 border-grey-100 border-t-0 border-r-0 ">
         <div className="flex   gap-5 items-start">
           <Link href={"/dashboard/campaigns"}>
             {" "}

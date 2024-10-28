@@ -1,8 +1,11 @@
 "use client";
 import { validationSchemaCampaignSetup } from "@/app/validation";
+import Button from "@/components/buttons/Button";
 import InputField from "@/components/InputField";
 import SelectField from "@/components/SelectField";
 import TextArea from "@/components/TextArea";
+import LoudSpeaker from "@/icons/loudspeaker";
+import UserGroup from "@/icons/user-group";
 import { messageTypeOptions, targetAudienceOptions } from "@/utils/data";
 import { useFormik } from "formik";
 import React, { useState } from "react";
@@ -56,47 +59,117 @@ const Setup = (props: Props) => {
   };
 
   return (
-    <div>
-      <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
-        1. Setup Campaign Details
-      </p>
-      <div className="mt-8 flex flex-col gap-5 ">
-        <InputField
-          size="sm"
-          inputType="text"
-          label="Campaign Name"
-          placeholder="Enter a name for your campaign"
-        />
-        <TextArea
-          label="Campaign Description"
-          placeholder="Enter a description..."
-          size="sm"
-        />
-        <div className="w-full flex gap-4">
-        <SelectField
-            label="Message Type"
-            name="messageType"
-            options={messageTypeOptions}
-            isOpen={dropdownStates.messageType}
-            onToggle={() => toggleDropdown("messageType")}
-            onSelect={(value) => handleSelect("messageType", value)}
-            value={formik.values.messageType}
-            error={formik.touched.messageType && Boolean(formik.errors.messageType)}
-            errorText={formik.touched.messageType ? formik.errors.messageType : ""}
+    <div className=" px-4">
+      <form onSubmit={formik.handleSubmit}>
+        <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
+          1. Setup Campaign Details
+        </p>
+        <div className="mt-8 flex flex-col gap-5 ">
+          <InputField
+            size="sm"
+            inputType="text"
+            label="Campaign Name"
+            placeholder="Enter a name for your campaign"
+            value={formik.values.campaign}
+            name="campaign"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.campaign && Boolean(formik.errors.campaign)}
+            errorText={formik.touched.campaign ? formik.errors.campaign : ""}
           />
-          <SelectField
-            label="Target Audience"
-            name="targetAudience"
-            options={targetAudienceOptions}
-            isOpen={dropdownStates.targetAudience}
-            onToggle={() => toggleDropdown("targetAudience")}
-            onSelect={(value) => handleSelect("targetAudience", value)}
-            value={formik.values.targetAudience}
-            error={formik.touched.targetAudience && Boolean(formik.errors.targetAudience)}
-            errorText={formik.touched.targetAudience ? formik.errors.targetAudience : ""}
+          <TextArea
+            label="Campaign Description"
+            placeholder="Enter a description..."
+            size="sm"
+            value={formik.values.campaignDescription}
+            onChange={formik.handleChange}
+            name="campaignDescription"
+            onBlur={formik.handleBlur}
+            error={
+              formik.touched.campaignDescription &&
+              Boolean(formik.errors.campaignDescription)
+            }
+            errorText={
+              formik.touched.campaignDescription
+                ? formik.errors.campaignDescription
+                : ""
+            }
+          />
+          <div className="w-full flex lg:flex-row flex-col gap-4">
+            <SelectField
+              label="Message Type"
+              name="messageType"
+              options={messageTypeOptions}
+              isOpen={dropdownStates.messageType}
+              onToggle={() => toggleDropdown("messageType")}
+              onSelect={(value) => handleSelect("messageType", value)}
+              value={formik.values.messageType}
+              error={
+                formik.touched.messageType && Boolean(formik.errors.messageType)
+              }
+              errorText={
+                formik.touched.messageType ? formik.errors.messageType : ""
+              }
+              icon={<LoudSpeaker color="#858D9D" />}
+            />
+            <SelectField
+              label="Target Audience"
+              name="targetAudience"
+              options={targetAudienceOptions}
+              isOpen={dropdownStates.targetAudience}
+              onToggle={() => toggleDropdown("targetAudience")}
+              onSelect={(value) => handleSelect("targetAudience", value)}
+              value={formik.values.targetAudience}
+              error={
+                formik.touched.targetAudience &&
+                Boolean(formik.errors.targetAudience)
+              }
+              errorText={
+                formik.touched.targetAudience
+                  ? formik.errors.targetAudience
+                  : ""
+              }
+              icon={<UserGroup color="#858D9D" />}
+            />
+          </div>
+        </div>
+        <div className="mt-8 pb-8  border-b borer-[#D0D3D9]">
+          <p className="text-base font-medium  ">Estimated Cost</p>
+          <div className="flex flex-col gap-4 text-grey-500 text-sm mt-5">
+            <div className="flex items-center justify-between">
+              <p className="text-sm">Price</p>
+              <p className="text-sm text-[#101828]">
+                {formik.values.campaign && "₦"}
+                {formik.values.campaign
+                  ? Number("26486").toLocaleString()
+                  : "-"}
+              </p>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-sm">Credits</p>
+              <p className="text-sm text-[#101828]">
+                {formik.values.campaign
+                  ? Number("500").toLocaleString()
+                  : "-"}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="w-full mt-8 flex justify-between items-center pb-10">
+          <Button
+            text="Save to drafts"
+            type="secondary"
+            size="sm"
+            className="font-semibold text-md"
+          />
+          <Button
+            text="Next: Compose Message"
+            type="primary"
+            size="sm"
+            className="font-semibold text-md"
           />
         </div>
-      </div>
+      </form>
     </div>
   );
 };
