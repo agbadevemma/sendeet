@@ -58,7 +58,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative w-full" ref={dropdownRef}>
       <div className="flex flex-col gap-1.5">
         <label className="text-[#344054] text-sm lg:text-md">{label}</label>
         <div
