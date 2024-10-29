@@ -26,6 +26,7 @@ import { CampaignInterface, initialCampaign } from "@/utils/data";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { toggleModal } from "@/lib/slices/miscellaneousSlice";
+import Pagination from "@/components/Pagination";
 
 type Props = {};
 
@@ -484,6 +485,7 @@ const Campaign = (props: Props) => {
             </div>
           )}
         </div>
+        <Pagination  />
       </div>
     </div>
   );

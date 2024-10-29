@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Button from "@/components/buttons/Button";
 import SearchInput from "@/components/SearchInput";
 import Calendar from "@/icons/calendar";
@@ -75,25 +75,28 @@ const page = (props: Props) => {
             <div className="px-4 py-[22px]  w-full  border rounded-xl">
               <span className="text-lg font-medium">Quick Actions</span>
               <div className="flex  flex-col mt-[39.5px]">
-                <div className="w-full">
+                <Link
+                  onClick={() => dispatch(openModal())}
+                  href={"/dashboard/campaigns"}
+                  className="w-full"
+                >
                   <div className="flex justify-between items-center ">
                     <div className="flex gap-4">
                       <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                         <LoudSpeaker color="black" />
                       </div>
-                      <Link
-                        href={"/dashboard/campaigns"}
+                      <p
                         className="flex flex-col gap-1"
                       >
                         <span className="text-md font-medium">
                           Create Campaign
                         </span>
                         <span className="text-sm">Start a new campaign</span>
-                      </Link>
+                      </p>
                     </div>
                     <ChevronRight color="#667185" />
                   </div>
-                </div>
+                </Link>
                 <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
                 <div className="flex justify-between items-center ">
                   <div className="flex gap-4">
@@ -112,23 +115,23 @@ const page = (props: Props) => {
                   <ChevronRight color="#667185" />
                 </div>
                 <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
-                <div className="flex justify-between items-center ">
+                <Link
+                  href={"/dashboard/credits"}
+                  className="flex justify-between items-center "
+                >
                   <div className="flex gap-4">
                     <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                       <Plus color="black" />
                     </div>
-                    <Link
-                      href={"/dashboard/credits"}
-                      className="flex flex-col gap-1"
-                    >
+                    <p className="flex flex-col gap-1">
                       <span className="text-md font-medium">
                         Top up Credits
                       </span>
                       <span className="text-sm">Get more Sendeet credits</span>
-                    </Link>
+                    </p>
                   </div>
                   <ChevronRight color="#667185" />
-                </div>
+                </Link>
               </div>
             </div>
           </div>
