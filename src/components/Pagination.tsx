@@ -43,7 +43,7 @@ const Pagination = () => {
   };
 
   return (
-    <div className="w-full p-6 space-y-6">
+    <div className="w-full  space-y-6">
 
      
 
@@ -56,29 +56,27 @@ const Pagination = () => {
           </span>
         }
         nextLabel={
-          <span className="flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+          <span className="flex items-center justify-center px-[14px] py-2 rounded-md gap-2  text-sm font-medium text-grey-700 bg-white border border-[#D0D5DD] hover:bg-gray-50">
        <span>Next</span>  <ArrowRight color='#48505E'/>
           </span>
         }
         previousLabel={
-          <span className="flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+          <span className="flex items-center justify-center  px-[14px] py-2 gap-2 rounded-md text-sm font-medium text-grey-700 bg-white border border-[#D0D5DD] hover:bg-gray-50">
           <ArrowLeft color='#48505E'/> <span>Previous</span>
           </span>
         }
-       
         onPageChange={handlePageClick}
         pageCount={pageCount}
         pageRangeDisplayed={3}
         marginPagesDisplayed={3}
         className="flex items-center  justify-center space-x-2 w-full"
         pageClassName="flex w-fit"
-        pageLinkClassName="px-3 py-2   w-fit rounded-md text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
-        activeClassName="active"
+        pageLinkClassName="w-[40px]  h-[40px] flex items-center justify-center rounded-md text-sm font-medium text-grey-500 bg-transparent"
+        activeClassName="bg-[#E6F7FE] rounded-lg  "
         containerClassName='flex w-fit justify-between '
-        
-        activeLinkClassName="!bg-blue-600 !text-white border-blue-600"
+        activeLinkClassName=" text-[#00AAF7]  "
         breakClassName="flex items-center justify-between"
-        nextClassName="flex  absolute right-0"
+        nextClassName="flex  absolute right-0 "
         previousClassName="flex absolute left-0"
         disabledClassName="opacity-50 cursor-not-allowed hover:bg-white"
       />

@@ -485,7 +485,9 @@ const Campaign = (props: Props) => {
             </div>
           )}
         </div>
-        <Pagination  />
+        <div className="w-full  pt-[11px] pb-[16px] p-6 ">
+            <Pagination />
+          </div>
       </div>
     </div>
   );

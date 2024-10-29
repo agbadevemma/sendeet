@@ -23,6 +23,7 @@ import ArrowRight from "@/icons/arrow-right";
 import Link from "next/link";
 import { useAppDispatch } from "@/lib/hooks";
 import { openModal } from "@/lib/slices/miscellaneousSlice";
+import Pagination from "@/components/Pagination";
 
 type Props = {};
 
@@ -85,9 +86,7 @@ const page = (props: Props) => {
                       <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                         <LoudSpeaker color="black" />
                       </div>
-                      <p
-                        className="flex flex-col gap-1"
-                      >
+                      <p className="flex flex-col gap-1">
                         <span className="text-md font-medium">
                           Create Campaign
                         </span>
@@ -239,7 +238,7 @@ const page = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className=" w-full  h-32 mb-32   mt-5 ">
+      <div className=" w-full  h-32 mb-32   mt-6 ">
         <div className="w-full flex flex-col gap-2 lg:flex-row lg:gap-0 lg:items-center justify-between">
           {" "}
           <div className="flex flex-col w-full">
@@ -262,11 +261,12 @@ const page = (props: Props) => {
             />
           </div>
         </div>
-        {!available ? (
-          <div className="mt-6">
-            <div className="w-full flex flex-col gap-4">
+        {available ? (
+          <div className="mt-6 ">
+            <div className="w-full flex flex-col sidebar gap-4 max-h-[800px] overflow-auto">
               <Campaign />
               <Campaign /> <Campaign />
+              <Campaign /> <Campaign /> <Campaign />
             </div>
           </div>
         ) : (
@@ -294,6 +294,13 @@ const page = (props: Props) => {
             </Link>
           </div>
         )}
+
+        {available && (
+          <div className="w-full mt-8 pt-[11px] pb-[16px] px-6 border rounded-lg border-[#E4E7EC]">
+            <Pagination />
+          </div>
+        )}
+
         {!available && (
           <div className=" flex items-center justify-between mt-8 rounded rounded-t-lg px-[24px] py-[11px]">
             <Button
