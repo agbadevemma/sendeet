@@ -15,7 +15,7 @@ type Props = {};
 const Compose = (props: Props) => {
   const [value, setValue] = useState<string>("");
   // State to store the input values as an array
-  const [inputValues, setInputValues] = useState<string[]>([]);
+  const [inputValues, setInputValues] = useState<string[]>(['']);
 
   // Function to add a new input field
   const handleAddInput = () => {
