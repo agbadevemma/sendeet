@@ -7,7 +7,7 @@ import mailicon from "../../../images/icons/mail.svg";
 import passwordopenicon from "../../../images/icons/eye.svg";
 
 import Link from "next/link";
-import { validationSchema } from "@/app/validation";
+import { validationSchema } from "@/utils/validation";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import Button from "@/components/buttons/Button";

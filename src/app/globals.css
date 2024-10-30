@@ -40,3 +40,31 @@ html{
 .sidebar::-webkit-scrollbar {
   display: none;
 }
+
+
+/* Add this CSS to your stylesheet */
+.quill {
+  border-radius: 8px;
+}
+
+/* The toolbar should match the border radius on top */
+.quill .ql-toolbar {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border: 1px solid #ccc;
+  border-bottom: none;
+}
+
+/* The editor content area should match the border radius on bottom */
+.quill .ql-container {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+/* Optional: Add a slight hover/focus state */
+.quill:hover .ql-toolbar,
+.quill:hover .ql-container {
+  border-color: #b3b3b3;
+}

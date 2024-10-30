@@ -72,7 +72,7 @@ const Pagination = () => {
         className="flex items-center  justify-center space-x-2 w-full"
         pageClassName="flex w-fit"
         pageLinkClassName="w-[40px]  h-[40px] flex items-center justify-center rounded-md text-sm font-medium text-grey-500 bg-transparent"
-        activeClassName="bg-[#E6F7FE] rounded-lg  "
+        activeClassName="bg-[#E6F7FE] text-[#00AAF7]  rounded-lg  "
         containerClassName='flex w-fit justify-between '
         activeLinkClassName=" text-[#00AAF7]  "
         breakClassName="flex items-center justify-between"

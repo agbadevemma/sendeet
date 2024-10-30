@@ -7,7 +7,7 @@ import passwordopenicon from "../../../images/icons/eye.svg";
 
 import Link from "next/link";
 import { useFormik } from "formik";
-import { validationSchemaLogin } from "@/app/validation";
+import { validationSchemaLogin } from "@/utils/validation";
 import { useRouter } from "next/navigation";
 import Button from "@/components/buttons/Button";
 import Eye from "@/icons/eye";

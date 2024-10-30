@@ -1,5 +1,5 @@
 "use client";
-import { validationSchemaCampaignSetup } from "@/app/validation";
+import { validationSchemaCampaignSetup } from "@/utils/validation";
 import Button from "@/components/buttons/Button";
 import InputField from "@/components/InputField";
 import SelectField from "@/components/SelectField";
@@ -9,6 +9,7 @@ import UserGroup from "@/icons/user-group";
 import { messageTypeOptions, targetAudienceOptions } from "@/utils/data";
 import { useFormik } from "formik";
 import React, { useState } from "react";
+import secureLocalStorage from "react-secure-storage";
 
 type Props = {};
 interface DropdownStates {
@@ -33,6 +34,7 @@ const Setup = (props: Props) => {
     validationSchema: validationSchemaCampaignSetup,
     onSubmit: (values) => {
       console.log(values);
+      secureLocalStorage.setItem("step1", values);
     },
   });
   const [dropdownStates, setDropdownStates] = useState<DropdownStates>({
@@ -60,10 +62,10 @@ const Setup = (props: Props) => {
 
   return (
     <div className=" px-4">
+          <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
+            1. Setup Campaign Details
+          </p>
       <form onSubmit={formik.handleSubmit}>
-        <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
-          1. Setup Campaign Details
-        </p>
         <div className="mt-8 flex flex-col gap-5 ">
           <InputField
             size="sm"
@@ -148,9 +150,7 @@ const Setup = (props: Props) => {
             <div className="flex items-center justify-between">
               <p className="text-sm">Credits</p>
               <p className="text-sm text-[#101828]">
-                {formik.values.campaign
-                  ? Number("500").toLocaleString()
-                  : "-"}
+                {formik.values.campaign ? Number("500").toLocaleString() : "-"}
               </p>
             </div>
           </div>

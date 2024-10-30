@@ -1,5 +1,5 @@
 "use client";
-import { validationSchemaBasicInfo } from "@/app/validation";
+import { validationSchemaBasicInfo } from "@/utils/validation";
 
 import Checkbox from "@/components/Checkbox";
 import InputField from "@/components/InputField";

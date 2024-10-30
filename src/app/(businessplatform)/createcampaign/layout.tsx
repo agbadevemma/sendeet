@@ -13,12 +13,15 @@ import ChevronRight from "@/icons/chevron-right";
 import PencilEdit from "@/icons/pencil-edit";
 import CalendarAlt from "@/icons/calender-alt";
 import Eye from "@/icons/eye";
+import secureLocalStorage from "react-secure-storage";
+import CheckCircle from "@/icons/check-circle";
 export default function CreateLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  console.log("print", secureLocalStorage.getItem("step1"));
 
   return (
     <div className=" w-full bg-[#FCFCFD] border-grey-100">
@@ -63,9 +66,19 @@ export default function CreateLayout({
                 : "border-grey-100"
             } `}
           >
-            <Settings2
-              color={pathname === "/createcampaign" ? "#0079AF" : "#383E49"}
-            />
+            {Object.keys(
+              (secureLocalStorage.getItem("step1") as Record<
+                string,
+                unknown
+              >) || {}
+            ).length === 0 ? (
+              <Settings2
+                color={pathname === "/createcampaign" ? "#0079AF" : "#383E49"}
+              />
+            ) : (
+              <CheckCircle color="#0079AF" />
+            )}
+
             <span
               className={` font-medium ${
                 pathname === "/createcampaign"
@@ -84,11 +97,15 @@ export default function CreateLayout({
                 : "border-grey-100"
             } `}
           >
-            <PencilEdit
-              color={
-                pathname === "/createcampaign/compose" ? "#0079AF" : "#383E49"
-              }
-            />
+            {secureLocalStorage.getItem("step2") ? (
+              <CheckCircle color={"#0079AF"} />
+            ) : (
+              <PencilEdit
+                color={
+                  pathname === "/createcampaign/compose" ? "#0079AF" : "#383E49"
+                }
+              />
+            )}
             <span
               className={` font-medium ${
                 pathname === "/createcampaign/compose"
@@ -107,11 +124,17 @@ export default function CreateLayout({
                 : "border-grey-100"
             } `}
           >
-            <CalendarAlt
-              color={
-                pathname === "/createcampaign/schedule" ? "#0079AF" : "#383E49"
-              }
-            />
+            {secureLocalStorage.getItem("step3") ? (
+              <CheckCircle color={"#0079AF"} />
+            ) : (
+              <CalendarAlt
+                color={
+                  pathname === "/createcampaign/schedule"
+                    ? "#0079AF"
+                    : "#383E49"
+                }
+              />
+            )}
             <span
               className={` font-medium ${
                 pathname === "/createcampaign/schedule"
@@ -130,11 +153,15 @@ export default function CreateLayout({
                 : "border-grey-100"
             } `}
           >
-            <Eye
-              color={
-                pathname === "/createcampaign/review" ? "#0079AF" : "#383E49"
-              }
-            />
+            {secureLocalStorage.getItem("step4") ? (
+              <CheckCircle color={"#0079AF"} />
+            ) : (
+              <Eye
+                color={
+                  pathname === "/createcampaign/review" ? "#0079AF" : "#383E49"
+                }
+              />
+            )}
             <span
               className={` font-medium ${
                 pathname === "/createcampaign/review"
@@ -147,7 +174,10 @@ export default function CreateLayout({
           </div>
         </div>
       </div>
-   <div className="max-w-[640px] w-full mx-auto mt-8 bg-[#FCFCFD] h-screen">   {children}</div>
+      <div className="max-w-[640px] w-full mx-auto mt-8 bg-[#FCFCFD] min-h-screen">
+        {" "}
+        {children}
+      </div>
     </div>
   );
 }

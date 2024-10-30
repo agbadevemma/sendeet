@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFormik, FormikProps } from "formik";
-import { validationSchemaCompany } from "@/app/validation";
+import { validationSchemaCompany } from "@/utils/validation";
 
 import InputField from "@/components/InputField";
 import SelectField from "@/components/SelectField";

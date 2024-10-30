@@ -9,7 +9,7 @@ import mailicon from "../../../images/icons/mail.svg";
 import arrowleft from "../../../images/icons/arrow-left.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { ForgotPasswordSchema } from "@/app/validation";
+import { ForgotPasswordSchema } from "@/utils/validation";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 
