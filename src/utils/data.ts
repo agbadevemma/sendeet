@@ -44,7 +44,6 @@ export const messageTypeOptions: Option[] = [
 export const targetAudienceOptions: Option[] = [
   { value: "All Contacts", label: "All Contacts" },
   { value: "Custom Selection", label: "Custom Selection" },
- 
 ];
 
 export const subscriberRangeOptions: Option[] = [
@@ -179,7 +178,6 @@ export const initialTransactions: Transaction[] = [
     creditUsed: "300",
     status: "failed",
   },
-
 ];
 
 // export const initialTransactions: Transaction[] = [];
@@ -225,4 +223,19 @@ export const initialCampaign: CampaignInterface[] = [
     open: "15",
     status: "Completed",
   },
+];
+
+export const timeZones: Option[] = [
+  { value: "utc", label: "UTC +01:00: West Africa Time (WAT)" },
+  { value: "est", label: "EST (Eastern Standard Time)" },
+  { value: "pst", label: "PST (Pacific Standard Time)" },
+  { value: "cet", label: "CET (Central European Time)" },
+  { value: "jst", label: "JST (Japan Standard Time)" },
+];
+
+export const deliveryWindows: Option[] = [
+  { value: "09:00 AM - 12:00 PM", label: "09:00 AM - 12:00 PM" },
+  { value: "12:00 PM - 03:00 PM", label: "12:00 PM - 03:00 PM" },
+  { value: "03:00 PM - 06:00 PM", label: "03:00 PM - 06:00 PM" },
+  { value: "06:00 PM - 09:00 PM", label: "06:00 PM - 09:00 PM" },
 ];

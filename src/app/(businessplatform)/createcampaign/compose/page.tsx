@@ -23,7 +23,15 @@ const Compose = (props: Props) => {
   // Handles
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState<boolean>(false);
+  const [fileName, setFileName] = useState<string>("");
   const [dragging, setDragging] = useState<boolean>(false);
+  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>([
+    "",
+  ]);
+  const handleAddTextEditInput = () => {
+    setTextEditorInputValues((prev) => [...prev, ""]); // Append an empty string for the new input
+  };
+
   const [isModal, setisModal] = useState<boolean>(false);
 
   const [value, setValue] = useState<string>("");
@@ -70,8 +78,8 @@ const Compose = (props: Props) => {
     setDragging(false);
 
     const droppedFiles = Array.from(e.dataTransfer.files);
-    const validFiles = droppedFiles.filter((file) =>
-      file.type === "application/pdf" // Accept only PDF files
+    const validFiles = droppedFiles.filter(
+      (file) => file.type === "application/pdf" // Accept only PDF files
     );
     if (validFiles.length > 0) {
       setFiles((prevFiles) => [...prevFiles, ...validFiles]);
@@ -94,10 +102,10 @@ const Compose = (props: Props) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files ? Array.from(e.target.files) : [];
 
-    const validFiles = selectedFiles.filter((file) =>
-      file.type === "application/pdf" // Accept only PDF files
+    const validFiles = selectedFiles.filter(
+      (file) => file.type === "application/pdf" // Accept only PDF files
     );
-  
+
     if (validFiles.length > 0) {
       setFiles((prevFiles) => [...prevFiles, ...validFiles]);
     } else {
@@ -171,7 +179,7 @@ const Compose = (props: Props) => {
 
             <div className="flex flex-col gap-y-1">
               <p className="text-sm font-semibold text-grey-900">Preview</p>
-              <p className="text-grey-500  text-sm">October Issue 324.pdf</p>
+              <p className="text-grey-500  text-sm">{fileName}</p>
             </div>
           </div>
           <PdfViewer
@@ -181,7 +189,7 @@ const Compose = (props: Props) => {
       </div>
       <div className=" px-4">
         <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
-          1. Setup Campaign Details
+          2.Compose Message
         </p>
 
         <div className="flex flex-col">
@@ -191,10 +199,18 @@ const Compose = (props: Props) => {
           >
             Message 1
           </label>
-          <TextEditor />
+          <div className="flex flex-col gap-y-14">
+            {" "}
+            {textEditorInputValues.map((item, index) => (
+              <TextEditor />
+            ))}
+          </div>
         </div>
         <div className="mt-14">
-          <div className="flex cursor-pointer  items-center justify-center px-[14px] py-[10px] border border-[#D0D5DD] shadow-xs rounded-lg">
+          <div
+            onClick={handleAddTextEditInput}
+            className="flex cursor-pointer  items-center justify-center px-[14px] py-[10px] border border-[#D0D5DD] shadow-xs rounded-lg"
+          >
             <Plus color="#989FAD" />
           </div>
         </div>
@@ -214,13 +230,18 @@ const Compose = (props: Props) => {
               <CloudUpload color="#475367" />
             </div>
             <div className="mt-4 flex items-center gap-1">
-              <p className="text-primary-600 text-sm font-semibold cursor-pointer">
+              <p
+                className="text-primary-600 text-sm font-semibold cursor-pointer"
+                onClick={() => document.getElementById("file-upload")?.click()}
+              >
                 Click to upload
                 <input
                   type="file"
+                  id="file-upload"
                   className="hidden"
-                  accept="image/*"
+                  accept="application/pdf"
                   onChange={handleFileChange}
+                  multiple
                 />
               </p>
               <span className="text-[#475367]  text-sm">or drag and drop</span>
@@ -233,14 +254,21 @@ const Compose = (props: Props) => {
               <span className="text-xs font-semibold text-[#98A2B3]">OR</span>
               <div className="h-px w-full  bg-[#F0F2F5]"></div>
             </div>
-            <p className="mt-4 text-primary-600">Browse files</p>
+            <p
+              onClick={() => document.getElementById("file-upload")?.click()}
+              className="mt-4 text-primary-600 cursor-pointer"
+            >
+              Browse files
+            </p>
           </div>
-          <div className="flex gap-2 items-center mt-3">
-            <span> Uploaded Files</span>
-            <div className="flex items-center justify-center h-6 w-6 bg-primary-500 text-white rounded-full">
-              {files.length}
+          {files.length > 0 && (
+            <div className="flex gap-2 items-center mt-3">
+              <span> Uploaded Files</span>
+              <div className="flex items-center justify-center h-6 w-6 bg-primary-500 text-white rounded-full">
+                {files.length}
+              </div>
             </div>
-          </div>
+          )}
           {files.length > 0 && (
             <ul className="mt-4 gap-4 flex flex-col">
               {files.map((file, index) => (
@@ -265,7 +293,12 @@ const Compose = (props: Props) => {
                     </div>
                   </div>
                   <div className="flex item-center gap-4">
-                    <button onClick={() => setisModal((prev) => !prev)}>
+                    <button
+                      onClick={() => {
+                        setFileName(file.name);
+                        setisModal((prev) => !prev);
+                      }}
+                    >
                       <Eye color="#475367" height={28} width={28} />
                     </button>
                     <button onClick={() => handleRemoveFile(index)}>
@@ -364,25 +397,3 @@ const Compose = (props: Props) => {
 
 export default Compose;
 
-{
-  /* {inputValues.map((value, index) => (
-                
-                 
-                    <div className="flex items-center gap-2 mt-4 ">
-                      <ReorderAlt color="#B9BDC7" />
-                      <div className="flex items-center justify-center  w-full border border-dashed rounded-lg shadow-xs border-[#D0D5DD] py-[10px] px-[14px]">
-                        <input
-                          type="text"
-                          value={inputValues[index] || ""}
-                          onChange={(e) =>
-                            handleInputChange(index, e.target.value)
-                          }
-                          className="focus:outline-none w-full bg-transparent placeholder:text-sm placeholder:text-grey-300 text-grey-700"
-                          placeholder="Enter button text"
-                        />
-                      </div>
-                      <button onClick={() => handleRemoveInput(index)}>
-                        <Multiply color="#475367" height={24} width={24} />
-                      </button>
-                    </div> */
-}
