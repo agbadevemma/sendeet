@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import StoreProvider from "./StoreProvider";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,6 +29,12 @@ export default function RootLayout({
 
       <body className={` antialiased  ${inter.className} `}>
         <NextTopLoader showSpinner={false} />
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          theme="colored"
+          hideProgressBar
+        />
         <StoreProvider> {children}</StoreProvider>
       </body>
     </html>
