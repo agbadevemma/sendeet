@@ -21,6 +21,7 @@ type Props = {};
 
 const Compose = (props: Props) => {
   // Handles
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>("");
@@ -232,10 +233,7 @@ const Compose = (props: Props) => {
             <div className="mt-4 flex items-center gap-1">
               <p
                 className="text-primary-600 text-sm font-semibold cursor-pointer"
-                onClick={() => {
-                  typeof window !== "undefined" &&
-                    document.getElementById("file-upload")?.click();
-                }}
+                onClick={() => fileInputRef.current?.click()}
               >
                 Click to upload
                 <input
