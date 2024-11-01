@@ -1,8 +1,10 @@
+"use client"
 import { formatPlainText } from "@/utils/extras";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Quill from 'quill';
+import QuillNoSSRWrapper from "./QuillEditor";
 // import QuillEmoji from 'quill-emoji';
 
 // Register the emoji module with Quill
@@ -58,13 +60,14 @@ const TextEditor: React.FC = () => {
 
   return (
     <div>
-      <ReactQuill
+      <QuillNoSSRWrapper 
         value={value}
         onChange={setValue}
         modules={modules}
         formats={formats}
         className="h-36 text-sm  text-grey-700"
         placeholder="Enter a message....."
+        
       />
       {/* <button onClick={copyToClipboard} style={{ marginTop: "20px" }}>
         Copy Formatted Text
