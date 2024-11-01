@@ -200,12 +200,14 @@ const Compose = (props: Props) => {
           >
             Message 1
           </label>
-          <div className="flex flex-col gap-y-14">
-            {" "}
-            {textEditorInputValues.map((item, index) => (
-              <TextEditor />
-            ))}
-          </div>
+          {typeof window  !== undefined && (
+            <div className="flex flex-col gap-y-14">
+              {" "}
+              {textEditorInputValues.map((item, index) => (
+                <TextEditor />
+              ))}
+            </div>
+          )}
         </div>
         <div className="mt-14">
           <div
@@ -239,7 +241,7 @@ const Compose = (props: Props) => {
                 <input
                   type="file"
                   id="file-upload"
-                  ref={fileInputRef} 
+                  ref={fileInputRef}
                   className="hidden"
                   accept="application/pdf"
                   onChange={handleFileChange}
@@ -257,7 +259,7 @@ const Compose = (props: Props) => {
               <div className="h-px w-full  bg-[#F0F2F5]"></div>
             </div>
             <p
-                onClick={() => fileInputRef.current?.click()}
+              onClick={() => fileInputRef.current?.click()}
               className="mt-4 text-primary-600 cursor-pointer"
             >
               Browse files
