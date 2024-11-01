@@ -200,14 +200,14 @@ const Compose = (props: Props) => {
           >
             Message 1
           </label>
-          {typeof window  !== undefined && (
+          {/* {typeof window  !== undefined && (
             <div className="flex flex-col gap-y-14">
               {" "}
               {textEditorInputValues.map((item, index) => (
                 <TextEditor />
               ))}
             </div>
-          )}
+          )} */}
         </div>
         <div className="mt-14">
           <div
