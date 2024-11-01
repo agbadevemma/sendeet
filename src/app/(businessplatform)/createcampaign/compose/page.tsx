@@ -232,7 +232,10 @@ const Compose = (props: Props) => {
             <div className="mt-4 flex items-center gap-1">
               <p
                 className="text-primary-600 text-sm font-semibold cursor-pointer"
-                onClick={() => document.getElementById("file-upload")?.click()}
+                onClick={() => {
+                  typeof window !== "undefined" &&
+                    document.getElementById("file-upload")?.click();
+                }}
               >
                 Click to upload
                 <input
@@ -382,12 +385,14 @@ const Compose = (props: Props) => {
               size="sm"
               className="font-semibold text-md"
             />
-            <Link href={"/createcampaign/schedule"}><Button
-              text="Next: Schedule Campaign"
-              type="primary"
-              size="sm"
-              className="font-semibold text-md"
-            /></Link>
+            <Link href={"/createcampaign/schedule"}>
+              <Button
+                text="Next: Schedule Campaign"
+                type="primary"
+                size="sm"
+                className="font-semibold text-md"
+              />
+            </Link>
           </div>
         </div>
       </div>
@@ -396,4 +401,3 @@ const Compose = (props: Props) => {
 };
 
 export default Compose;
-
