@@ -372,7 +372,7 @@ const Compose = (props: Props) => {
               <div className="flex cursor-pointer items-center justify-center  w-full border border-dashed rounded-lg shadow-xs border-[#D0D5DD] py-[10px] px-[14px]">
                 <Plus color="#989FAD" />
               </div>
-              <Multiply color="#fff" height={24} width={24} />
+              <Multiply color="" height={24} width={24} />
             </div>
           </div>
           <div className="flex items-center justify-between mt-8 pt-8 border-t border-t-[#D0D3D9] mb-8">
@@ -382,12 +382,12 @@ const Compose = (props: Props) => {
               size="sm"
               className="font-semibold text-md"
             />
-            <Button
+            <Link href={"/createcampaign/schedule"}><Button
               text="Next: Schedule Campaign"
               type="primary"
               size="sm"
               className="font-semibold text-md"
-            />
+            /></Link>
           </div>
         </div>
       </div>

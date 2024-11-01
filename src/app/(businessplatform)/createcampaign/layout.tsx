@@ -174,7 +174,11 @@ export default function CreateLayout({
           </div>
         </div>
       </div>
-      <div className="max-w-[640px] w-full mx-auto mt-8 bg-[#FCFCFD] min-h-screen">
+      <div
+        className={`${
+          pathname !== "/createcampaign/review" && "max-w-[640px]  mx-auto"
+        }  w-full mt-8 bg-[#FCFCFD] min-h-screen`}
+      >
         {" "}
         {children}
       </div>

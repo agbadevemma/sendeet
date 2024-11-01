@@ -61,7 +61,7 @@ const CampaignSelectField: React.FC<CampaignSelectFieldProps> = ({
   return (
     <div className="relative w-full max-w-[320px]" ref={dropdownRef}>
       <div className="flex flex-col gap-1.5">
-        <label className="text-[#344054] text-xs">{label}</label>
+        <label className="text-[#344054] text-md">{label}</label>
         <div
           className={`flex justify-between items-center gap-2 rounded-lg px-3.5 py-2.5 border ${
             error && "border-[#D42620]"
@@ -73,12 +73,12 @@ const CampaignSelectField: React.FC<CampaignSelectFieldProps> = ({
           onClick={onToggle}
         >
           <div
-            className={`text-md w-full flex gap-2  items-center ${
+            className={` w-full flex gap-2 text-xs  items-center ${
               selectedOption ? "text-[#344054]" : "text-[#B9BDC7]"
             }`}
           >
             {icon && <span>{icon}</span>}
-            <span className="text-sm">
+            <span className="text-xs">
               {selectedOption ? selectedOption.label : placeholder}
             </span>
           </div>
@@ -98,7 +98,7 @@ const CampaignSelectField: React.FC<CampaignSelectFieldProps> = ({
               key={option.value}
               className={`px-[14px] py-[10px] text-md  flex  ${
                 option.value === value ? "bg-gray-100" : ""
-              }   justify-between items-center hover:bg-[#F9FAFB] cursor-pointer text-[#344054] `}
+              }   justify-between items-center text-xs hover:bg-[#F9FAFB] cursor-pointer text-[#344054] `}
               onClick={() => handleSelect(option.value)}
             >
               <span>{option.label}</span>
