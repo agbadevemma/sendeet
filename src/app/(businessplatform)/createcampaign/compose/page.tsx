@@ -202,7 +202,6 @@ const Compose = (props: Props) => {
           </label>
           {typeof window  !== undefined && (
             <div className="flex flex-col gap-y-14">
-              {" "}
               {textEditorInputValues.map((item, index) => (
                 <TextEditor />
               ))}

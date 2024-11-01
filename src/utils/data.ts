@@ -239,3 +239,51 @@ export const deliveryWindows: Option[] = [
   { value: "03:00 PM - 06:00 PM", label: "03:00 PM - 06:00 PM" },
   { value: "06:00 PM - 09:00 PM", label: "06:00 PM - 09:00 PM" },
 ];
+
+
+
+
+type DocumentItem = {
+  title: string;
+  date: string;
+  time: string;
+  size: string;
+  buttonDate: string;
+};
+export const documents: DocumentItem[] = [
+  {
+    title: "October Issue 321.pdf",
+    date: "11 Oct, 2024",
+    time: "12:24pm",
+    size: "4MB",
+    buttonDate: "Oct 13, 2024",
+  },
+  {
+    title: "September Edition 220.pdf",
+    date: "10 Sep, 2024",
+    time: "10:15am",
+    size: "3.5MB",
+    buttonDate: "Sep 12, 2024",
+  },
+  {
+    title: "August Monthly Review.pdf",
+    date: "08 Aug, 2024",
+    time: "9:30am",
+    size: "4.2MB",
+    buttonDate: "Aug 10, 2024",
+  },
+  {
+    title: "July Mid-Year Report.pdf",
+    date: "12 Jul, 2024",
+    time: "1:00pm",
+    size: "5MB",
+    buttonDate: "Jul 14, 2024",
+  },
+  {
+    title: "June Special Issue.pdf",
+    date: "15 Jun, 2024",
+    time: "11:45am",
+    size: "3MB",
+    buttonDate: "Jun 17, 2024",
+  },
+];

@@ -10,6 +10,7 @@ import { messageTypeOptions, targetAudienceOptions } from "@/utils/data";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 interface DropdownStates {
@@ -24,6 +25,7 @@ interface FormValues {
   targetAudience: string;
 }
 const Setup = (props: Props) => {
+  const router = useRouter();
   const formik = useFormik<FormValues>({
     initialValues: {
       campaign: "",
@@ -35,6 +37,7 @@ const Setup = (props: Props) => {
     onSubmit: (values) => {
       console.log(values);
       secureLocalStorage.setItem("step1", values);
+      router.push("/createcampaign/compose");
     },
   });
   const [dropdownStates, setDropdownStates] = useState<DropdownStates>({
@@ -62,9 +65,9 @@ const Setup = (props: Props) => {
 
   return (
     <div className=" px-4">
-          <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
-            1. Setup Campaign Details
-          </p>
+      <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
+        1. Setup Campaign Details
+      </p>
       <form onSubmit={formik.handleSubmit}>
         <div className="mt-8 flex flex-col gap-5 ">
           <InputField
