@@ -239,6 +239,7 @@ const Compose = (props: Props) => {
                 <input
                   type="file"
                   id="file-upload"
+                  ref={fileInputRef} 
                   className="hidden"
                   accept="application/pdf"
                   onChange={handleFileChange}
