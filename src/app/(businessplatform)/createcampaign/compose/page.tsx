@@ -256,7 +256,7 @@ const Compose = (props: Props) => {
               <div className="h-px w-full  bg-[#F0F2F5]"></div>
             </div>
             <p
-              onClick={() => document.getElementById("file-upload")?.click()}
+                onClick={() => fileInputRef.current?.click()}
               className="mt-4 text-primary-600 cursor-pointer"
             >
               Browse files
