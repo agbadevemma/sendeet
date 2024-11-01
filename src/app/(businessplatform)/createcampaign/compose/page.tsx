@@ -202,9 +202,9 @@ const Compose = (props: Props) => {
           </label>
           <div className="flex flex-col gap-y-14">
             {" "}
-            {/* {textEditorInputValues.map((item, index) => (
+            {textEditorInputValues.map((item, index) => (
               <TextEditor />
-            ))} */}
+            ))}
           </div>
         </div>
         <div className="mt-14">
@@ -233,10 +233,10 @@ const Compose = (props: Props) => {
             <div className="mt-4 flex items-center gap-1">
               <p
                 className="text-primary-600 text-sm font-semibold cursor-pointer"
-                // onClick={() => fileInputRef.current?.click()}
+                onClick={() => fileInputRef.current?.click()}
               >
                 Click to upload
-                {/* <input
+                <input
                   type="file"
                   id="file-upload"
                   ref={fileInputRef} 
@@ -244,7 +244,7 @@ const Compose = (props: Props) => {
                   accept="application/pdf"
                   onChange={handleFileChange}
                   multiple
-                /> */}
+                />
               </p>
               <span className="text-[#475367]  text-sm">or drag and drop</span>
             </div>
