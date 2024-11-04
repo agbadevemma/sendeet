@@ -4,6 +4,7 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import StoreProvider from "./StoreProvider";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,15 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={`en`}>
-
       <body className={` antialiased  ${inter.className} `}>
         <NextTopLoader showSpinner={false} />
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          theme="colored"
-          hideProgressBar
-        />
+        <ToastContainer position="top-left" autoClose={5000} />
         <StoreProvider> {children}</StoreProvider>
       </body>
     </html>
