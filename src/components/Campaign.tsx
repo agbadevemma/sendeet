@@ -2,9 +2,11 @@ import DotV from "@/icons/dot-v";
 import SendAlt from "@/icons/send-alt";
 import React from "react";
 
-type Props = {};
+type Props = {
+  status: "active" | "draft";
+};
 
-const Campaign = (props: Props) => {
+const Campaign = ({ status }: Props) => {
   return (
     <div>
       <div className="py-6 pl-12 pr-6 w-full flex flex-col rounded-xl border-solid border border-[#E4E7EC]">
@@ -25,10 +27,18 @@ const Campaign = (props: Props) => {
           <div className="flex flex-col items-end gap-[5px]">
             <div className="flex items-center gap-[13px]">
               {" "}
-              <div className="pl-2 py-[2px] gap-[6px] bg- pr-[10px] flex items-center rounded-2xl bg-[#F2F4F7]">
-                <div className="w-2 h-2 rounded-full bg-[#667085]"></div>{" "}
-                <p className="text-[#344054] text-sm font-medium">Draft</p>
-              </div>
+              {status === "draft" && (
+                <div className="pl-2 py-[2px] gap-[6px] bg- pr-[10px] flex items-center rounded-2xl bg-[#F2F4F7]">
+                  <div className="w-2 h-2 rounded-full bg-[#667085]"></div>{" "}
+                  <p className="text-[#344054] text-sm font-medium">Draft</p>
+                </div>
+              )}
+              {status === "active" && (
+                <div className="pl-2 py-[2px] gap-[6px] bg- pr-[10px] flex items-center rounded-2xl bg-warning-50">
+                  <div className="w-2 h-2 rounded-full bg-warning-500"></div>{" "}
+                  <p className="text-warning-500 text-sm font-medium">Active</p>
+                </div>
+              )}
               <div className="h-8 w-8 p-2 flex items-center rounded-lg border border-[#E4E7EC] ">
                 <DotV color="#101928" />
               </div>
