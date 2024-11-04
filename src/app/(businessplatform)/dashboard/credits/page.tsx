@@ -233,7 +233,7 @@ const Credits = (props: Props) => {
                               transaction.status === "successful"
                                 ? "bg-success-50 text-success-800 w-[94px]"
                                 : transaction.status === "pending"
-                                ? "text-warning-700 bg-warning-50  w-[94px]"
+                                ? "text-warning-700 bg-warning-50 w-full text-nowrap"
                                 : "bg-red-50 text-red-800 w-[61px]"
                             }`}
                           >

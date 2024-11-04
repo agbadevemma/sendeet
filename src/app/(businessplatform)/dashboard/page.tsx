@@ -266,7 +266,7 @@ const page = (props: Props) => {
             <div className="w-full flex flex-col sidebar gap-4 max-h-[800px] overflow-auto">
               <Campaign />
               <Campaign /> <Campaign />
-              <Campaign /> <Campaign /> <Campaign />
+              <Campaign /> 
             </div>
           </div>
         ) : (
@@ -301,41 +301,7 @@ const page = (props: Props) => {
           </div>
         )}
 
-        {!available && (
-          <div className=" flex items-center justify-between mt-8 rounded rounded-t-lg px-[24px] py-[11px]">
-            <Button
-              text="Previous"
-              icon_style="leading-icon"
-              iconComponent={<ArrowLeft color="#48505E" />}
-            />
-            <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center bg-[#E6F7FE] h-10 w-10 text-primary-500 rounded-lg">
-                1
-              </div>
-              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
-                2
-              </div>{" "}
-              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
-                3
-              </div>
-              .....
-              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
-                6
-              </div>{" "}
-              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
-                7
-              </div>
-              <div className="flex items-center justify-center  h-10 w-10  rounded-lg">
-                8
-              </div>
-            </div>
-            <Button
-              text="Next"
-              icon_style="trailing icon"
-              iconComponent={<ArrowRight color="#48505E" />}
-            />
-          </div>
-        )}
+        
       </div>
     </div>
   );
