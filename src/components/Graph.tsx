@@ -43,7 +43,7 @@ const Graph = (props: Props) => {
     (item) => item.subscribers === 0 && item.unsubscribers === 0
   );
   return (
-    <div className="mt-5">
+    <div className="mt-5 w-full">
       <ResponsiveContainer width="100%" height={214}>
         <AreaChart
           data={data}
