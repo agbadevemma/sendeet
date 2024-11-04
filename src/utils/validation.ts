@@ -42,7 +42,6 @@ export const validationSchemaBasicInfo = Yup.object({
 export const validationSchemaCompany = Yup.object({
   brn: Yup.string()
     .required("Business Registration Number is required")
-    .matches(/^[0-9]+$/, "Must be only digits")
     .min(2, "Business Registration Number must be at least 2 digits")
     .max(20, "Business Registration Number must not exceed 20 digits"),
   industry: Yup.string().required("Industry is required"),
