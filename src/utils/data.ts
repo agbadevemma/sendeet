@@ -1,31 +1,14 @@
+import industries from "./industries.json";
 type Option = {
   value: string;
   label: string;
 };
-export const industryOptions: Option[] = [
-  { value: "tech", label: "Technology" },
-  { value: "finance", label: "Finance" },
-  { value: "healthcare", label: "Healthcare" },
-  { value: "education", label: "Education" },
-  { value: "realestate", label: "Real Estate" },
-  { value: "construction", label: "Construction" },
-  { value: "manufacturing", label: "Manufacturing" },
-  { value: "retail", label: "Retail" },
-  { value: "transportation", label: "Transportation" },
-  { value: "agriculture", label: "Agriculture" },
-  { value: "energy", label: "Energy" },
-  { value: "telecommunications", label: "Telecommunications" },
-  { value: "entertainment", label: "Entertainment" },
-  { value: "hospitality", label: "Hospitality" },
-  { value: "legal", label: "Legal Services" },
-  { value: "nonprofit", label: "Nonprofit Organizations" },
-  { value: "marketing", label: "Marketing and Advertising" },
-  { value: "insurance", label: "Insurance" },
-  { value: "consulting", label: "Consulting" },
-  { value: "logistics", label: "Logistics and Supply Chain" },
-  { value: "automotive", label: "Automotive" },
-  { value: "pharmaceutical", label: "Pharmaceutical" },
-];
+
+export const industryOptions: Option[] = industries.industries.map(
+  (industry) => {
+    return { value: industry, label: industry };
+  }
+);
 
 export const employeeCountOptions: Option[] = [
   { value: "1-10", label: "1-10 employees" },
@@ -239,9 +222,6 @@ export const deliveryWindows: Option[] = [
   { value: "03:00 PM - 06:00 PM", label: "03:00 PM - 06:00 PM" },
   { value: "06:00 PM - 09:00 PM", label: "06:00 PM - 09:00 PM" },
 ];
-
-
-
 
 type DocumentItem = {
   title: string;
