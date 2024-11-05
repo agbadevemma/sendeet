@@ -37,9 +37,6 @@ html{
   @apply text-gray-900;
 }
 
-.sidebar::-webkit-scrollbar {
-  display: none;
-}
 
 
 /* Add this CSS to your stylesheet */
@@ -75,3 +72,27 @@ html{
   margin: 0;
   display: contents !important;
 }
+
+
+.campaign::-webkit-scrollbar {
+  width: 10px;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #bdbdbd;
+}
+
+
+
+
+.campaign::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #8c8c8c;
+}
+
