@@ -24,6 +24,7 @@ import Link from "next/link";
 import { useAppDispatch } from "@/lib/hooks";
 import { openModal } from "@/lib/slices/miscellaneousSlice";
 import Pagination from "@/components/Pagination";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -263,10 +264,11 @@ const page = (props: Props) => {
         </div>
         {available ? (
           <div className="mt-6 ">
-            <div className="w-full flex flex-col sidebar gap-4 max-h-[800px] overflow-auto">
-              <Campaign />
-              <Campaign /> <Campaign />
-              <Campaign /> 
+            <div className="w-full flex flex-col sidebar gap-4 ">
+              <Campaign status="draft" />
+              <Campaign status="active" />
+              <Campaign status="draft" />
+              <Campaign status="active" />
             </div>
           </div>
         ) : (
@@ -280,7 +282,10 @@ const page = (props: Props) => {
               contacts
             </p>
             <Link
-              onClick={() => dispatch(openModal())}
+              onClick={() => {
+                toast.success("");
+                dispatch(openModal());
+              }}
               href={"/dashboard/campaigns"}
             >
               <Button
@@ -300,8 +305,6 @@ const page = (props: Props) => {
             <Pagination />
           </div>
         )}
-
-        
       </div>
     </div>
   );

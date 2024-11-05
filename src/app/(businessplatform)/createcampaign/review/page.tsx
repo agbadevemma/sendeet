@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import phone from "../../../../images/phone.svg";
@@ -12,10 +13,15 @@ import { documents } from "@/utils/data";
 import Link from "next/link";
 import ReorderAlt from "@/icons/reorder-alt";
 import Multiply from "@/icons/multiply";
+import { useAppDispatch } from "@/lib/hooks";
+import { closeModal } from "@/lib/slices/miscellaneousSlice";
+import { toast } from "react-toastify";
+import CheckCircle from "@/icons/check-circle";
 
 type Props = {};
 
 const Review = (props: Props) => {
+  const dispatch = useAppDispatch();
   return (
     <div>
       {" "}
@@ -129,7 +135,35 @@ const Review = (props: Props) => {
                 size="sm"
                 className="font-semibold text-md"
               />
-              <Link href={"/dashboard/campaigns"}>
+              <Link
+                onClick={() => {
+                  toast.success(
+                    <div className="flex items-start justify-between w-full px-4 py-8">
+                      <div className="rounded-lg flex items-center mr-5 justify-center p-4  h-[40px] w-[40px] bg-success-50 border border-success-500">
+                        {" "}
+                        <CheckCircle color="#0F973D" />
+                      </div>
+                      <div className="gap-1 flex flex-col mr-4 text-[#667085]">
+                        <p className="] text-sm !font-bold">Payment successful</p>
+                        <p className=" !text-[14px] whitespace-nowrap">500 credits have been added to your account</p>
+                      </div>
+                    </div>,
+                    {
+                      className: " text-white rounded-lg p-4 shadow-lg w-full", // Tailwind classes
+                      bodyClassName:
+                        "text-sm  flex flex-col w-full  !w-full !p-12",
+                      progressClassName: "bg-red-200",
+                      icon: false,
+                   
+                      closeButton:false
+                    }
+                  );
+
+                  dispatch(closeModal());
+                }}
+                href={""}
+                // href={"/dashboard/campaigns"}
+              >
                 <Button
                   text="Confirm & Schedule"
                   type="primary"

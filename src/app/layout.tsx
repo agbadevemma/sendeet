@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang={`en`}>
       <body className={` antialiased  ${inter.className} `}>
         <NextTopLoader showSpinner={false} />
-        <ToastContainer position="top-left" autoClose={5000} />
+        <ToastContainer position="top-right" autoClose={5000} />
         <StoreProvider> {children}</StoreProvider>
       </body>
     </html>

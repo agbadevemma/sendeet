@@ -85,7 +85,7 @@ const Campaign = (props: Props) => {
     { id: 1, title: "All", value: campaigns.length, isActive: true },
     { id: 2, title: "Active", value: activeCount, isActive: false },
     { id: 3, title: "Completed", value: completedCount, isActive: false },
-    { id: 4, title: "Drafts", value: draftCount, isActive: false },
+    { id: 4, title: "Draft", value: draftCount, isActive: false },
   ]);
   // Function to handle tab switching
   const handleTabClick = (selectedId: number) => {
@@ -115,10 +115,7 @@ const Campaign = (props: Props) => {
       const matchesSearch = campaign.campaign
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
-      const matchesTab =
-        activeTab === "All" ||
-        campaign.status === activeTab ||
-        campaign.status === "Draft";
+      const matchesTab = activeTab === "All" || campaign.status === activeTab;
       return matchesSearch && matchesTab;
     });
   };
@@ -152,14 +149,16 @@ const Campaign = (props: Props) => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
-  const isModalOpen = useAppSelector((state) => state.miscellaneous.isModalOpen);
+  const isModalOpen = useAppSelector(
+    (state) => state.miscellaneous.isModalOpen
+  );
   const dispatch = useAppDispatch();
   return (
     <div>
       <div
-       onClick={() => dispatch(toggleModal())}
+        onClick={() => dispatch(toggleModal())}
         className={`fixed w-full h-screen flex items-center justify-end  bg-black/20 top-0 left-0 z-50  p-4   transition-all duration-500 ${
-         isModalOpen ? "visible opacity-100" : "invisible opacity-0"
+          isModalOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
         <div
@@ -280,6 +279,7 @@ const Campaign = (props: Props) => {
                 className={tab.isActive ? "text-primary-400" : "text-grey-800"}
               >
                 {tab.title}
+                {tab.title === "Draft" && "s"}
               </span>
               <span className="border border-[#EAECF0] bg-[#F2F4F7] py-[1px] px-1 rounded">
                 {tab.value}
@@ -486,8 +486,8 @@ const Campaign = (props: Props) => {
           )}
         </div>
         <div className="w-full  pt-[11px] pb-[16px] p-6 ">
-            <Pagination />
-          </div>
+          <Pagination />
+        </div>
       </div>
     </div>
   );

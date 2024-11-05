@@ -68,3 +68,10 @@ html{
 .quill:hover .ql-container {
   border-color: #b3b3b3;
 }
+
+
+
+.Toastify__toast-body {
+  margin: 0;
+  display: contents !important;
+}
