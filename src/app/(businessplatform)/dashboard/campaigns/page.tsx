@@ -412,7 +412,19 @@ const Campaign = (props: Props) => {
                         checked={selectedItems.includes(index)}
                         onClick={() => handleSelectItem(index)}
                       />{" "}
-                      <div className="h-5 w-5 p-4 flex items-center justify-center bg-primary-500 border-[#00AAF7] rounded-lg">
+                      <div
+                        className={`h-5 w-5 p-4 flex items-center justify-center ${
+                          campaign.status === "Draft" &&
+                          "border-[#F2F4F7] bg-[#344054]"
+                        }  ${
+                          campaign.status === "Active" &&
+                          "bg-warning-500 border-warning-50"
+                        }
+                         ${
+                           campaign.status === "Completed" &&
+                           "border-success-50 bg-success-500 "
+                         } rounded-lg`}
+                      >
                         <SendAlt color="#fff" />
                       </div>
                       {campaign.campaign}
