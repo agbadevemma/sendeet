@@ -25,7 +25,7 @@ const Review = (props: Props) => {
   return (
     <div>
       {" "}
-      <div className=" px-4 max-w-[1000px] mx-auto w-full flex  items-start gap-20 mb-10">
+      <div className=" px-4 max-w-[1000px]  w-full flex  items-start gap-20 mb-10">
         <div className="flex gap-10 w-full items-start">
           <div className="w-full gap-x-2">
             <p className="text-lg w-full mb-8 font-semibold  border-b borer-[#D0D3D9] pb-6 ">
@@ -173,9 +173,9 @@ const Review = (props: Props) => {
               </Link>
             </div>
           </div>
-          <div className="h-[592px] bg-grey-100 w-px mt-32"></div>
+          <div className="h-[592px] bg-grey-100 w-px mt-32 hidden lg:block"></div>
         </div>
-        <Image src={phone} alt="" />
+        <Image src={phone} alt="" className="hidden lg:block"/>
       </div>
     </div>
   );

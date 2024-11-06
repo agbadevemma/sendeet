@@ -57,7 +57,7 @@ const Campaign = ({ status }: Props) => {
         <div className="px-8  mt-5 mb-[21px]">
           <div className="w-full bg-[#F0F1F3]  h-[0.8px] mx-auto"></div>
         </div>
-        <div className="mx-auto flex w-full gap-x-[92px] max-w-[823px] ">
+        <div className="mx-auto flex w-full  justify-between max-w-[823px] ">
           <div className="flex flex-col items-center gap-y-[9px]">
             <span className="text-md font-medium">1,287</span>
             <span className="text-grey-600 text-sm font-medium">Delivered</span>

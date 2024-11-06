@@ -157,13 +157,13 @@ const Campaign = (props: Props) => {
     <div>
       <div
         onClick={() => dispatch(toggleModal())}
-        className={`fixed w-full h-screen flex items-center justify-end  bg-black/20 top-0 left-0 z-50  p-4   transition-all duration-500 ${
+        className={`fixed w-full h-screen flex items-center justify-end   bg-black/20 top-0 left-0 z-50  p-4   transition-all duration-500 ${
           isModalOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`h-full bg-white  max-w-[475px] sidebar  py overflow-auto w-full rounded-xl mt   transition-all duration-500 p-6   ${
+          className={`h-full bg-white  max-w-[475px] campaign  py overflow-auto w-full rounded-xl mt   transition-all duration-500 p-6   ${
             isModalOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >

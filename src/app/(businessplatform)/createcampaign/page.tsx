@@ -64,8 +64,8 @@ const Setup = (props: Props) => {
   };
 
   return (
-    <div className=" px-4">
-      <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
+    <div className=" px-4 w">
+      <p className="text-lg  font-semibold  border-b borer-[#D0D3D9]  pb-6">
         1. Setup Campaign Details
       </p>
       <form onSubmit={formik.handleSubmit}>
