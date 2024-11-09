@@ -1,3 +1,4 @@
+"use client"
 import React, { Dispatch, SetStateAction } from "react";
 import SearchInput from "./SearchInput";
 
@@ -8,6 +9,11 @@ import BellBorder from "@/icons/bell-border";
 import Image from "next/image";
 import profile from "../images/profile.jpg";
 import AlignJustify from "@/icons/align-justify";
+import Building5 from "@/icons/building-5";
+import Settings from "@/icons/settings";
+import Logout from "@/icons/logout";
+import Avatar from "./Avatar";
+import Notification from "./Notification";
 
 type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -17,8 +23,10 @@ const Header = ({ setIsOpen }: Props) => {
   return (
     <div>
       <div className="w-full  py-[14px] px-4 md:px-7 lg:px-[28px] flex   lg:gap-0 items-center border-b border-grey-100 justify-between">
-        <div onClick={() => setIsOpen((prev) => !prev)}  className="block xl:hidden">
-        
+        <div
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="block xl:hidden"
+        >
           <AlignJustify color="black" />
         </div>
         <SearchInput
@@ -34,16 +42,8 @@ const Header = ({ setIsOpen }: Props) => {
             size="sm"
             iconComponent={<LightingBorderIcon color="black" />}
           />
-          <Button
-            icon_style="icon-only"
-            size="lg"
-            iconComponent={<BellBorder color="black" />}
-          />
-          <Image
-            src={profile}
-            alt=""
-            className="rounded-full h-10 w-10 object-cover"
-          />
+          <Notification />
+         <Avatar />
         </div>
       </div>
     </div>

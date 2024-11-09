@@ -227,6 +227,7 @@ const Campaign = (props: Props) => {
               text="Continue"
               type="primary"
               size="sm"
+              onClick={() => dispatch(toggleModal())}
               className="mt-10 mb-8"
             />
           </Link>

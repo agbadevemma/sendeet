@@ -138,31 +138,41 @@ const Review = (props: Props) => {
               <Link
                 onClick={() => {
                   toast.success(
-                    <div className="flex items-start justify-between w-full px-4 py-8">
-                      <div className="rounded-lg flex items-center mr-5 justify-center p-4  h-[40px] w-[40px] bg-success-50 border border-success-500">
+                    <div className="flex items-start justify-between w-full  py-2 px-4 ">
+                      <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
                         {" "}
                         <CheckCircle color="#0F973D" />
                       </div>
                       <div className="gap-1 flex flex-col mr-4 text-[#667085]">
-                        <p className="] text-sm !font-bold">Payment successful</p>
-                        <p className=" !text-[14px] whitespace-nowrap">500 credits have been added to your account</p>
+                        <p className="] text-sm !font-bold">
+                        Yay....Campaign successfully created
+                        </p>
+                        <p className=" !text-[14px] ">
+                        Your campaign has been successfully scheduled
+                        </p>
                       </div>
                     </div>,
+                    
                     {
+                      style: {
+                        width: "400px" ,// Adjust width as needed
+                        maxWidth: "90vw"  
+                      },
                       className: " text-white rounded-lg p-4 shadow-lg w-full", // Tailwind classes
                       bodyClassName:
                         "text-sm  flex flex-col w-full  !w-full !p-12",
                       progressClassName: "bg-red-200",
                       icon: false,
-                   
-                      closeButton:false
+
+                      // closeButton: false,
                     }
+                    
                   );
 
-                  dispatch(closeModal());
+                  // dispatch(closeModal());
                 }}
-                href={""}
-                // href={"/dashboard/campaigns"}
+                // href={""}
+                href={"/dashboard/campaigns"}
               >
                 <Button
                   text="Confirm & Schedule"
@@ -175,7 +185,11 @@ const Review = (props: Props) => {
           </div>
           <div className="h-[592px] bg-grey-100 w-px mt-32 hidden lg:block"></div>
         </div>
-        <Image src={phone} alt="" className="hidden lg:block"/>
+        <div className="flex flex-col items-center justify-center mt-32 gap-y-4 ">
+          {" "}
+          <Image src={phone} alt="" className="hidden lg:block w-full" />
+          <Button text="Send Test Message" />
+        </div>
       </div>
     </div>
   );

@@ -56,6 +56,7 @@ const Button = ({
               "text-md font-semibold py-4 px-6"
             }
              ${size == "sm" && icon_style === "icon-only" ? " p-2 " : ""}
+             ${size == "md" && icon_style === "icon-only" ? " p-[16px]" : ""}
              ${
                size == "lg" && icon_style === "icon-only"
                  ? "h-10 w-10 p-2 flex justify-center items-center"
