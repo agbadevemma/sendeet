@@ -39,6 +39,7 @@ const TextButton = ({
           onClick={onClick}
           disabled={disabled}
           className={` font-semibold  flex gap-[8px]
+            ${className}
            ${size == "sm" && "text-sm  "}
             ${size == "lg" && "text-md  "}
            
