@@ -25,6 +25,9 @@ import { useAppDispatch } from "@/lib/hooks";
 import { openModal } from "@/lib/slices/miscellaneousSlice";
 import Pagination from "@/components/Pagination";
 import { toast } from "react-toastify";
+import TickDouble from "@/icons/tick-double";
+import Eye from "@/icons/eye";
+import HandClick from "@/icons/hand-click";
 
 type Props = {};
 
@@ -167,8 +170,8 @@ const page = (props: Props) => {
                     <span className="text-grey-400 text-xs">No data</span>
                   </div>
                 </div>
-                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]">
-                  <SendAlt color="#667085" />
+                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
+                  <TickDouble color="#667085" />
                 </div>
               </div>
               <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
@@ -185,26 +188,26 @@ const page = (props: Props) => {
                     <span className="text-grey-400 text-xs">No data</span>
                   </div>
                 </div>
-                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]">
-                  <SendAlt color="#667085" />
+                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
+                  <Eye color="#667085" />
                 </div>
               </div>
               <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid   ">
                 {" "}
                 <div className="flex flex-col gap-2">
                   <span className="text text-sm">Click Rate</span>
-                  <span className="text-[#344054] text-xl font-semibold">
+                  <span className="text-[#344054] text-xl font-semibold ">
                     0%
                   </span>
                   <div className="flex items-center gap-[6px]">
-                    <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                    <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054] flex items-center justify-center flex-shrink-0">
                       -%
                     </div>
                     <span className="text-grey-400 text-xs">No data</span>
                   </div>
                 </div>
-                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]">
-                  <SendAlt color="#667085" />
+                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]  flex items-center justify-center flex-shrink-0">
+                  <HandClick color="#667085" />
                 </div>
               </div>
             </div>
