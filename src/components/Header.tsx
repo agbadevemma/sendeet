@@ -13,7 +13,7 @@ import Building5 from "@/icons/building-5";
 import Settings from "@/icons/settings";
 import Logout from "@/icons/logout";
 import Avatar from "./Avatar";
-import Notification from "./Notification";
+import Notification from "./Notifications";
 
 type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -36,12 +36,12 @@ const Header = ({ setIsOpen }: Props) => {
         />
 
         <div className=" flex gap-1.5 lg:gap-3 items-center">
-          <Button
+          {/* <Button
             text="Getting Started"
             icon_style="leading-icon"
             size="sm"
             iconComponent={<LightingBorderIcon color="black" />}
-          />
+          /> */}
           <Notification />
          <Avatar />
         </div>
