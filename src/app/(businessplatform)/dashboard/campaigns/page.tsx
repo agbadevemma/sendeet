@@ -228,7 +228,7 @@ const Campaign = (props: Props) => {
               type="primary"
               size="sm"
               onClick={() => dispatch(toggleModal())}
-              className="mt-10 mb-8"
+              className="mt-10 mb-8 !py-4"
             />
           </Link>
         </div>

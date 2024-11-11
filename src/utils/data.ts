@@ -267,3 +267,18 @@ export const documents: DocumentItem[] = [
     buttonDate: "Jun 17, 2024",
   },
 ];
+
+
+type CreditItem = {
+  price: string;
+  credits: string;
+};
+
+export const creditsData: CreditItem[] = [
+  { price: "7500", credits: "50 credits" },
+  { price: "12500", credits: "100 credits" },
+  { price: "14500", credits: "150 credits" },
+  { price: "17500", credits: "200 credits" },
+  { price: "37500", credits: "500 credits" },
+  { price: "77500", credits: "1000 credits" },
+];

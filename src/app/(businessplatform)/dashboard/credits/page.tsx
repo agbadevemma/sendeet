@@ -12,6 +12,7 @@ import { initialTransactions, Transaction } from "@/utils/data";
 import React, { useState } from "react";
 import illustration from "../../../../images/creditillustration.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {};
 
@@ -64,13 +65,15 @@ const Credits = (props: Props) => {
             icon_style="leading-icon"
             text="Export"
           />
-          <Button
-            size="sm"
-            iconComponent={<Plus color="#fff" />}
-            icon_style="leading-icon"
-            type="primary"
-            text="Top up Credits"
-          />
+          <Link href={"credits/topup"}>
+            <Button
+              size="sm"
+              iconComponent={<Plus color="#fff" />}
+              icon_style="leading-icon"
+              type="primary"
+              text="Top up Credits"
+            />
+          </Link>
         </div>
       </div>
 
@@ -198,33 +201,36 @@ const Credits = (props: Props) => {
                   </div>
                 </th>
                 <th className="p-2 rounded-e-lg">
-                  <div className="flex items-center text-nowrap text-sm text-[#5D6679] font-medium">Status</div>
+                  <div className="flex items-center text-nowrap text-sm text-[#5D6679] font-medium">
+                    Status
+                  </div>
                 </th>
               </tr>
             </thead>
-            {transactions.length != 0 && (
+
+            {transactions.length == 0 && (
               <tbody>
                 {transactions.map((transaction, index) => (
                   <tr
                     key={transaction.code}
                     className="border-b border-b-grey-50 hover:bg-gray-50"
                   >
-                    <td className="font-medium text-grey-800 p-4 pl-6">
+                    <td className="font-medium text-sm text-grey-800 p-4 pl-6">
                       {transaction.code}
                     </td>
-                    <td className="font-medium text-grey-800 p-2 pr-8">
+                    <td className="font-medium text-sm text-grey-800 p-2 pr-8">
                       {transaction.date}
                     </td>
-                    <td className="font-medium text-grey-800 p-2">
+                    <td className="font-medium text-sm text-grey-800 p-2">
                       {transaction.creditPurchased}
                     </td>
-                    <td className="font-medium text-grey-800 p-2">
+                    <td className="font-medium text-sm text-grey-800 p-2">
                       {transaction.description}
                     </td>
-                    <td className="font-medium text-grey-800 p-2">
+                    <td className="font-medium text-sm text-grey-800 p-2">
                       {transaction.creditUsed}
                     </td>
-                    <td className="font-medium text-grey-800 p-2">
+                    <td className="font-medium text-sm text-grey-800 p-2">
                       <div className="flex gap-x-6 justify-start">
                         <div className="w-[94px]">
                           {" "}
@@ -252,22 +258,26 @@ const Credits = (props: Props) => {
               </tbody>
             )}
           </table>
-          {transactions.length == 0 && (
+          {transactions.length != 0 && (
             <div className="w-full h-80 flex flex-col  mt-32 mb-32 items-center justify-center mx-auto">
               <Image src={illustration} alt="img" className="mx-auto" />
-              <p className="text-lg font-semibold">Oops....nothing to see here</p>
+              <p className="text-lg font-semibold">
+                Oops....nothing to see here
+              </p>
               <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
                 Tap the button below to top up credits and share content with
                 your contacts
               </p>
-              <Button
-                size="sm"
-                iconComponent={<Plus color="#fff" />}
-                icon_style="leading-icon"
-                type="primary"
-                className="mt-7"
-                text="Top up Credits"
-              />
+              <Link href={"credits/topup"}>
+                <Button
+                  size="sm"
+                  iconComponent={<Plus color="#fff" />}
+                  icon_style="leading-icon"
+                  type="primary"
+                  className="mt-7 !py-2 !px-3"
+                  text="Top up Credits"
+                />
+              </Link>
             </div>
           )}
         </div>

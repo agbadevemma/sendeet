@@ -43,7 +43,7 @@ const Button = ({
            ${
              size == "sm" &&
              icon_style === "txt" &&
-             "text-sm font-medium  py-[8px] px-[6px]"
+             "text-sm font-medium  py-[8px] px-[6px] w-full"
            }
             ${
               size == "md" &&

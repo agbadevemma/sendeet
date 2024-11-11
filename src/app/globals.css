@@ -96,3 +96,8 @@ html{
   background-color: #8c8c8c;
 }
 
+
+.Toastify__toast-container {
+  width: 100% !important; /* Set to your desired width */
+  max-width: 400px !important;
+}
