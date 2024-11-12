@@ -19,8 +19,13 @@ import Receipt from "@/icons/receipt";
 type Props = {};
 
 const Credits = (props: Props) => {
-  const [openViewIndex, setOpenViewIndex] = useState<number | null>(null); // Track open dropdown index
+  const [openViewIndex, setOpenViewIndex] = useState<number | null>(null);
   const viewRef = useRef<HTMLDivElement>(null);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const filterRef = useRef<HTMLDivElement>(null);
+
+
+
 
   const [transactions, setTransactions] =
     useState<Transaction[]>(initialTransactions);
@@ -54,15 +59,17 @@ const Credits = (props: Props) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        calendarRef.current &&
-        !calendarRef.current.contains(event.target as Node)
-      ) {
-        setIsCalenderOpen(false); // Close calendar if click is outside
-      }
-      if (viewRef.current && !viewRef.current.contains(event.target as Node)) {
-        setOpenViewIndex(null); // Close all dropdowns if click is outside
-      }
+      const handleClickOutside = (event: MouseEvent) => {
+        if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
+          setIsCalenderOpen(false); // Close calendar if click is outside
+        }
+        if (viewRef.current && !viewRef.current.contains(event.target as Node)) {
+          setOpenViewIndex(null); // Close dropdown if click is outside
+        }
+        if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+          setIsFilterOpen(false); // Close filter if click is outside
+        }
+      };
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -127,12 +134,25 @@ const Credits = (props: Props) => {
             </p>
           </div>
           <div className="flex gap gap-x-[18px] ">
-            <Button
-              size="sm"
-              text="Filters"
-              icon_style="leading-icon"
-              iconComponent={<FilterAlt color="#383E49" />}
-            />
+            <div className="relative"  >
+              <Button
+                size="sm"
+                text="Filters"
+                icon_style="leading-icon"
+                iconComponent={<FilterAlt color="#383E49" />}
+                onClick={() => setIsFilterOpen((prev) => !prev)}
+              />
+              {isFilterOpen && (
+                <div ref={filterRef} className="absolute mt-2 w-full bg-white gap-y-2 rounded-lg p-4 px-2 items-center shadow-sm z-30 flex flex-col">
+                  <div className="rounded-sm py-1 cursor-pointer  hover:bg-[#F9FAFB] w-full text-xs whitespace-nowrap ">
+                    Credit used
+                  </div>
+                  <div className="rounded-sm py-1 cursor-pointer  hover:bg-[#F9FAFB] w-full text-xs whitespace-nowrap ">
+                    Credit unused
+                  </div>
+                </div>
+              )}
+            </div>
             <div ref={calendarRef} className="relative">
               <Button
                 size="sm"
