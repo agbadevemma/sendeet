@@ -9,7 +9,7 @@ const Notification = (props: Props) => {
   return (
     <div>
       <div className="flex justify-between items-start gap-5">
-        <div className="flex border border-success-500 p-3 shadow-[0px_1px_2px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,189,199,0.20)] rounded-lg bg-success-50 ">
+        <div className="flex border border-success-500 p-2.5Top up Credits shadow-[0px_1px_2px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,189,199,0.20)] rounded-lg bg-success-50 ">
           <SendAlt color="#0F973D" />
         </div>
         <div className="flex flex-col">

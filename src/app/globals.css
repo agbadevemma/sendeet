@@ -101,3 +101,19 @@ html{
   width: 100% !important; /* Set to your desired width */
   max-width: 400px !important;
 }
+
+
+
+.custom-date-range .rdrSelectedDate {
+  background-color: #28a745 !important; /* Green */
+  
+}
+
+.custom-date-range .rdrInRange {
+  /* background-color: #E6F7FE !important;  */
+  /* color: #0079AF !important; */
+}
+
+.custom-date-range .rdrStartEdge, .custom-date-range .rdrEndEdge {
+  border-color: #28a745 !important; /* Green border */
+}

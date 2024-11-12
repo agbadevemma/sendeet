@@ -39,7 +39,7 @@ export const subscriberRangeOptions: Option[] = [
 export const statusOptions: Option[] = [
   { value: "active", label: "Active" },
   { value: "inactive", label: "Inactive" },
-  { value: "pending", label: "Pending" },
+  { value: "Pending", label: "Pending" },
   { value: "archived", label: "Archived" },
   { value: "draft", label: "Draft" },
 ];
@@ -61,7 +61,7 @@ export interface Transaction {
   creditPurchased: string;
   description: string;
   creditUsed: string;
-  status: "successful" | "pending" | "failed";
+  status: "successful" | "Pending" | "Failed";
 }
 
 export interface CampaignInterface {
@@ -95,7 +95,7 @@ export const initialTransactions: Transaction[] = [
     creditPurchased: "200",
     description: "Purchased 200 credits",
     creditUsed: "50",
-    status: "failed",
+    status: "Failed",
   },
   {
     code: "TXN12348",
@@ -103,7 +103,7 @@ export const initialTransactions: Transaction[] = [
     creditPurchased: "300",
     description: "Purchased 300 credits",
     creditUsed: "-",
-    status: "pending",
+    status: "Pending",
   },
   {
     code: "TXN12349",
@@ -119,7 +119,7 @@ export const initialTransactions: Transaction[] = [
     creditPurchased: "500",
     description: "Purchased 500 credits",
     creditUsed: "-",
-    status: "pending",
+    status: "Pending",
   },
   {
     code: "TXN12351",
@@ -127,7 +127,7 @@ export const initialTransactions: Transaction[] = [
     creditPurchased: "250",
     description: "Purchased 250 credits",
     creditUsed: "50",
-    status: "failed",
+    status: "Failed",
   },
   {
     code: "TXN12352",
@@ -143,7 +143,7 @@ export const initialTransactions: Transaction[] = [
     creditPurchased: "500",
     description: "Purchased 500 credits",
     creditUsed: "-",
-    status: "pending",
+    status: "Pending",
   },
   {
     code: "TXN12354",
@@ -159,7 +159,7 @@ export const initialTransactions: Transaction[] = [
     creditPurchased: "1200",
     description: "Purchased 1200 credits",
     creditUsed: "300",
-    status: "failed",
+    status: "Failed",
   },
 ];
 

@@ -36,16 +36,16 @@ const Avatar = (props: Props) => {
         <Image
           src={profile}
           alt=""
-          className="rounded-full h-10 w-10 object-cover"
+          className="rounded-full h-10 w-10 object-cover cursor-pointer"
           onClick={toggleDropdown}
         />
         {isOpen && (
-          <div   className="shadow-lg absolute w-[240px] rounded-lg flex-col right-0 mt-2 bg-white">
+          <div   className="shadow-lg absolute w-[240px] rounded-lg flex-col right-0 mt-2 bg-white z-[80] cursor-pointer">
             <div className="flex w-full gap-4 px-4  py-[12px] border-b border-b-grey-50 ">
               <Image
                 src={profile}
                 alt=""
-                className="rounded-full h-10 w-10 object-cover"
+                className="rounded-full h-10 w-10 object-cover cursor-pointer"
               />
               <div className="flex flex-col ">
                 <p className="text-sm font-medium text-[#344054]">

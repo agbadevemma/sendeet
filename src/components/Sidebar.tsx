@@ -19,7 +19,7 @@ type Props = {
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
   return (
-    <div  className="">
+    <div className="">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
         className={`w-full bg-black/20 z-50 fixed  xl:static  transition-all duration-500  ${
@@ -27,7 +27,6 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
         } `}
       >
         <div
-          
           className={`h-screen pb-20 overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[60%] md:w-[40%] lg:w-full  lg:max-w-[272px] transition-all duration-500    ${
             isOpen ? "-translate-x-0" : "-translate-x-full xl:translate-x-0"
           } `}
@@ -62,10 +61,16 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   label="Dashboard"
                 />
                 <IconLink
+                  href="/dashboard/analytics"
+                  IconComponent={BarChartv}
+                  label="Analytics"
+                />
+                <IconLink
                   href="/dashboard/campaigns"
                   IconComponent={LoudSpeaker}
                   label="Campaigns"
                 />
+
                 <IconLink
                   href="/dashboard/audience"
                   IconComponent={UserGroup}
@@ -75,11 +80,6 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   href="/dashboard/credits"
                   IconComponent={Money1}
                   label="Credits"
-                />
-                <IconLink
-                  href="/dashboard/analytics"
-                  IconComponent={BarChartv}
-                  label="Analytics"
                 />
               </div>
             </div>

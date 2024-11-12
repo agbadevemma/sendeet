@@ -9,16 +9,22 @@ import IconStack from "@/icons/icon-stack";
 import Money1 from "@/icons/money-1";
 import Plus from "@/icons/plus";
 import { initialTransactions, Transaction } from "@/utils/data";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import illustration from "../../../../images/creditillustration.svg";
 import Image from "next/image";
 import Link from "next/link";
+import DateRangePicker from "@/components/DateRangePicker";
+import Receipt from "@/icons/receipt";
 
 type Props = {};
 
 const Credits = (props: Props) => {
+  const [openViewIndex, setOpenViewIndex] = useState<number | null>(null); // Track open dropdown index
+  const viewRef = useRef<HTMLDivElement>(null);
+
   const [transactions, setTransactions] =
     useState<Transaction[]>(initialTransactions);
+  const [isCalenderOpen, setIsCalenderOpen] = useState<boolean>(false);
   const [sortConfig, setSortConfig] = useState<{
     key: keyof Transaction;
     direction: "asc" | "desc";
@@ -43,6 +49,27 @@ const Credits = (props: Props) => {
     setSortConfig({ key, direction });
     setTransactions(sortedTransactions);
   };
+
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target as Node)
+      ) {
+        setIsCalenderOpen(false); // Close calendar if click is outside
+      }
+      if (viewRef.current && !viewRef.current.contains(event.target as Node)) {
+        setOpenViewIndex(null); // Close all dropdowns if click is outside
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div>
@@ -99,19 +126,27 @@ const Credits = (props: Props) => {
               Keep track of credit purchases and usage
             </p>
           </div>
-          <div className="flex gap gap-x-[18px]">
+          <div className="flex gap gap-x-[18px] ">
             <Button
               size="sm"
               text="Filters"
               icon_style="leading-icon"
               iconComponent={<FilterAlt color="#383E49" />}
             />
-            <Button
-              size="sm"
-              iconComponent={<Calendar color="#383E49" />}
-              icon_style="leading-icon"
-              text="Select dates"
-            />
+            <div ref={calendarRef} className="relative">
+              <Button
+                size="sm"
+                iconComponent={<Calendar color="#383E49" />}
+                icon_style="leading-icon"
+                text="Select dates"
+                onClick={() => setIsCalenderOpen(true)}
+              />
+              {isCalenderOpen && (
+                <div className="absolute z-30 w-full flex items-center justify-center lg:block lg:w-fit   left-1 lg:-left-64 lg:right-10  mt-4">
+                  <DateRangePicker />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -138,17 +173,19 @@ const Credits = (props: Props) => {
                   </div>
                 </th>
                 <th className="p-2" onClick={() => handleSort("date")}>
-                  <div className="flex items-center text-nowrap gap-2 text-sm text-[#5D6679] font-medium w-full cursor-pointer">
-                    Date{" "}
-                    <div
-                      className={` transition-transform duration-300   ${
-                        sortConfig?.key === "date" &&
-                        sortConfig.direction === "asc"
-                          ? "transform rotate-180"
-                          : ""
-                      }`}
-                    >
-                      <ArrowUp color={"#5D6679"} />
+                  <div className="relative">
+                    <div className="flex items-center text-nowrap gap-2 text-sm text-[#5D6679] font-medium w-full cursor-pointer">
+                      Date{" "}
+                      <div
+                        className={` transition-transform duration-300   ${
+                          sortConfig?.key === "date" &&
+                          sortConfig.direction === "asc"
+                            ? "transform rotate-180"
+                            : ""
+                        }`}
+                      >
+                        <ArrowUp color={"#5D6679"} />
+                      </div>
                     </div>
                   </div>
                 </th>
@@ -208,7 +245,7 @@ const Credits = (props: Props) => {
               </tr>
             </thead>
 
-            {transactions.length == 0 && (
+            {transactions.length !== 0 && (
               <tbody>
                 {transactions.map((transaction, index) => (
                   <tr
@@ -238,18 +275,51 @@ const Credits = (props: Props) => {
                             className={`flex items-center min-h-[24px]   justify-center font-medium py-[2px] text-sm px-[10px] rounded-2xl ${
                               transaction.status === "successful"
                                 ? "bg-success-50 text-success-800 w-[94px]"
-                                : transaction.status === "pending"
+                                : transaction.status === "Pending"
                                 ? "text-warning-700 bg-warning-50 w-full text-nowrap"
-                                : "bg-red-50 text-red-800 w-[61px]"
+                                : "bg-red-50 text-red-800 w-[61px] "
                             }`}
                           >
-                            {transaction.status === "pending"
+                            {transaction.status === "Pending"
                               ? "In Progress"
                               : transaction.status}
                           </p>
                         </div>
-                        <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
-                          <DotV color="#101928" />
+                        <div ref={viewRef} className="relative">
+                          <div
+                            onClick={() =>
+                              setOpenViewIndex(
+                                openViewIndex === index ? null : index
+                              )
+                            }
+                            className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC] cursor-pointer"
+                          >
+                            <DotV color="#101928" />
+                          </div>
+                          {openViewIndex === index && (
+                            <div
+                              ref={viewRef}
+                              className="absolute rounded-[10px]  min-w-[163px] flex flex-col gap-4 p-4 border-[0.9px] border-grey-50 bg-white z-[50] -right-1 mt-1  py-2 px-2"
+                            >
+                              <Link href={"credits/transaction-details"}>
+                                {" "}
+                                <div className="w-full flex items-center gap-4 group  group-hover:text-[#009BE1] hover:bg-[#F9FAFB] p-2 cursor-pointer  text-grey-800 rounded-lg">
+                                  <Receipt color="#383E49" />
+                                  <span className="text-xs whitespace-nowrap">
+                                    Transaction details
+                                  </span>
+                                </div>
+                              </Link>
+                              <Link href={""}>
+                                <div className="w-full flex items-center gap-4 group  group-hover:text-[#009BE1] hover:bg-[#F9FAFB] p-2 text-grey-800 cursor-pointer rounded-lg">
+                                  <FileDownload color="#383E49" />
+                                  <span className="text-xs whitespace-nowrap">
+                                    Export Receipt
+                                  </span>
+                                </div>
+                              </Link>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </td>
@@ -258,7 +328,7 @@ const Credits = (props: Props) => {
               </tbody>
             )}
           </table>
-          {transactions.length != 0 && (
+          {transactions.length == 0 && (
             <div className="w-full h-80 flex flex-col  mt-32 mb-32 items-center justify-center mx-auto">
               <Image src={illustration} alt="img" className="mx-auto" />
               <p className="text-lg font-semibold">
