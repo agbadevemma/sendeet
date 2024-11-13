@@ -89,7 +89,18 @@ html{
 }
 
 
+.noscrollbar{
+  scrollbar-width: none;
+  -ms-overflow-style: none;  /* IE 10+ */
+}
 
+
+.noscrollbar::-webkit-scrollbar{
+  scrollbar-width: none;
+  display: none;
+  
+  
+}
 
 .campaign::-webkit-scrollbar-thumb {
   border-radius: 8px;
