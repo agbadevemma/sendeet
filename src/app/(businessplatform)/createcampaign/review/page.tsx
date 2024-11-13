@@ -46,7 +46,7 @@ const Review = (props: Props) => {
     if (!isDragging || !scrollRef.current) return;
     e.preventDefault();
     const y = e.pageY - scrollRef.current.offsetTop;
-    const walk = (y - startY) * 1; // Adjust scroll speed here
+    const walk = (y - startY) * 1.5; // Adjust scroll speed here
     scrollRef.current.scrollTop = scrollTop - walk;
   };
 
