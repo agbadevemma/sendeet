@@ -56,7 +56,7 @@ export const ForgotPasswordSchema = Yup.object().shape({
 
 export const validationSchemaCampaignSetup = Yup.object().shape({
   campaign: Yup.string().required("Campaign name is required"),
-  campaignDescription: Yup.string().required("Campaign description is required"),
+  campaignDescription: Yup.string(),
   messageType: Yup.string().required("Message type is required"),
   targetAudience: Yup.string().required("Target audience is required")
 });
