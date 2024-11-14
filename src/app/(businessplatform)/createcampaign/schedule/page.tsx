@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/buttons/Button";
 import CampaignSelectField from "@/components/CampaignSelectField";
+import RadioButton from "@/components/RadioButton";
 import Calendar from "@/icons/calendar";
 import CheckCircle from "@/icons/check-circle";
 import CheckCircleBg from "@/icons/check-circle-bg";
@@ -19,6 +20,7 @@ const Schedule = (props: Props) => {
   const [isOpen2, setIsOpen2] = useState(false);
   const [selectedTimezone, setSelectedTimezone] = useState<string>("utc");
   const [selectedWindow, setSelectedWindow] = useState("09:00 AM - 12:00 PM");
+  const [sendOption, setSendOption] = useState<string>("sendNow");
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -93,13 +95,8 @@ const Schedule = (props: Props) => {
           <p className="text-grey-700 text-sm mb-">
             When do you want to send it ?
           </p>
-          <div className="flex mt-3 gap-2 items-start ">
-            <input
-              type="radio"
-              name=""
-              id=""
-              className=" bg-primary-50 border-[#00AAF7] mt-[2px]"
-            />
+          <div className="flex mt-3 gap-2 items-start cursor-pointer " onClick={() => setSendOption("sendNow")}>
+          <RadioButton checked={sendOption === "sendNow"} />
             <div className="flex flex-col">
               <span className="text-grey-800 font-medium  text-sm">
                 Send Now
@@ -111,13 +108,8 @@ const Schedule = (props: Props) => {
           </div>
         </div>
 
-        <div className="flex mt-6 gap-2 items-start ">
-          <input
-            type="radio"
-            name=""
-            id=""
-            className=" bg-primary-50 border-[#00AAF7] mt-[2px]"
-          />
+        <div className="flex mt-6 gap-2 items-start cursor-pointer " onClick={() => setSendOption("schedule")}>
+        <RadioButton checked={sendOption === "schedule"} />
           <div className="flex flex-col">
             <span className="text-grey-800 font-medium  text-sm">
               Schedule for a specific time
