@@ -29,7 +29,7 @@ const Signup = (props: Props) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      router.push("signup/basic-info");
+      router.replace("signup/verification");
       console.log(values);
     },
   });

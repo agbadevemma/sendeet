@@ -11,6 +11,7 @@ import card from "../../../images/signup/card2.svg";
 import arrowactive from "../../../images/icons/chevron-right-active.svg";
 import arrowinactive from "../../../images/icons/chevron-right-inactive.svg";
 import ChevronRight from "@/icons/chevron-right";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -19,7 +20,10 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const pathname = usePathname();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const backgrounds: StaticImageData[] = [ bg1, bg2,bg3];
+  const switchToBasicInfo = useAppSelector(
+    (state) => state.miscellaneous.switchToBasicInfo
+  );
+  const backgrounds: StaticImageData[] = [bg1, bg2, bg3];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,8 +42,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       >
         {text}
       </p>
-      <ChevronRight width={16} height={16} color={pathname === href ?"#00AAF7":"#B9BDC7" }/>
-      
+      <ChevronRight
+        width={16}
+        height={16}
+        color={pathname === href ? "#00AAF7" : "#B9BDC7"}
+      />
     </div>
   );
 
@@ -50,13 +57,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="w-full max-w-[525px] mx-auto mt-[96px]">
             <Image src={logo} alt="logo" className="w-32 mx-auto lg:mx-0" />
             <div className="lg:mt-[57.6px] mt-8">
-              <div className="w-fit gap-4 mx-auto lg:mx-0 lg:pl-8 flex">
+              <div className="w-fit gap-4 mx-auto lg:mx-0 lg:pl-0 flex">
                 {renderNavLink("/signup", "Account")}
-                {renderNavLink("/signup/basic-info", "Basic info")}
+                {switchToBasicInfo
+                  ? renderNavLink("/signup/basic-info", "Basic info")
+                  : renderNavLink("/signup/verification", "Verification")}
                 {renderNavLink("/signup/company", "Company")}
-                <p className="text-xs lg:text-sm text-grey-300">
-                  Finish setup
-                </p>
+                <p className="text-xs lg:text-sm text-grey-300">Finish setup</p>
               </div>
               {children}
             </div>

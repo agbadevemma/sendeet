@@ -9,12 +9,14 @@ import location from "../../../../images/icons/map-marker.svg";
 import building from "../../../../images/icons/building-5.svg";
 import globe from "../../../../images/icons/globe.svg";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/buttons/Button";
 import ChevronIcon from "@/icons/chevron-right";
 import MapMarker from "@/icons/map-marker";
 import Building5 from "@/icons/building-5";
 import GlobeAlt from "@/icons/globe-alt";
+import { toggleBasicInfo } from "@/lib/slices/miscellaneousSlice";
+import { useAppDispatch } from "@/lib/hooks";
 
 type FormValues = {
   firstName: string;
@@ -28,6 +30,11 @@ type FormValues = {
 const FinishSetup = () => {
   const router = useRouter();
   const [isModalOpen, setModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(toggleBasicInfo(false));
+  //   // alert("cooler")
+  // }, []);
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -89,7 +96,7 @@ const FinishSetup = () => {
             label="Company Name"
             placeholder="Your company name"
             className="col-span-2"
-            icon={<Building5 color="#667085"/>}
+            icon={<Building5 color="#667085" />}
             id="companyName"
             name="companyName"
             value={formik.values.companyName}
@@ -105,8 +112,7 @@ const FinishSetup = () => {
             label="Company Address"
             placeholder="Your company address"
             className="col-span-2"
-            icon={<MapMarker color="#667085"/>}
-         
+            icon={<MapMarker color="#667085" />}
             id="companyAddress"
             name="companyAddress"
             value={formik.values.companyAddress}
@@ -124,7 +130,7 @@ const FinishSetup = () => {
             placeholder="Link to your company website"
             className="col-span-2"
             id="website"
-            icon={<GlobeAlt color="#667085"/>}
+            icon={<GlobeAlt color="#667085" />}
             name="website"
             value={formik.values.website}
             onChange={formik.handleChange}

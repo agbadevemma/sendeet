@@ -1,15 +1,17 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface MiscellaneousState {
   isModalOpen: boolean;
+  switchToBasicInfo: boolean;
 }
 
 const initialState: MiscellaneousState = {
   isModalOpen: false,
+  switchToBasicInfo: false,
 };
 
 const miscellaneousSlice = createSlice({
-  name: 'miscellaneous',
+  name: "miscellaneous",
   initialState,
   reducers: {
     openModal: (state) => {
@@ -21,9 +23,13 @@ const miscellaneousSlice = createSlice({
     toggleModal: (state) => {
       state.isModalOpen = !state.isModalOpen;
     },
+    toggleBasicInfo: (state, action: PayloadAction<boolean>) => {
+      state.switchToBasicInfo = action.payload;
+    },
   },
 });
 
-export const { openModal, closeModal, toggleModal } = miscellaneousSlice.actions;
+export const { openModal, closeModal, toggleModal, toggleBasicInfo } =
+  miscellaneousSlice.actions;
 
 export default miscellaneousSlice.reducer;
