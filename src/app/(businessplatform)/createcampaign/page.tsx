@@ -144,8 +144,10 @@ const Setup = (props: Props) => {
             <div className="flex items-center justify-between">
               <p className="text-sm">Price</p>
               <p className="text-sm text-[#101828]">
-                {formik.values.campaign && "₦"}
-                {formik.values.campaign
+                {formik.values.messageType &&
+                  formik.values.targetAudience &&
+                  "₦"}
+                {formik.values.messageType && formik.values.targetAudience
                   ? Number("26486").toLocaleString()
                   : "-"}
               </p>
@@ -153,7 +155,9 @@ const Setup = (props: Props) => {
             <div className="flex items-center justify-between">
               <p className="text-sm">Credits</p>
               <p className="text-sm text-[#101828]">
-                {formik.values.campaign ? Number("500").toLocaleString() : "-"}
+                {formik.values.messageType && formik.values.targetAudience
+                  ? Number("500").toLocaleString()
+                  : "-"}
               </p>
             </div>
           </div>
