@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
         } `}
       >
         <div
-          className={`h-screen pb-20 overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[60%] md:w-[40%] lg:w-full  lg:max-w-[272px] transition-all duration-500    ${
+          className={`h-screen  overflow-y-auto sidebar  bg-white border-grey-100 border lg:flex flex-col w-[60%] md:w-[40%] lg:w-full  lg:max-w-[272px] transition-all duration-500    ${
             isOpen ? "-translate-x-0" : "-translate-x-full xl:translate-x-0"
           } `}
         >
