@@ -16,6 +16,7 @@ import Eye from "@/icons/eye";
 import EyeSlash from "@/icons/eye-slash";
 import Message from "@/icons/message";
 import Mail from "@/icons/mail";
+import secureLocalStorage from "react-secure-storage";
 
 type Props = {};
 
@@ -30,6 +31,7 @@ const Signup = (props: Props) => {
     validationSchema,
     onSubmit: (values) => {
       router.replace("signup/verification");
+      secureLocalStorage.setItem("email", values.email);
       console.log(values);
     },
   });
@@ -55,8 +57,7 @@ const Signup = (props: Props) => {
           <div className="mt-[40px] flex flex-col gap-4">
             <InputField
               label="Work Email Address"
-             
-              icon={<Mail color="#667085"/>}
+              icon={<Mail color="#667085" />}
               placeholder="email@company"
               inputType="email"
               id="email"

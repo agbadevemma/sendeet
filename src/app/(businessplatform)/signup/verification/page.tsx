@@ -5,6 +5,7 @@ import { useAppDispatch } from "@/lib/hooks";
 import { toggleBasicInfo } from "@/lib/slices/miscellaneousSlice";
 import Link from "next/link";
 import React, { useState } from "react";
+import secureLocalStorage from "react-secure-storage";
 
 type Props = {};
 
@@ -28,7 +29,9 @@ const Verification = () => {
         {showOTPFields
           ? "Enter the 4-digit code sent to "
           : "We sent a verification link to "}
-        <span className="font-medium">example@companyname.com</span>
+        <span className="font-medium">
+          {String(secureLocalStorage.getItem("email")||"")}
+        </span>
       </p>
       <div className="flex w-full justify-center items-center  mt-8 gap-10"></div>
       {showOTPFields && <OtpFields />}
