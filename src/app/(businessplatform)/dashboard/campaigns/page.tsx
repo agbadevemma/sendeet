@@ -157,17 +157,17 @@ const Campaign = (props: Props) => {
     <div>
       <div
         onClick={() => dispatch(toggleModal())}
-        className={`fixed w-full h-screen flex items-center justify-end   bg-black/20 top-0 left-0 z-50  p-4   transition-all duration-500 ${
+        className={`fixed w-full h-screen flex items-center justify-end  overflow-auto bg-black/20 top-0 left-0 z-50  p-4   transition-all duration-500 ${
           isModalOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`h-full bg-white  max-w-[475px] campaign  py overflow-auto w-full rounded-xl mt   transition-all duration-500 p-6   ${
+          className={`h-full bg-white  max-w-[475px] gap-4 campaign flex flex-col overflow-auto  py  w-full rounded-xl mt   transition-all duration-500 p-6   ${
             isModalOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex justify-end items-center mt-2  cursor-pointer">
+          <div className="flex justify-end items-center   cursor-pointer">
             <div
               onClick={() => dispatch(toggleModal())}
               className="flex items-center p-2 w-fit rounded-lg  justify-center border border-[#E4E7EC]"
@@ -175,18 +175,18 @@ const Campaign = (props: Props) => {
               <Multiply color="#5D6679" />
             </div>
           </div>
-          <div className="w-full relative grid place-items-center mt-4">
+          <div className="w-full relative grid place-items-center ">
             <Image src={bg} alt="bg" className="w-full" />
             <span className="text-4xl font-semibold text-white absolute z-50">
               MESSAGE TYPE
             </span>
           </div>
-          <div className="overflow-auto h-full py-9 max-h-[490px] justify-between gap-4 flex flex-col h-43  p-4 px-4 mt-10 rounded-xl bg-[#F2F4F7]">
+          <div className=" f py-4 flex-1  justify-between gap-2 flex flex-col h-43  p-4 px-4  rounded-xl bg-[#F2F4F7]">
             <div className="">
               <p className="text-grey-800 text-sm font-medium">
                 Marketing Message
               </p>
-              <p className="text-sm text-grey-500">
+              <p className="text-[80%] text-grey-500">
                 Automate follow-ups and provide essential updates to your
                 customers. Perfect for order confirmations, account alerts, and
                 delivery tracking.
@@ -196,7 +196,7 @@ const Campaign = (props: Props) => {
               <p className="text-grey-800 text-sm font-medium">
                 Utility Message
               </p>
-              <p className="text-sm text-grey-500">
+              <p className="text-[80%] text-grey-500">
                 Choose a campaign type to fit your goal. This will affect
                 message format, engagement options, and billing.
               </p>
@@ -205,7 +205,7 @@ const Campaign = (props: Props) => {
               <p className="text-grey-800 text-sm font-medium">
                 Authentication Message
               </p>
-              <p className="text-sm text-grey-500">
+              <p className="text-[80%] text-grey-500">
                 Securely verify user identities with one-time passcodes. Ideal
                 for account verification, password resets, and login challenges.
               </p>
@@ -214,7 +214,7 @@ const Campaign = (props: Props) => {
               <p className="text-grey-800 text-sm font-medium">
                 Service Message
               </p>
-              <p className="text-sm text-grey-500">
+              <p className="text-[80%] text-grey-500">
                 Provide seamless customer support by addressing inquiries and
                 resolving issues. Use this for real-time assistance, feedback
                 collection, or issue resolution.
@@ -228,7 +228,7 @@ const Campaign = (props: Props) => {
               type="primary"
               size="sm"
               onClick={() => dispatch(toggleModal())}
-              className="mt-10 mb-8 !py-4"
+              className=" mb-0 !py-3"
             />
           </Link>
         </div>
@@ -414,19 +414,27 @@ const Campaign = (props: Props) => {
                         onClick={() => handleSelectItem(index)}
                       />{" "}
                       <div
-                        className={`h-5 w-5 p-4 flex items-center justify-center ${
+                        className={`h-5 w-5 p-4 flex items-center justify-center shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] border ${
                           campaign.status === "Draft" &&
-                          "border-[#F2F4F7] bg-[#344054]"
+                          "bg-grey-50 border-[#475467]"
                         }  ${
                           campaign.status === "Active" &&
-                          "bg-warning-500 border-warning-50"
+                          "border-warning-500 bg-warning-50"
                         }
                          ${
                            campaign.status === "Completed" &&
-                           "border-success-50 bg-success-500 "
+                           "bg-success-50 border-success-500 "
                          } rounded-lg`}
                       >
-                        <SendAlt color="#fff" />
+                        <SendAlt
+                          color={
+                            campaign.status === "Active"
+                              ? "#DD9316"
+                              : campaign.status === "Completed"
+                              ? "#0F973D"
+                              : "#667085"
+                          }
+                        />
                       </div>
                       {campaign.campaign}
                     </td>
@@ -498,9 +506,11 @@ const Campaign = (props: Props) => {
             </div>
           )}
         </div>
-        <div className="w-full  pt-[11px] pb-[16px] p-6 ">
-          <Pagination />
-        </div>
+        {campaigns.length >= 10 && (
+          <div className="w-full  pt-[11px] pb-[16px] p-6 ">
+            <Pagination />
+          </div>
+        )}
       </div>
     </div>
   );
