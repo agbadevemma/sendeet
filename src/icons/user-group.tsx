@@ -5,13 +5,13 @@ type Props = {
     width?: number;  // Optional width prop
     height?: number; // Optional height prop
   };
-const UserGroup = ({ color, width = 25, height = 24 }: Props) => {
+const UserGroup = ({ color, width = 20, height = 20 }: Props) => {
   return (
     <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
+        width={width}
+        height={height}
         viewBox="0 0 20 20"
         fill="none"
       >
