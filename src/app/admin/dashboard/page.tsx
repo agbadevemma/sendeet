@@ -99,7 +99,7 @@ const AdminDashboard = (props: Props) => {
           </div>{" "}
           <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
-              <span className="text text-sm">Delivered</span>
+              <span className="text text-sm">Total Subscribers</span>
               <span className="text-[#344054] text-xl font-semibold">1,325,464</span>
                 <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
@@ -116,7 +116,7 @@ const AdminDashboard = (props: Props) => {
           </div>{" "}
           <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
-              <span className="text text-sm">Delivered</span>
+              <span className="text text-sm">Total Opt outs</span>
               <span className="text-[#344054] text-xl font-semibold">235,987</span>
                 <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
