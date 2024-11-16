@@ -31,16 +31,16 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
         } `}
       >
         <div
-          className={`h-screen overflow-y-auto sidebar  bg-[#101928] lg:flex flex-col w-[60%] md:w-[40%] lg:w-[]  xl:w-[280px]  transition-all duration-500    ${
+          className={`h-screen overflow-y-auto sidebar  bg-[#101928] lg:flex flex-col w-[60%] md:w-[40%] lg:w-[250px] xl:w-[240px]  transition-all duration-500    ${
             isOpen ? "-translate-x-0" : "-translate-x-full xl:translate-x-0"
           } `}
         >
-          <div className="px-[24px] py-3.5 pb-1 ">
-            <Image src={logo} alt="logo" className="w-32" />
-          </div>
-
-          <hr className="  max-w-[200px] mt-4 bg-[#F0F1F3]  mx-auto  w-full" />
+          {/* 
+          <hr className="  max-w-[200px] mt-4 bg-[#F0F1F3]  mx-auto  w-full" /> */}
           <div className="w-full px-4 mt-0">
+            <div className="px-[24px] py-3.5  w-full border-b border-grey-50 pb-4">
+              <Image src={logo} alt="logo" className="w-32" />
+            </div>
             <div className="mt-7">
               <p className="text-gray-100 text-sm font-medium w-full px-1 mt-1">
                 MAIN MENU

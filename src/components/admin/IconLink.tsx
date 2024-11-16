@@ -8,7 +8,7 @@ const IconLink = ({
   label,
 }: {
   href: string;
-  IconComponent: React.ComponentType<{ color: string }>;
+  IconComponent: React.ComponentType<{ color: string, height:number, width:number }>;
   label: string;
 }) => {
   const pathName = usePathname();
@@ -22,12 +22,15 @@ const IconLink = ({
         isActive
           ? " text-white bg-[#1D2739]"
           : "hover:bg-[#1D2739] ease-in-out duration-500 text-gray-50"
-      } cursor-pointer rounded-lg gap-3 py-3 px-2 flex items-center text-white`}
+      } cursor-pointer rounded-lg  justify-between py-3 px-2 flex items-center text-white`}
     >
-      <IconComponent color={"#F0F1F3"} />
-      <span className="text-sm whitespace-nowrap">{label}</span>
+      <div className="gap-3 flex items-center">
+        {" "}
+        <IconComponent color={"#F0F1F3"} height={20} width={20} />
+        <span className="text-[13px] whitespace-nowrap">{label}</span>
+      </div>
       {href === "/admin/dashboard/usermanagement" && (
-        <div className="ml-2 lg:ml-4 xl:ml-8">
+        <div className="">
           {" "}
           <ChevronDown color="#F0F1F3" height={20} width={20} />
         </div>
