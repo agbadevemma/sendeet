@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import logo from "../../images/Logo.png";
 import dashlogo from "../../images/dashlogo.svg";
 import Image from "next/image";
@@ -15,6 +15,7 @@ import BellBorder from "@/icons/bell-border";
 import Users from "@/icons/users";
 import NewsPaper from "@/icons/newspaper";
 import IconLink from "./IconLink";
+import { usePathname } from "next/navigation";
 
 type Props = {
   isOpen: boolean;
@@ -22,6 +23,12 @@ type Props = {
 };
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
+  const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
+  const pathName = usePathname();
+  const baseRoute: string = "/admin/dashboard/usermanagement/audience";
+  // Check if the current pathname matches the base route
+  const isUserManagementPage = pathName?.startsWith(baseRoute);
+  const id = isUserManagementPage ? pathName.replace(baseRoute, "") : null;
   return (
     <div className="">
       <div
@@ -51,6 +58,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   IconComponent={Elements}
                   label="Dashboard"
                 />
+
                 <IconLink
                   href="/admin/dashboard/analytics"
                   IconComponent={BarChartv}
@@ -70,7 +78,14 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   href="/admin/dashboard/usermanagement"
                   IconComponent={Users}
                   label="User Management"
+                  onClick={() => setIsOpenDropDown((prev) => !prev)}
+                  isOpenDropDown ={isOpenDropDown }
                 />
+                <div className={`${isOpenDropDown ? "block" : "hidden"}`}>
+                  <IconLink href="" IconComponent={Users} label="Business" />
+                  <IconLink href="" IconComponent={Users} label="Audience" />
+                </div>
+
                 <IconLink
                   href="/admin/dashboard/content"
                   IconComponent={NewsPaper}

@@ -16,6 +16,7 @@ interface SelectFieldProps {
   errorText?: string;
   name: string;
   icon?: React.ReactNode;
+  labelClassName?:string;
 }
 
 const SelectField: React.FC<SelectFieldProps> = ({
@@ -30,6 +31,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   icon,
   error = false,
   errorText = "",
+  labelClassName,
   name,
 }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -60,7 +62,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   return (
     <div className="relative w-full" ref={dropdownRef}>
       <div className="flex flex-col gap-1.5">
-        <label className="text-[#344054] text-sm lg:text-md">{label}</label>
+        <label className={`text-[#344054] text-sm lg:text-md ${labelClassName}`}>{label}</label>
         <div
           className={`flex justify-between items-center gap-2 rounded-lg px-3.5 py-2.5 border ${
             error ? "border-[#D42620]" : "border-grey-100"
@@ -89,7 +91,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
         </div>
       </div>
       {isOpen && (
-        <div className="absolute z-50 w-full border mt-1 max-h-80 overflow-y-auto p-1 rounded-lg border-[#F2F4F7] shadow-[0px_12px_16px_-4px_rgba(16,_24,_40,_0.08),_0px_4px_6px_-2px_rgba(16,_24,_40,_0.03)] bg-white">
+        <div className={`absolute ${className} z-50 w-full border mt-1 max-h-80 overflow-y-auto p-1 rounded-lg border-[#F2F4F7] shadow-[0px_12px_16px_-4px_rgba(16,_24,_40,_0.08),_0px_4px_6px_-2px_rgba(16,_24,_40,_0.03)] bg-white`}>
           {options.map((option) => (
             <div
               key={option.value}

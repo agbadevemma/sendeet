@@ -282,3 +282,62 @@ export const creditsData: CreditItem[] = [
   { price: "37500", credits: "500 credits" },
   { price: "77500", credits: "1000 credits" },
 ];
+export interface AudienceData {
+  id: number; // id field is now a number
+  name: string;
+  phoneNumber: string;
+  business: string;
+  lastEngagement: string;
+  subscription: 'Opted In' | 'Opted Out';
+}
+
+export const mockAudienceData: AudienceData[] = [
+  {
+    id: 1,
+    name: "Alice Johnson",
+    phoneNumber: "+2348012345678",
+    business: "TechSavvy Solutions",
+    lastEngagement: "02/10/24",
+    subscription: "Opted In",
+  },
+  {
+    id: 2,
+    name: "John Doe",
+    phoneNumber: "+2347012345678",
+    business: "Tech Solutions",
+    lastEngagement: "01/09/24",
+    subscription: "Opted Out",
+  },
+  {
+    id: 3,
+    name: "Jane Smith",
+    phoneNumber: "+2349012345678",
+    business: "Digital Media",
+    lastEngagement: "15/08/24",
+    subscription: "Opted In",
+  },
+  {
+    id: 4,
+    name: "Bob Brown",
+    phoneNumber: "+2347012345679",
+    business: "E-commerce",
+    lastEngagement: "03/11/24",
+    subscription: "Opted Out",
+  },
+  {
+    id: 5,
+    name: "Charlie Davis",
+    phoneNumber: "+2347023456789",
+    business: "Consulting",
+    lastEngagement: "10/07/24",
+    subscription: "Opted In",
+  },
+  {
+    id: 6,
+    name: "David Wilson",
+    phoneNumber: "+2347034567890",
+    business: "Freelance Design",
+    lastEngagement: "18/06/24",
+    subscription: "Opted Out",
+  },
+];
