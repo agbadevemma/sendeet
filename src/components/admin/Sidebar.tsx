@@ -33,7 +33,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
     <div className="">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`w-full bg-black/20 z-50 fixed  xl:static  transition-all duration-500  ${
+        className={`w-full bg-black/20 z-50 fixed  xl:static  transition-all duration-500 pb-4 ${
           isOpen ? "visible " : "invisible  xl:visible xl:opacity-100"
         } `}
       >
@@ -57,17 +57,20 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   href="/admin/dashboard"
                   IconComponent={Elements}
                   label="Dashboard"
+                  onClick={() => setIsOpenDropDown(false)}
                 />
 
                 <IconLink
                   href="/admin/dashboard/analytics"
                   IconComponent={BarChartv}
                   label="Analytics"
+                  onClick={() => setIsOpenDropDown(false)}
                 />
                 <IconLink
                   href="/admin/dashboard/campaigns"
                   IconComponent={BellBorder}
-                  label="Campaigns"
+                  label="Notifications"
+                  onClick={() => setIsOpenDropDown(false)}
                 />
               </div>
             </div>
@@ -75,26 +78,29 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
               <p className="text-grey-100 text-sm mb-3 pl-3 pr-4">MANAGEMENT</p>
               <div className="flex flex-col gap-1">
                 <IconLink
-                  href="/admin/dashboard/usermanagement"
+                  href="/admin/dashboard/usermanagement/business"
+                  route={false}
                   IconComponent={Users}
                   label="User Management"
                   onClick={() => setIsOpenDropDown((prev) => !prev)}
                   isOpenDropDown ={isOpenDropDown }
                 />
                 <div className={`${isOpenDropDown ? "block" : "hidden"}`}>
-                  <IconLink href="" IconComponent={Users} label="Business" />
-                  <IconLink href="" IconComponent={Users} label="Audience" />
+                  <IconLink href="/admin/dashboard/usermanagement/business" subroute={true} IconComponent={Users} label="Business" />
+                  <IconLink href="/admin/dashboard/usermanagement/audience" subroute={true} IconComponent={Users} label="Audience" />
                 </div>
 
                 <IconLink
                   href="/admin/dashboard/content"
                   IconComponent={NewsPaper}
                   label="Content"
+                  onClick={() => setIsOpenDropDown(false)}
                 />
                 <IconLink
                   href="/admin/dashboard/credits"
                   IconComponent={Money1}
                   label="Credits"
+                  onClick={() => setIsOpenDropDown(false)}
                 />
               </div>
             </div>
@@ -106,11 +112,13 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   href="/admin/dashboard/settings"
                   IconComponent={Settings}
                   label="Settings"
+                  onClick={() => setIsOpenDropDown(false)}
                 />
                 <IconLink
                   href="/admin/dashboard/help-center"
                   IconComponent={Messages}
                   label="Help Center"
+                  onClick={() => setIsOpenDropDown(false)}
                 />
               </div>
             </div>
