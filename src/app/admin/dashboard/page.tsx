@@ -44,8 +44,8 @@ const AdminDashboard = (props: Props) => {
             />
           </div>
         </div>
-        <div className="grid lg:grid-cols-2 xl:grid-cols-5 w-full gap-4 mt-12">
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-4 w-full gap-4 mt-12">
+          <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Users</span>
               <span className="text-[#344054] text-xl font-semibold">
@@ -62,7 +62,7 @@ const AdminDashboard = (props: Props) => {
               <UserGroup color="#667085" height={20} width={20}/>
             </div>
           </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+          <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Active Users</span>
               <span className="text-[#344054] text-xl font-semibold">1,751,369</span>
@@ -80,7 +80,7 @@ const AdminDashboard = (props: Props) => {
               <UserTick  height={20} width={20} color="#667085" />
             </div>
           </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+          <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Businesses</span>
               <span className="text-[#344054] text-xl font-semibold">342,891</span>
@@ -97,7 +97,7 @@ const AdminDashboard = (props: Props) => {
               <Building5 color="#667085" height={20} width={20} />
             </div>
           </div>{" "}
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+          <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Subscribers</span>
               <span className="text-[#344054] text-xl font-semibold">1,325,464</span>
@@ -114,7 +114,7 @@ const AdminDashboard = (props: Props) => {
               <UserAdd color="#667085" height={20} width={20} />
             </div>
           </div>{" "}
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+          {/* <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Opt outs</span>
               <span className="text-[#344054] text-xl font-semibold">235,987</span>
@@ -130,7 +130,7 @@ const AdminDashboard = (props: Props) => {
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
               <UserRemove color="#667085" height={20} width={20} />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="flex gap-8 flex-col w-full gap-x-4 mt-12">
           <div className=" p-4 lg:p-6  w-full border rounded-xl flex lg:flex-row flex-col gap-10 h-full">

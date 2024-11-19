@@ -47,10 +47,14 @@ const Credits = (props: Props) => {
 
     // Filter by credit used or unused
     if (filter.includes("Credit used")) {
-      filtered = filtered.filter((transaction) =>  typeof transaction.creditUsed== 'number');
+      filtered = filtered.filter(
+        (transaction) => typeof transaction.creditUsed == "number"
+      );
     }
     if (filter.includes("Credit unused")) {
-      filtered = filtered.filter((transaction) => typeof transaction.creditUsed=== 'string');
+      filtered = filtered.filter(
+        (transaction) =>  transaction.creditUsed === "-"
+      );
     }
 
     // Filter by date range

@@ -134,7 +134,7 @@ export const initialTransactions: Transaction[] = [
     date: "10/17/24",
     creditPurchased: "1000",
     description: "Purchased 1000 credits",
-    creditUsed: "200",
+    creditUsed: 200,
     status: "successful",
   },
   {
