@@ -33,12 +33,12 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
     <div className="">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`w-full bg-black/20 z-50 fixed  xl:static  transition-all duration-500 pb-4 ${
+        className={`w-full bg-black/20 z-50 fixed  xl:static  transition-all duration-500 ${
           isOpen ? "visible " : "invisible  xl:visible xl:opacity-100"
         } `}
       >
         <div
-          className={`h-screen overflow-y-auto sidebar  bg-[#101928] lg:flex flex-col w-[60%] md:w-[40%] lg:w-[250px] xl:w-[240px]  transition-all duration-500    ${
+          className={`h-screen overflow-y-auto sidebar  bg-[#101928] pb-4  lg:flex flex-col w-[60%] md:w-[40%] lg:w-[250px] xl:w-[240px]  transition-all duration-500    ${
             isOpen ? "-translate-x-0" : "-translate-x-full xl:translate-x-0"
           } `}
         >

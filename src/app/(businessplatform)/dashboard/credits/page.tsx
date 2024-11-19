@@ -15,35 +15,63 @@ import Image from "next/image";
 import Link from "next/link";
 import DateRangePicker from "@/components/DateRangePicker";
 import Receipt from "@/icons/receipt";
+import Multiply from "@/icons/multiply";
 
 type Props = {};
 
 const Credits = (props: Props) => {
   const [openViewIndex, setOpenViewIndex] = useState<number | null>(null);
-  const viewRef = useRef<HTMLDivElement>(null);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
-  const filterRef = useRef<HTMLDivElement>(null);
-
-
-
+  const [isCalenderOpen, setIsCalenderOpen] = useState<boolean>(false);
+  const [filter, setFilter] = useState<Array<string>>([]);
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    startDate: Date | null;
+    endDate: Date | null;
+  }>({ startDate: null, endDate: null });
 
   const [transactions, setTransactions] =
     useState<Transaction[]>(initialTransactions);
-  const [isCalenderOpen, setIsCalenderOpen] = useState<boolean>(false);
+  const [filteredTransactions, setFilteredTransactions] =
+    useState<Transaction[]>(initialTransactions);
   const [sortConfig, setSortConfig] = useState<{
     key: keyof Transaction;
     direction: "asc" | "desc";
   } | null>(null);
 
-  const handleSort = (key: keyof Transaction) => {
-    let direction: "asc" | "desc" = "asc";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "asc"
-    ) {
-      direction = "desc";
+  const viewRef = useRef<HTMLDivElement>(null);
+  const filterRef = useRef<HTMLDivElement>(null);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  const filterTransactions = () => {
+    let filtered = transactions;
+
+    // Filter by credit used or unused
+    // if (filter.includes("Credit used")) {
+    //   filtered = filtered.filter((transaction) => transaction.creditUsed== typeof Number);
+    // }
+    // if (filter.includes("Credit unused")) {
+    //   filtered = filtered.filter((transaction) => transaction.creditUsed=== typeof String);
+    // }
+
+    // Filter by date range
+    if (selectedDateRange.startDate && selectedDateRange.endDate) {
+      filtered = filtered.filter((transaction) => {
+        const transactionDate = new Date(transaction.date);
+        return (
+          transactionDate >= selectedDateRange.startDate! &&
+          transactionDate <= selectedDateRange.endDate!
+        );
+      });
     }
+
+    setFilteredTransactions(filtered);
+  };
+
+  const handleSort = (key: keyof Transaction) => {
+    const direction =
+      sortConfig?.key === key && sortConfig.direction === "asc"
+        ? "desc"
+        : "asc";
 
     const sortedTransactions = [...transactions].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
@@ -55,29 +83,49 @@ const Credits = (props: Props) => {
     setTransactions(sortedTransactions);
   };
 
-  const calendarRef = useRef<HTMLDivElement>(null);
+  const formatDate = (date: Date | undefined | null) => {
+    if (!date) {
+      return "No date available";
+    }
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }).format(date);
+  };
+
+  const handleDateRangeChange = (startDate: Date, endDate: Date) => {
+    setSelectedDateRange({ startDate, endDate });
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      calendarRef.current &&
+      !calendarRef.current.contains(event.target as Node)
+    ) {
+      setIsCalenderOpen(false);
+    }
+    if (viewRef.current && !viewRef.current.contains(event.target as Node)) {
+      setOpenViewIndex(null);
+    }
+    if (
+      filterRef.current &&
+      !filterRef.current.contains(event.target as Node)
+    ) {
+      setIsFilterOpen(false);
+    }
+  };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
-          setIsCalenderOpen(false); // Close calendar if click is outside
-        }
-        if (viewRef.current && !viewRef.current.contains(event.target as Node)) {
-          setOpenViewIndex(null); // Close dropdown if click is outside
-        }
-        if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
-          setIsFilterOpen(false); // Close filter if click is outside
-        }
-      };
-    };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
+  useEffect(() => {
+    filterTransactions(); // Apply filter changes
+  }, [filter, selectedDateRange]);
   return (
     <div>
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
@@ -134,22 +182,51 @@ const Credits = (props: Props) => {
             </p>
           </div>
           <div className="flex gap gap-x-[18px] ">
-            <div className="relative"  >
+            <div className="relative">
               <Button
                 size="sm"
                 text="Filters"
                 icon_style="leading-icon"
                 iconComponent={<FilterAlt color="#383E49" />}
-                onClick={() => setIsFilterOpen((prev) => !prev)}
+                onClick={() => {
+                  if (filter.length < 2) {
+                    setIsFilterOpen(true);
+                  } else {
+                    setIsFilterOpen(false);
+                  }
+                }}
               />
               {isFilterOpen && (
-                <div ref={filterRef} className="absolute mt-2 w-full bg-white gap-y-2 rounded-lg p-4 px-2 items-center shadow-sm z-30 flex flex-col">
-                  <div className="rounded-sm py-1 cursor-pointer  hover:bg-[#F9FAFB] w-full text-xs whitespace-nowrap ">
-                    Credit used
-                  </div>
-                  <div className="rounded-sm py-1 cursor-pointer  hover:bg-[#F9FAFB] w-full text-xs whitespace-nowrap ">
-                    Credit unused
-                  </div>
+                <div
+                  ref={filterRef}
+                  className="absolute mt-2 w-fsull bg-white gap-y-2 rounded-lg p-4 px-2  items-center shadow-sm z-30 flex flex-col"
+                >
+                  {!filter.includes("Credit used") && (
+                    <div
+                      onClick={() => {
+                        setFilter((prev) => {
+                          return [...prev, "Credit used"];
+                        });
+                        setIsFilterOpen(false);
+                      }}
+                      className="rounded-sm py-1 cursor-pointer  hover:bg-[#F9FAFB] w-full text-sm whitespace-nowrap "
+                    >
+                      Credit used
+                    </div>
+                  )}
+                  {!filter.includes("Credit unsed") && (
+                    <div
+                      onClick={() => {
+                        setFilter((prev) => {
+                          return [...prev, "Credit unsed"];
+                        });
+                        setIsFilterOpen(false);
+                      }}
+                      className="rounded-sm py-1 cursor-pointer  hover:bg-[#F9FAFB] w-full text-sm whitespace-nowrap "
+                    >
+                      Credit unused
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -158,18 +235,67 @@ const Credits = (props: Props) => {
                 size="sm"
                 iconComponent={<Calendar color="#383E49" />}
                 icon_style="leading-icon"
-                text="Select dates"
-                onClick={() => setIsCalenderOpen(true)}
+                className={
+                  selectedDateRange.startDate === null
+                    ? ""
+                    : "!font-[480] !text-sm !text-grey-800"
+                }
+                onClick={() => {
+                  if (selectedDateRange.startDate === null) {
+                    setIsCalenderOpen((prev) => !prev);
+                  } else {
+                    setSelectedDateRange({ startDate: null, endDate: null });
+                    setIsCalenderOpen((prev) => !prev);
+                  }
+                }}
+                text={
+                  selectedDateRange.startDate === null
+                    ? "Select dates"
+                    : `${formatDate(
+                        selectedDateRange.startDate
+                      )} - ${formatDate(selectedDateRange.endDate)}`
+                }
               />
+
               {isCalenderOpen && (
-                <div className="absolute z-30 w-full flex items-center justify-center lg:block lg:w-fit   left-1 lg:-left-64 lg:right-10  mt-4">
-                  <DateRangePicker />
+                <div className="absolute z-30 w-full flex items-center justify-center lg:block lg:w-fit   left-1 lg:-left-[32rem] lg:right-32  mt-2">
+                  <DateRangePicker
+                    handleDateRangeChange={handleDateRangeChange}
+                    setFilteredTransactions={setFilteredTransactions}
+                    setIsCalenderOpen={setIsCalenderOpen}
+                  />
                 </div>
               )}
             </div>
           </div>
         </div>
-
+        {filter.length !== 0 && (
+          <div className="px-6 flex items-center gap-2">
+            {" "}
+            {filter.map((item, index) => (
+              <div
+                key={index}
+                className=" flex items-center rounded-full px-3 py-1 border w-fit gap-2"
+              >
+                <span className="text-grey-500 text-sm"> {item}</span>{" "}
+                <span
+                  onClick={() =>
+                    setFilter((prev) => prev.filter((_, ind) => ind !== index))
+                  }
+                >
+                  <Multiply color="#667085" height={11} width={11} />
+                </span>
+              </div>
+            ))}
+            <span className="text-grey-50 tex">|</span>
+            <span
+              onClick={() => setFilter([])}
+              className="text-grey-500 text-sm cursor-pointer"
+            >
+              Reset
+            </span>
+          </div>
+        )}
         <div className="flex flex-col w-full mx-auto px-6 overflow-auto mt-[18px]  max-h-[814px] ">
           <table className="w-full">
             <thead className="text-grey-600 rounded sticky top-0 z-10">
@@ -267,7 +393,7 @@ const Credits = (props: Props) => {
 
             {transactions.length !== 0 && (
               <tbody>
-                {transactions.map((transaction, index) => (
+                {filteredTransactions.map((transaction, index) => (
                   <tr
                     key={transaction.code}
                     className="border-b border-b-grey-50 hover:bg-gray-50"

@@ -3,9 +3,13 @@ import AdminBarChart from "@/components/admin/AdminBarChart";
 import AnalyticsModal from "@/components/AnalyticsModal";
 import Button from "@/components/buttons/Button";
 import CampaignPerformanceChart from "@/components/CampaignPerformanceChart";
+import Checkbox from "@/components/Checkbox";
+import Heatmap from "@/components/HeatMap";
+import SearchInput from "@/components/SearchInput";
 import ArrowUp from "@/icons/arrow-up";
 import BarChartv from "@/icons/bar-chart-v";
 import Calendar from "@/icons/calendar";
+import DotV from "@/icons/dot-v";
 import Elements from "@/icons/elements";
 import Engagement from "@/icons/engagement";
 import Eye from "@/icons/eye";
@@ -13,17 +17,126 @@ import FileDownload from "@/icons/file-download";
 import Money1 from "@/icons/money-1";
 import Multiply from "@/icons/multiply";
 import PencilEdit from "@/icons/pencil-edit";
+import SearchIcon from "@/icons/search-icon";
+import SendAlt from "@/icons/send-alt";
 import TickDouble from "@/icons/tick-double";
 import UserTick from "@/icons/user-tick";
-import React, { useState } from "react";
+import { CampaignInterface, initialCampaign } from "@/utils/data";
+import React, { useMemo, useState } from "react";
 
 type Props = {};
 
 const Analytics = (props: Props) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+
+  const [campaigns, setCampaigns] =
+  useState<CampaignInterface[]>(initialCampaign);
+const [searchQuery, setSearchQuery] = useState<string>("");
+const [sortConfig, setSortConfig] = useState<{
+  key: keyof CampaignInterface;
+  direction: "asc" | "desc";
+} | null>(null);
+
+const handleSort = (key: keyof CampaignInterface) => {
+  let direction: "asc" | "desc" = "asc";
+  if (
+    sortConfig &&
+    sortConfig.key === key &&
+    sortConfig.direction === "asc"
+  ) {
+    direction = "desc";
+  }
+
+  const sortedCampaigns = [...campaigns].sort((a, b) => {
+    if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
+    if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  setSortConfig({ key, direction });
+  setCampaigns(sortedCampaigns);
+};
+
+interface TabItem {
+  id: number;
+  title: string;
+  value: number;
+  isActive: boolean;
+}
+const activeCount = useMemo(
+  () => campaigns.filter((campaign) => campaign.status === "Active").length,
+  [campaigns]
+);
+const completedCount = useMemo(
+  () =>
+    campaigns.filter((campaign) => campaign.status === "Completed").length,
+  [campaigns]
+);
+const draftCount = useMemo(
+  () => campaigns.filter((campaign) => campaign.status === "Draft").length,
+  [campaigns]
+);
+
+  const [tabs, setTabs] = useState<Array<TabItem>>([
+    { id: 1, title: "All", value: campaigns.length, isActive: true },
+    { id: 2, title: "Active", value: activeCount, isActive: false },
+    { id: 3, title: "Completed", value: completedCount, isActive: false },
+    { id: 4, title: "Draft", value: draftCount, isActive: false },
+  ]);
+  // Function to handle tab switching
+  const handleTabClick = (selectedId: number) => {
+    setTabs(
+      tabs.map((tab) => ({
+        ...tab,
+        isActive: tab.id == selectedId,
+      }))
+    );
+  };
+
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
+  // Function to handle "select all" checkbox
+  const handleSelectAll = () => {
+    if (selectedItems.length < campaigns.length) {
+      // Select all campaigns
+      setSelectedItems(campaigns.map((_, index) => index));
+    } else {
+      // Deselect all
+      setSelectedItems([]);
+    }
+  };
+  const getFilteredCampaigns = () => {
+    const activeTab = tabs.find((tab) => tab.isActive)?.title;
+    return campaigns.filter((campaign) => {
+      const matchesSearch = campaign.campaign
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      const matchesTab = activeTab === "All" || campaign.status === activeTab;
+      return matchesSearch && matchesTab;
+    });
+  };
+  // Function to handle individual checkbox selection
+  const handleSelectItem = (index: number) => {
+    setSelectedItems((prev) => {
+      if (prev.includes(index)) {
+        // Remove if already selected
+        return prev.filter((i) => i !== index);
+      } else {
+        // Add if not selected
+        return [...prev, index];
+      }
+    });
+  };
+
+  // Calculate header checkbox state
+  const isAllSelected =
+    campaigns.length > 0 && selectedItems.length === campaigns.length;
+  const isIndeterminate =
+    selectedItems.length > 0 && selectedItems.length < campaigns.length;
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      {isOpen && <AnalyticsModal setIsOpen={setIsOpen} />}
+      {isOpenModal && <AnalyticsModal setIsOpen={setIsOpenModal} />}
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
         <div className="flex items-center gap-4">
           <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
@@ -56,7 +169,7 @@ const Analytics = (props: Props) => {
       <div className="w-full mt-4 py-8 px-6 flex flex-col gap-[10px] border borde-[#E4E7EC] rounded-lg">
         <div className="flex gap-4 items-center">
           <p className="text-[16px]  font-medium">Engagement Performance</p>
-          <button onClick={() => setIsOpen((prev) => !prev)}>
+          <button onClick={() => setIsOpenModal((prev) => !prev)}>
             <PencilEdit color="#00AAF7" height={24} width={24} />
           </button>
         </div>
@@ -197,6 +310,206 @@ const Analytics = (props: Props) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-full flex lg:flex-row flex-col gap-4 mt-10">
+        <div className="w-full rounded-lg border border-grey-200 p-4">
+          <Heatmap />
+        </div>
+      </div>
+      <div className="w-full mt-20 bg-white">
+      <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
+          <div className="text-lg font-medium">
+          Top Performing Campaigns
+          </div>
+
+          <div className="shadow-xs flex items-center">
+            <SearchInput
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              icon={<SearchIcon color="#667085" />}
+            />
+          </div>
+        </div>
+      <table className="w-full">
+            <thead className="text-grey-600 rounded sticky top-0 z-10">
+              <tr className="bg-[#F9FAFB]">
+                <th className="pl-6 pr-2 py-2 rounded-s-lg">
+                  <div className="flex items-center text-nowrap gap-2 text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                    <Checkbox
+                      checked={isAllSelected}
+                      indeterminate={isIndeterminate}
+                      onClick={handleSelectAll}
+                    />
+                    <span> Campaign Name</span>
+                    <div
+                      onClick={() => handleSort("campaign")}
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "campaign" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2">
+                  <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                    Date
+                    <div
+                      onClick={() => handleSort("date")}
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "date" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2">
+                  <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                   Clicked
+                    <div
+                      onClick={() => handleSort("clicked")}
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "clicked" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2">
+                  <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                    opt In
+                    <div
+                      onClick={() => handleSort("open")}
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "open" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2" onClick={() => handleSort("clicked")}>
+                  <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                    Opt Out
+                    <div
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "clicked" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2 rounded-e-lg">
+                  <div className="flex items-center text-nowrap  text-[#5D6679] text-sm font-medium">
+                    Status
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            {campaigns.length != 0 && (
+              <tbody>
+                {getFilteredCampaigns().map((campaign, index) => (
+                  <tr
+                    key={index}
+                    className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
+                  >
+                    <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
+                      <Checkbox
+                        checked={selectedItems.includes(index)}
+                        onClick={() => handleSelectItem(index)}
+                      />{" "}
+                      <div
+                        className={`h-5 w-5 p-4 flex items-center justify-center shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] border ${
+                          campaign.status === "Draft" &&
+                          "bg-grey-50 border-[#475467]"
+                        }  ${
+                          campaign.status === "Active" &&
+                          "border-warning-500 bg-warning-50"
+                        }
+                         ${
+                           campaign.status === "Completed" &&
+                           "bg-success-50 border-success-500 "
+                         } rounded-lg`}
+                      >
+                        <SendAlt
+                          color={
+                            campaign.status === "Active"
+                              ? "#DD9316"
+                              : campaign.status === "Completed"
+                              ? "#0F973D"
+                              : "#667085"
+                          }
+                        />
+                      </div>
+                      {campaign.campaign}
+                    </td>
+                    <td className="text-sm font-medium text-grey-800 p-2 pr-8">
+                      {campaign.date}
+                    </td>
+                    <td className="text-sm font-medium text-grey-800 p-2">
+                      {campaign.clicked}
+                    </td>
+                    <td className="text-sm font-medium text-grey-800 p-2">
+                      {campaign.delivered}
+                    </td>
+                    <td className="text-sm font-medium text-grey-800 p-2">
+                      {campaign.open}
+                    </td>
+                  
+                    <td className="text-sm font-medium text-grey-800 p-2">
+                      <div className="flex gap-x-6 justify-start">
+                        <div className="w-[100px]">
+                          {" "}
+                          <p
+                            className={`flex items-center min-h-[24px] w-fit   justify-center text-sm font-medium py-[2px] pl-[8px] pr-[10px]   gap-[6px] rounded-2xl ${
+                              campaign.status === "Draft"
+                                ? "bg-[#F2F4F7] text-[#344054] "
+                                : campaign.status === "Active"
+                                ? "text-warning-500 bg-warning-50"
+                                : "bg-success-50 text-success-500 "
+                            }`}
+                          >
+                            <div
+                              className={`h-[6px] w-[6px] rounded-full ${
+                                campaign.status === "Draft"
+                                  ? "bg-[#667085] "
+                                  : campaign.status === "Active"
+                                  ? "bg-warning-500 "
+                                  : "bg-success-500"
+                              }`}
+                            ></div>{" "}
+                            <span> {campaign.status}</span>
+                          </p>
+                        </div>
+                        <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
+                          <DotV color="#101928" />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
+          </table>
       </div>
     </div>
   );

@@ -17,7 +17,8 @@ type Props = {
   errorText?: string;
   icon?: React.ReactNode;
   className?: string;
-  size?:"sm"|"lg"
+  inputclassName?: string;
+  size?: "sm" | "lg";
 };
 
 const InputField = ({
@@ -34,14 +35,20 @@ const InputField = ({
   error = false,
   errorText,
   icon,
-  size="lg",
+  size = "lg",
   className,
+  inputclassName,
 }: Props) => {
   return (
-    <div className={`${className}`}>
+    <div className={``}>
       {" "}
       <div className={`flex flex-col gap-1 group `}>
-        <label htmlFor="" className={`text-sm lg:text-md ${size==="sm"?"font-medium":"font-normal"}`}>
+        <label
+          htmlFor=""
+          className={`text-sm lg:text-md ${
+            size === "sm" ? "font-medium" : "font-normal"
+          }`}
+        >
           {label}
         </label>
         <div
@@ -49,13 +56,15 @@ const InputField = ({
             error
               ? "border-error-500 "
               : "border-grey-100 group-focus-within:border-primary-100 "
-          } rounded-lg gap-3 items-center justify-between border border-solid   ${size==="lg"?"p-4":"px-[14px] py-[10px]"}`}
+          } rounded-lg gap-3 items-center justify-between border border-solid ${className}  ${
+            size === "lg" ? "p-4" : "px-[14px] py-[10px]"
+          }`}
         >
           <input
             type={inputType}
             id={id}
             name={name}
-            className="w-full focus:outline-none text-sm lg:text-md bg-transparent"
+            className={`w-full focus:outline-none text-sm lg:text-md bg-transparent ${inputclassName}`}
             placeholder={placeholder}
             value={value}
             onChange={onChange}
@@ -64,10 +73,12 @@ const InputField = ({
           {iconSrc && (
             <Image src={iconSrc} alt={`${label} icon`} width={20} height={20} />
           )}
-          <div onClick={onClick} className={`${onClick && "cursor-pointer"}`}>
-            {" "}
-            {icon && icon}
-          </div>
+          {icon && (
+            <div onClick={onClick} className={`${onClick && "cursor-pointer"}`}>
+              {" "}
+              {icon}
+            </div>
+          )}
         </div>
       </div>
       {error && <p className="text-xs text-error-500">{errorText}</p>}

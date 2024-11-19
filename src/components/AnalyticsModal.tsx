@@ -56,7 +56,7 @@ const AnalyticsModal = ({ setIsOpen }: Props) => {
                 <PencilEdit color="#383E49" height={24} width={24} />
               </div>
               <div className="flex flex-col">
-                <p className="lg:text-2xl font-semibold">
+                <p className="lg:text-xl font-semibold">
                   Customize your metrics
                 </p>
                 <p className="text-grey-600 text-md">

@@ -60,7 +60,7 @@ export interface Transaction {
   date: string;
   creditPurchased: string;
   description: string;
-  creditUsed: string;
+  creditUsed: string|number;
   status: "successful" | "Pending" | "Failed";
 }
 
@@ -94,7 +94,7 @@ export const initialTransactions: Transaction[] = [
     date: "10/12/24",
     creditPurchased: "200",
     description: "Purchased 200 credits",
-    creditUsed: "50",
+    creditUsed: 50,
     status: "Failed",
   },
   {
@@ -110,7 +110,7 @@ export const initialTransactions: Transaction[] = [
     date: "10/14/24",
     creditPurchased: "750",
     description: "Purchased 750 credits",
-    creditUsed: "100",
+    creditUsed: 100,
     status: "successful",
   },
   {
@@ -126,7 +126,7 @@ export const initialTransactions: Transaction[] = [
     date: "10/16/24",
     creditPurchased: "250",
     description: "Purchased 250 credits",
-    creditUsed: "50",
+    creditUsed: 50,
     status: "Failed",
   },
   {
@@ -158,7 +158,7 @@ export const initialTransactions: Transaction[] = [
     date: "10/20/24",
     creditPurchased: "1200",
     description: "Purchased 1200 credits",
-    creditUsed: "300",
+    creditUsed: 300,
     status: "Failed",
   },
 ];
