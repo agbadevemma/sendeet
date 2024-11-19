@@ -46,12 +46,12 @@ const Credits = (props: Props) => {
     let filtered = transactions;
 
     // Filter by credit used or unused
-    // if (filter.includes("Credit used")) {
-    //   filtered = filtered.filter((transaction) => transaction.creditUsed== typeof Number);
-    // }
-    // if (filter.includes("Credit unused")) {
-    //   filtered = filtered.filter((transaction) => transaction.creditUsed=== typeof String);
-    // }
+    if (filter.includes("Credit used")) {
+      filtered = filtered.filter((transaction) =>  typeof transaction.creditUsed== 'number');
+    }
+    if (filter.includes("Credit unused")) {
+      filtered = filtered.filter((transaction) => typeof transaction.creditUsed=== 'string');
+    }
 
     // Filter by date range
     if (selectedDateRange.startDate && selectedDateRange.endDate) {
