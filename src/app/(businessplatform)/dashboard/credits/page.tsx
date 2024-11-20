@@ -53,7 +53,7 @@ const Credits = (props: Props) => {
     }
     if (filter.includes("Credit unused")) {
       filtered = filtered.filter(
-        (transaction) =>  transaction.creditUsed === "-"
+        (transaction) => transaction.creditUsed === "-"
       );
     }
 
