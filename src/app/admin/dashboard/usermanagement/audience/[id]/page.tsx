@@ -16,6 +16,7 @@ import UserGroup from "@/icons/user-group";
 import ArrowUp from "@/icons/arrow-up";
 import UserTick from "@/icons/user-tick";
 import Card from "@/components/Card";
+import Link from "next/link";
 
 interface Option {
   value: string;
@@ -72,11 +73,14 @@ const AudienceId = ({ params }: { params: { id: string } }) => {
         {/* Profile Info */}
         <div className="w-full lg:w-[40%] border border-[#E4E7EC] rounded-xl p-4">
           <div className="flex items-center gap-3">
-            <Button
-              iconComponent={<ChevronLeft color="black" />}
-              className="!p-2"
-              icon_style="icon-only"
-            />
+            <Link href={"/admin/dashboard/usermanagement/audience"}>
+              {" "}
+              <Button
+                iconComponent={<ChevronLeft color="black" />}
+                className="!p-2"
+                icon_style="icon-only"
+              />
+            </Link>
             <p className="text-[18px] font-bold text-[#101928]">Eve Thompson</p>
             <div
               className={`p-1 px-2 rounded-2xl text-sm font-medium ${
