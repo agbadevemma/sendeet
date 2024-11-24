@@ -19,6 +19,7 @@ type Props = {
   className?: string;
   inputclassName?: string;
   size?: "sm" | "lg";
+  disabled?: boolean;
 };
 
 const InputField = ({
@@ -38,6 +39,7 @@ const InputField = ({
   size = "lg",
   className,
   inputclassName,
+  disabled = false,
 }: Props) => {
   return (
     <div className={``}>
@@ -66,6 +68,7 @@ const InputField = ({
             name={name}
             className={`w-full focus:outline-none text-sm lg:text-md bg-transparent ${inputclassName}`}
             placeholder={placeholder}
+            disabled={disabled}
             value={value}
             onChange={onChange}
             onBlur={onBlur}
