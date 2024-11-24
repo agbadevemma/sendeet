@@ -78,16 +78,30 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
               <p className="text-grey-100 text-sm mb-3 pl-3 pr-4">MANAGEMENT</p>
               <div className="flex flex-col gap-1">
                 <IconLink
-                  href="/admin/dashboard/usermanagement/business"
+                  href={
+                    pathName === "/admin/dashboard/usermanagement/business"||"/admin/dashboard/usermanagement/audience"
+                      ? ""
+                      : "/admin/dashboard/usermanagement/business"
+                  }
                   route={false}
                   IconComponent={Users}
                   label="User Management"
                   onClick={() => setIsOpenDropDown((prev) => !prev)}
-                  isOpenDropDown ={isOpenDropDown }
+                  isOpenDropDown={isOpenDropDown}
                 />
                 <div className={`${isOpenDropDown ? "block" : "hidden"}`}>
-                  <IconLink href="/admin/dashboard/usermanagement/business" subroute={true} IconComponent={Users} label="Business" />
-                  <IconLink href="/admin/dashboard/usermanagement/audience" subroute={true} IconComponent={Users} label="Audience" />
+                  <IconLink
+                    href="/admin/dashboard/usermanagement/business"
+                    subroute={true}
+                    IconComponent={Users}
+                    label="Business"
+                  />
+                  <IconLink
+                    href="/admin/dashboard/usermanagement/audience"
+                    subroute={true}
+                    IconComponent={Users}
+                    label="Audience"
+                  />
                 </div>
 
                 <IconLink
