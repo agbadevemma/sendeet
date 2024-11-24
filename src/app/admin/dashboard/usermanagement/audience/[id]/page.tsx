@@ -13,6 +13,9 @@ import CalendarAlt from "@/icons/calender-alt";
 import Call from "@/icons/call";
 import SendAlt from "@/icons/send-alt";
 import UserGroup from "@/icons/user-group";
+import ArrowUp from "@/icons/arrow-up";
+import UserTick from "@/icons/user-tick";
+import Card from "@/components/Card";
 
 interface Option {
   value: string;
@@ -102,7 +105,9 @@ const AudienceId = ({ params }: { params: { id: string } }) => {
               </label>
               <div className="max-w-[281px] mt-[11px] px-6 py-4 bg-[#F9FAFB] flex items-center rounded-md">
                 <Call color="#667085" />
-                <span className="text-[#667085] text-sm">+234 8143 21 9109</span>
+                <span className="text-[#667085] text-sm">
+                  +234 8143 21 9109
+                </span>
               </div>
             </div>
             <div className="mt-10">
@@ -150,7 +155,9 @@ const AudienceId = ({ params }: { params: { id: string } }) => {
                           : "bg-success-50 border-success-500"
                       }`}
                     >
-                      <SendAlt color={status === "Active" ? "black" : "#0F973D"} />
+                      <SendAlt
+                        color={status === "Active" ? "black" : "#0F973D"}
+                      />
                     </div>
                     {index < activities.length - 1 && (
                       <div className="h-24 w-px bg-grey-50"></div>
@@ -183,6 +190,35 @@ const AudienceId = ({ params }: { params: { id: string } }) => {
             ) : (
               <div className="grid lg:grid-cols-2 gap-4 pb-10">
                 {/* Insight Cards */}
+                <Card
+                  title="Messages Received"
+                  value="23"
+                  percentage="5%"
+                  mainIcon={<SendAlt height={20} width={20} color="#667085" />}
+                />
+
+                <Card
+                  title="Open Rate"
+                  value="88.9%"
+                  percentage="5%"
+                  mainIcon={<SendAlt height={20} width={20} color="#667085" />}
+                />
+
+                <Card
+                  title="Response Rate"
+                  value="89.88%"
+                  percentage="5%"
+                  oppositeFlow={true}
+                  mainIcon={<SendAlt height={20} width={20} color="#667085" />}
+                />
+
+                <Card
+                  title="Click Rate"
+                  value="16.4%"
+                  percentage="5%"
+                  oppositeFlow={true}
+                  mainIcon={<SendAlt height={20} width={20} color="#667085" />}
+                />
               </div>
             )}
           </div>
