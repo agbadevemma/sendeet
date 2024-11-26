@@ -62,7 +62,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   return (
     <div className="relative w-full" ref={dropdownRef}>
       <div className="flex flex-col gap-1.5">
-        <label className={`text-[#344054] text-sm lg:text-md ${labelClassName}`}>{label}</label>
+        <label className={`text-[#344054] text-sm lg:text-md  whitespace-nowrap ${labelClassName}`}>{label}</label>
         <div
           className={`flex justify-between items-center gap-2 rounded-lg px-3.5 py-2.5 border ${
             error ? "border-[#D42620]" : "border-grey-100"
@@ -74,7 +74,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
           onClick={onToggle}
         >
           <div
-            className={`text-md w-full flex gap-2  items-center ${
+            className={`text-md w-full flex gap-2  items-center whitespace-nowrap ${
               selectedOption ? "text-[#344054]" : "text-[#B9BDC7]"
             }`}
           >

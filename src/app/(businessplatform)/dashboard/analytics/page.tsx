@@ -4,7 +4,8 @@ import AnalyticsModal from "@/components/AnalyticsModal";
 import Button from "@/components/buttons/Button";
 import CampaignPerformanceChart from "@/components/CampaignPerformanceChart";
 import Checkbox from "@/components/Checkbox";
-import Heatmap from "@/components/HeatMap";
+import DonutChart from "@/components/Donut";
+import HeatmapChart from "@/components/HeatmapChart";
 import SearchInput from "@/components/SearchInput";
 import ArrowUp from "@/icons/arrow-up";
 import BarChartv from "@/icons/bar-chart-v";
@@ -313,7 +314,9 @@ const draftCount = useMemo(
       </div>
       <div className="w-full flex lg:flex-row flex-col gap-4 mt-10">
         <div className="w-full rounded-lg border border-grey-200 p-4">
-          <Heatmap />
+          {/* <EngagementDashboard /> */}
+          <HeatmapChart />
+          <DonutChart  />
         </div>
       </div>
       <div className="w-full mt-20 bg-white">

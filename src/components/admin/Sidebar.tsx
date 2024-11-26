@@ -79,9 +79,9 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
               <div className="flex flex-col gap-1">
                 <IconLink
                   href={
-                    pathName === "/admin/dashboard/usermanagement/business"||"/admin/dashboard/usermanagement/audience"
+                    pathName === "/admin/dashboard/usermanagement/organization"||"/admin/dashboard/usermanagement/audience"
                       ? ""
-                      : "/admin/dashboard/usermanagement/business"
+                      : "/admin/dashboard/usermanagement/organization"
                   }
                   route={false}
                   IconComponent={Users}
@@ -91,10 +91,10 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                 />
                 <div className={`${isOpenDropDown ? "block" : "hidden"}`}>
                   <IconLink
-                    href="/admin/dashboard/usermanagement/business"
+                    href="/admin/dashboard/usermanagement/organization"
                     subroute={true}
                     IconComponent={Users}
-                    label="Business"
+                    label="Organization"
                   />
                   <IconLink
                     href="/admin/dashboard/usermanagement/audience"

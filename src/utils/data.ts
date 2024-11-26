@@ -341,3 +341,100 @@ export const mockAudienceData: AudienceData[] = [
     subscription: "Opted Out",
   },
 ];
+
+
+
+// Define types for the organization
+type Organization = {
+  id:string;
+  organizationName: string;
+  emailAddress: string;
+  registrationDate: string;
+  industry: string;
+  whatsappAPIStatus: "Connected" | "Pending";
+};
+
+
+// Single array with mixed statuses
+export const organizations: Organization[] = [
+  {
+    id: "1",
+    organizationName: "Tech Innovators Inc.",
+    emailAddress: "contact@techinnovators.com",
+    registrationDate: "01/15/24",
+    industry: "Technology",
+    whatsappAPIStatus: "Connected",
+  },
+  {
+    id: "2",
+    organizationName: "Smart Health Systems",
+    emailAddress: "admin@smarthealth.com",
+    registrationDate: "12/10/23",
+    industry: "Healthcare",
+    whatsappAPIStatus: "Connected",
+  },
+  {
+    id: "3",
+    organizationName: "NextGen EduTech",
+    emailAddress: "hello@nextgenedutech.com",
+    registrationDate: "02/08/24",
+    industry: "Education",
+    whatsappAPIStatus: "Connected",
+  },
+  {
+    id: "4",
+    organizationName: "Green Earth Solutions",
+    emailAddress: "info@greenearth.com",
+    registrationDate: "02/10/24",
+    industry: "Environmental Services",
+    whatsappAPIStatus: "Pending",
+  },
+  {
+    id: "5",
+    organizationName: "Global Retail Hub",
+    emailAddress: "support@globalretail.com",
+    registrationDate: "03/01/24",
+    industry: "Retail",
+    whatsappAPIStatus: "Pending",
+  },
+  {
+    id: "6",
+    organizationName: "Bright Minds Marketing",
+    emailAddress: "contact@brightminds.com",
+    registrationDate: "01/20/24",
+    industry: "Marketing",
+    whatsappAPIStatus: "Connected",
+  },
+  {
+    id: "7",
+    organizationName: "Apex Financial Group",
+    emailAddress: "info@apexfinancial.com",
+    registrationDate: "11/25/23",
+    industry: "Finance",
+    whatsappAPIStatus: "Pending",
+  },
+  {
+    id: "8",
+    organizationName: "Urban Developers Ltd.",
+    emailAddress: "sales@urbandevelopers.com",
+    registrationDate: "02/28/24",
+    industry: "Construction",
+    whatsappAPIStatus: "Connected",
+  },
+  {
+    id: "9",
+    organizationName: "EcoFarms Alliance",
+    emailAddress: "admin@ecofarms.com",
+    registrationDate: "12/05/23",
+    industry: "Agriculture",
+    whatsappAPIStatus: "Pending",
+  },
+  {
+    id: "10",
+    organizationName: "Peak Performance Training",
+    emailAddress: "training@peakperformance.com",
+    registrationDate: "03/10/24",
+    industry: "Professional Services",
+    whatsappAPIStatus: "Connected",
+  },
+];
