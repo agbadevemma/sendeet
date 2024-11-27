@@ -92,7 +92,7 @@ const Organization = (props: Props) => {
 
             <SearchInput
               placeholder="Search"
-              className="!h-[40px]"
+              className1="!h-[40px]"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               icon={<SearchIcon color="#667085" />}

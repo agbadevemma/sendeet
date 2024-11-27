@@ -269,6 +269,7 @@ const Campaign = (props: Props) => {
         <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12 border-t border-t-grey-50 h-[62px] items-end">
           {tabs.map((tab, index) => (
             <div
+              key={tab.id}
               onClick={() => handleTabClick(tab.id)}
               className={`flex  gap-[7px]  justify-center cursor-pointer items-center pb-4  ${
                 tab.isActive

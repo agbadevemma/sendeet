@@ -218,7 +218,7 @@ const Credits = (props: Props) => {
                       Credit used
                     </div>
                   )}
-                  {!filter.includes("Credit unsed") && (
+                  {/* {!filter.includes("Credit unsed") && (
                     <div
                       onClick={() => {
                         setFilter((prev) => {
@@ -230,7 +230,7 @@ const Credits = (props: Props) => {
                     >
                       Credit unused
                     </div>
-                  )}
+                  )} */}
                 </div>
               )}
             </div>
