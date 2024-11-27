@@ -103,7 +103,7 @@ const HeatmapChart: React.FC = () => {
             </React.Fragment>
           ))}
         </div>
-        <div className="mt-4 flex items-center w-full justify-between">
+        <div className="flex items-center w-full justify-between mt-8">
           {/* Render hours without AM/PM */}
           {hours.map((hour, idx) => {
             const hourWithoutAmPm = hour.replace(/AM|PM/gi, "").trim(); // Remove AM/PM
@@ -114,7 +114,7 @@ const HeatmapChart: React.FC = () => {
             );
           })}
         </div>
-        <div className="flex items-center mt-4">
+        <div className="flex items-center mt-6">
           <div className="w-full h-px bg-[#F0F1F3] mr-2"></div>
           <span className=" text-[#667085] text-xs">AM</span>
           <div className="w-full h-px bg-[#F0F1F3] mx-2"></div>{" "}

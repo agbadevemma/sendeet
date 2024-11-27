@@ -313,9 +313,9 @@ const Analytics = (props: Props) => {
         </div>
       </div>
       <div className="w-full flex lg:flex-row flex-col gap-4 mt-10">
-        <div className="w-full flex   lg:flex-row flex-col  rounded-lg border gap-10 border-grey-200 p-4 bgs-black">
+        <div className="w-full flex   lg:flex-row flex-col  rounded-lg  gap-4 p-4 bgs-black">
           {/* <EngagementDashboard /> */}
-          <div className="w-full border-[#EAECF0] bg-white border p-8 flex flex-col rounded-lg ">
+          <div className="w-full border-[#EAECF0] bg-white border p-8 py-4 flex flex-col rounded-lg ">
             <p className="text-lg mb-4 font-medium">Engagement by Time of Day</p>
             {" "}
             <HeatmapChart />
