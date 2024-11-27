@@ -340,7 +340,7 @@ const Analytics = (props: Props) => {
             />
           </div>
         </div>
-        <table className="w-full">
+        <table className="w-full b">
           <thead className="text-grey-600 rounded sticky top-0 z-10">
             <tr className="bg-[#F9FAFB]">
               <th className="pl-6 pr-2 py-2 rounded-s-lg">
