@@ -315,10 +315,11 @@ const Analytics = (props: Props) => {
       <div className="w-full flex lg:flex-row flex-col gap-4 mt-10">
         <div className="w-full flex   lg:flex-row flex-col  rounded-lg border gap-10 border-grey-200 p-4 bgs-black">
           {/* <EngagementDashboard /> */}
-          <div className="w-full border-[#EAECF0] bg-white border p-8 flex-col rounded-lg ">
+          <div className="w-full border-[#EAECF0] bg-white border p-8 flex flex-col rounded-lg ">
             <p className="text-lg mb-4 font-medium">Engagement by Time of Day</p>
             {" "}
             <HeatmapChart />
+            
           </div>
           <div className="w-full lg:w-[40%] px-4 py-2 border-[#EAECF0] bg-white items-center justify-center border flex flex-col rounded-lg ">
             <p className="text-lg mb-4 font-medium">Engagement by Time of Day</p>
