@@ -60,7 +60,7 @@ export interface Transaction {
   date: string;
   creditPurchased: string;
   description: string;
-  creditUsed: string|number;
+  creditUsed: string | number;
   status: "successful" | "Pending" | "Failed";
 }
 
@@ -268,7 +268,6 @@ export const documents: DocumentItem[] = [
   },
 ];
 
-
 type CreditItem = {
   price: string;
   credits: string;
@@ -288,7 +287,7 @@ export interface AudienceData {
   phoneNumber: string;
   business: string;
   lastEngagement: string;
-  subscription: 'Opted In' | 'Opted Out';
+  subscription: "Opted In" | "Opted Out";
 }
 
 export const mockAudienceData: AudienceData[] = [
@@ -342,18 +341,15 @@ export const mockAudienceData: AudienceData[] = [
   },
 ];
 
-
-
 // Define types for the organization
 type Organization = {
-  id:string;
+  id: string;
   organizationName: string;
   emailAddress: string;
   registrationDate: string;
   industry: string;
   whatsappAPIStatus: "Connected" | "Pending";
 };
-
 
 // Single array with mixed statuses
 export const organizations: Organization[] = [
@@ -438,3 +434,24 @@ export const organizations: Organization[] = [
     whatsappAPIStatus: "Connected",
   },
 ];
+
+interface ActivityData {
+  day: string; // Day of the week (e.g., "Mon")
+  hour: string; // Hour of the day (e.g., "12 AM")
+  count: number; // Activity count
+}
+
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const hours = Array.from({ length: 24 }, (_, idx) => {
+  const period = idx < 12 ? "AM" : "PM";
+  const hour = idx % 12 || 12; // Convert 0 to 12 for 12-hour format
+  return `${hour} ${period}`;
+});
+
+export const activityData: ActivityData[] = days.flatMap((day) =>
+  hours.map((hour) => ({
+    day,
+    hour,
+    count: Math.floor(Math.random() * 100), // Random count between 0 and 99
+  }))
+);
