@@ -33,12 +33,50 @@ import Calendar from "@/icons/calendar";
 import Multiply from "@/icons/multiply";
 import Receipt from "@/icons/receipt";
 import Plus from "@/icons/plus";
+import Money1 from "@/icons/money-1";
+import Bell from "@/icons/bell";
 
 type Props = {};
+type MenuItem = {
+  id: number;
+  label: string;
+  Icon: React.ComponentType<{ color: string; height: number; width: number }>;
+};
 
 const OrganizationId = (props: Props) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [status, setStatus] = useState<string>("Active");
+  const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const menuItems: MenuItem[] = [
+    {
+      id: 1,
+      label: "Top Up Credits",
+      Icon: (props) => <Money1 {...props} />,
+    },
+    {
+      id: 2,
+      label: "Send Notifications",
+      Icon: (props) => <Bell {...props} />,
+    },
+  ];
 
   interface TabItem {
     id: number;
@@ -111,19 +149,20 @@ const OrganizationId = (props: Props) => {
 
   const handleSort = (key: keyof Transaction) => {
     const direction =
-      sortConfig?.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
-  
+      sortConfig?.key === key && sortConfig.direction === "asc"
+        ? "desc"
+        : "asc";
+
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
     });
-  
+
     setSortConfig({ key, direction });
     setFilteredTransactions(sortedTransactions);
   };
 
-  
   const formatDate = (date: Date | undefined | null) => {
     if (!date) {
       return "No date available";
@@ -169,7 +208,7 @@ const OrganizationId = (props: Props) => {
   }, [filter, selectedDateRange]);
   return (
     <div>
-      <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
+      <div className="flex  flex-col lg:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
         <div className="flex items-center gap-4">
           <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <Building5 color="#383E49" width={24} height={24} />
@@ -188,22 +227,53 @@ const OrganizationId = (props: Props) => {
             </p>
           </div>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 mt-8 lg:mt-0">
           <Button
             size="sm"
             iconComponent={<FileDownload color="#383E49" />}
             icon_style="leading-icon"
             text="Export"
           />
-          <Button
-            className=""
-            iconComponent={
-              <ChevronDown color="#ffffff" height={20} width={20} />
-            }
-            type="primary"
-            text="Organization Actions"
-            icon_style="trailing icon"
-          />
+          <div className="relative" ref={dropdownRef}>
+            <Button
+              className=""
+              iconComponent={
+                <ChevronDown color="#ffffff" height={20} width={20} />
+              }
+              type="primary"
+              text="Organization Actions"
+              onClick={() => setIsOpen((prev) => !prev)}
+              icon_style="trailing icon"
+            />
+            <div
+              className={`w-[200px] ${
+                isOpen ? "block" : "hidden"
+              } -right-4 absolute mt-2 border rounded-[10px] px-[7px] py-[5px] bg-white`}
+            >
+              {menuItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  onClick={() => setIsOpen((prev) => !prev)}
+                  className={`flex items-center px-[10px] py-2 gap-2 cursor-pointer ${
+                    hoveredIndex === index
+                      ? "text-primary-600 bg-[#F9FAFB] rounded-lg"
+                      : "text-grey-800"
+                  }`}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <item.Icon
+                    color={hoveredIndex === index ? "#009BE1" : "#383E49"}
+                    height={16}
+                    width={16}
+                  />
+                  <span className="text-sm whitespace-nowrap">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <div className="w-full mt-8 rounded-[12px] p-4 border border-[#E4E7EC]">
@@ -222,12 +292,14 @@ const OrganizationId = (props: Props) => {
                 <p className="text-[20px] font-bold text-[#101928]">
                   BrightMinds Education
                 </p>
-                <div className="flex  gap-3"><p className="px-4 text-sm w-fit bg-[#E0F2FE] rounded-xl text-[#065986] font-medium">
-                  Education
-                </p>
-                <p className="px-4 text-sm w-fit bg-success-50 rounded-xl text-success-500 font-medium">
-                  Connected
-                </p></div>
+                <div className="flex  gap-3">
+                  <p className="px-4 text-sm w-fit bg-[#E0F2FE] rounded-xl text-[#065986] font-medium">
+                    Education
+                  </p>
+                  <p className="px-4 text-sm w-fit bg-success-50 rounded-xl text-success-500 font-medium">
+                    Connected
+                  </p>
+                </div>
               </div>
               <div className="   mt-3 flex items-center gap-6">
                 <div className="flex items-center gap-3">
