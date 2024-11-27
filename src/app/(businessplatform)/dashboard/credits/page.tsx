@@ -5,7 +5,7 @@ import Calendar from "@/icons/calendar";
 import DotV from "@/icons/dot-v";
 import FileDownload from "@/icons/file-download";
 import FilterAlt from "@/icons/filter-alt";
-import IconStack from "@/icons/icon-stack";
+import Coinstack from "@/icons/coinstack";
 import Money1 from "@/icons/money-1";
 import Plus from "@/icons/plus";
 import { initialTransactions, Transaction } from "@/utils/data";
@@ -73,18 +73,16 @@ const Credits = (props: Props) => {
 
   const handleSort = (key: keyof Transaction) => {
     const direction =
-      sortConfig?.key === key && sortConfig.direction === "asc"
-        ? "desc"
-        : "asc";
-
-    const sortedTransactions = [...transactions].sort((a, b) => {
+      sortConfig?.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
+  
+    const sortedTransactions = [...filteredTransactions].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
     });
-
+  
     setSortConfig({ key, direction });
-    setTransactions(sortedTransactions);
+    setFilteredTransactions(sortedTransactions);
   };
 
   const formatDate = (date: Date | undefined | null) => {
@@ -171,7 +169,7 @@ const Credits = (props: Props) => {
         </div>
 
         <div className="rounded-full p-[10px] border border-solid border-[#E4E7EC]">
-          <IconStack color="#667085" />
+          <Coinstack color="#667085" />
         </div>
       </div>
 

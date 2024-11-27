@@ -111,20 +111,19 @@ const OrganizationId = (props: Props) => {
 
   const handleSort = (key: keyof Transaction) => {
     const direction =
-      sortConfig?.key === key && sortConfig.direction === "asc"
-        ? "desc"
-        : "asc";
-
-    const sortedTransactions = [...transactions].sort((a, b) => {
+      sortConfig?.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
+  
+    const sortedTransactions = [...filteredTransactions].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
     });
-
+  
     setSortConfig({ key, direction });
-    setTransactions(sortedTransactions);
+    setFilteredTransactions(sortedTransactions);
   };
 
+  
   const formatDate = (date: Date | undefined | null) => {
     if (!date) {
       return "No date available";
@@ -218,17 +217,17 @@ const OrganizationId = (props: Props) => {
           </Link>
           <div className="w-full   ">
             <div className="flex  flex-col gap-2">
-              <div className="flex items-center gap-3">
+              <div className="flex  flex-col md:flex-row md:items-center gap-3">
                 {" "}
                 <p className="text-[20px] font-bold text-[#101928]">
                   BrightMinds Education
                 </p>
-                <p className="px-4 text-sm bg-[#E0F2FE] rounded-xl text-[#065986] font-medium">
+                <div className="flex  gap-3"><p className="px-4 text-sm w-fit bg-[#E0F2FE] rounded-xl text-[#065986] font-medium">
                   Education
                 </p>
-                <p className="px-4 text-sm bg-success-50 rounded-xl text-success-500 font-medium">
+                <p className="px-4 text-sm w-fit bg-success-50 rounded-xl text-success-500 font-medium">
                   Connected
-                </p>
+                </p></div>
               </div>
               <div className="   mt-3 flex items-center gap-6">
                 <div className="flex items-center gap-3">
@@ -241,7 +240,7 @@ const OrganizationId = (props: Props) => {
                 </div>
               </div>
             </div>
-            <div className="mt-10 flex items-center  gap-10 w-full">
+            <div className="mt-10 flex flex-col lg:flex-row  gap-10 w-full">
               <div className="flex items-start flex-col w-full max-w-[345px] ">
                 <span className="text-[13.8px] text-grey-800 font-medium ">
                   Contact Information

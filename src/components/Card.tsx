@@ -26,7 +26,7 @@ const Card = ({
   return (
     <div className="p-4 flex items-center justify-between w-full border gap-4 rounded-xl border-[#E4E7EC] border-solid">
       <div className="flex flex-col gap-2 w-full">
-        <span className={`text text-sm ${className1}`}>{title}</span>
+        <span className={`text-xs xl:text-sm ${className1} `}>{title}</span>
         <span className={`text-[#344054] text-xl font-semibold`}>{value}</span>
         {percentage && (
           <div
