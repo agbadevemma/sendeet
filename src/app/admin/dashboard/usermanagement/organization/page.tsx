@@ -25,8 +25,7 @@ type Props = {};
 
 const OrganizationPage = (props: Props) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filteredOrganizations, setFilteredOrganizations] =
-    useState<Organization[]>(organizations);
+
   const [organizationsData, setOrganizationsData] =
     useState<Organization[]>(organizations);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
@@ -70,15 +69,30 @@ const OrganizationPage = (props: Props) => {
     }
   };
 
-  const getFilteredCampaigns = () => {
+  const getFilteredOrganizations = () => {
+    const searchableFields: (keyof Organization)[] = [
+      "organizationName",
+      "emailAddress",
+      "industry",
+      "whatsappAPIStatus",
+    ];
+  
     return organizationsData.filter((organization) => {
-      const matchesSearch = organization.organizationName
-        .toLowerCase()
+      // Check if any of the specified fields match the search query
+      const matchesFields = searchableFields.some((field) =>
+        organization[field]?.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      );
+  
+      // Check if the registration date matches the search query
+      const matchesRegistrationDate = organization.registrationDate
+        ?.toLowerCase()
         .includes(searchQuery.toLowerCase());
-
-      return matchesSearch;
+  
+      // Return true if any condition matches
+      return matchesFields || matchesRegistrationDate;
     });
   };
+  
   // Function to handle individual checkbox selection
   const handleSelectItem = (index: number) => {
     setSelectedItems((prev) => {
@@ -252,7 +266,7 @@ const OrganizationPage = (props: Props) => {
 
           {organizations.length !== 0 && (
             <tbody>
-              {filteredOrganizations.map((org, index) => (
+              {getFilteredOrganizations().map((org, index) => (
                 <tr
                   key={org.id}
                   className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
