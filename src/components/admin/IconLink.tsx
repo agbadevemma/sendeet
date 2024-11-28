@@ -48,13 +48,12 @@ const IconLink = ({
         <span className="text-[13px] whitespace-nowrap">{label}</span>
       </div>
       {!route && (
-        <div className="">
-          {" "}
-          {isOpenDropDown ? (
-            <ChevronUp color="#F0F1F3" height={20} width={20} />
-          ) : (
-            <ChevronDown color="#F0F1F3" height={20} width={20} />
-          )}
+        <div
+          className={` transition-transform duration-500 ${
+            isOpenDropDown ? "transform rotate-180" : ""
+          } `}
+        >
+          <ChevronUp color="#F0F1F3" height={20} width={20} />  
         </div>
       )}
     </Link>

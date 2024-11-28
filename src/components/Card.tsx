@@ -11,6 +11,7 @@ type Props = {
   mainIcon: JSX.Element; // Icon displayed in the circle
   oppositeFlow?: boolean;
   className1?: string;
+  className?: string; // Additional class for the card container
 };
 
 const Card = ({
@@ -20,13 +21,13 @@ const Card = ({
   comparisonText = "vs last week",
   mainIcon,
   className1,
-
+  className,
   oppositeFlow = false,
 }: Props) => {
   return (
-    <div className="p-4 flex items-center justify-between w-full border gap-4 rounded-xl border-[#E4E7EC] border-solid">
+    <div className={`p-4 ${className} flex items-center justify-between w-full border gap-4 rounded-xl border-[#E4E7EC] border-solid`}>
       <div className="flex flex-col gap-2 w-full">
-        <span className={`text-sm ${className1} `}>{title}</span>
+        <span className={`text-sm ${className1} text-[#475367] `}>{title}</span>
         <span className={`text-[#344054] text-xl font-semibold`}>{value}</span>
         {percentage && (
           <div

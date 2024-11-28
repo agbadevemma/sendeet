@@ -16,7 +16,7 @@ import SendAlt from "@/icons/send-alt";
 import UserAdd from "@/icons/user-add";
 import UserGroup from "@/icons/user-group";
 import UserTick from "@/icons/user-tick";
-import { initialTransactions, organizations, Transaction } from "@/utils/data";
+import { initialTransactions, Transaction } from "@/utils/data";
 import Image from "next/image";
 import Link from "next/link";
 import illustration from "../../../../../../images/creditillustration.svg";
@@ -278,7 +278,7 @@ const OrganizationId = (props: Props) => {
       </div>
       <div className="w-full mt-8 rounded-[12px] p-4 border border-[#E4E7EC]">
         <div className="w-full flex max-w-[810px] gap-3">
-          <Link href={"/admin/dashboard/usermanagement/audience"}>
+          <Link href={"/admin/dashboard/usermanagement/organization"} replace={true}>
             <Button
               iconComponent={<ChevronLeft color="black" />}
               className="!p-2 !w-8 !h-8"

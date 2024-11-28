@@ -342,7 +342,7 @@ export const mockAudienceData: AudienceData[] = [
 ];
 
 // Define types for the organization
-type Organization = {
+export type Organization = {
   id: string;
   organizationName: string;
   emailAddress: string;

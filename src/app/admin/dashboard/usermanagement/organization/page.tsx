@@ -15,16 +15,82 @@ import SendAlt from "@/icons/send-alt";
 import UserAdd from "@/icons/user-add";
 import UserGroup from "@/icons/user-group";
 import UserTick from "@/icons/user-tick";
-import { organizations } from "@/utils/data";
+import { Organization, organizations } from "@/utils/data";
 import Image from "next/image";
 import Link from "next/link";
-import illustration from  "../../../../../images/illustration3.svg"
+import illustration from "../../../../../images/illustration3.svg";
 import React, { useState } from "react";
 
 type Props = {};
 
-const Organization = (props: Props) => {
+const OrganizationPage = (props: Props) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredOrganizations, setFilteredOrganizations] =
+    useState<Organization[]>(organizations);
+  const [organizationsData, setOrganizationsData] =
+    useState<Organization[]>(organizations);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const isAllSelected =
+    organizationsData.length > 0 &&
+    selectedItems.length === organizationsData.length;
+  const isIndeterminate =
+    selectedItems.length > 0 && selectedItems.length < organizationsData.length;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [sortConfig, setSortConfig] = useState<{
+    key: keyof Organization;
+    direction: "asc" | "desc";
+  } | null>(null);
+
+  const handleSort = (key: keyof Organization) => {
+    const direction =
+      sortConfig?.key === key && sortConfig.direction === "asc"
+        ? "desc"
+        : "asc";
+
+    const sortedOrganizations = [...organizationsData].sort((a, b) => {
+      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
+      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    setSortConfig({ key, direction });
+    setOrganizationsData(sortedOrganizations);
+  };
+
+  // Function to handle "select all" checkbox
+  const handleSelectAll = () => {
+    if (selectedItems.length < organizationsData.length) {
+      // Select all organizationsData
+      setSelectedItems(organizationsData.map((_, index) => index));
+    } else {
+      // Deselect all
+      setSelectedItems([]);
+    }
+  };
+
+  const getFilteredCampaigns = () => {
+    return organizationsData.filter((organization) => {
+      const matchesSearch = organization.organizationName
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+
+      return matchesSearch;
+    });
+  };
+  // Function to handle individual checkbox selection
+  const handleSelectItem = (index: number) => {
+    setSelectedItems((prev) => {
+      if (prev.includes(index)) {
+        // Remove if already selected
+        return prev.filter((i) => i !== index);
+      } else {
+        // Add if not selected
+        return [...prev, index];
+      }
+    });
+  };
   return (
     <div>
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
@@ -104,20 +170,20 @@ const Organization = (props: Props) => {
             <tr className="bg-[#F9FAFB]">
               <th className="pl-6 pr-2 py-2 rounded-s-lg">
                 <div className="flex items-center text-nowrap gap-2 text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                  {/* <Checkbox
-                        checked={isAllSelected}
-                        indeterminate={isIndeterminate}
-                        onClick={handleSelectAll}
-                      /> */}
+                  <Checkbox
+                    checked={isAllSelected}
+                    indeterminate={isIndeterminate}
+                    onClick={handleSelectAll}
+                  />
                   <span> Organization Name</span>
                   <div
-                  // onClick={() => handleSort("name")}
-                  // className={` transition-transform duration-300   ${
-                  //   sortConfig?.key === "name" &&
-                  //   sortConfig.direction === "asc"
-                  //     ? "transform rotate-180"
-                  //     : ""
-                  // }`}
+                    onClick={() => handleSort("organizationName")}
+                    className={` transition-transform duration-300   ${
+                      sortConfig?.key === "organizationName" &&
+                      sortConfig.direction === "asc"
+                        ? "transform rotate-180"
+                        : ""
+                    }`}
                   >
                     <ArrowUp color={"#5D6679"} />
                   </div>
@@ -127,13 +193,13 @@ const Organization = (props: Props) => {
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                   Email Address
                   <div
-                  // onClick={() => handleSort("phoneNumber")}
-                  // className={` transition-transform duration-300   ${
-                  //   sortConfig?.key === "phoneNumber" &&
-                  //   sortConfig.direction === "asc"
-                  //     ? "transform rotate-180"
-                  //     : ""
-                  // }`}
+                    onClick={() => handleSort("emailAddress")}
+                    className={` transition-transform duration-300   ${
+                      sortConfig?.key === "emailAddress" &&
+                      sortConfig.direction === "asc"
+                        ? "transform rotate-180"
+                        : ""
+                    }`}
                   >
                     <ArrowUp color={"#5D6679"} />
                   </div>
@@ -143,13 +209,13 @@ const Organization = (props: Props) => {
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                   Registration Date
                   <div
-                  // onClick={() => handleSort("business")}
-                  // className={` transition-transform duration-300   ${
-                  //   sortConfig?.key === "business" &&
-                  //   sortConfig.direction === "asc"
-                  //     ? "transform rotate-180"
-                  //     : ""
-                  // }`}
+                    onClick={() => handleSort("registrationDate")}
+                    className={` transition-transform duration-300   ${
+                      sortConfig?.key === "registrationDate" &&
+                      sortConfig.direction === "asc"
+                        ? "transform rotate-180"
+                        : ""
+                    }`}
                   >
                     <ArrowUp color={"#5D6679"} />
                   </div>
@@ -159,13 +225,13 @@ const Organization = (props: Props) => {
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                   Industry
                   <div
-                  // onClick={() => handleSort("business")}
-                  // className={` transition-transform duration-300   ${
-                  //   sortConfig?.key === "business" &&
-                  //   sortConfig.direction === "asc"
-                  //     ? "transform rotate-180"
-                  //     : ""
-                  // }`}
+                    onClick={() => handleSort("industry")}
+                    className={` transition-transform duration-300   ${
+                      sortConfig?.key === "industry" &&
+                      sortConfig.direction === "asc"
+                        ? "transform rotate-180"
+                        : ""
+                    }`}
                   >
                     <ArrowUp color={"#5D6679"} />
                   </div>
@@ -186,15 +252,15 @@ const Organization = (props: Props) => {
 
           {organizations.length !== 0 && (
             <tbody>
-              {organizations.map((org, index) => (
+              {filteredOrganizations.map((org, index) => (
                 <tr
                   key={org.id}
                   className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
                 >
                   <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
                     <Checkbox
-                      checked={false}
-                      // onClick={() => handleSelectItem(index)}
+                      checked={selectedItems.includes(index)}
+                      onClick={() => handleSelectItem(index)}
                     />
                     {org.organizationName}
                   </td>
@@ -249,23 +315,24 @@ const Organization = (props: Props) => {
             </tbody>
           )}
         </table>
-      {organizations.length >= 10 && (
-            <div className="w-full  pt-[11px] pb-[16px] p-6 ">
-              <Pagination />
-            </div>
-          )}
-          {organizations.length === 0 && (
-            <div className="w-full h-80 flex flex-col  text-center  mt-32 mb-32 items-center justify-center mx-auto">
-              <Image src={illustration} alt="img" className="mx-auto" />
-              <p className="text-lg font-semibold">No Organizations Yet</p>
-              <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
-              It looks like no Organizationes have been registered on the platform.
-              </p>
-            </div>
-          )}
+        {organizations.length >= 10 && (
+          <div className="w-full  pt-[11px] pb-[16px] p-6 ">
+            <Pagination />
+          </div>
+        )}
+        {organizations.length === 0 && (
+          <div className="w-full h-80 flex flex-col  text-center  mt-32 mb-32 items-center justify-center mx-auto">
+            <Image src={illustration} alt="img" className="mx-auto" />
+            <p className="text-lg font-semibold">No Organizations Yet</p>
+            <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
+              It looks like no Organizationes have been registered on the
+              platform.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default Organization;
+export default OrganizationPage;
