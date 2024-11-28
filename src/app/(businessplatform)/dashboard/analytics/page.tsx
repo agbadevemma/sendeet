@@ -23,6 +23,8 @@ import SendAlt from "@/icons/send-alt";
 import TickDouble from "@/icons/tick-double";
 import UserTick from "@/icons/user-tick";
 import { CampaignInterface, initialCampaign } from "@/utils/data";
+import Image from "next/image";
+import donut from "../../../../images/donut.svg"
 import React, { useMemo, useState } from "react";
 
 type Props = {};
@@ -316,14 +318,33 @@ const Analytics = (props: Props) => {
         <div className="w-full flex   lg:flex-row flex-col  rounded-lg  gap-4 p-4 bgs-black">
           {/* <EngagementDashboard /> */}
           <div className="w-full border-[#EAECF0] bg-white border p-8 py-4 flex flex-col rounded-lg ">
-            <p className="text-lg mb-4 font-medium">Engagement by Time of Day</p>
-            {" "}
+            <p className="text-lg mb-4 font-medium">
+              Engagement by Time of Day
+            </p>{" "}
             <HeatmapChart />
-            
           </div>
-          <div className="w-full lg:w-[40%] px-4 py-2 border-[#EAECF0] bg-white items-center justify-center border flex flex-col rounded-lg ">
-            <p className="text-lg mb-4 font-medium">Engagement by Time of Day</p>
-          <DonutChart />
+          <div className="w-full flex flex-col gap-8 lg:w-[40%] px-4 py-2 border-[#EAECF0] bg-white items-center border  rounded-lg ">
+            <div className="flex justify-between items-center w-full">
+              <p className="a">Audience Metrics</p>
+              <Button text="12 Months" className="p-4" />
+            </div>
+            <div className="flex justify-between items-center w-full">
+              <div className="flex flex-col items-center ">
+               <div className="flex items-center gap-1">
+                <span className="h-4 w-2 rounded-full bg-[#54C6FA]"></span>
+               <div className="text-xl text-[#667085]">Opt In</div>
+               </div>
+                <div className="font-medium text-[30px]">762</div>
+              </div>
+              <div className="flex flex-col items-center">
+               <div className="flex items-center gap-1">
+                <span className="h-4 w-2 rounded-full bg-[#B0E5FD]"></span>
+               <div className="text-xl text-[#667085]">Opt Out</div>
+               </div>
+                <div className="font-medium text-[30px]">215</div>
+              </div>
+            </div>
+            <Image src={donut} alt="donut" />
           </div>
         </div>
       </div>
@@ -340,7 +361,8 @@ const Analytics = (props: Props) => {
             />
           </div>
         </div>
-        <table className="w-full b">
+       <div className="w-full overflow-x-auto ">
+       <table className="w-full b">
           <thead className="text-grey-600 rounded sticky top-0 z-10">
             <tr className="bg-[#F9FAFB]">
               <th className="pl-6 pr-2 py-2 rounded-s-lg">
@@ -519,6 +541,7 @@ const Analytics = (props: Props) => {
             </tbody>
           )}
         </table>
+       </div>
       </div>
     </div>
   );
