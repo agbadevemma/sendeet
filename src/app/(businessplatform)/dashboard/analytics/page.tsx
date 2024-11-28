@@ -258,7 +258,7 @@ const Analytics = (props: Props) => {
       <div className="w-full mt-5">
         <div className=" p-4 lg:p-6  w-full border rounded-xl flex lg:flex-row flex-col gap-10 h-full">
           <div className="w-full">
-            <div className="flex  items-start justify-between gap-4">
+            <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
               <p className="text-md font-medium ">Campaign Performance</p>
               <div className="flex items-center gap-3">
                 <span className="text-grey-500 text-sm font-medium">
