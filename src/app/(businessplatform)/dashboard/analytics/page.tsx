@@ -332,16 +332,16 @@ const Analytics = (props: Props) => {
               <div className="flex flex-col items-center ">
                <div className="flex items-center gap-1">
                 <span className="h-4 w-2 rounded-full bg-[#54C6FA]"></span>
-               <div className="text-xl text-[#667085]">Opt In</div>
+               <div className="text-lg text-[#667085]">Opt In</div>
                </div>
-                <div className="font-medium text-[30px]">762</div>
+                <div className="font-medium text-[22px]">762</div>
               </div>
               <div className="flex flex-col items-center">
                <div className="flex items-center gap-1">
                 <span className="h-4 w-2 rounded-full bg-[#B0E5FD]"></span>
-               <div className="text-xl text-[#667085]">Opt Out</div>
+               <div className="text-lg text-[#667085]">Opt Out</div>
                </div>
-                <div className="font-medium text-[30px]">215</div>
+                <div className="font-medium text-[22px]">215</div>
               </div>
             </div>
             <Image src={donut} alt="donut" />
@@ -361,7 +361,7 @@ const Analytics = (props: Props) => {
             />
           </div>
         </div>
-       <div className="w-full overflow-x-auto ">
+       <div className="w-full overflow-x-auto px-4">
        <table className="w-full b">
           <thead className="text-grey-600 rounded sticky top-0 z-10">
             <tr className="bg-[#F9FAFB]">
@@ -420,7 +420,7 @@ const Analytics = (props: Props) => {
               </th>
               <th className="p-2">
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                  opt In
+                  Opt In
                   <div
                     onClick={() => handleSort("open")}
                     className={` transition-transform duration-300   ${
