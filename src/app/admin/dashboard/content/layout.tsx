@@ -38,8 +38,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
     );
   };
   const pathName = usePathname();
-  console.log(pathName);
-
+ 
   return (
     <div>
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
