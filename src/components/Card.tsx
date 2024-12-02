@@ -12,6 +12,7 @@ type Props = {
   oppositeFlow?: boolean;
   className1?: string;
   className?: string; // Additional class for the card container
+  coloredbackground?: string; // Color of the icon background
 };
 
 const Card = ({
@@ -23,9 +24,12 @@ const Card = ({
   className1,
   className,
   oppositeFlow = false,
+  coloredbackground,
 }: Props) => {
   return (
-    <div className={`p-4 ${className} flex items-center justify-between w-full border gap-4 rounded-xl border-[#E4E7EC] border-solid`}>
+    <div
+      className={`p-4 ${className} flex items-center justify-between w-full border gap-4 rounded-xl border-[#E4E7EC] border-solid`}
+    >
       <div className="flex flex-col gap-2 w-full">
         <span className={`text-sm ${className1} text-[#475367] `}>{title}</span>
         <span className={`text-[#344054] text-xl font-semibold`}>{value}</span>
@@ -53,7 +57,11 @@ const Card = ({
           </div>
         )}
       </div>
-      <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
+      <div
+        className={`rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center ${
+          coloredbackground 
+        } flex-shrink-0`}
+      >
         {mainIcon}
       </div>
     </div>

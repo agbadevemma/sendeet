@@ -5,24 +5,32 @@ import Checkbox from "@/components/Checkbox";
 import InputField from "@/components/InputField";
 import Pagination from "@/components/Pagination";
 import ArrowUp from "@/icons/arrow-up";
-import Building5 from "@/icons/building-5";
-import Check from "@/icons/check";
-import Coinstack from "@/icons/coinstack";
 import DotV from "@/icons/dot-v";
 import Eye from "@/icons/eye";
-import FileDownload from "@/icons/file-download";
+
 import FilterAlt from "@/icons/filter-alt";
-import LoudSpeaker from "@/icons/loudspeaker";
-import Messages from "@/icons/messages";
-import Multiply from "@/icons/multiply";
-import NewsPaper from "@/icons/newspaper";
+
 import SearchIcon from "@/icons/search-icon";
-import illustration from "../../../../images/illustrationcampaign.svg";
+import illustration from "../../../../../images/illustrationfiles.svg";
 import SendAlt from "@/icons/send-alt";
-import { Campaign, mockCampaignData } from "@/utils/data";
+import {
+  Campaign,
+  mockCampaignData,
+  mockUploadsData,
+  Uploads,
+} from "@/utils/data";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import FileIcon from "@/icons/file-icon";
+import FileAlt from "@/icons/file-alt";
+import Video from "@/icons/video";
+import ImageIcon from "@/icons/imageicon";
+import MusicIcon from "@/icons/music";
+import mp3img from "../../../../../images/filetypes/mp3.svg";
+import gifimg from "../../../../../images/filetypes/gif.svg";
+import pngimg from "../../../../../images/filetypes/png.svg";
+import xlsimg from "../../../../../images/filetypes/xls.svg";
 
 type Props = {};
 
@@ -32,16 +40,16 @@ interface TabItem {
   isActive: boolean;
 }
 interface SortConfig {
-  key: keyof Campaign; // Restrict to keys of Campaign
+  key: keyof Uploads; // Restrict to keys of Campaign
   direction: "asc" | "desc";
 }
-const Content = (props: Props) => {
-  const [campaignData, setCampaignData] = useState(mockCampaignData);
+const Upload = (props: Props) => {
+  const [uploadData, setUploadData] = useState(mockUploadsData); // Changed variable name to reflect uploads
   const [selectedItems, setSelectedItems] = useState<number[]>([]); // State to track selected items
   const [sortConfig, setSortConfig] = useState<SortConfig | null>(null);
   const [tabs, setTabs] = useState<Array<TabItem>>([
     { id: 1, title: "Campaigns", isActive: true },
-    { id: 2, title: "Uploads", isActive: false },
+    { id: 2, title: "Uploads", isActive: false }, // "Uploads" tab is active
   ]);
 
   const handleTabClick = (selectedId: number) => {
@@ -53,7 +61,10 @@ const Content = (props: Props) => {
     );
   };
   const [filterTabs, setFilterTabs] = useState<Array<string>>([
-    "All", "Active", "Completed", "Drafts",
+    "All",
+    "Document",
+    "Images",
+    "Audio",
   ]);
 
   const [activeFilter, setActiveFilter] = useState<string>("All");
@@ -63,7 +74,8 @@ const Content = (props: Props) => {
   };
 
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const handleSort = (key: keyof Campaign) => {
+
+  const handleSort = (key: keyof Uploads) => {
     let direction: "asc" | "desc" = "asc";
 
     if (
@@ -76,12 +88,12 @@ const Content = (props: Props) => {
 
     setSortConfig({ key, direction });
   };
-  const sortedCampaigns = () => {
-    let sortableCampaigns = [...campaignData];
+  const sortedUploads = () => {
+    // Renamed to reflect "uploads"
+    let sortableUploads = [...uploadData]; // Renamed variable to match uploads
 
     if (sortConfig !== null) {
-      sortableCampaigns.sort((a, b) => {
-        // Ensure 'a[sortConfig.key]' and 'b[sortConfig.key]' are valid for the key
+      sortableUploads.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
           return sortConfig.direction === "asc" ? -1 : 1;
         }
@@ -92,84 +104,109 @@ const Content = (props: Props) => {
       });
     }
 
-    return sortableCampaigns;
+    return sortableUploads;
   };
 
-  const getFilteredCampaigns = () => {
-    return sortedCampaigns()
-      .filter((campaign) =>
-        campaign.name.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-      .filter((campaign) =>
-        activeFilter === "All" || campaign.status === activeFilter
-      );
+  const getFilteredUploads = () => {
+    // Filter by search query
+    const filteredBySearch = sortedUploads().filter((upload) =>
+      upload.fileName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  
+    // Filter by active filter tab
+    return filteredBySearch.filter((upload) => {
+      const fileExtension = getFileExtension(upload.fileName).toLowerCase();
+  
+      if (activeFilter === "All") {
+        return true; // Show all uploads
+      }
+  
+      const filterMappings: { [key: string]: string[] } = {
+        Document: ["xlsx"],
+        Images: ["gif", "png"],
+        Audio: ["mp3"],
+      };
+  
+      return filterMappings[activeFilter]?.includes(fileExtension);
+    });
   };
+  
 
   const handleSelectItem = (index: number) => {
     const isSelected = selectedItems.includes(index);
     if (isSelected) {
-      setSelectedItems(selectedItems.filter((item) => item !== index)); // Deselect item
+      setSelectedItems(selectedItems.filter((item) => item !== index));
     } else {
-      setSelectedItems([...selectedItems, index]); // Select item
+      setSelectedItems([...selectedItems, index]);
     }
   };
 
   const handleSelectAll = () => {
-    if (selectedItems.length < mockCampaignData.length) {
-      // Select all mockCampaignData
-      setSelectedItems(mockCampaignData.map((_, index) => index));
+    if (selectedItems.length < mockUploadsData.length) {
+      // Renamed variable to "mockUploadsData"
+      setSelectedItems(mockUploadsData.map((_, index) => index)); // Renamed to reflect uploads
     } else {
-      // Deselect all
       setSelectedItems([]);
     }
   };
 
   const isAllSelected =
-    mockCampaignData.length > 0 &&
-    selectedItems.length === mockCampaignData.length;
+    mockUploadsData.length > 0 &&
+    selectedItems.length === mockUploadsData.length;
   const isIndeterminate =
-    selectedItems.length > 0 && selectedItems.length < mockCampaignData.length;
+    selectedItems.length > 0 && selectedItems.length < mockUploadsData.length;
+  const getFileExtension = (fileName: string): string => {
+    const match = fileName.match(/\.(\w+)$/);
+    return match ? match[1] : "";
+  };
   return (
     <div>
-      
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 pb-10 mt-10">
+      <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 pb-10 mt-10">
         {/* Insight Cards */}
         <Card
-          title="Total Campaigns"
-          value="349"
+          title="Documents"
+          value="349 Files"
+          coloredbackground="!border-none bg-success-50"
           className="py-6"
-          mainIcon={<LoudSpeaker height={20} width={20} color="#667085" />}
+          mainIcon={<FileIcon height={20} width={20} color="#0F973D" />}
         />
 
         <Card
-          title="Active Campaigns"
-          value="23,853"
+          title="Videos"
+          value="65 Files"
+          oppositeFlow={true}
+          coloredbackground="!border-none bg-warning-50"
           className="py-6"
-          mainIcon={<Messages height={20} width={20} color="#667085" />}
+          mainIcon={<Video height={20} width={20} color="#F3A218" />}
         />
 
         <Card
-          title="Successful Campaigns"
-          value="1,234"
+          title="Images"
+          value="54 Files"
+          coloredbackground="!border-none bg-primary-50"
           oppositeFlow={true}
           className="py-6"
-          mainIcon={<Check height={20} width={20} color="#667085" />}
+          mainIcon={<ImageIcon height={20} width={20} color="#00AAF7" />}
         />
-
         <Card
-          title="Failed Campaigns"
-          value="21"
+          title="Audio"
+          value="3 Files"
+          oppositeFlow={true}
+          coloredbackground="!border-none bg-[#F4EBFF]"
+          className="py-6"
+          mainIcon={<MusicIcon height={20} width={20} color="#7F56D9" />}
+        />
+        <Card
+          title="Other"
+          value="0 Files"
           oppositeFlow={true}
           className="py-6"
-          mainIcon={<Multiply height={20} width={20} color="#667085" />}
+          mainIcon={<FileAlt height={20} width={20} color="#667085" />}
         />
       </div>
       <div className="w-full border-[#E4E7EC] border rounded-[12px] bg-white px-4">
-        <p className="text-lg text-[#101828] font-medium mt-10">
-          Campaign Performance Table
-        </p>
-        <div className="flex lg:flex-row flex-col gap-4 items-center justify-between mt-4 lg:mt-10">
-          <div className="flex bg-[#F9FAFB]   justify-between items-center py-1 px-1 rounded-lg lg:max-w-[344px] w-full">
+        <div className="flex lg:flex-row flex-col items-center justify-between mt-4 lg:mt-10">
+          <div className="flex bg-[#F9FAFB] mt-4 lg:mt-0  justify-between items-center py-1 px-1 rounded-lg max-w-[344px] w-full">
             {filterTabs.map((filter, i) => (
               <div
                 key={i}
@@ -203,8 +240,8 @@ const Content = (props: Props) => {
             />
           </div>
         </div>
-        <div className="flex flex-col w-full mx-auto overflow-auto mt-[18px] max-h-[814px]">
-          <table className="w-full">
+        <div className="flex flex-col w-full mx-auto  mt-[18px] max-h-[814px]">
+         <div className="w-full overflow-x-auto"> <table className="w-full">
             <thead className="text-grey-600 rounded sticky top-0 z-10">
               <tr className="bg-[#F9FAFB]">
                 <th className="pl-6 pr-2 py-2 rounded-s-lg">
@@ -214,11 +251,11 @@ const Content = (props: Props) => {
                       indeterminate={isIndeterminate}
                       onClick={handleSelectAll}
                     />
-                    <span>Campaign Name</span>
+                    <span>File Name</span>
                     <div
-                      onClick={() => handleSort("name")}
+                      onClick={() => handleSort("fileName")}
                       className={` transition-transform duration-300   ${
-                        sortConfig?.key === "name" &&
+                        sortConfig?.key === "fileName" &&
                         sortConfig.direction === "asc"
                           ? "transform rotate-180"
                           : ""
@@ -230,11 +267,11 @@ const Content = (props: Props) => {
                 </th>
                 <th className="p-2">
                   <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                    Organization
+                    Date Uploaded
                     <div
-                      onClick={() => handleSort("organization")}
+                      onClick={() => handleSort("dateUploaded")}
                       className={` transition-transform duration-300   ${
-                        sortConfig?.key === "organization" &&
+                        sortConfig?.key === "dateUploaded" &&
                         sortConfig.direction === "asc"
                           ? "transform rotate-180"
                           : ""
@@ -246,11 +283,11 @@ const Content = (props: Props) => {
                 </th>
                 <th className="p-2">
                   <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                    Scheduled Date
+                    Uploaded By
                     <div
-                      onClick={() => handleSort("date")}
+                      onClick={() => handleSort("uploadedBy")}
                       className={` transition-transform duration-300   ${
-                        sortConfig?.key === "date" &&
+                        sortConfig?.key === "uploadedBy" &&
                         sortConfig.direction === "asc"
                           ? "transform rotate-180"
                           : ""
@@ -262,11 +299,11 @@ const Content = (props: Props) => {
                 </th>
                 <th className="p-2">
                   <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                    Open Rate
+                    File Size
                     <div
-                      onClick={() => handleSort("openRate")}
+                      onClick={() => handleSort("fileSize")}
                       className={` transition-transform duration-300   ${
-                        sortConfig?.key === "openRate" &&
+                        sortConfig?.key === "fileSize" &&
                         sortConfig.direction === "asc"
                           ? "transform rotate-180"
                           : ""
@@ -276,28 +313,12 @@ const Content = (props: Props) => {
                     </div>
                   </div>
                 </th>
-                <th className="p-2">
+                <th className="p-2 rounded-e-lg ">
                   <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                    Opt Out Rate
-                    <div
-                      onClick={() => handleSort("optOutRate")}
-                      className={` transition-transform duration-300   ${
-                        sortConfig?.key === "optOutRate" &&
-                        sortConfig.direction === "asc"
-                          ? "transform rotate-180"
-                          : ""
-                      }`}
-                    >
-                      <ArrowUp color={"#5D6679"} />
-                    </div>
+                   status
                   </div>
                 </th>
 
-                <th className="p-2 ">
-                  <div className="flex items-center text-nowrap  text-[#5D6679] text-sm font-medium">
-                    Status
-                  </div>
-                </th>
                 <th className="p-2 rounded-e-lg ">
                   <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                     Actions
@@ -306,11 +327,11 @@ const Content = (props: Props) => {
               </tr>
             </thead>
 
-            {campaignData.length !== 0 && (
+            {uploadData.length !== 0 && (
               <tbody>
-                {getFilteredCampaigns().map((campaign, index) => (
+                {getFilteredUploads().map((upload, index) => (
                   <tr
-                    key={campaign.id}
+                    key={upload.id}
                     className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
                   >
                     <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
@@ -318,49 +339,55 @@ const Content = (props: Props) => {
                         checked={selectedItems.includes(index)}
                         onClick={() => handleSelectItem(index)}
                       />
-                      <div className="w-10 h-10 border border-[#00AAF780]/[0.5] rounded-lg bg-primary-500 flex items-center justify-center">
-                        <SendAlt color="#fff" height={28} width={28} />
-                      </div>
-                      {campaign.name}
+                      <Image
+                        src={
+                          getFileExtension(upload.fileName) === "xls"
+                            ? xlsimg
+                            : getFileExtension(upload.fileName) === "png"
+                            ? pngimg
+                            : getFileExtension(upload.fileName) === "mp3"
+                            ? mp3img
+                            : gifimg
+                        }
+                        alt=""
+                      />
+                      {upload.fileName}
                     </td>
                     <td className="text-sm font-medium text-grey-800 p-2 pr-8">
-                      {campaign.organization}
+                      {upload.dateUploaded}
                     </td>
                     <td className="text-sm font-medium text-grey-800 p-2">
-                      {campaign.date}
+                      {upload.uploadedBy}
                     </td>
                     <td className="text-sm font-medium text-grey-800 p-2">
-                      {campaign.openRate}
-                    </td>
-                    <td className="text-sm font-medium text-grey-800 p-2">
-                      {campaign.optOutRate}
+                      {upload.fileSize}
                     </td>
 
                     <td className="text-sm font-medium  p-2">
                       <div
                         className={`p-1 px-2 whitespace-nowrap  ${
-                          campaign.status === "Completed"
+                          upload.status === "Successful"
                             ? "bg-success-50 text-success-700"
-                            : campaign.status === "Active"
+                            : upload.status === "In Progress"
                             ? " text-warning-700 bg-warning-50"
-                            : "text-[#344054] bg-[#F2F4F7]"
+                            : "text-error-700 bg-[#FEF3F2]"
                         } rounded-2xl flex items-center gap-2 w-fit`}
                       >
                         <div
                           className={`rounded-full h-2 w-2 text-success-700 ${
-                            campaign.status === "Completed"
+                            upload.status === "Successful"
                               ? " bg-success-500"
-                              : campaign.status === "Active"
-                              ? "bg-[#B54708] "
-                              : "bg-[#667085]"
+                              : upload.status === "In Progress"
+                              ? "bg-[#F79009] "
+                              : "bg-[#F04438]"
                           }`}
                         ></div>
-                        {campaign.status}
+                        {upload.status}
                       </div>
                     </td>
                     <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
                       <Link
-                        href={`/admin/dashboard/usermanagement/campaignience/${campaign.id}`}
+                        href={`/admin/dashboard/usermanagement/campaignience/${upload.id}`}
                       >
                         {" "}
                         <Button
@@ -380,25 +407,25 @@ const Content = (props: Props) => {
                 ))}
               </tbody>
             )}
-          </table>
-        {mockCampaignData.length >= 10 && (
-          <div className="w-full  pt-[11px] pb-[16px] p-6 ">
-            <Pagination />
-          </div>
-        )}
-        {mockCampaignData.length === 0 && (
-          <div className="w-full h-80 flex flex-col  text-center  mt-32 mb-32 items-center justify-center mx-auto">
-            <Image src={illustration} alt="img" className="mx-auto" />
-            <p className="text-lg font-semibold">No Content Yet</p>
-            <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
-            It looks like no Audience have opted in  through Organizationes.
-            </p>
-          </div>
-        )}
+          </table></div>
+          {mockUploadsData.length >= 10 && (
+            <div className="w-full  pt-[11px] pb-[16px] p-6 ">
+              <Pagination />
+            </div>
+          )}
+          {mockUploadsData.length == 0 && (
+            <div className="w-full h-80 flex flex-col  text-center  mt-32 mb-32 items-center justify-center mx-auto">
+              <Image src={illustration} alt="img" className="mx-auto" />
+              <p className="text-lg font-semibold">No Files Yet</p>
+              <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
+              Nothing to see here...no uploads have been made
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default Content;
+export default Upload;

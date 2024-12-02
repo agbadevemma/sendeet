@@ -455,3 +455,136 @@ export const activityData: ActivityData[] = days.flatMap((day) =>
     count: Math.floor(Math.random() * 100), // Random count between 0 and 99
   }))
 );
+
+// Define the type for a campaign
+export interface Campaign {
+  id: number;
+  name: string;
+  organization: string;
+  date: string;
+  openRate: string;
+  optOutRate: string;
+  status: string;
+}
+
+export const mockCampaignData: Campaign[] = [
+  {
+    id: 1,
+    name: "Campaign A",
+    organization: "Org 1",
+    date: "2024-12-01",
+    openRate: "45%",
+    optOutRate: "5%",
+    status: "Active",
+  },
+  {
+    id: 2,
+    name: "Campaign B",
+    organization: "Org 2",
+    date: "2024-11-15",
+    openRate: "60%",
+    optOutRate: "3%",
+    status: "Completed",
+  },
+  {
+    id: 3,
+    name: "Campaign C",
+    organization: "Org 3",
+    date: "2024-10-20",
+    openRate: "30%",
+    optOutRate: "8%",
+    status: "Drafts",
+  },
+];
+
+export interface Uploads {
+  id: number;
+  fileName: string;
+  dateUploaded: string;
+  uploadedBy: string;
+  fileSize: string;
+  status:"In Progress"|"Successful"|"Failed";
+}
+
+export const mockUploadsData: Uploads[] = [
+  {
+    id: 1,
+    fileName: "Tech_requirements_about_the_fund.gif",
+    dateUploaded: "2024-12-01",
+    uploadedBy: "TechSavvy Solutions",
+    fileSize: "12MB",
+    status: "Successful",
+  },
+  {
+    id: 2,
+    fileName: "Financial_report_2024.xlsx",
+    dateUploaded: "2024-11-28",
+    uploadedBy: "Finance Team",
+    fileSize: "3MB",
+    status: "In Progress",
+  },
+  {
+    id: 3,
+    fileName: "Project_presentation.mp3",
+    dateUploaded: "2024-11-30",
+    uploadedBy: "Audio Team",
+    fileSize: "8MB",
+    status: "Failed",
+  },
+  {
+    id: 4,
+    fileName: "Team_meeting_notes.png",
+    dateUploaded: "2024-11-25",
+    uploadedBy: "HR Department",
+    fileSize: "1.5MB",
+    status: "Successful",
+  },
+  {
+    id: 5,
+    fileName: "Annual_budget_review.xlsx",
+    dateUploaded: "2024-11-15",
+    uploadedBy: "Finance Department",
+    fileSize: "4.2MB",
+    status: "In Progress",
+  },
+  {
+    id: 6,
+    fileName: "Marketing_campaign_summary.gif",
+    dateUploaded: "2024-11-10",
+    uploadedBy: "Marketing Team",
+    fileSize: "2.1MB",
+    status: "Successful",
+  },
+  {
+    id: 7,
+    fileName: "Client_feedback.mp3",
+    dateUploaded: "2024-11-20",
+    uploadedBy: "Customer Support",
+    fileSize: "6.3MB",
+    status: "Failed",
+  },
+  {
+    id: 8,
+    fileName: "Product_launch_plan.png",
+    dateUploaded: "2024-12-02",
+    uploadedBy: "Product Team",
+    fileSize: "3.5MB",
+    status: "Successful",
+  },
+  {
+    id: 9,
+    fileName: "Performance_evaluation.gif",
+    dateUploaded: "2024-10-30",
+    uploadedBy: "HR Department",
+    fileSize: "5MB",
+    status: "Successful",
+  },
+  {
+    id: 10,
+    fileName: "Quarterly_sales_report.xlsx",
+    dateUploaded: "2024-10-25",
+    uploadedBy: "Sales Team",
+    fileSize: "7.8MB",
+    status: "In Progress",
+  },
+];

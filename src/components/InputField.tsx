@@ -20,6 +20,7 @@ type Props = {
   inputclassName?: string;
   size?: "sm" | "lg";
   disabled?: boolean;
+  icon_style?: "leading-icon" | "trailing icon";
 };
 
 const InputField = ({
@@ -37,6 +38,7 @@ const InputField = ({
   errorText,
   icon,
   size = "lg",
+  icon_style = "trailing icon",
   className,
   inputclassName,
   disabled = false,
@@ -62,6 +64,14 @@ const InputField = ({
             size === "lg" ? "p-4" : "px-[14px] py-[10px]"
           }`}
         >
+          {icon && icon_style == "leading-icon" ? (
+            <div onClick={onClick} className={`${onClick && "cursor-pointer"}`}>
+              {" "}
+              {icon}
+            </div>
+          ) : (
+            ""
+          )}
           <input
             type={inputType}
             id={id}
@@ -73,10 +83,12 @@ const InputField = ({
             onChange={onChange}
             onBlur={onBlur}
           />
-          {iconSrc && (
+          {iconSrc && icon_style == "trailing icon" ? (
             <Image src={iconSrc} alt={`${label} icon`} width={20} height={20} />
+          ) : (
+            ""
           )}
-          {icon && (
+          {icon && icon_style == "trailing icon" && (
             <div onClick={onClick} className={`${onClick && "cursor-pointer"}`}>
               {" "}
               {icon}
