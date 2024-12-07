@@ -17,7 +17,7 @@ const AdjustOrganizationModal = ({ isOpen, setIsOpen }: Props) => {
       {" "}
       <div
         onClick={() => setIsOpen(false)}
-        className={`flex justify-center top-0 left-0 h-screen w-full bg-black/20 fixed ${
+        className={`flex justify-center top-0 left-0 z-50 h-screen w-full bg-black/20 fixed ${
           isOpen ? "visible" : "invisible"
         }`}
       >

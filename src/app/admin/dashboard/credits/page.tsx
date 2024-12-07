@@ -208,9 +208,9 @@ const Overview = (props: Props) => {
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                   Credit Balance
                   <div
-                    onClick={() => handleSort("lastPurchase")}
+                    onClick={() => handleSort("creditBalance")}
                     className={` transition-transform duration-300   ${
-                      sortConfig?.key === "lastPurchase" &&
+                      sortConfig?.key === "creditBalance" &&
                       sortConfig.direction === "asc"
                         ? "transform rotate-180"
                         : ""
@@ -224,9 +224,9 @@ const Overview = (props: Props) => {
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                   Last Purchase
                   <div
-                    onClick={() => handleSort("industry")}
+                    onClick={() => handleSort("lastPurchase")}
                     className={` transition-transform duration-300   ${
-                      sortConfig?.key === "industry" &&
+                      sortConfig?.key === "lastPurchase" &&
                       sortConfig.direction === "asc"
                         ? "transform rotate-180"
                         : ""

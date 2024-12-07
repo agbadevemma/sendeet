@@ -528,6 +528,109 @@ export const organizationCredits: OrganizationCredit[] = [
   },
 ];
 
+export type CreditHistory = {
+  id: number;
+  organizationName: string;
+  date: string;
+  transactionCode: string;
+  creditPurchased: string;
+  creditUsed: string;
+  creditStatus: "Normal" | "Low";
+};
+
+// Single array with mixed statuses
+export const creditHistory: CreditHistory[] = [
+  {
+    id: 1,
+    organizationName: "Tech Innovators Inc.",
+    date: "01/15/24",
+    transactionCode: "123456789",
+    creditPurchased: "2300",
+    creditUsed: "1200",
+    creditStatus: "Normal",
+  },
+  {
+    id: 2,
+    organizationName: "Green Solutions Ltd.",
+    date: "02/10/24",
+    transactionCode: "987654321",
+    creditPurchased: "1800",
+    creditUsed: "700",
+    creditStatus: "Normal",
+  },
+  {
+    id: 3,
+    organizationName: "Healthcare United",
+    date: "01/25/24",
+    transactionCode: "112233445",
+    creditPurchased: "3200",
+    creditUsed: "2800",
+    creditStatus: "Low",
+  },
+  {
+    id: 4,
+    organizationName: "Bright Minds Education",
+    date: "02/05/24",
+    transactionCode: "556677889",
+    creditPurchased: "500",
+    creditUsed: "450",
+    creditStatus: "Low",
+  },
+  {
+    id: 5,
+    organizationName: "Global Freight Corp.",
+    date: "01/30/24",
+    transactionCode: "998877665",
+    creditPurchased: "2750",
+    creditUsed: "2200",
+    creditStatus: "Normal",
+  },
+  {
+    id: 6,
+    organizationName: "Solar Power Network",
+    date: "02/01/24",
+    transactionCode: "334455667",
+    creditPurchased: "1200",
+    creditUsed: "1100",
+    creditStatus: "Low",
+  },
+  {
+    id: 7,
+    organizationName: "Visionary Designs Co.",
+    date: "01/20/24",
+    transactionCode: "443322110",
+    creditPurchased: "2100",
+    creditUsed: "1700",
+    creditStatus: "Normal",
+  },
+  {
+    id: 8,
+    organizationName: "Pinnacle Finance Group",
+    date: "02/12/24",
+    transactionCode: "223344556",
+    creditPurchased: "4000",
+    creditUsed: "3500",
+    creditStatus: "Normal",
+  },
+  {
+    id: 9,
+    organizationName: "Urban Living Architects",
+    date: "01/28/24",
+    transactionCode: "665544332",
+    creditPurchased: "950",
+    creditUsed: "850",
+    creditStatus: "Low",
+  },
+  {
+    id: 10,
+    organizationName: "Fresh Farm Organics",
+    date: "02/08/24",
+    transactionCode: "778899001",
+    creditPurchased: "1500",
+    creditUsed: "1400",
+    creditStatus: "Normal",
+  },
+];
 
 interface ActivityData {
   day: string; // Day of the week (e.g., "Mon")
