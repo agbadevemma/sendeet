@@ -263,7 +263,7 @@ const Credits = (props: Props) => {
                 <div className="absolute z-30 w-full flex items-center justify-center lg:block lg:w-fit   left-1 lg:-left-[32rem] lg:right-32  mt-2">
                   <DateRangePicker
                     handleDateRangeChange={handleDateRangeChange}
-                    setFilteredTransactions={setFilteredTransactions}
+                   
                     setIsCalenderOpen={setIsCalenderOpen}
                   />
                 </div>
