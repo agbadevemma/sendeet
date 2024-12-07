@@ -435,6 +435,100 @@ export const organizations: Organization[] = [
   },
 ];
 
+export type OrganizationCredit = {
+  id: number;
+  organizationName: string;
+  industry: string;
+  creditBalance: string;
+  lastPurchase: string;
+  creditStatus: "Normal" | "Low";
+};
+
+// Single array with mixed statuses
+export const organizationCredits: OrganizationCredit[] = [
+  {
+    id: 1,
+    organizationName: "Tech Innovators Inc.",
+    industry: "Technology",
+    creditBalance: "2300",
+    lastPurchase: "01/15/24",
+    creditStatus: "Normal",
+  },
+  {
+    id: 2,
+    organizationName: "Green Solutions Ltd.",
+    industry: "Environmental Services",
+    creditBalance: "1800",
+    lastPurchase: "02/10/24",
+    creditStatus: "Normal",
+  },
+  {
+    id: 3,
+    organizationName: "Healthcare United",
+    industry: "Healthcare",
+    creditBalance: "3200",
+    lastPurchase: "01/25/24",
+    creditStatus: "Low",
+  },
+  {
+    id: 4,
+    organizationName: "Bright Minds Education",
+    industry: "Education",
+    creditBalance: "500",
+    lastPurchase: "02/05/24",
+    creditStatus: "Normal",
+  },
+  {
+    id: 5,
+    organizationName: "Global Freight Corp.",
+    industry: "Logistics",
+    creditBalance: "2750",
+    lastPurchase: "01/30/24",
+    creditStatus: "Normal",
+  },
+  {
+    id: 6,
+    organizationName: "Solar Power Network",
+    industry: "Energy",
+    creditBalance: "1200",
+    lastPurchase: "02/01/24",
+    creditStatus: "Low",
+  },
+  {
+    id: 7,
+    organizationName: "Visionary Designs Co.",
+    industry: "Creative Arts",
+    creditBalance: "2100",
+    lastPurchase: "01/20/24",
+    creditStatus: "Normal",
+  },
+  {
+    id: 8,
+    organizationName: "Pinnacle Finance Group",
+    industry: "Finance",
+    creditBalance: "4000",
+    lastPurchase: "02/12/24",
+    creditStatus: "Normal",
+  },
+  {
+    id: 9,
+    organizationName: "Urban Living Architects",
+    industry: "Construction",
+    creditBalance: "950",
+    lastPurchase: "01/28/24",
+    creditStatus: "Low",
+  },
+  {
+    id: 10,
+    organizationName: "Fresh Farm Organics",
+    industry: "Agriculture",
+    creditBalance: "1500",
+    lastPurchase: "02/08/24",
+    creditStatus: "Normal",
+  },
+];
+
+
 interface ActivityData {
   day: string; // Day of the week (e.g., "Mon")
   hour: string; // Hour of the day (e.g., "12 AM")
@@ -503,7 +597,7 @@ export interface Uploads {
   dateUploaded: string;
   uploadedBy: string;
   fileSize: string;
-  status:"In Progress"|"Successful"|"Failed";
+  status: "In Progress" | "Successful" | "Failed";
 }
 
 export const mockUploadsData: Uploads[] = [

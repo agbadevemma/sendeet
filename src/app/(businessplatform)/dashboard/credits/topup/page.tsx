@@ -19,12 +19,13 @@ type Props = {};
 
 const Topup = (props: Props) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [value, setValue] = useState<string>(creditsData[0].price.toLocaleString());
+  const [value, setValue] = useState<string>(
+    creditsData[0].price.toLocaleString()
+  );
   const [payChoice, setPayChoice] = useState<"flutterwave" | "paystack">(
     "flutterwave"
   );
   const router = useRouter();
- 
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -57,7 +58,6 @@ const Topup = (props: Props) => {
             placeholder="3000"
             disabled={true}
             value={Number(value).toLocaleString()}
-          
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setValue(e.target.value)
             }
@@ -126,9 +126,12 @@ const Topup = (props: Props) => {
                       {" "}
                       <CheckCircle color="#0F973D" />
                     </div>
-                    <div className="gap-1 flex flex-col mr-4 text-[#667085]">
-                      <p className="] text-sm !font-bold">Payment successful</p>
-                      <p className=" !text-[14px] ">
+
+                    <div className="gap-1 flex flex-col mr-4 ">
+                      <p className="!text-[14px] !font-medium text-[#101828]">
+                        Payment successful
+                      </p>
+                      <p className=" !text-[14px] !font-normal text-[#667085]">
                         500 credits have been added to your account
                       </p>
                     </div>
