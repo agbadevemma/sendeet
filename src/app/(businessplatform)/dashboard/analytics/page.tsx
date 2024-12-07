@@ -24,14 +24,38 @@ import TickDouble from "@/icons/tick-double";
 import UserTick from "@/icons/user-tick";
 import { CampaignInterface, initialCampaign } from "@/utils/data";
 import Image from "next/image";
-import donut from "../../../../images/donut.svg"
-import React, { useMemo, useState } from "react";
+import donut from "../../../../images/donut.svg";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import ChevronDown from "@/icons/cheveron-down";
 
 type Props = {};
 
 const Analytics = (props: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [isFirstDropdownOpen, setIsFirstDropdownOpen] = useState<boolean>(false);
+  const [isSecondDropdownOpen, setIsSecondDropdownOpen] = useState<boolean>(false);
 
+
+  // Refs for the dropdown containers
+  const firstDropdownRef = useRef<HTMLDivElement | null>(null);
+  const secondDropdownRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    // Close dropdown when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      if (firstDropdownRef.current && !firstDropdownRef.current.contains(event.target as Node)) {
+        setIsFirstDropdownOpen(false);
+      }
+      if (secondDropdownRef.current && !secondDropdownRef.current.contains(event.target as Node)) {
+        setIsSecondDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   const [campaigns, setCampaigns] =
     useState<CampaignInterface[]>(initialCampaign);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -264,12 +288,66 @@ const Analytics = (props: Props) => {
                 <span className="text-grey-500 text-sm font-medium">
                   Metric:
                 </span>
-                <Button
-                  size="md"
-                  text="Open Rate"
-                  className="!px-4 !py-[10px]"
-                />
-                <Button size="md" text="7 Days" className="!px-4 !py-[10px]" />
+
+                {/* First Dropdown */}
+                <div className="relative" ref={firstDropdownRef}>
+                  <Button
+                    onClick={() => setIsFirstDropdownOpen((prev) => !prev)}
+                    className="!px-4 !py-[10px] !text-sm"
+                    size="md"
+                    icon_style="trailing icon"
+                    iconComponent={
+                      <ChevronDown color="#344054" height={20} width={20} />
+                    }
+                    text="Open Rate"
+                  />
+                  {isFirstDropdownOpen && (
+                    <div className="w-[15rem] mt-2 bg-white absolute drop-shadow-[0px_1px_2px_rgba(16,24,40,0.05)] border-[0.9px] border-[#F0F1F3] right-0 rounded-[10px] p-2 flex flex-col gap-2 z-50">
+                      {[
+                        "Total Messages",
+                        "Delivered",
+                        "Average Engagement Rate",
+                        "Total Sends",
+                        "Open Rate",
+                        "Click Rate",
+                        "Delivery Rate",
+                        "Opt In Rate",
+                        "Opt Out Rate",
+                      ].map((item) => (
+                        <div
+                          key={item}
+                          className="text-[#383E49] font-normal text-[13px] rounded-lg cursor-pointer whitespace-nowrap px-[10px] py-2 hover:bg-[#F9FAFB]"
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Second Dropdown */}
+                <div ref={secondDropdownRef} className="relative">
+                  <Button
+                    onClick={() => setIsSecondDropdownOpen((prev) => !prev)}
+                    className="!px-4 !py-[10px] !text-sm"
+                    size="md"
+                    text="7 Days"
+                  />
+                  {isSecondDropdownOpen && (
+                    <div className="w-32 mt-2 bg-white absolute drop-shadow-[0px_1px_2px_rgba(16,24,40,0.05)] border-[0.9px] border-[#F0F1F3] rounded-[10px] p-2 flex flex-col gap-2 z-50">
+                      {["7 Days", "30 Days", "6 Months", "12 Months"].map(
+                        (item) => (
+                          <div
+                            key={item}
+                            className="text-[#383E49] font-normal text-[13px]  rounded-lg cursor-pointer px-[10px] py-2 hover:bg-[#F9FAFB]"
+                          >
+                            {item}
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -330,17 +408,17 @@ const Analytics = (props: Props) => {
             </div>
             <div className="flex justify-between items-center w-full">
               <div className="flex flex-col items-center ">
-               <div className="flex items-center gap-1">
-                <span className="h-4 w-2 rounded-full bg-[#54C6FA]"></span>
-               <div className="text-lg text-[#667085]">Opt In</div>
-               </div>
+                <div className="flex items-center gap-1">
+                  <span className="h-4 w-2 rounded-full bg-[#54C6FA]"></span>
+                  <div className="text-lg text-[#667085]">Opt In</div>
+                </div>
                 <div className="font-medium text-[22px]">762</div>
               </div>
               <div className="flex flex-col items-center">
-               <div className="flex items-center gap-1">
-                <span className="h-4 w-2 rounded-full bg-[#B0E5FD]"></span>
-               <div className="text-lg text-[#667085]">Opt Out</div>
-               </div>
+                <div className="flex items-center gap-1">
+                  <span className="h-4 w-2 rounded-full bg-[#B0E5FD]"></span>
+                  <div className="text-lg text-[#667085]">Opt Out</div>
+                </div>
                 <div className="font-medium text-[22px]">215</div>
               </div>
             </div>
@@ -361,187 +439,187 @@ const Analytics = (props: Props) => {
             />
           </div>
         </div>
-       <div className="w-full overflow-x-auto px-4">
-       <table className="w-full b">
-          <thead className="text-grey-600 rounded sticky top-0 z-10">
-            <tr className="bg-[#F9FAFB]">
-              <th className="pl-6 pr-2 py-2 rounded-s-lg">
-                <div className="flex items-center text-nowrap gap-2 text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                  <Checkbox
-                    checked={isAllSelected}
-                    indeterminate={isIndeterminate}
-                    onClick={handleSelectAll}
-                  />
-                  <span> Campaign Name</span>
-                  <div
-                    onClick={() => handleSort("campaign")}
-                    className={` transition-transform duration-300   ${
-                      sortConfig?.key === "campaign" &&
-                      sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                    }`}
-                  >
-                    <ArrowUp color={"#5D6679"} />
-                  </div>
-                </div>
-              </th>
-              <th className="p-2">
-                <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                  Date
-                  <div
-                    onClick={() => handleSort("date")}
-                    className={` transition-transform duration-300   ${
-                      sortConfig?.key === "date" &&
-                      sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                    }`}
-                  >
-                    <ArrowUp color={"#5D6679"} />
-                  </div>
-                </div>
-              </th>
-              <th className="p-2">
-                <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                  Clicked
-                  <div
-                    onClick={() => handleSort("clicked")}
-                    className={` transition-transform duration-300   ${
-                      sortConfig?.key === "clicked" &&
-                      sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                    }`}
-                  >
-                    <ArrowUp color={"#5D6679"} />
-                  </div>
-                </div>
-              </th>
-              <th className="p-2">
-                <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                  Opt In
-                  <div
-                    onClick={() => handleSort("open")}
-                    className={` transition-transform duration-300   ${
-                      sortConfig?.key === "open" &&
-                      sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                    }`}
-                  >
-                    <ArrowUp color={"#5D6679"} />
-                  </div>
-                </div>
-              </th>
-              <th className="p-2" onClick={() => handleSort("clicked")}>
-                <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                  Opt Out
-                  <div
-                    className={` transition-transform duration-300   ${
-                      sortConfig?.key === "clicked" &&
-                      sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                    }`}
-                  >
-                    <ArrowUp color={"#5D6679"} />
-                  </div>
-                </div>
-              </th>
-              <th className="p-2 rounded-e-lg">
-                <div className="flex items-center text-nowrap  text-[#5D6679] text-sm font-medium">
-                  Status
-                </div>
-              </th>
-            </tr>
-          </thead>
-          {campaigns.length != 0 && (
-            <tbody>
-              {getFilteredCampaigns().map((campaign, index) => (
-                <tr
-                  key={index}
-                  className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
-                >
-                  <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
+        <div className="w-full overflow-x-auto px-4">
+          <table className="w-full b">
+            <thead className="text-grey-600 rounded sticky top-0 z-10">
+              <tr className="bg-[#F9FAFB]">
+                <th className="pl-6 pr-2 py-2 rounded-s-lg">
+                  <div className="flex items-center text-nowrap gap-2 text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                     <Checkbox
-                      checked={selectedItems.includes(index)}
-                      onClick={() => handleSelectItem(index)}
-                    />{" "}
+                      checked={isAllSelected}
+                      indeterminate={isIndeterminate}
+                      onClick={handleSelectAll}
+                    />
+                    <span> Campaign Name</span>
                     <div
-                      className={`h-5 w-5 p-4 flex items-center justify-center shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] border ${
-                        campaign.status === "Draft" &&
-                        "bg-grey-50 border-[#475467]"
-                      }  ${
-                        campaign.status === "Active" &&
-                        "border-warning-500 bg-warning-50"
-                      }
+                      onClick={() => handleSort("campaign")}
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "campaign" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2">
+                  <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                    Date
+                    <div
+                      onClick={() => handleSort("date")}
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "date" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2">
+                  <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                    Clicked
+                    <div
+                      onClick={() => handleSort("clicked")}
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "clicked" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2">
+                  <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                    Opt In
+                    <div
+                      onClick={() => handleSort("open")}
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "open" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2" onClick={() => handleSort("clicked")}>
+                  <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                    Opt Out
+                    <div
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "clicked" &&
+                        sortConfig.direction === "asc"
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                    >
+                      <ArrowUp color={"#5D6679"} />
+                    </div>
+                  </div>
+                </th>
+                <th className="p-2 rounded-e-lg">
+                  <div className="flex items-center text-nowrap  text-[#5D6679] text-sm font-medium">
+                    Status
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            {campaigns.length != 0 && (
+              <tbody>
+                {getFilteredCampaigns().map((campaign, index) => (
+                  <tr
+                    key={index}
+                    className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
+                  >
+                    <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
+                      <Checkbox
+                        checked={selectedItems.includes(index)}
+                        onClick={() => handleSelectItem(index)}
+                      />{" "}
+                      <div
+                        className={`h-5 w-5 p-4 flex items-center justify-center shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] border ${
+                          campaign.status === "Draft" &&
+                          "bg-grey-50 border-[#475467]"
+                        }  ${
+                          campaign.status === "Active" &&
+                          "border-warning-500 bg-warning-50"
+                        }
                          ${
                            campaign.status === "Completed" &&
                            "bg-success-50 border-success-500 "
                          } rounded-lg`}
-                    >
-                      <SendAlt
-                        color={
-                          campaign.status === "Active"
-                            ? "#DD9316"
-                            : campaign.status === "Completed"
-                            ? "#0F973D"
-                            : "#667085"
-                        }
-                      />
-                    </div>
-                    {campaign.campaign}
-                  </td>
-                  <td className="text-sm font-medium text-grey-800 p-2 pr-8">
-                    {campaign.date}
-                  </td>
-                  <td className="text-sm font-medium text-grey-800 p-2">
-                    {campaign.clicked}
-                  </td>
-                  <td className="text-sm font-medium text-grey-800 p-2">
-                    {campaign.delivered}
-                  </td>
-                  <td className="text-sm font-medium text-grey-800 p-2">
-                    {campaign.open}
-                  </td>
+                      >
+                        <SendAlt
+                          color={
+                            campaign.status === "Active"
+                              ? "#DD9316"
+                              : campaign.status === "Completed"
+                              ? "#0F973D"
+                              : "#667085"
+                          }
+                        />
+                      </div>
+                      {campaign.campaign}
+                    </td>
+                    <td className="text-sm font-medium text-grey-800 p-2 pr-8">
+                      {campaign.date}
+                    </td>
+                    <td className="text-sm font-medium text-grey-800 p-2">
+                      {campaign.clicked}
+                    </td>
+                    <td className="text-sm font-medium text-grey-800 p-2">
+                      {campaign.delivered}
+                    </td>
+                    <td className="text-sm font-medium text-grey-800 p-2">
+                      {campaign.open}
+                    </td>
 
-                  <td className="text-sm font-medium text-grey-800 p-2">
-                    <div className="flex gap-x-6 justify-start">
-                      <div className="w-[100px]">
-                        {" "}
-                        <p
-                          className={`flex items-center min-h-[24px] w-fit   justify-center text-sm font-medium py-[2px] pl-[8px] pr-[10px]   gap-[6px] rounded-2xl ${
-                            campaign.status === "Draft"
-                              ? "bg-[#F2F4F7] text-[#344054] "
-                              : campaign.status === "Active"
-                              ? "text-warning-500 bg-warning-50"
-                              : "bg-success-50 text-success-500 "
-                          }`}
-                        >
-                          <div
-                            className={`h-[6px] w-[6px] rounded-full ${
+                    <td className="text-sm font-medium text-grey-800 p-2">
+                      <div className="flex gap-x-6 justify-start">
+                        <div className="w-[100px]">
+                          {" "}
+                          <p
+                            className={`flex items-center min-h-[24px] w-fit   justify-center text-sm font-medium py-[2px] pl-[8px] pr-[10px]   gap-[6px] rounded-2xl ${
                               campaign.status === "Draft"
-                                ? "bg-[#667085] "
+                                ? "bg-[#F2F4F7] text-[#344054] "
                                 : campaign.status === "Active"
-                                ? "bg-warning-500 "
-                                : "bg-success-500"
+                                ? "text-warning-500 bg-warning-50"
+                                : "bg-success-50 text-success-500 "
                             }`}
-                          ></div>{" "}
-                          <span> {campaign.status}</span>
-                        </p>
+                          >
+                            <div
+                              className={`h-[6px] w-[6px] rounded-full ${
+                                campaign.status === "Draft"
+                                  ? "bg-[#667085] "
+                                  : campaign.status === "Active"
+                                  ? "bg-warning-500 "
+                                  : "bg-success-500"
+                              }`}
+                            ></div>{" "}
+                            <span> {campaign.status}</span>
+                          </p>
+                        </div>
+                        <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
+                          <DotV color="#101928" />
+                        </div>
                       </div>
-                      <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
-                        <DotV color="#101928" />
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          )}
-        </table>
-       </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
+          </table>
+        </div>
       </div>
     </div>
   );
