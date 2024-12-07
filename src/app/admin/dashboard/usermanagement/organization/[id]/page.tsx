@@ -344,7 +344,7 @@ const OrganizationId = (props: Props) => {
                     <MapMarker color="#667085" height={20} width={20} />{" "}
                     <p className="text-grey-500 text-[13px]">
                       Off Ladi Kwali Way before the mango tree at the junction
-                      with a yellow gate beside the house{" "}
+                      with a yellow gate beside the house
                     </p>
                   </div>
                 </div>
@@ -389,7 +389,7 @@ const OrganizationId = (props: Props) => {
                     }`}
                   >
                     <SendAlt
-                      color={status === "Active" ? "black" : "#0F973D"}
+                      color={status === "Active" ? "#004768" : "#0F973D"}
                     />
                   </div>
                   {index < activities.length - 1 && (
