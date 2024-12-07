@@ -8,13 +8,13 @@ import InputField from "./InputField";
 // Import custom CSS to hide the left UI
 interface MyDateRangePickerProps {
   handleDateRangeChange: (startDate: Date, endDate: Date) => void;
-  setFilteredTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>;
+
   setIsCalenderOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DateRangePicker: React.FC<MyDateRangePickerProps> = ({
   handleDateRangeChange,
-  setFilteredTransactions,
+
   setIsCalenderOpen,
 }) => {
   const [state, setState] = useState<Range[]>([

@@ -24,7 +24,7 @@ const AdjustOrganizationModal = ({ isOpen, setIsOpen }: Props) => {
         <div
           onClick={(e) => e.stopPropagation()}
           className={`max-w-[523px] w-full h-fit min-h-32 bg-white rounded-2xl mt-[5rem] p-6 pb-10 ease-in-out transition-all duration-700 ${
-            isOpen ? "-translate-y-0 " : " -translate-y-[150%]"
+            isOpen ? "opacity-[100%] " : " opacity-0"
           }`}
         >
           <div className="flex items-start justify-between">
@@ -46,7 +46,10 @@ const AdjustOrganizationModal = ({ isOpen, setIsOpen }: Props) => {
                 </p>
               </div>
             </div>
-            <div   onClick={() => setIsOpen(false)} className="h-8 w-8 rounded-lg cursor-pointer p-2 flex items-center justify-center border border-[#E4E7EC]">
+            <div
+              onClick={() => setIsOpen(false)}
+              className="h-8 w-8 rounded-lg cursor-pointer p-2 flex items-center justify-center border border-[#E4E7EC]"
+            >
               <Multiply color="#101928" height={16} width={16} />
             </div>
           </div>

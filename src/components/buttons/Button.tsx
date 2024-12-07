@@ -39,7 +39,7 @@ const Button = ({
       <button
         onClick={onClick}
         disabled={disabled}
-        className={`font-semibold 
+        className={`font-semibold whitespace-nowrap
            ${
              size == "sm" &&
              icon_style === "txt" &&

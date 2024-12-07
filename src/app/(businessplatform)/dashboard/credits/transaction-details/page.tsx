@@ -14,7 +14,6 @@ import Image from "next/image";
 
 type Props = {};
 
-
 type TransactionData = {
   transactionCode: string;
   date: string;
@@ -36,7 +35,6 @@ const transactionData: TransactionData = {
   status: "Successful",
 };
 
-
 const TransactionDetails = (props: Props) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [istransaction, setIsTransaction] = useState<boolean>(false);
@@ -55,14 +53,18 @@ const TransactionDetails = (props: Props) => {
     try {
       // Create PDF with slightly larger width for better spacing
       const pdf = new jsPDF({
-        unit: 'mm',
-        format: 'a4',
+        unit: "mm",
+        format: "a4",
       });
-      
+
       const pageWidth = pdf.internal.pageSize.getWidth();
-      
+
       // Helper function to add justified text
-      const addJustifiedText = (leftText: string, rightText: string, y: number) => {
+      const addJustifiedText = (
+        leftText: string,
+        rightText: string,
+        y: number
+      ) => {
         pdf.text(leftText, 20, y); // Left margin at 20mm
         const rightTextWidth = pdf.getTextWidth(rightText);
         pdf.text(rightText, pageWidth - 20 - rightTextWidth, y); // Right margin at 20mm
@@ -70,7 +72,7 @@ const TransactionDetails = (props: Props) => {
 
       const loadImage = () => {
         return new Promise<HTMLImageElement>((resolve, reject) => {
-          const img = document.createElement('img');
+          const img = document.createElement("img");
           img.src = "logo";
           img.onload = () => resolve(img);
           img.onerror = () => reject(new Error("Failed to load logo"));
@@ -79,7 +81,7 @@ const TransactionDetails = (props: Props) => {
 
       try {
         // const img = await loadImage();
-        
+
         // const canvas = document.createElement('canvas');
         // canvas.width = img.width;
         // canvas.height = img.height;
@@ -87,11 +89,11 @@ const TransactionDetails = (props: Props) => {
         // if (ctx) {
         //   ctx.drawImage(img, 0, 0);
         //   const imageData = canvas.toDataURL('image/png');
-          
+
         //   // Add logo
         //   pdf.addImage(imageData, "PNG", 20, 20, 30, 30);
         // }
-        
+
         // Title and Company Name (centered)
         pdf.setFontSize(18);
         const title = "Transaction Receipt";
@@ -114,19 +116,28 @@ const TransactionDetails = (props: Props) => {
           ["Date & Time", transactionData.date],
           ["Transaction Type", transactionData.transactionType],
           ["Description", transactionData.description],
-          ["Credit Amount Spent", `$${transactionData.amountSpent.toLocaleString()}`],
+          [
+            "Credit Amount Spent",
+            `$${transactionData.amountSpent.toLocaleString()}`,
+          ],
           ["Credit Balance", `$${transactionData.balance.toLocaleString()}`],
         ];
 
         // Add each detail with justified text
         details.forEach(([label, value], index) => {
-          addJustifiedText(label, value.toString(), 75 + (index * 10));
+          addJustifiedText(label, value.toString(), 75 + index * 10);
         });
 
         // Status (special handling for color)
-        pdf.setTextColor(transactionData.status === "Successful" ? "#0B6B2B" : "#FF0000");
-        addJustifiedText("Status", transactionData.status, 75 + (details.length * 10));
-        
+        pdf.setTextColor(
+          transactionData.status === "Successful" ? "#0B6B2B" : "#FF0000"
+        );
+        addJustifiedText(
+          "Status",
+          transactionData.status,
+          75 + details.length * 10
+        );
+
         // Reset text color
         pdf.setTextColor("#000000");
 
@@ -136,7 +147,7 @@ const TransactionDetails = (props: Props) => {
         //   pdf.setDrawColor(200, 200, 200); // Light gray color for lines
         //   pdf.line(20, y, pageWidth - 20, y);
         // });
-        
+
         // Save PDF
         pdf.save("transaction_receipt.pdf");
       } catch (error) {
@@ -155,7 +166,7 @@ const TransactionDetails = (props: Props) => {
         <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
           <Money1 color="black" />
         </div>
-      
+
         <div className="flex flex-col gap-1">
           <p className="text-lg font-semibold">
             Credits <span className="text-[#D0D5DD] text-xs mx-2">/</span>

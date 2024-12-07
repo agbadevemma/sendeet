@@ -278,7 +278,10 @@ const OrganizationId = (props: Props) => {
       </div>
       <div className="w-full mt-8 rounded-[12px] p-4 border border-[#E4E7EC]">
         <div className="w-full flex max-w-[810px] gap-3">
-          <Link href={"/admin/dashboard/usermanagement/organization"} replace={true}>
+          <Link
+            href={"/admin/dashboard/usermanagement/organization"}
+            replace={true}
+          >
             <Button
               iconComponent={<ChevronLeft color="black" />}
               className="!p-2 !w-8 !h-8"
@@ -549,7 +552,6 @@ const OrganizationId = (props: Props) => {
                         <div className="absolute z-30 w-full flex items-center justify-center lg:block lg:w-fit   left-1 lg:-left-[32rem] lg:right-32  mt-2">
                           <DateRangePicker
                             handleDateRangeChange={handleDateRangeChange}
-                            setFilteredTransactions={setFilteredTransactions}
                             setIsCalenderOpen={setIsCalenderOpen}
                           />
                         </div>

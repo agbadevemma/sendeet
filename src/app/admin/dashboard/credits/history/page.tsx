@@ -1,34 +1,49 @@
-"use client"
-import Button from '@/components/buttons/Button';
-import Checkbox from '@/components/Checkbox';
-import Pagination from '@/components/Pagination';
-import SearchInput from '@/components/SearchInput';
-import ArrowUp from '@/icons/arrow-up';
+"use client";
+import Button from "@/components/buttons/Button";
+import Checkbox from "@/components/Checkbox";
+import Pagination from "@/components/Pagination";
+import SearchInput from "@/components/SearchInput";
+import ArrowUp from "@/icons/arrow-up";
 import illustration from "../../../../../images/illustration3.svg";
-import DotV from '@/icons/dot-v';
-import Eye from '@/icons/eye';
-import FilterAlt from '@/icons/filter-alt';
-import Money1 from '@/icons/money-1';
-import { CreditHistory, creditHistory} from '@/utils/data';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react'
-import SearchIcon from '@/icons/search-icon';
+import DotV from "@/icons/dot-v";
+import Eye from "@/icons/eye";
+import FilterAlt from "@/icons/filter-alt";
+import Money1 from "@/icons/money-1";
+import { CreditHistory, creditHistory } from "@/utils/data";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
+import SearchIcon from "@/icons/search-icon";
+import Calendar from "@/icons/calendar";
+import DateRangePicker from "@/components/DateRangePicker";
+import TransactionalDetailsModal from "@/components/admin/TransactionalDetailsModal ";
 
-type Props = {}
+type Props = {};
 
 const History = (props: Props) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [organizationsData, setOrganizationsData] =
+  const calendarRef = useRef<HTMLDivElement>(null);
+  const [isCalenderOpen, setIsCalenderOpen] = useState<boolean>(false);
+  const [filter, setFilter] = useState<Array<string>>([]);
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    startDate: Date | null;
+    endDate: Date | null;
+  }>({ startDate: null, endDate: null });
+
+  const [creditHistoryData, setCreditHistoryData] =
     useState<CreditHistory[]>(creditHistory);
+  const [creditFilterHistoryData, setCreditFilterHistoryData] =
+    useState<CreditHistory[]>(creditHistory);
+
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
   const isAllSelected =
-    organizationsData.length > 0 &&
-    selectedItems.length === organizationsData.length;
+    creditHistoryData.length > 0 &&
+    selectedItems.length === creditHistoryData.length;
   const isIndeterminate =
-    selectedItems.length > 0 && selectedItems.length < organizationsData.length;
+    selectedItems.length > 0 && selectedItems.length < creditHistoryData.length;
   const [sortConfig, setSortConfig] = useState<{
     key: keyof CreditHistory;
     direction: "asc" | "desc";
@@ -40,25 +55,33 @@ const History = (props: Props) => {
         ? "desc"
         : "asc";
 
-    const sortedOrganizations = [...organizationsData].sort((a, b) => {
+    const sortedOrganizations = [...creditHistoryData].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
     });
 
     setSortConfig({ key, direction });
-    setOrganizationsData(sortedOrganizations);
+    setCreditHistoryData(sortedOrganizations);
   };
 
   // Function to handle "select all" checkbox
   const handleSelectAll = () => {
-    if (selectedItems.length < organizationsData.length) {
-      // Select all organizationsData
-      setSelectedItems(organizationsData.map((_, index) => index));
+    if (selectedItems.length < creditHistoryData.length) {
+      // Select all creditHistoryData
+      setSelectedItems(creditHistoryData.map((_, index) => index));
     } else {
       // Deselect all
       setSelectedItems([]);
     }
+  };
+  // Utility function to parse date in "DD/MM/YY" format
+  const parseDate = (dateString: string) => {
+    const [day, month, year] = dateString
+      .split("/")
+      .map((part) => parseInt(part, 10));
+    const fullYear = year < 100 ? 2000 + year : year; // Handle two-digit year
+    return new Date(fullYear, month - 1, day); // Month is 0-based in Date constructor
   };
 
   const getFilteredOrganizations = () => {
@@ -68,7 +91,10 @@ const History = (props: Props) => {
       "creditPurchased",
     ];
 
-    return organizationsData.filter((organization) => {
+    return creditHistoryData.filter((organization) => {
+      // Parse the date string into a Date object
+      const organizationDate = parseDate(organization.date);
+
       // Check if any of the specified fields match the search query
       const matchesFields = searchableFields.some((field) =>
         organization[field]
@@ -82,8 +108,17 @@ const History = (props: Props) => {
         ?.toLowerCase()
         .includes(searchQuery.toLowerCase());
 
+      const matchesDateRange =
+        selectedDateRange.startDate &&
+        selectedDateRange.endDate &&
+        organizationDate >= selectedDateRange.startDate &&
+        organizationDate <= selectedDateRange.endDate;
+
       // Return true if any condition matches
-      return matchesFields || matchesRegistrationDate;
+      return (
+        (matchesFields || matchesRegistrationDate) &&
+        (!selectedDateRange.startDate || matchesDateRange)
+      );
     });
   };
 
@@ -99,30 +134,103 @@ const History = (props: Props) => {
       }
     });
   };
+  const formatDate = (date: Date | undefined | null) => {
+    if (!date) {
+      return "No date available";
+    }
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }).format(date);
+  };
+
+  const handleDateRangeChange = (startDate: Date, endDate: Date) => {
+    setSelectedDateRange({ startDate, endDate });
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      calendarRef.current &&
+      !calendarRef.current.contains(event.target as Node)
+    ) {
+      setIsCalenderOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
-      {/* <AdjustOrganizationModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} /> */}
-     
+      <TransactionalDetailsModal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+      />
 
       <div className="rounded-xl mt-7  h-full w-full border border-[#E4E7EC] ">
         <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
           <div className="text-lg font-medium flex flex-col">
-            <span className='text-[18px]'>Credit History</span>
-            <span className='text-[14px] text-[#667085] font-normal'>Keep track of credit purchases and usage</span>
+            <span className="text-[18px]">Credit History</span>
+            <span className="text-[14px] text-[#667085] font-normal">
+              Keep track of credit purchases and usage
+            </span>
           </div>
 
           <div className="flex gap items-center gap-x-[18px] ">
             <Button
               size="sm"
-              className="!h-[40px]"
+              className="!h-[44px]"
               text="Filters"
               icon_style="leading-icon"
               iconComponent={<FilterAlt color="#383E49" />}
             />
+            <div ref={calendarRef} className="relative">
+              <Button
+                size="sm"
+                iconComponent={<Calendar color="#383E49" />}
+                icon_style="leading-icon"
+                className={` !h-[44px] ${
+                  selectedDateRange.startDate === null
+                    ? ""
+                    : "!font-[480]  !text-sm !text-grey-800"
+                }`}
+                onClick={() => {
+                  if (selectedDateRange.startDate === null) {
+                    setIsCalenderOpen((prev) => !prev);
+                  } else {
+                    setSelectedDateRange({
+                      startDate: null,
+                      endDate: null,
+                    });
+                    setIsCalenderOpen((prev) => !prev);
+                  }
+                }}
+                text={
+                  selectedDateRange.startDate === null
+                    ? "Select dates"
+                    : `${formatDate(
+                        selectedDateRange.startDate
+                      )} - ${formatDate(selectedDateRange.endDate)}`
+                }
+              />
 
+              {isCalenderOpen && (
+                <div className="absolute z-30 w-full flex items-center justify-center lg:block lg:w-fit   left-1 lg:-left-[32rem] lg:right-32  mt-2">
+                  <DateRangePicker
+                    handleDateRangeChange={handleDateRangeChange}
+                    setIsCalenderOpen={setIsCalenderOpen}
+                  />
+                </div>
+              )}
+            </div>
             <SearchInput
               placeholder="Search"
-              className1="!h-[40px] !max-w-[177px] !w-full"
+              className="!h-[40px] !max-w-[177px] !w-full"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               icon={<SearchIcon color="#667085" />}
@@ -171,7 +279,7 @@ const History = (props: Props) => {
               </th>
               <th className="p-2">
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                Transaction Code
+                  Transaction Code
                   <div
                     onClick={() => handleSort("transactionCode")}
                     className={` transition-transform duration-300   ${
@@ -187,7 +295,7 @@ const History = (props: Props) => {
               </th>
               <th className="p-2">
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                Credit Purchased
+                  Credit Purchased
                   <div
                     onClick={() => handleSort("creditPurchased")}
                     className={` transition-transform duration-300   ${
@@ -203,7 +311,7 @@ const History = (props: Props) => {
               </th>
               <th className="p-2">
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                Credit Used
+                  Credit Used
                   <div
                     onClick={() => handleSort("creditUsed")}
                     className={` transition-transform duration-300   ${
@@ -219,7 +327,7 @@ const History = (props: Props) => {
               </th>
               <th className="p-2">
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                 Status
+                  Status
                 </div>
               </th>
               <th className="p-2">
@@ -269,23 +377,16 @@ const History = (props: Props) => {
                     </div>
                   </td>
                   <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
-                    <Link
-                      href={`/admin/dashboard/usermanagement/organization/${org.id}`}
-                    >
-                      {" "}
+                  
                       <Button
                         size="sm"
                         icon_style="icon-only"
+                        onClick={() => setIsModalOpen(true)}
                         iconComponent={<Eye color="#858D9D" />}
                         text="Edit"
                       />
-                    </Link>
-                    <Button
-                      size="sm"
-                      onClick={() => setIsModalOpen(true)}
-                      iconComponent={<Money1 color="#858D9D" />}
-                      icon_style="icon-only"
-                    />
+                   
+
                     <Button
                       size="sm"
                       iconComponent={<DotV color="#858D9D" />}
@@ -316,4 +417,4 @@ const History = (props: Props) => {
     </div>
   );
 };
-export default History
+export default History;

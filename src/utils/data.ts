@@ -543,7 +543,7 @@ export const creditHistory: CreditHistory[] = [
   {
     id: 1,
     organizationName: "Tech Innovators Inc.",
-    date: "01/15/24",
+    date: "01/12/24",
     transactionCode: "123456789",
     creditPurchased: "2300",
     creditUsed: "1200",
@@ -561,7 +561,7 @@ export const creditHistory: CreditHistory[] = [
   {
     id: 3,
     organizationName: "Healthcare United",
-    date: "01/25/24",
+    date: "01/10/24",
     transactionCode: "112233445",
     creditPurchased: "3200",
     creditUsed: "2800",
@@ -570,7 +570,7 @@ export const creditHistory: CreditHistory[] = [
   {
     id: 4,
     organizationName: "Bright Minds Education",
-    date: "02/05/24",
+    date: "02/11/24",
     transactionCode: "556677889",
     creditPurchased: "500",
     creditUsed: "450",
@@ -579,7 +579,7 @@ export const creditHistory: CreditHistory[] = [
   {
     id: 5,
     organizationName: "Global Freight Corp.",
-    date: "01/30/24",
+    date: "01/12/24",
     transactionCode: "998877665",
     creditPurchased: "2750",
     creditUsed: "2200",
@@ -588,7 +588,7 @@ export const creditHistory: CreditHistory[] = [
   {
     id: 6,
     organizationName: "Solar Power Network",
-    date: "02/01/24",
+    date: "02/12/24",
     transactionCode: "334455667",
     creditPurchased: "1200",
     creditUsed: "1100",
@@ -597,7 +597,7 @@ export const creditHistory: CreditHistory[] = [
   {
     id: 7,
     organizationName: "Visionary Designs Co.",
-    date: "01/20/24",
+    date: "01/09/24",
     transactionCode: "443322110",
     creditPurchased: "2100",
     creditUsed: "1700",
@@ -615,7 +615,7 @@ export const creditHistory: CreditHistory[] = [
   {
     id: 9,
     organizationName: "Urban Living Architects",
-    date: "01/28/24",
+    date: "01/10/24",
     transactionCode: "665544332",
     creditPurchased: "950",
     creditUsed: "850",
@@ -624,7 +624,7 @@ export const creditHistory: CreditHistory[] = [
   {
     id: 10,
     organizationName: "Fresh Farm Organics",
-    date: "02/08/24",
+    date: "02/11/24",
     transactionCode: "778899001",
     creditPurchased: "1500",
     creditUsed: "1400",
