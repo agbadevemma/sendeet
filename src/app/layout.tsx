@@ -6,7 +6,7 @@ import StoreProvider from "./StoreProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GlobalLoading from "@/components/GlobalLoading";
-import ClientOnly from "@/components/ClientOnly";
+
 
 const inter = Inter({
   subsets: ["latin"],

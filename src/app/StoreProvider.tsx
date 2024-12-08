@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore, AppStore } from "../lib/store";
-import ClientOnly from "@/components/ClientOnly";
+
 import GlobalLoading from "@/components/GlobalLoading";
 
 export default function StoreProvider({
