@@ -5,6 +5,7 @@ import Multiply from "@/icons/multiply";
 import InputField from "../InputField";
 import CheckCircle from "@/icons/check-circle";
 import { toast } from "react-toastify";
+import SuccessToast from "../SuccessToast";
 
 type Props = {
   isOpen: boolean;
@@ -91,36 +92,45 @@ const AdjustOrganizationModal = ({ isOpen, setIsOpen }: Props) => {
               size="md"
               onClick={() => {
                 toast.success(
-                  <div className="flex items-start justify-between w-full  py-2 px-4 ">
-                    <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
-                      {" "}
-                      <CheckCircle color="#0F973D" />
-                    </div>
-                    <div className="gap-1 flex flex-col mr-4 ">
-                      <p className="!text-[14px] !font-medium text-[#101828]">
-                        Credits Added
-                      </p>
-                      <p className=" !text-[14px] !font-normal text-[#667085]">
-                        Credits successfully topped up for SkyHigh Travel Co.
-                      </p>
-                    </div>
-                  </div>,
-
+                  <SuccessToast
+                    message="Credits Added"
+                    details="Credits successfully topped up for SkyHigh Travel Co."
+                  />,
                   {
-                    style: {
-                      width: "100%", // Adjust width as needed
-                      maxWidth: "",
-                    },
-                    className:
-                      " text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]  ", // Tailwind classes
-                    bodyClassName:
-                      "text-sm  flex flex-col w-full max-w-[400px]  !w-full !p-12",
-                    progressClassName: "bg-red-200",
-                    icon: false,
-
-                    // closeButton: false,
+                    icon: false, // Optional: Disable default icon
                   }
                 );
+                // toast.success(
+                //   <div className="flex items-start justify-between w-full  py-2 px-4 ">
+                //     <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
+                //       {" "}
+                //       <CheckCircle color="#0F973D" />
+                //     </div>
+                //     <div className="gap-1 flex flex-col mr-4 ">
+                //       <p className="!text-[14px] !font-medium text-[#101828]">
+                //         Credits Added
+                //       </p>
+                //       <p className=" !text-[14px] !font-normal text-[#667085]">
+                //         Credits successfully topped up for SkyHigh Travel Co.
+                //       </p>
+                //     </div>
+                //   </div>,
+
+                //   {
+                //     style: {
+                //       width: "100%", // Adjust width as needed
+                //       maxWidth: "",
+                //     },
+                //     className:
+                //       " text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]  ", // Tailwind classes
+                //     bodyClassName:
+                //       "text-sm  flex flex-col w-full max-w-[400px]  !w-full !p-12",
+                //     progressClassName: "bg-red-200",
+                //     icon: false,
+
+                //     // closeButton: false,
+                //   }
+                // );
                 setIsOpen(false);
               }}
             />

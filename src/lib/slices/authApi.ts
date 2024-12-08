@@ -1,4 +1,5 @@
 // redux/authApi.ts
+import { withLoading } from "@/utils/withLoading";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface LoginRequest {
@@ -19,7 +20,13 @@ interface SignupRequest {
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api/auth" }), // Adjust the base URL to match your API
+  baseQuery: fetchBaseQuery({
+    baseUrl: "/api/auth",
+    prepareHeaders: (headers) => {
+      headers.set("Content-Type", "application/json");
+      return headers;
+    },
+  }), // Adjust the base URL to match your API
   endpoints: (builder) => ({
     signup: builder.mutation<LoginResponse, SignupRequest>({
       query: (userData) => ({
@@ -27,6 +34,7 @@ export const authApi = createApi({
         method: "POST",
         body: userData,
       }),
+      onQueryStarted: withLoading(),
     }),
     login: builder.mutation<LoginResponse, LoginRequest>({
       query: (credentials) => ({
@@ -34,6 +42,7 @@ export const authApi = createApi({
         method: "POST",
         body: credentials,
       }),
+      onQueryStarted: withLoading(),
     }),
     verifyOtp: builder.mutation({
       query: (otp: string) => ({
@@ -41,8 +50,10 @@ export const authApi = createApi({
         method: "POST",
         body: { otp },
       }),
+      onQueryStarted: withLoading(),
     }),
   }),
 });
 
-export const { useSignupMutation, useLoginMutation,useVerifyOtpMutation } = authApi;
+export const { useSignupMutation, useLoginMutation, useVerifyOtpMutation } =
+  authApi;

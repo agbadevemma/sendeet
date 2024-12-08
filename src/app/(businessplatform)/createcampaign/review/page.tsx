@@ -20,6 +20,7 @@ import CheckCircle from "@/icons/check-circle";
 import ShareAlt from "@/icons/share-alt";
 import preview from "../../../../images/preview.png";
 import doc from "../../../../images/Doc.svg";
+import SuccessToast from "@/components/SuccessToast";
 type Props = {};
 
 const Review = (props: Props) => {
@@ -165,36 +166,46 @@ const Review = (props: Props) => {
               />
               <Link
                 onClick={() => {
+                  
                   toast.success(
-                    <div className="flex items-start justify-between w-full  py-2 px-4 ">
-                      <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
-                        {" "}
-                        <CheckCircle color="#0F973D" />
-                      </div>
-                      <div className="gap-1 flex flex-col mr-4 text-[#667085]">
-                        <p className="] text-sm !font-bold">
-                          Yay....Campaign successfully created
-                        </p>
-                        <p className=" !text-[14px] ">
-                          Your campaign has been successfully scheduled
-                        </p>
-                      </div>
-                    </div>,
-
+                    <SuccessToast
+                      message="Yay....Campaign successfully created"
+                      details="Your campaign has been successfully scheduled"
+                    />,
                     {
-                      style: {
-                        width: "400px", // Adjust width as needed
-                        maxWidth: "90vw",
-                      },
-                      className: " text-white rounded-lg p-4 shadow-lg w-full", // Tailwind classes
-                      bodyClassName:
-                        "text-sm  flex flex-col w-full  !w-full !p-12",
-                      progressClassName: "bg-red-200",
-                      icon: false,
-
-                      // closeButton: false,
+                      icon: false, // Optional: Disable default icon
                     }
                   );
+                  // toast.success(
+                  //   <div className="flex items-start justify-between w-full  py-2 px-4 ">
+                  //     <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
+                  //       {" "}
+                  //       <CheckCircle color="#0F973D" />
+                  //     </div>
+                  //     <div className="gap-1 flex flex-col mr-4 text-[#667085]">
+                  //       <p className="] text-sm !font-bold">
+                  //         Yay....Campaign successfully created
+                  //       </p>
+                  //       <p className=" !text-[14px] ">
+                  //         Your campaign has been successfully scheduled
+                  //       </p>
+                  //     </div>
+                  //   </div>,
+
+                  //   {
+                  //     style: {
+                  //       width: "400px", // Adjust width as needed
+                  //       maxWidth: "90vw",
+                  //     },
+                  //     className: " text-white rounded-lg p-4 shadow-lg w-full", // Tailwind classes
+                  //     bodyClassName:
+                  //       "text-sm  flex flex-col w-full  !w-full !p-12",
+                  //     progressClassName: "bg-red-200",
+                  //     icon: false,
+
+                  //     // closeButton: false,
+                  //   }
+                  // );
 
                   // dispatch(closeModal());
                 }}

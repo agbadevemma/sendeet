@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import miscellaneousReducer from "../lib/slices/miscellaneousSlice";
+import loadingReducer from "../lib/slices/loadingSlice";
 import { authApi } from "./slices/authApi";
 export const makeStore = () => {
   return configureStore({
     reducer: {
       miscellaneous: miscellaneousReducer,
+      loading: loadingReducer,
       [authApi.reducerPath]: authApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>

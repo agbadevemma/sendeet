@@ -1,12 +1,14 @@
 "use client";
 import Button from "@/components/buttons/Button";
 import OtpFields from "@/components/OtpFields";
+import SuccessToast from "@/components/SuccessToast";
 import { useAppDispatch } from "@/lib/hooks";
 import { useVerifyOtpMutation } from "@/lib/slices/authApi";
 import { toggleBasicInfo } from "@/lib/slices/miscellaneousSlice";
 import Link from "next/link";
 import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -22,25 +24,27 @@ const Verification = () => {
   const handleToggleOTPFields = () => {
     setShowOTPFields((prev) => !prev);
   };
-  const handleOnclick = async() => {
-    console.log(otp.join(''));
+  const handleOnclick = async () => {
+    console.log(otp.join(""));
     try {
       const response = await verifyOtp(otp.join("")).unwrap();
-      console.log('OTP Verified:', response);
+      console.log("OTP Verified:", response);
       // dispatch(toggleBasicInfo(true));
     } catch (err) {
-      console.error("Error verifying OTP:", err);
+      // toast.error("Error verifying OTP");
+      toast.success(
+        <SuccessToast
+          message="Credits Added"
+          details="Credits successfully topped up for SkyHigh Travel Co."
+        />,
+        {
+          icon: false, // Optional: Disable default icon
+        }
+      );
+      console.log("Error verifying OTP:", err);
     }
   };
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await verifyOtp(otp.join("")).unwrap();
-  //     console.log('OTP Verified:', response);
-  //   } catch (err) {
-  //     console.error("Error verifying OTP:", err);
-  //   }
-  // };
+
   return (
     <div>
       <p className="text-display-xs lg:text-display-sm font-semibold mt-8">

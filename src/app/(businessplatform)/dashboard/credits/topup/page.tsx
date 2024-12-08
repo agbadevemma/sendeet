@@ -14,6 +14,7 @@ import { useRouterWithLoading } from "@/hooks/useRouterLoading";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import CheckCircle from "@/icons/check-circle";
+import SuccessToast from "@/components/SuccessToast";
 
 type Props = {};
 
@@ -121,37 +122,46 @@ const Topup = (props: Props) => {
                   return;
                 }
                 toast.success(
-                  <div className="flex items-start justify-between w-full  py-2 px-4 ">
-                    <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
-                      {" "}
-                      <CheckCircle color="#0F973D" />
-                    </div>
-
-                    <div className="gap-1 flex flex-col mr-4 ">
-                      <p className="!text-[14px] !font-medium text-[#101828]">
-                        Payment successful
-                      </p>
-                      <p className=" !text-[14px] !font-normal text-[#667085]">
-                        500 credits have been added to your account
-                      </p>
-                    </div>
-                  </div>,
-
+                  <SuccessToast
+                    message="Payment successful"
+                    details="500 credits have been added to your account"
+                  />,
                   {
-                    style: {
-                      width: "100%", // Adjust width as needed
-                      maxWidth: "",
-                    },
-                    className:
-                      " text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]  ", // Tailwind classes
-                    bodyClassName:
-                      "text-sm  flex flex-col w-full max-w-[400px]  !w-full !p-12",
-                    progressClassName: "bg-red-200",
-                    icon: false,
-
-                    // closeButton: false,
+                    icon: false, // Optional: Disable default icon
                   }
                 );
+                // toast.success(
+                //   <div className="flex items-start justify-between w-full  py-2 px-4 ">
+                //     <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
+                //       {" "}
+                //       <CheckCircle color="#0F973D" />
+                //     </div>
+
+                //     <div className="gap-1 flex flex-col mr-4 ">
+                //       <p className="!text-[14px] !font-medium text-[#101828]">
+                //         Payment successful
+                //       </p>
+                //       <p className=" !text-[14px] !font-normal text-[#667085]">
+                //         500 credits have been added to your account
+                //       </p>
+                //     </div>
+                //   </div>,
+
+                //   {
+                //     style: {
+                //       width: "100%", // Adjust width as needed
+                //       maxWidth: "",
+                //     },
+                //     className:
+                //       " text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]  ", // Tailwind classes
+                //     bodyClassName:
+                //       "text-sm  flex flex-col w-full max-w-[400px]  !w-full !p-12",
+                //     progressClassName: "bg-red-200",
+                //     icon: false,
+
+                //     // closeButton: false,
+                //   }
+                // );
 
                 router.push("/dashboard/credits");
               }}
