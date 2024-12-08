@@ -14,10 +14,12 @@ import Eye from "@/icons/eye";
 import { useState } from "react";
 import EyeSlash from "@/icons/eye-slash";
 import Mail from "@/icons/mail";
+import { useLoginMutation } from "@/lib/slices/authApi";
 type Props = {};
 
 const LoginPage = (props: Props) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [login, { isLoading, isError, error }] = useLoginMutation();
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -25,9 +27,15 @@ const LoginPage = (props: Props) => {
       password: "",
     },
     validationSchema: validationSchemaLogin,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("Form data:", values);
-      router.push("/dashboard");
+      try {
+        const data = await login(values).unwrap();
+        console.log("Token:", data.token);
+        router.push("/dashboard");
+      } catch (error: any) {
+        console.error("Login error:", error);
+      }
     },
   });
   return (
@@ -91,10 +99,11 @@ const LoginPage = (props: Props) => {
                   </Link>
                 </div>
                 <Button
-                  text="Continue"
+                  text=  {isLoading ? 'Logging in...' : 'Continue'}
                   className="mt-8"
                   size="lg"
                   type="primary"
+                
                 />
               </form>
               <div className="flex items-center mt-10 justify-center gap-1">

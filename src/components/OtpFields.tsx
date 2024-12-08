@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 
-type Props = {};
+type Props = {
+  otp: string[];
+  setOtp: React.Dispatch<React.SetStateAction<string[]>>;
+};
 
-const OtpFields: React.FC<Props> = () => {
-  const [otp, setOtp] = useState<string[]>(new Array(4).fill(""));
+const OtpFields: React.FC<Props> = ({otp, setOtp}) => {
   const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0);
   const [isResendActive, setIsResendActive] = useState<boolean>(false);
   const [resendTimer, setResendTimer] = useState<number>(60);
@@ -89,7 +91,6 @@ const OtpFields: React.FC<Props> = () => {
           //   placeholder={activeOTPIndex === index ? "8" : "-"}
           type="text"
           inputMode="numeric"
-        
           className={`max-w-[80px] lg:max-w-[80px] h-[80px] shadow-xs p-2 border spin-button-none bg-transparent outline-none text-center font-semibold text-[38px] font-manrope border-primary-300 border-solid transition mx-3 rounded-lg focus:ring-primary-50  focus:ring-4  text-primary-600 `}
           value={value}
           maxLength={1}

@@ -17,11 +17,13 @@ import EyeSlash from "@/icons/eye-slash";
 import Message from "@/icons/message";
 import Mail from "@/icons/mail";
 import secureLocalStorage from "react-secure-storage";
+import { useSignupMutation } from "@/lib/slices/authApi";
 
 type Props = {};
 
 const Signup = (props: Props) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [signup, { isLoading, isError, error }] = useSignupMutation();
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -29,9 +31,15 @@ const Signup = (props: Props) => {
       password: "",
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       router.replace("signup/verification");
-      secureLocalStorage.setItem("email", values.email);
+      try {
+        const data = await signup({ ...values, role: "business" }).unwrap();
+        console.log("value", data);
+      } catch (err: any) {
+        console.error("Registration error:", err);
+      }
+      // secureLocalStorage.setItem("email", values.email);
       console.log(values);
     },
   });
@@ -131,7 +139,7 @@ const Signup = (props: Props) => {
             </div>
           </div>
           <Button
-            text="Basic Info"
+            text={isLoading ? "Registering..." : "Basic Info"}
             size="lg"
             type="primary"
             icon_style="trailing icon"

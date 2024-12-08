@@ -2,6 +2,7 @@
 import Button from "@/components/buttons/Button";
 import OtpFields from "@/components/OtpFields";
 import { useAppDispatch } from "@/lib/hooks";
+import { useVerifyOtpMutation } from "@/lib/slices/authApi";
 import { toggleBasicInfo } from "@/lib/slices/miscellaneousSlice";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -11,15 +12,35 @@ type Props = {};
 
 const Verification = () => {
   const [showOTPFields, setShowOTPFields] = useState(false);
+  const [verifyOtp, { isLoading, isError, isSuccess, error }] =
+    useVerifyOtpMutation();
+  const [otp, setOtp] = useState<string[]>(new Array(4).fill(""));
+  console.log(otp);
+
   const dispatch = useAppDispatch();
 
   const handleToggleOTPFields = () => {
     setShowOTPFields((prev) => !prev);
   };
-  const handleOnclick = () => {
-    dispatch(toggleBasicInfo(true));
+  const handleOnclick = async() => {
+    console.log(otp.join(''));
+    try {
+      const response = await verifyOtp(otp.join("")).unwrap();
+      console.log('OTP Verified:', response);
+      // dispatch(toggleBasicInfo(true));
+    } catch (err) {
+      console.error("Error verifying OTP:", err);
+    }
   };
-
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await verifyOtp(otp.join("")).unwrap();
+  //     console.log('OTP Verified:', response);
+  //   } catch (err) {
+  //     console.error("Error verifying OTP:", err);
+  //   }
+  // };
   return (
     <div>
       <p className="text-display-xs lg:text-display-sm font-semibold mt-8">
@@ -30,23 +51,22 @@ const Verification = () => {
           ? "Enter the 4-digit code sent to "
           : "We sent a verification link to "}
         <span className="font-medium">
-          {String(secureLocalStorage.getItem("email")||"")}
+          {String(secureLocalStorage.getItem("email") || "")}
         </span>
       </p>
       <div className="flex w-full justify-center items-center  mt-8 gap-10"></div>
-      {showOTPFields && <OtpFields />}
+      {showOTPFields && <OtpFields setOtp={setOtp} otp={otp} />}
+      {/* <Link href={"basic-info"} replace={true}> */}
+      {/* </Link> */}
       {showOTPFields ? (
-        <Link href={"basic-info"} replace={true}>
-          {" "}
-          <Button
-            className="mt-8"
-            icon_style="txt"
-            size="lg"
-            type="primary"
-            onClick={showOTPFields ? handleOnclick : handleToggleOTPFields}
-            text={showOTPFields ? "Verify Email" : "Enter Code Manually"}
-          />
-        </Link>
+        <Button
+          className="mt-8"
+          icon_style="txt"
+          size="lg"
+          type="primary"
+          onClick={showOTPFields ? handleOnclick : handleToggleOTPFields}
+          text={showOTPFields ? "Verify Email" : "Enter Code Manually"}
+        />
       ) : (
         <Button
           className="mt-8"
