@@ -16,6 +16,7 @@
     "@types/react-date-range": "^1.4.9",
     "@types/recharts": "^1.8.29",
     "apexcharts": "^4.0.0",
+    "axios": "^1.7.9",
     "chart.js": "^4.4.6",
     "chartjs-chart-geo": "^4.3.4",
     "emoji-picker-react": "^4.12.0",
