@@ -12,7 +12,7 @@ import Plus from "@/icons/plus";
 import SearchIcon from "@/icons/search-icon";
 import SendAlt from "@/icons/send-alt";
 import UserAdd from "@/icons/user-add";
-import React from "react";
+import React, { useEffect } from "react";
 import img from "../../../images/illustration.svg";
 import Image from "next/image";
 import illustration from "../../../images/illustration2.svg";
@@ -21,21 +21,35 @@ import Campaign from "@/components/Campaign";
 import ArrowLeft from "@/icons/arrow-left";
 import ArrowRight from "@/icons/arrow-right";
 import Link from "next/link";
-import { useAppDispatch } from "@/lib/hooks";
-import { openModal } from "@/lib/slices/miscellaneousSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { openModal, setOnboarding } from "@/lib/slices/miscellaneousSlice";
 import Pagination from "@/components/Pagination";
 import { toast } from "react-toastify";
 import TickDouble from "@/icons/tick-double";
 import Eye from "@/icons/eye";
 import HandClick from "@/icons/hand-click";
+import Welcome from "@/components/onboarding/Welcome";
+import TextButton from "@/components/buttons/TextButton";
+import OnboardCard from "@/components/onboarding/OnboardCard";
+import HelpCircle from "@/icons/help-circle";
+import CompletedTour from "@/components/onboarding/CompletedTour";
 
 type Props = {};
 
 const page = (props: Props) => {
   const available: boolean = true;
   const dispatch = useAppDispatch();
+  const onboarding = useAppSelector((state) => state.miscellaneous.onboarding);
+  const stepsArray = ["step1", "step2", "step3"];
+  useEffect(() => {
+    dispatch(setOnboarding("welcome"));
+  }, []);
+
   return (
     <div className="w-full pb-32">
+      <Welcome />
+      <CompletedTour />
+
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
         <div className="flex items-center gap-4">
           <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
@@ -73,69 +87,95 @@ const page = (props: Props) => {
                   <span className="text-grey-400 text-xs">No data</span>
                 </div>
               </div>
-              <div className="rounded-full p-[10px] border border-solid border-[#E4E7EC]">
-                <Message color="#667085" />
+              <div className="flex gap-4 items-center">
+                {onboarding == "step1" && (
+                  <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                )}
+                <div className="rounded-full p-[10px] border border-solid border-[#E4E7EC]">
+                  <Message color="#667085" />
+                </div>
               </div>
             </div>
-            <div className="px-4 py-[22px]  w-full  border rounded-xl">
-              <span className="text-lg font-medium">Quick Actions</span>
-              <div className="flex  flex-col mt-[39.5px]">
-                <Link
-                  onClick={() => dispatch(openModal())}
-                  href={"/dashboard/campaigns"}
-                  className="w-full"
-                >
+            <div className="relative w-full z-[50]">
+              <div className="px-4 py-[22px]   w-full  border rounded-xl">
+                <div className="text-lg font-medium flex items-center gap-2">
+                  Quick Actions
+                  <span className="cursor-pointer">
+                    <HelpCircle color="" />
+                  </span>
+                  {onboarding === "step2" && (
+                    <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                  )}
+                </div>
+                <div className="flex  flex-col mt-[39.5px]">
+                  <Link
+                    onClick={() => dispatch(openModal())}
+                    href={"/dashboard/campaigns"}
+                    className="w-full"
+                  >
+                    <div className="flex justify-between items-center ">
+                      <div className="flex gap-4">
+                        <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
+                          <LoudSpeaker color="black" />
+                        </div>
+                        <p className="flex flex-col gap-1">
+                          <span className="text-md font-medium">
+                            Create Campaign
+                          </span>
+                          <span className="text-sm">Start a new campaign</span>
+                        </p>
+                      </div>
+                      <ChevronRight color="#667185" />
+                    </div>
+                  </Link>
+                  <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
                   <div className="flex justify-between items-center ">
                     <div className="flex gap-4">
                       <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
-                        <LoudSpeaker color="black" />
+                        <UserAdd color="black" />
                       </div>
-                      <p className="flex flex-col gap-1">
+                      <div className="flex flex-col gap-1">
                         <span className="text-md font-medium">
-                          Create Campaign
+                          Import Contacts
                         </span>
-                        <span className="text-sm">Start a new campaign</span>
-                      </p>
+                        <span className="text-sm">
+                          Add or import CSV or XLS files
+                        </span>
+                      </div>
                     </div>
                     <ChevronRight color="#667185" />
                   </div>
-                </Link>
-                <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
-                <div className="flex justify-between items-center ">
-                  <div className="flex gap-4">
-                    <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
-                      <UserAdd color="black" />
+                  <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
+                  <Link
+                    href={"/dashboard/credits"}
+                    className="flex justify-between items-center "
+                  >
+                    <div className="flex gap-4">
+                      <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
+                        <Plus color="black" />
+                      </div>
+                      <p className="flex flex-col gap-1">
+                        <span className="text-md font-medium">
+                          Top up Credits
+                        </span>
+                        <span className="text-sm">
+                          Get more Sendeet credits
+                        </span>
+                      </p>
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-md font-medium">
-                        Import Contacts
-                      </span>
-                      <span className="text-sm">
-                        Add or import CSV or XLS files
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronRight color="#667185" />
+                    <ChevronRight color="#667185" />
+                  </Link>
                 </div>
-                <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
-                <Link
-                  href={"/dashboard/credits"}
-                  className="flex justify-between items-center "
-                >
-                  <div className="flex gap-4">
-                    <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
-                      <Plus color="black" />
-                    </div>
-                    <p className="flex flex-col gap-1">
-                      <span className="text-md font-medium">
-                        Top up Credits
-                      </span>
-                      <span className="text-sm">Get more Sendeet credits</span>
-                    </p>
-                  </div>
-                  <ChevronRight color="#667185" />
-                </Link>
               </div>
+              <OnboardCard
+                step="Step 2 of 4"
+                title="Quick Actions"
+                bodyClassName="top-20 delay-200 -right-[20.7rem] top-0"
+                description="Use these Quick Actions to get started quickly. Create a new campaign, import contacts, or top up credits."
+                arrowClassName="-translate-x-1/2 !left-0 !top-1/2 "
+                currentStep="step2"
+                onNext={() => dispatch(setOnboarding("step3"))}
+              />
             </div>
           </div>
           <div className="flex flex-col w-full gap-5">
@@ -157,22 +197,38 @@ const page = (props: Props) => {
                   <Message color="#667085" />
                 </div>
               </div>
-              <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
-                <div className="flex flex-col gap-2">
-                  <span className="text text-sm">Delivered</span>
-                  <span className="text-[#344054] text-xl font-semibold">
-                    0
-                  </span>
-                  <div className="flex items-center gap-[6px]">
-                    <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                      -%
+              <div className="relative w-full group inline-block">
+                <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+                  <div className="flex flex-col gap-2">
+                    <span className="text text-sm">Delivered</span>
+                    <span className="text-[#344054] text-xl font-semibold">
+                      0
+                    </span>
+                    <div className="flex items-center gap-[6px]">
+                      <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                        -%
+                      </div>
+                      <span className="text-grey-400 text-xs">No data</span>
                     </div>
-                    <span className="text-grey-400 text-xs">No data</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    {onboarding == "step1" && (
+                      <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                    )}
+                    <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
+                      <TickDouble color="#667085" />
+                    </div>
                   </div>
                 </div>
-                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-                  <TickDouble color="#667085" />
-                </div>
+                <OnboardCard
+                  step="Step 1 of 4"
+                  title="Key Metrics Panel"
+                  bodyClassName="mt-0 delay-500 top-[8rem]  left-4"
+                  description="Here, you can monitor key metrics like messages sent, delivery rates, and audience growth at a glance."
+                  arrowClassName="-translate-x-1/2 -top-1.5 left-1/2  "
+                  currentStep="step1"
+                  onNext={() => dispatch(setOnboarding("step2"))}
+                />
               </div>
               <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
                 {" "}
@@ -188,8 +244,13 @@ const page = (props: Props) => {
                     <span className="text-grey-400 text-xs">No data</span>
                   </div>
                 </div>
-                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-                  <Eye color="#667085" />
+                <div className="flex items-center gap-4">
+                  {onboarding == "step1" && (
+                    <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                  )}
+                  <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
+                    <Eye color="#667085" />
+                  </div>
                 </div>
               </div>
               <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid   ">
@@ -206,14 +267,37 @@ const page = (props: Props) => {
                     <span className="text-grey-400 text-xs">No data</span>
                   </div>
                 </div>
-                <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]  flex items-center justify-center flex-shrink-0">
-                  <HandClick color="#667085" />
+                <div className="flex items-center gap-4">
+                  {onboarding == "step1" && (
+                    <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                  )}
+                  <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]  flex items-center justify-center flex-shrink-0">
+                    <HandClick color="#667085" />
+                  </div>
                 </div>
               </div>
             </div>
+
             <div className="p-6  w-full border rounded-xl h-full">
-              <div className="flex  items-center gap-4">
-                <p className="text-lg font-medium w-full">Audience Growth</p>
+              <div className="flex  justify-between items-center gap-4">
+                <div className="text-lg font-medium flex items-center gap-2 relative">
+                  Audience Growth
+                  <span className="cursor-pointer">
+                    <HelpCircle color="" />
+                  </span>
+                  {onboarding === "step3" && (
+                    <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                  )}
+                  <OnboardCard
+                    step="Step 3 of 4"
+                    title="Audience Growth"
+                    bodyClassName="mt-4 delay-500  left-[15rem]  -top-[9rem]"
+                    description="Track your opt-in and opt-out trends here. Adjust the time period to see monthly or yearly stats."
+                    arrowClassName="-translate-x-1/2 !left-0 top-1/2 "
+                    currentStep="step3"
+                    onNext={() => dispatch(setOnboarding("step4"))}
+                  />
+                </div>
                 <Link href={"/dashboard/audience"}>
                   <Button icon_style="txt" size="md" text="View Report" />
                 </Link>
@@ -242,11 +326,28 @@ const page = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className=" w-full  h-32 mb-32   mt-6 ">
+      <div className=" w-full  h-32 mb-32 relative  mt-6 ">
+        <OnboardCard
+          step="Step 4 of 4"
+          title="Recent Campaign Performance"
+          bodyClassName="mt-0  delay-500  !-top-[15rem] left-[4rem]"
+          description="Review the performance of your recent campaigns here, including key stats like open and click rates."
+          arrowClassName="-translate-x-1/2   !-bottom-1 "
+          currentStep="step4"
+          onNext={() => dispatch(setOnboarding("completed"))}
+        />
         <div className="w-full flex flex-col gap-2 lg:flex-row lg:gap-0 lg:items-center justify-between">
           {" "}
           <div className="flex flex-col w-full">
-            <p className="text-lg font-medium">Recent Campaign Performance</p>
+            <div className="text-lg font-medium flex items-center gap-2">
+              Recent Campaign Performance
+              <span className="cursor-pointer">
+                <HelpCircle color="" />
+              </span>
+              {onboarding === "step4" && (
+                <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+              )}
+            </div>
             <p className="text-sm text-grey-500">
               Keep track of recent campaigns and their statistics
             </p>

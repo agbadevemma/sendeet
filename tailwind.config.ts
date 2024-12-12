@@ -8,6 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        pinging: 'ping 2.3s linear infinite', // Slower animation (3 seconds)
+      },
+      keyframes: {
+        ping: {
+          '0%': { transform: 'scale(1)', opacity: '1' },
+          '75%, 100%': { transform: 'scale(2)', opacity: '0' },
+        },
+      },
+
      
       filter: {
         "blur-sm": "blur(4px)",
