@@ -19,9 +19,9 @@ const ArrowRight = ({ color, width = 24, height = 24 }: Props) => {
         <path
           d="M4.16663 10H15.8333M15.8333 10L9.99996 4.16669M15.8333 10L9.99996 15.8334"
           stroke="#48505E"
-          stroke-width="1.67"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.67"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>

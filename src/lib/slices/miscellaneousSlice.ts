@@ -3,14 +3,17 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface MiscellaneousState {
   isModalOpen: boolean;
   switchToBasicInfo: boolean;
-  onboarding: "" | "welcome" | "step1" | "step2" | "step3"| "step4"|"completed";
+  onboarding:null | "welcome" | "step1" | "step2" | "step3"| "step4"|"completed";
+  explore:null | "credit" | "startcampaign" | "singlecontact" | "bulkcontact"| "sendcampaign";
 }
 
 const initialState: MiscellaneousState = {
   isModalOpen: false,
   switchToBasicInfo: false,
-  onboarding: "",
+  onboarding:null,
+  explore: null, 
 };
+
 
 const miscellaneousSlice = createSlice({
   name: "miscellaneous",
@@ -30,9 +33,15 @@ const miscellaneousSlice = createSlice({
     },
     setOnboarding: (
       state,
-      action: PayloadAction<"" | "welcome" | "step1" | "step2" | "step3"| "step4"|"completed">
+      action: PayloadAction<null | "welcome" | "step1" | "step2" | "step3"| "step4"|"completed">
     ) => {
       state.onboarding = action.payload;
+    },
+    setExplore: (
+      state,
+      action: PayloadAction<null | "credit" | "startcampaign" | "singlecontact" | "bulkcontact"| "sendcampaign">
+    ) => {
+      state.explore = action.payload;
     },
   },
 });
@@ -43,6 +52,7 @@ export const {
   toggleModal,
   toggleBasicInfo,
   setOnboarding,
+  setExplore
 } = miscellaneousSlice.actions;
 
 export default miscellaneousSlice.reducer;

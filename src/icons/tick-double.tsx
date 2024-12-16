@@ -18,9 +18,9 @@ const TickDouble = ({ color, width = 20, height = 21 }: Props) => {
         <path
           d="M2.85419 12.1875L5.97919 15.3125M10.3542 10.3125L13.4792 7.1875M7.85419 12.1875L10.9792 15.3125L18.4792 7.1875"
           stroke="#667085"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>

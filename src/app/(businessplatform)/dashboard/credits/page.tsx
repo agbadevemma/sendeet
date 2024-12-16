@@ -16,6 +16,9 @@ import Link from "next/link";
 import DateRangePicker from "@/components/DateRangePicker";
 import Receipt from "@/icons/receipt";
 import Multiply from "@/icons/multiply";
+import ExploreCard from "@/components/onboarding/ExploreCard";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { setExplore } from "@/lib/slices/miscellaneousSlice";
 
 type Props = {};
 
@@ -73,14 +76,16 @@ const Credits = (props: Props) => {
 
   const handleSort = (key: keyof Transaction) => {
     const direction =
-      sortConfig?.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
-  
+      sortConfig?.key === key && sortConfig.direction === "asc"
+        ? "desc"
+        : "asc";
+
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
     });
-  
+
     setSortConfig({ key, direction });
     setFilteredTransactions(sortedTransactions);
   };
@@ -128,6 +133,11 @@ const Credits = (props: Props) => {
   useEffect(() => {
     filterTransactions(); // Apply filter changes
   }, [filter, selectedDateRange]);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setExplore("sendcampaign"));
+  }, []);
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
@@ -149,15 +159,25 @@ const Credits = (props: Props) => {
             icon_style="leading-icon"
             text="Export"
           />
-          <Link href={"credits/topup"}>
-            <Button
-              size="sm"
-              iconComponent={<Plus color="#fff" />}
-              icon_style="leading-icon"
-              type="primary"
-              text="Top up Credits"
-            />
-          </Link>
+          <div className="relative w-full">
+            <ExploreCard
+              arrowClassName="-translate-x-1/2  !left-auto  !-top-1.5 !right-1 "
+              currentStep="sendcampaign"
+              bodyClassName="top-[0rem]  !-left-[10rem]  mt-14  "
+              description="Running low on credits? Click here to purchase more and keep your campaigns running smoothly!"
+              onNext={() => dispatch(setExplore(null))}
+              title="Get credits to send campaigns"
+            />{" "}
+            <Link href={"credits/topup"}>
+              <Button
+                size="sm"
+                iconComponent={<Plus color="#fff" />}
+                icon_style="leading-icon"
+                type="primary"
+                text="Top up Credits"
+              />
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -263,7 +283,6 @@ const Credits = (props: Props) => {
                 <div className="absolute z-30 w-full flex items-center justify-center lg:block lg:w-fit   left-1 lg:-left-[32rem] lg:right-32  mt-2">
                   <DateRangePicker
                     handleDateRangeChange={handleDateRangeChange}
-                   
                     setIsCalenderOpen={setIsCalenderOpen}
                   />
                 </div>

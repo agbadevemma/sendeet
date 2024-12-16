@@ -14,7 +14,7 @@ const Welcome = (props: Props) => {
   const dispatch = useAppDispatch();
   return (
     <div
-      onClick={() => dispatch(setOnboarding(""))}
+      onClick={() => dispatch(setOnboarding(null))}
       className={`fixed h-screen w-full  bg-black/35  top-0 left-0 z-[100] flex items-center justify-center lg:px-0 px-4 md:px-8 ${
         onboarding === "welcome" ? "visible" : "invisible"
       }`}
@@ -29,7 +29,7 @@ const Welcome = (props: Props) => {
         <div className="w-full h-full bg-[#E6F7FE] rounded-t-2xl p-4 pb-8 pt-10 relative">
           <Image src={image1} alt="" className="mx-auto -mb-8" />
           <button
-            onClick={() => dispatch(setOnboarding(""))}
+            onClick={() => dispatch(setOnboarding(null))}
             className="absolute top-2 rounded-lg flex items-center justify-center right-4 bg-white border border-[#E4E7EC] p-1.5 mt-1"
           >
             <Multiply color="#101928" />
@@ -42,7 +42,7 @@ const Welcome = (props: Props) => {
             worry, the tour is quick and can be skipped anytime!
           </p>
           <div className="flex items-center justify-center gap-4 mt-10">
-            <Button text="No thanks" className="!px-4"    onClick={() => dispatch(setOnboarding(""))} />
+            <Button text="No thanks" className="!px-4"    onClick={() => dispatch(setOnboarding(null))} />
             <Button type="primary" text="Give me a tour" className="!px-4"    onClick={() => dispatch(setOnboarding("step1"))} />
           </div>
         </div>

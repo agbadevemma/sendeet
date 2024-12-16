@@ -18,9 +18,9 @@ const ArrowUp = ({ color, width = 24, height = 20 }: Props) => {
         <path
           d="M10.0001 15.8334V4.16675M10.0001 4.16675L4.16675 10.0001M10.0001 4.16675L15.8334 10.0001"
           stroke={color}
-          stroke-width="1.67"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.67"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>

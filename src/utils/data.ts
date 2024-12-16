@@ -65,6 +65,7 @@ export interface Transaction {
 }
 
 export interface CampaignInterface {
+  id:number;
   campaign: string;
   date: string;
   delivered: string;
@@ -167,6 +168,7 @@ export const initialTransactions: Transaction[] = [
 
 export const initialCampaign: CampaignInterface[] = [
   {
+    id: 1,
     campaign: "Tech requirements for Fund A.pdf",
     clicked: "75%",
     date: "02/10/24",
@@ -175,6 +177,7 @@ export const initialCampaign: CampaignInterface[] = [
     status: "Draft",
   },
   {
+    id: 2,
     campaign: "Financial Analysis for Fund B.pdf",
     clicked: "89.5%",
     date: "03/10/24",
@@ -183,6 +186,7 @@ export const initialCampaign: CampaignInterface[] = [
     status: "Active",
   },
   {
+    id: 3,
     campaign: "Market Research Report.pdf",
     clicked: "92%",
     date: "04/10/24",
@@ -191,6 +195,7 @@ export const initialCampaign: CampaignInterface[] = [
     status: "Active",
   },
   {
+    id: 4,
     campaign: "Investment Strategy Overview.pdf",
     clicked: "85%",
     date: "05/10/24",
@@ -199,6 +204,7 @@ export const initialCampaign: CampaignInterface[] = [
     status: "Active",
   },
   {
+    id: 5,
     campaign: "Tech requirements for Fund C.pdf",
     clicked: "78%",
     date: "06/10/24",
@@ -207,6 +213,7 @@ export const initialCampaign: CampaignInterface[] = [
     status: "Completed",
   },
 ];
+
 
 export const timeZones: Option[] = [
   { value: "utc", label: "UTC +01:00: West Africa Time (WAT)" },

@@ -41,9 +41,9 @@ const Checkbox = ({
             <path
               d="M11.6666 3.5L5.24992 9.91667L2.33325 7"
               stroke="#00AAF7"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         )}
@@ -59,9 +59,9 @@ const Checkbox = ({
             <path
               d="M1.91675 1H10.0834"
               stroke="#00AAF7"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         )}

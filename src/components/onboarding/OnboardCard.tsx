@@ -29,7 +29,7 @@ const OnboardCard = ({
   const dispatch = useAppDispatch();
   const onboarding = useAppSelector((state) => state.miscellaneous.onboarding);
   return (
-    <div>
+    <div className={` ${onboarding === currentStep  ? "visible" : "invisible"}`}>
       <div
         className={`absolute  p-5 py-8  ${bodyClassName} bg-white z-[80] shadow-3xl rounded-lg w-[20rem] transition-all ease-in-out  duration-500 ${
           onboarding === currentStep ? "opacity-100" : "opacity-0"
@@ -43,10 +43,9 @@ const OnboardCard = ({
         <p className="text-[12px] text-grey-800">{description}</p>
         {currentStep !== "step4" ? (
           <div className="flex items-center justify-end gap-4 mt-4 w-full z-[100]  ">
-            {/* <button   onClick={() => dispatch(setOnboarding(""))}>ddsads</button> */}
             <TextButton
               text="Skip Tour"
-              onClick={() => dispatch(setOnboarding(""))}
+              onClick={() => dispatch(setOnboarding(null))}
             />
             <Button
               text="Next"

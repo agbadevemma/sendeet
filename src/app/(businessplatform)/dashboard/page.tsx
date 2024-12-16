@@ -22,7 +22,11 @@ import ArrowLeft from "@/icons/arrow-left";
 import ArrowRight from "@/icons/arrow-right";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { openModal, setOnboarding } from "@/lib/slices/miscellaneousSlice";
+import {
+  openModal,
+  setOnboarding,
+  setExplore,
+} from "@/lib/slices/miscellaneousSlice";
 import Pagination from "@/components/Pagination";
 import { toast } from "react-toastify";
 import TickDouble from "@/icons/tick-double";
@@ -33,23 +37,26 @@ import TextButton from "@/components/buttons/TextButton";
 import OnboardCard from "@/components/onboarding/OnboardCard";
 import HelpCircle from "@/icons/help-circle";
 import CompletedTour from "@/components/onboarding/CompletedTour";
+import ExploreCard from "@/components/onboarding/ExploreCard";
 
 type Props = {};
 
 const page = (props: Props) => {
   const available: boolean = true;
   const dispatch = useAppDispatch();
-  const onboarding = useAppSelector((state) => state.miscellaneous.onboarding);
+  const { onboarding, explore } = useAppSelector(
+    (state) => state.miscellaneous
+  );
   const stepsArray = ["step1", "step2", "step3"];
+  
   useEffect(() => {
-    dispatch(setOnboarding("welcome"));
+    dispatch(setExplore("credit"));
   }, []);
 
   return (
     <div className="w-full pb-32">
       <Welcome />
       <CompletedTour />
-
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
         <div className="flex items-center gap-4">
           <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
@@ -107,7 +114,11 @@ const page = (props: Props) => {
                     <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
                   )}
                 </div>
-                <div className="flex  flex-col mt-[39.5px]">
+                <div
+                  className={` flex     mt-[39.5px] ${
+                    explore == "credit" ? "flex-col-reverse" : "flex-col"
+                  }`}
+                >
                   <Link
                     onClick={() => dispatch(openModal())}
                     href={"/dashboard/campaigns"}
@@ -146,25 +157,42 @@ const page = (props: Props) => {
                     <ChevronRight color="#667185" />
                   </div>
                   <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
-                  <Link
-                    href={"/dashboard/credits"}
-                    className="flex justify-between items-center "
-                  >
-                    <div className="flex gap-4">
-                      <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
-                        <Plus color="black" />
+                  <div className="relative w-full">
+                    {" "}
+                    <ExploreCard
+                      arrowClassName="-translate-x-1/2  top-1/2 !left-0 "
+                      currentStep="credit"
+                      bodyClassName="-right-[22rem] -top-[2rem]"
+                      description="Click here to purchase credits to send out campaigns!"
+                      onNext={() => dispatch(setExplore("startcampaign"))}
+                      title="Get credits to send campaigns"
+                    />
+                    <Link
+                      href={"/dashboard/credits"}
+                      className="flex justify-between items-center  relative"
+                    >
+                      <div className="flex gap-4">
+                        <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
+                          <Plus color="black" />
+                        </div>
+                        <p className="flex flex-col gap-1">
+                          <div className="flex items-center justify-between w-full">
+                            {" "}
+                            <span className="text-md font-medium">
+                              Top up Credits
+                            </span>
+                            {explore === "credit" && (
+                              <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                            )}
+                          </div>
+                          <span className="text-sm">
+                            Get more Sendeet credits
+                          </span>
+                        </p>
                       </div>
-                      <p className="flex flex-col gap-1">
-                        <span className="text-md font-medium">
-                          Top up Credits
-                        </span>
-                        <span className="text-sm">
-                          Get more Sendeet credits
-                        </span>
-                      </p>
-                    </div>
-                    <ChevronRight color="#667185" />
-                  </Link>
+                      <ChevronRight color="#667185" />
+                    </Link>
+                  </div>
                 </div>
               </div>
               <OnboardCard

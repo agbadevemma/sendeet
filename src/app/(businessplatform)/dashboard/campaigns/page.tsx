@@ -17,8 +17,10 @@ import bg from "../../../../images/campaignbg.png";
 import { CampaignInterface, initialCampaign } from "@/utils/data";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { toggleModal } from "@/lib/slices/miscellaneousSlice";
+import { setExplore, toggleModal } from "@/lib/slices/miscellaneousSlice";
 import Pagination from "@/components/Pagination";
+import ExploreCard from "@/components/onboarding/ExploreCard";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -123,7 +125,7 @@ const Campaign = (props: Props) => {
       }
     });
   };
-
+  const router = useRouter();
   // Calculate header checkbox state
   const isAllSelected =
     campaigns.length > 0 && selectedItems.length === campaigns.length;
@@ -141,10 +143,13 @@ const Campaign = (props: Props) => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
-  const isModalOpen = useAppSelector(
-    (state) => state.miscellaneous.isModalOpen
+  const { isModalOpen, explore } = useAppSelector(
+    (state) => state.miscellaneous
   );
   const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(setExplore("startcampaign"));
+  // }, []);
   return (
     <div>
       <div
@@ -213,8 +218,8 @@ const Campaign = (props: Props) => {
               </p>
             </div>
           </div>
+
           <Link href={"/createcampaign"}>
-            {" "}
             <Button
               text="Continue"
               type="primary"
@@ -246,14 +251,26 @@ const Campaign = (props: Props) => {
             icon_style="leading-icon"
             text="Export"
           />
-          <Button
-            size="sm"
-            onClick={() => dispatch(toggleModal())}
-            iconComponent={<Plus color="#fff" />}
-            icon_style="leading-icon"
-            type="primary"
-            text="Create Campaign"
-          />
+          <div className="relative w-full">
+           
+              <ExploreCard
+                arrowClassName="-translate-x-1/2  !left-auto  !-top-1 !right-0 "
+                currentStep="startcampaign"
+                bodyClassName="top-[0rem]  !-left-[14rem] mt-12"
+                description="Create a new campaign to engage your audience."
+                onNext={() => dispatch(setExplore("singlecontact"))}
+                title="Start a campaign"
+              />
+         
+            <Button
+              size="sm"
+              onClick={() => dispatch(toggleModal())}
+              iconComponent={<Plus color="#fff" />}
+              icon_style="leading-icon"
+              type="primary"
+              text="Create Campaign"
+            />
+          </div>
         </div>
       </div>
 
@@ -399,7 +416,9 @@ const Campaign = (props: Props) => {
                 {getFilteredCampaigns().map((campaign, index) => (
                   <tr
                     key={index}
+                    onClick={() =>router.push(`campaigns/${campaign.id}`)}
                     className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
+
                   >
                     <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
                       <Checkbox
