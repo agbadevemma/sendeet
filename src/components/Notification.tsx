@@ -2,6 +2,7 @@ import React from "react";
 import TextButton from "./buttons/TextButton";
 import Button from "./buttons/Button";
 import SendAlt from "@/icons/send-alt";
+import Link from "next/link";
 
 type Props = {};
 
@@ -15,8 +16,10 @@ const Notification = (props: Props) => {
         <div className="flex flex-col">
           <p className="text-[#667085] text-sm">
             Your campaign
-            <span className="text-grey-900 font-medium mx-1">Summer School</span> was
-            successfully sent to
+            <span className="text-grey-900 font-medium mx-1">
+              Summer School
+            </span>{" "}
+            was successfully sent to
             <span className="text-primary-500 mx-1">245 contacts</span>
           </p>
           <div className="flex items-center text-[#98A2B3] gap-2 text-sm mt-1">
@@ -31,15 +34,15 @@ const Notification = (props: Props) => {
               size="lg"
               text="New Campaign"
               type="primary"
-              
-              
             />
-            <Button
-              size="sm"
-              text="View Report"
-              type="primary"
-              className="!px-4 !py-2 !text-sm "
-            />
+            <Link href={"/dashboard/campaigns/1"}>
+              <Button
+                size="sm"
+                text="View Report"
+                type="primary"
+                className="!px-4 !py-2 !text-sm "
+              />
+            </Link>
           </div>
         </div>
         <div className="bg-primary-500 p-1.5 rounded-full"></div>
