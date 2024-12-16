@@ -252,16 +252,15 @@ const Campaign = (props: Props) => {
             text="Export"
           />
           <div className="relative w-full">
-           
-              <ExploreCard
-                arrowClassName="-translate-x-1/2  !left-auto  !-top-1 !right-0 "
-                currentStep="startcampaign"
-                bodyClassName="top-[0rem]  !-left-[14rem] mt-12"
-                description="Create a new campaign to engage your audience."
-                onNext={() => dispatch(setExplore("singlecontact"))}
-                title="Start a campaign"
-              />
-         
+            <ExploreCard
+              arrowClassName="-translate-x-1/2  !left-auto  !-top-1 !right-0 "
+              currentStep="startcampaign"
+              bodyClassName="top-[0rem]  !-left-[14rem] mt-12"
+              description="Create a new campaign to engage your audience."
+              onNext={() => dispatch(setExplore("singlecontact"))}
+              title="Start a campaign"
+            />
+
             <Button
               size="sm"
               onClick={() => dispatch(toggleModal())}
@@ -416,9 +415,8 @@ const Campaign = (props: Props) => {
                 {getFilteredCampaigns().map((campaign, index) => (
                   <tr
                     key={index}
-                    onClick={() =>router.push(`campaigns/${campaign.id}`)}
+                    onClick={() => router.push(`campaigns/${campaign.id}`)}
                     className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
-
                   >
                     <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
                       <Checkbox

@@ -1,8 +1,11 @@
 "use client";
 import AdminBarChart from "@/components/admin/AdminBarChart";
 import Button from "@/components/buttons/Button";
+import CampaignActionsModal from "@/components/CampaignActionsModal";
 import CampaignPerformanceChart from "@/components/CampaignPerformanceChart";
+import HeatmapChart from "@/components/HeatmapChart";
 import ExploreCard from "@/components/onboarding/ExploreCard";
+import SuccessToast from "@/components/SuccessToast";
 import ArrowUp from "@/icons/arrow-up";
 import Bin from "@/icons/bin";
 import CalendarAlt from "@/icons/calender-alt";
@@ -25,6 +28,7 @@ import { useAppDispatch } from "@/lib/hooks";
 import { setExplore, toggleModal } from "@/lib/slices/miscellaneousSlice";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -32,6 +36,9 @@ const CampaignId = (props: Props) => {
   const dispatch = useAppDispatch();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isMarkModalOpen, setIsMarkModalOpen] = useState <boolean>(false);
+
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isFirstDropdownOpen, setIsFirstDropdownOpen] =
@@ -71,6 +78,12 @@ const CampaignId = (props: Props) => {
   }, []);
   return (
     <div>
+      <CampaignActionsModal
+        isMarkModalOpen={isMarkModalOpen}
+        setIsEditModalOpen={setIsEditModalOpen}
+        isEditModalOpen={isEditModalOpen}
+        setIsMarkModalOpen={setIsMarkModalOpen}
+      />
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
         <div className="flex items-center gap-4">
           <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
@@ -116,6 +129,10 @@ const CampaignId = (props: Props) => {
                 className="flex cursor-pointer items-center gap-1 text-xs hover:text-primary-600"
                 onMouseEnter={() => setHoveredItem("completed")}
                 onMouseLeave={() => setHoveredItem(null)}
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsMarkModalOpen(true);
+                }}
               >
                 <CheckboxChecked
                   color={hoveredItem === "completed" ? "#009be1" : "#383E49"}
@@ -128,6 +145,10 @@ const CampaignId = (props: Props) => {
                 onMouseEnter={() => setHoveredItem("edit")}
                 onMouseLeave={() => setHoveredItem(null)}
                 className="flex cursor-pointer items-center gap-1 text-xs hover:text-primary-600"
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsEditModalOpen(true);
+                }}
               >
                 <PencilEdit
                   color={hoveredItem === "edit" ? "#009be1" : "#383E49"}
@@ -139,6 +160,19 @@ const CampaignId = (props: Props) => {
               <div
                 onMouseEnter={() => setHoveredItem("delete")}
                 onMouseLeave={() => setHoveredItem(null)}
+                onClick={() => {
+                  setIsOpen(false);
+                  toast.success(
+                    <SuccessToast
+                      message="Campaign dates has been updated"
+                      middleText="Tech Requirements About Desktops"
+                      details="send date has been updated"
+                    />,
+                    {
+                      icon: false, // Optional: Disable default icon
+                    }
+                  );
+                }}
                 className="flex cursor-pointer items-center gap-1 text-xs hover:text-primary-600"
               >
                 <Bin
@@ -153,7 +187,7 @@ const CampaignId = (props: Props) => {
         </div>
       </div>
       <div className="flex mt-5 p-4  pb-10 w-full border border-[#E4E7EC] rounded-xl flex-col">
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4  items-center">
           <Link href="/dashboard/campaigns">
             <Button
               icon_style="icon-only"
@@ -162,16 +196,16 @@ const CampaignId = (props: Props) => {
               }
             />
           </Link>
-          <p className="font-bold text-[18px] ">
+          <p className="font-bold text-[16px] md:text-[18px] ">
             Tech Requirements About Desktops
           </p>
-          <div className="flex bg-success-50 rounded-xl px-3 py-1 gap-[6px] items-center ">
+          <div className="flex bg-success-50 rounded-full px-3 py-1 gap-[6px] items-center ">
             <div className="h-2 w-2 bg-success-500 rounded-full "> </div>
-            <div className="text-success-500">Completed</div>
+            <div className="text-success-500 text-sm">Completed</div>
           </div>
         </div>
-        <div className="px-14 flex mt-8  justify-between items-center">
-          <div className="flex flex-col  gap-2 s[0.8px] pr-8 border-[#D0D5DD]">
+        <div className="lg:pl-14 flex mt-8 flex-wrap md:flex-row  justify-between items-center">
+          <div className="flex flex-col  gap-2 w-fit s[0.8px]  border-[#D0D5DD]">
             <p className="text-md text-[#667085]">Send Date</p>
             <div className="flex gap-2 items-center">
               {" "}
@@ -182,7 +216,7 @@ const CampaignId = (props: Props) => {
             </div>
           </div>
           <hr className="w-[0.8px] h-[56px] bg-[#D0D5DD] " />
-          <div className="flex flex-col  gap-2 s[0.8px] pr-8 border-[#D0D5DD]">
+          <div className="flex flex-col  gap-2 w-fit ">
             <p className="text-md text-[#667085]">Audience</p>
             <div className="flex gap-2 items-center">
               {" "}
@@ -193,7 +227,7 @@ const CampaignId = (props: Props) => {
             </div>
           </div>
           <hr className="w-[0.8px] h-[56px] bg-[#D0D5DD] " />{" "}
-          <div className="flex flex-col  gap-2 s[0.8px] pr-8 border-[#D0D5DD]">
+          <div className="flex flex-col  gap-2 w-fit s[0.8px]  border-[#D0D5DD]">
             <p className="text-md text-[#667085]">Total Messages</p>
             <div className="flex gap-2 items-center">
               {" "}
@@ -204,7 +238,7 @@ const CampaignId = (props: Props) => {
             </div>
           </div>
           <hr className="w-[0.8px] h-[56px] bg-[#D0D5DD] " />{" "}
-          <div className="flex flex-col  gap-2 s[0.8px] pr-8 border-[#D0D5DD]">
+          <div className="flex flex-col  gap-2 w-fit s[0.8px]  border-[#D0D5DD]">
             <p className="text-md text-[#667085]">Files</p>
             <div className="flex gap-2 items-center">
               {" "}
@@ -355,13 +389,13 @@ const CampaignId = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="w-full gap-2 flex ">
+      <div className="w-full gap-2 flex md:flex-row flex-col  ">
         <div className="mt-4 border border-[#E4E7EC] w-full rounded-lg flex-col p-6">
           <div className="w-full">
             <div className="flex gap-24 items-center ">
               <div className="flex items-center gap-2">
                 {" "}
-                <p className="text-[16px] font-medium w-full">
+                <p className="text-[18px] font-medium w-full">
                   Engagement Details
                 </p>
                 <HelpCircle color="#98A2B3" />
@@ -379,7 +413,7 @@ const CampaignId = (props: Props) => {
               </div>
             </div>
             <div className="flex  w-full justify-end  items-center gap-[13px] mt-2 mb-8">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 ">
                 <span className="w-2 h-2 bg-primary-100 rounded-full"></span>
                 <span className="text-gray-500 text-[13px]">Delivered</span>
               </div>
@@ -391,7 +425,16 @@ const CampaignId = (props: Props) => {
             <AdminBarChart />
           </div>
         </div>
-        <div className="mt-4 border border-[#E4E7EC] w-full rounded-lg flex-col p-6"></div>
+        <div className="mt-4 border border-[#E4E7EC] w-full rounded-lg flex-col p-6">
+          <div className="flex  mb-14 mt-2 items-center gap-2 ">
+            {" "}
+            <p className="text-[18px] font-medium w-fit ">
+              Engagement by Time of Day
+            </p>
+            <HelpCircle color="#98A2B3" />
+          </div>
+          <HeatmapChart />
+        </div>
       </div>
     </div>
   );
