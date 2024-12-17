@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { Dispatch, SetStateAction } from "react";
 import SearchInput from "./SearchInput";
 
@@ -14,27 +14,36 @@ import Settings from "@/icons/settings";
 import Logout from "@/icons/logout";
 import Avatar from "./Avatar";
 import Notification from "./Notifications";
+import { usePathname } from "next/navigation";
 
 type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const Header = ({ setIsOpen }: Props) => {
+  const pathName = usePathname();
   return (
     <div>
-      <div className="w-full  py-[14px] px-4 md:px-7 lg:px-[28px] flex   lg:gap-0 items-center border-b border-grey-100 justify-between">
+      <div
+        className={`w-full  py-[14px] px-4 md:px-7 lg:px-[28px] flex   lg:gap-0 items-center border-b border-grey-100 ${
+          pathName === "/dashboard/help-center"
+            ? " justify-between xl:justify-end"
+            : "justify-between"
+        }`}
+      >
         <div
           onClick={() => setIsOpen((prev) => !prev)}
           className="block xl:hidden"
         >
           <AlignJustify color="black" />
         </div>
-        <SearchInput
-          placeholder="Search keyword..."
-          className="hidden lg:block"
-          icon={<SearchIcon color={"#858D9D"} />}
-        />
-
+        {pathName !== "/dashboard/help-center" && (
+          <SearchInput
+            placeholder="Search keyword..."
+            className="hidden lg:block"
+            icon={<SearchIcon color={"#858D9D"} />}
+          />
+        )}
         <div className=" flex gap-1.5 lg:gap-3 items-center">
           {/* <Button
             text="Getting Started"
@@ -43,7 +52,7 @@ const Header = ({ setIsOpen }: Props) => {
             iconComponent={<LightingBorderIcon color="black" />}
           /> */}
           <Notification />
-         <Avatar />
+          <Avatar />
         </div>
       </div>
     </div>
