@@ -18,7 +18,7 @@ export default function DashboardLayout({
         <Header setIsOpen={setIsOpen} />
         <div
           className={`h-screen overflow-auto w-full px-4 md:px-8 lg:px-7 pt-6 ${
-            pathname == "/dashboard/help-center" ? "pb-0" : "pb-20"
+            pathname == "/dashboard/help-center" ? "pb-4" : "pb-20"
           }`}
         >
           <div className=" w-full"> {children}</div>
