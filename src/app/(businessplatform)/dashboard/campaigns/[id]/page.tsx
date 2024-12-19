@@ -186,7 +186,7 @@ const CampaignId = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex mt-5 p-4  pb-10 w-full bg-white  bg-white  border border-[#E4E7EC] rounded-xl flex-col">
+      <div className="flex mt-5 p-4  pb-10 w-full bg-white   border border-[#E4E7EC] rounded-xl flex-col">
         <div className="flex gap-4  items-center">
           <Link href="/dashboard/campaigns">
             <Button
