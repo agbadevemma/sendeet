@@ -142,7 +142,7 @@ const Credits = (props: Props) => {
     <div>
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+          <div className=" flex items-center bg-white justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <Money1 color="black" />
           </div>
           <div className="flex flex-col gap-1">
@@ -181,7 +181,7 @@ const Credits = (props: Props) => {
         </div>
       </div>
 
-      <div className=" w-full max-w-[361px] mt-[25px] gap-4 px-6  py-4 flex items-center rounded-xl border border-[#E4E7EC] ">
+      <div className=" w-full max-w-[361px] bg-white mt-[25px] gap-4 px-6  py-4 flex items-center rounded-xl border border-[#E4E7EC] ">
         <div className="flex flex-col gap-2 w-full">
           <span className="text-[#475367] text-sm">Credit Balance</span>
           <span className="text-[30px] font-semibold text-[#344054]">0</span>
@@ -193,7 +193,7 @@ const Credits = (props: Props) => {
         </div>
       </div>
 
-      <div className="rounded-xl mt-7  h-full w-full border border-[#E4E7EC] ">
+      <div className="rounded-xl mt-7  h-full w-full bg-white border border-[#E4E7EC] ">
         <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
           <div className="flex  flex-col gap-1">
             <p className=" text-[18px] font-medium text-[#101828]">

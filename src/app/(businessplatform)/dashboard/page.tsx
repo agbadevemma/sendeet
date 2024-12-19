@@ -59,7 +59,7 @@ const page = (props: Props) => {
       <CompletedTour />
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
         <div className="flex items-center gap-4">
-          <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+          <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50 bg-white">
             <Elements color="black" />
           </div>
           <div className="flex flex-col gap-1">
@@ -104,7 +104,7 @@ const page = (props: Props) => {
               </div>
             </div>
             <div className="relative w-full z-[50]">
-              <div className="px-4 py-[22px]   w-full  border rounded-xl">
+              <div className="px-4 py-[22px] bg-white  w-full  border rounded-xl">
                 <div className="text-lg font-medium flex items-center gap-2">
                   Quick Actions
                   <span className="cursor-pointer">
@@ -226,7 +226,7 @@ const page = (props: Props) => {
                 </div>
               </div>
               <div className="relative w-full group inline-block">
-                <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+                <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white  border-[#E4E7EC]  border-solid  ">
                   <div className="flex flex-col gap-2">
                     <span className="text text-sm">Delivered</span>
                     <span className="text-[#344054] text-xl font-semibold">
@@ -258,7 +258,7 @@ const page = (props: Props) => {
                   onNext={() => dispatch(setOnboarding("step2"))}
                 />
               </div>
-              <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+              <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
                 {" "}
                 <div className="flex flex-col gap-2">
                   <span className="text text-sm">Open Rate</span>
@@ -281,7 +281,7 @@ const page = (props: Props) => {
                   </div>
                 </div>
               </div>
-              <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid   ">
+              <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid   ">
                 {" "}
                 <div className="flex flex-col gap-2">
                   <span className="text text-sm">Click Rate</span>
@@ -306,7 +306,7 @@ const page = (props: Props) => {
               </div>
             </div>
 
-            <div className="p-6  w-full border rounded-xl h-full">
+            <div className="p-6  w-full border rounded-xl h-full bg-white">
               <div className="flex  justify-between items-center gap-4">
                 <div className="text-lg font-medium flex items-center gap-2 relative">
                   Audience Growth
@@ -385,6 +385,7 @@ const page = (props: Props) => {
               size="sm"
               text="Filters"
               icon_style="leading-icon"
+              
               iconComponent={<FilterAlt color="#383E49" />}
             />
             <SearchInput

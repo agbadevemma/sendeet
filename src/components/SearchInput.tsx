@@ -26,10 +26,10 @@ const SearchInput = ({
   className1,
 }: Props) => {
   return (
-    <div className={` ${className} w-full  lg:max-w-[487px] group`}>
+    <div className={` ${className} w-full  lg:max-w-[487px] group bg-white`}>
       {" "}
       <div
-        className={`flex c  ${"border-[#D0D5DD] group-focus-within:shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05),_0px_0px_0px_4px_#E6F7FE]  group-focus-within:border-[#8AD8FB] "} rounded-lg gap-2 items-center justify-between border border-solid   py-[10px] px-[14px]`}
+        className={`flex c  ${"border-[#D0D5DD] bg-white group-focus-within:shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05),_0px_0px_0px_4px_#E6F7FE]  group-focus-within:border-[#8AD8FB] "} rounded-lg gap-2 items-center justify-between border border-solid   py-[10px] px-[14px]`}
       >
         {icon && icon} {/* Render the SVG */}
         <input

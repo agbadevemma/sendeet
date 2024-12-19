@@ -16,9 +16,9 @@ type Props = {};
 const HelpCenter = (props: Props) => {
   return (
     <div>
-      <div className="flex flex-col  gap-4 ">
+      <div className="flex flex-col  gap-4 min-h-screen">
         <div className="flex items-center gap-4">
-          <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+          <div className=" flex items-center bg-white justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <Messages color="#383E49" />
           </div>
           <div className="flex flex-col gap-1">
@@ -37,9 +37,9 @@ const HelpCenter = (props: Props) => {
               className="!shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] !bg-white"
             />
           </div>
-          <div className="w-full border border-[#E4E7EC] rounded-[12px] p-6 flex flex-col gap-6  flex-1">
-            <div className="flex flex-col xl:flex-row items-stretch gap-6">
-              <div className="w-full p-6 border border-[#E4E7EC] rounded-lg max-h-[240px] h-full ">
+          <div className="w-full border border-[#E4E7EC] bg-white rounded-[12px] p-6 flex flex-col  flex-1">
+            <div className="grid  lg:grid-cols-2 gap-6">
+              <div className="w-full p-6 border bg-white border-[#E4E7EC] rounded-lg max-h-[240px] h-full ">
                 <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary-50 border  border-[rgba(0,_170,_247,_0.50)] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,189,199,0.20)]">
                   <Verified color={"#004768"} />
                 </div>
@@ -58,7 +58,7 @@ const HelpCenter = (props: Props) => {
                   <ArrowRight color="#00AAF7" />
                 </Link>
               </div>
-              <div className="w-full p-6 border border-[#E4E7EC] rounded-lg max-h-[240px] h-full ">
+              <div className="w-full p-6 bg-white border border-[#E4E7EC] rounded-lg max-h-[240px] h-full ">
                 <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary-50 border  border-[rgba(0,_170,_247,_0.50)] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,189,199,0.20)]">
                   <CalendarAlt color={"#004768"} />
                 </div>
@@ -77,9 +77,9 @@ const HelpCenter = (props: Props) => {
                   <ArrowRight color="#00AAF7" />
                 </Link>
               </div>
-            </div>{" "}
-            <div className="flex flex-col xl:flex-row items-stretch gap-6">
-              <div className="w-full p-6 border border-[#E4E7EC] rounded-lg max-h-[240px] h-full ">
+          
+          
+              <div className="w-full p-6 border bg-white border-[#E4E7EC] rounded-lg max-h-[240px] h-full ">
                 <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary-50 border  border-[rgba(0,_170,_247,_0.50)] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,189,199,0.20)]">
                   <Coinstack color={"#004768"} />
                 </div>
@@ -98,7 +98,7 @@ const HelpCenter = (props: Props) => {
                   <ArrowRight color="#00AAF7" />
                 </Link>
               </div>{" "}
-              <div className="w-full p-6 border border-[#E4E7EC] rounded-lg max-h-[240px] h-full ">
+              <div className="w-full p-6 bg-white border border-[#E4E7EC] rounded-lg max-h-[240px] h-full ">
                 <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary-50 border  border-[rgba(0,_170,_247,_0.50)] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,189,199,0.20)]">
                   <Chat color={"#004768"} />
                 </div>

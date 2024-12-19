@@ -43,7 +43,7 @@ const Button = ({
            ${
              size == "sm" &&
              icon_style === "txt" &&
-             "text-sm font-medium  py-[8px] px-[6px] w-full"
+             "text-sm font-medium  py-[8px] px-[16px] w-full"
            }
             ${
               size == "md" &&
@@ -83,7 +83,7 @@ const Button = ({
 
             ${
               type === "secondary" &&
-              " hover:border-grey-50 hover:bg-[#F9FAFB]  text-grey-800 hover:from-transparent hover:to-transparent  border border-white border-solid    hover:shadow-none shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] focus:shadow-[0px_0px_0px_4px_#F2F4F7] hover:shadow-transparent focus:border-grey-100  disabled:from-transparent disabled:to-transparent   disabled:shadow-transparent disabled:border-grey-50 disabled:text-grey-300 disabled:bg-white "
+              " hover:border-grey-50 hover:bg-[#F9FAFB] bg-white  text-grey-800 hover:from-transparent hover:to-transparent  border border-white border-solid    hover:shadow-none shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] focus:shadow-[0px_0px_0px_4px_#F2F4F7] hover:shadow-transparent focus:border-grey-100  disabled:from-transparent disabled:to-transparent   disabled:shadow-transparent disabled:border-grey-50 disabled:text-grey-300 disabled:bg-white "
             }
             ${
               type === "tertiary" &&

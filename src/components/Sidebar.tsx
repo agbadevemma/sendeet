@@ -19,7 +19,7 @@ type Props = {
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
   return (
-    <div className="">
+    <div className=" bg-white">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
         className={`w-full bg-black/20 z-50 fixed  xl:static  transition-all duration-500  ${

@@ -25,7 +25,7 @@ const Header = ({ setIsOpen }: Props) => {
   return (
     <div>
       <div
-        className={`w-full  py-[14px] px-4 md:px-7 lg:px-[28px] flex   lg:gap-0 items-center border-b border-grey-100 ${
+        className={`w-full  py-[14px] px-4 md:px-7 lg:px-[28px] flex bg-white   lg:gap-0 items-center border-b border-grey-100 ${
           pathName === "/dashboard/help-center"
             ? " justify-between xl:justify-end"
             : "justify-between"

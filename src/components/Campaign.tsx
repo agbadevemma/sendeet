@@ -9,7 +9,7 @@ type Props = {
 const Campaign = ({ status }: Props) => {
   return (
     <div>
-      <div className="py-6 pl-12 pr-6 w-full flex flex-col rounded-xl border-solid border border-[#E4E7EC]">
+      <div className="py-6 pl-12 pr-6 w-full flex flex-col rounded-xl border-solid border bg-white border-[#E4E7EC]">
         <div className="flex  items-center justify-between">
           <div className="flex gap-5 pr-6">
             <div className="rounded-lg h-[40px] w-[40px]  shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,189,199,0.20)] flex items-center justify-center border border-solid  border-[#00E9C4] bg-[#00D4B2]">

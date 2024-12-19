@@ -234,7 +234,7 @@ const Campaign = (props: Props) => {
       {/* The whole page */}
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+          <div className=" flex items-center  bg-white  justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <LoudSpeaker color="black" />
           </div>
           <div className="flex flex-col gap-1">
@@ -273,7 +273,7 @@ const Campaign = (props: Props) => {
         </div>
       </div>
 
-      <div className="flex mt-[25px] w-full border border-[#E4E7EC] rounded-xl flex-col">
+      <div className="flex mt-[25px] w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
         <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12 border-t border-t-grey-50 h-[62px] items-end">
           {tabs.map((tab, index) => (
             <div
@@ -299,7 +299,7 @@ const Campaign = (props: Props) => {
         </div>
       </div>
 
-      <div className="rounded-xl mt-7  h-full w-full border border-[#E4E7EC] ">
+      <div className="rounded-xl mt-7  bg-white h-full w-full border border-[#E4E7EC] ">
         <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
           <div className="text-lg font-medium">
             {campaigns.length} Campaigns

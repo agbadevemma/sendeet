@@ -27,14 +27,16 @@ import Image from "next/image";
 import donut from "../../../../images/donut.svg";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ChevronDown from "@/icons/cheveron-down";
+import HelpCircle from "@/icons/help-circle";
 
 type Props = {};
 
 const Analytics = (props: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [isFirstDropdownOpen, setIsFirstDropdownOpen] = useState<boolean>(false);
-  const [isSecondDropdownOpen, setIsSecondDropdownOpen] = useState<boolean>(false);
-
+  const [isFirstDropdownOpen, setIsFirstDropdownOpen] =
+    useState<boolean>(false);
+  const [isSecondDropdownOpen, setIsSecondDropdownOpen] =
+    useState<boolean>(false);
 
   // Refs for the dropdown containers
   const firstDropdownRef = useRef<HTMLDivElement | null>(null);
@@ -42,18 +44,24 @@ const Analytics = (props: Props) => {
   useEffect(() => {
     // Close dropdown when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
-      if (firstDropdownRef.current && !firstDropdownRef.current.contains(event.target as Node)) {
+      if (
+        firstDropdownRef.current &&
+        !firstDropdownRef.current.contains(event.target as Node)
+      ) {
         setIsFirstDropdownOpen(false);
       }
-      if (secondDropdownRef.current && !secondDropdownRef.current.contains(event.target as Node)) {
+      if (
+        secondDropdownRef.current &&
+        !secondDropdownRef.current.contains(event.target as Node)
+      ) {
         setIsSecondDropdownOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
   const [campaigns, setCampaigns] =
@@ -166,7 +174,7 @@ const Analytics = (props: Props) => {
       {isOpenModal && <AnalyticsModal setIsOpen={setIsOpenModal} />}
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
         <div className="flex items-center gap-4">
-          <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+          <div className=" flex items-center bg-white justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <BarChartv color="black" />
           </div>
           <div className="flex flex-col gap-1">
@@ -193,7 +201,7 @@ const Analytics = (props: Props) => {
           />
         </div>
       </div>
-      <div className="w-full mt-4 py-8 px-6 flex flex-col gap-[10px] border borde-[#E4E7EC] rounded-lg">
+      <div className="w-full mt-4 py-8 px-6 flex flex-col gap-[10px]  bg-white border border-[#E4E7EC] rounded-lg">
         <div className="flex gap-4 items-center">
           <p className="text-[16px]  font-medium">Engagement Performance</p>
           <button onClick={() => setIsOpenModal((prev) => !prev)}>
@@ -201,7 +209,7 @@ const Analytics = (props: Props) => {
           </button>
         </div>
         <div className="flex flex-col lg:flex-row gap-4">
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Total Opens</span>
               <span className="text-[#344054] text-xl font-semibold">
@@ -220,7 +228,7 @@ const Analytics = (props: Props) => {
               <Eye height={20} width={20} color="#667085" />
             </div>
           </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Opt Ins</span>
               <span className="text-[#344054] text-xl font-semibold">
@@ -239,7 +247,7 @@ const Analytics = (props: Props) => {
               <TickDouble height={20} width={20} color="#667085" />
             </div>
           </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Opt Outs</span>
               <span className="text-[#344054] text-xl font-semibold">
@@ -258,7 +266,7 @@ const Analytics = (props: Props) => {
               <Multiply height={20} width={20} color="#667085" />
             </div>
           </div>{" "}
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
+          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Average Engagement Rate</span>
               <span className="text-[#344054] text-xl font-semibold">
@@ -280,10 +288,15 @@ const Analytics = (props: Props) => {
         </div>
       </div>
       <div className="w-full mt-5">
-        <div className=" p-4 lg:p-6  w-full border rounded-xl flex lg:flex-row flex-col gap-10 h-full">
+        <div className=" p-4 lg:p-6 bg-white  w-full border rounded-xl flex lg:flex-row flex-col gap-10 h-full">
           <div className="w-full">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
-              <p className="text-md font-medium ">Campaign Performance</p>
+              <div className="flex gap-2 items-center">
+                <p className="text-lg  font-medium ">Campaign Performance</p>
+                <span className="cursor-pointer">
+                  <HelpCircle color="#98A2B3" />
+                </span>
+              </div>
               <div className="flex items-center gap-3">
                 <span className="text-grey-500 text-sm font-medium">
                   Metric:
@@ -393,7 +406,7 @@ const Analytics = (props: Props) => {
         </div>
       </div>
       <div className="w-full flex lg:flex-row flex-col gap-4 mt-10">
-        <div className="w-full flex   lg:flex-row flex-col  rounded-lg  gap-4 p-4 bgs-black">
+        <div className="w-full flex   lg:flex-row flex-col  rounded-lg  gap-4  ">
           {/* <EngagementDashboard /> */}
           <div className="w-full border-[#EAECF0] bg-white border p-8 py-4 flex flex-col rounded-lg ">
             <p className="text-lg mb-4 font-medium">
@@ -401,9 +414,9 @@ const Analytics = (props: Props) => {
             </p>{" "}
             <HeatmapChart />
           </div>
-          <div className="w-full flex flex-col gap-8 lg:w-[40%] px-4 py-2 border-[#EAECF0] bg-white items-center border  rounded-lg ">
-            <div className="flex justify-between items-center w-full">
-              <p className="a">Audience Metrics</p>
+          <div className="w-full flex flex-col gap-8 lg:w-[40%] px-4 py-2 pt-4 border-[#EAECF0] bg-white items-start border  rounded-lg ">
+            <div className="flex justify-between items-center w-full mb-4">
+              <p className="text-lg  font-medium">Audience Metrics</p>
               <Button text="12 Months" className="p-4" />
             </div>
             <div className="flex justify-between items-center w-full">
@@ -426,7 +439,7 @@ const Analytics = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="w-full mt-20 bg-white">
+      <div className="w-full mt-10 bg-white rounded-[12px] border border-solid border-[#E4E7EC]">
         <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
           <div className="text-lg font-medium">Top Performing Campaigns</div>
 
@@ -441,7 +454,7 @@ const Analytics = (props: Props) => {
         </div>
         <div className="w-full overflow-x-auto px-4">
           <table className="w-full b">
-            <thead className="text-grey-600 rounded sticky top-0 z-10">
+            <thead className="text-grey-600  rounded sticky top-0 z-10">
               <tr className="bg-[#F9FAFB]">
                 <th className="pl-6 pr-2 py-2 rounded-s-lg">
                   <div className="flex items-center text-nowrap gap-2 text-[#5D6679] text-sm font-medium w-full cursor-pointer">
