@@ -405,7 +405,7 @@ const Analytics = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="w-full flex lg:flex-row flex-col gap-4 mt-10">
+      <div className="w-full flex lg:flex-row flex-col gap-4 mt-5">
         <div className="w-full flex   lg:flex-row flex-col  rounded-lg  gap-4  ">
           {/* <EngagementDashboard /> */}
           <div className="w-full border-[#EAECF0] bg-white border p-8 py-4 flex flex-col rounded-lg ">
@@ -439,7 +439,7 @@ const Analytics = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="w-full mt-10 bg-white rounded-[12px] border border-solid border-[#E4E7EC]">
+      <div className="w-full mt-5 bg-white rounded-[12px] border border-solid border-[#E4E7EC]">
         <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
           <div className="text-lg font-medium">Top Performing Campaigns</div>
 
