@@ -90,7 +90,7 @@ const CampaignId = (props: Props) => {
             <LoudSpeaker color="black" />
           </div>
           <div className="flex flex-col gap-1  ">
-            <div className="text-lg font-semibold flex items-end  gadiv-3">
+            <div className="text-lg font-semibold flex items-end  gap-3">
              <Link href={"/dashboard/campaigns"}> Campaigns</Link> <span className="text-xl text-[#D0D5DD]">/</span>{" "}
               <p className="max-w-32 w-full truncate text-nowrap text-sm text-primary-600">
                 Tech Requirements About Desktops
