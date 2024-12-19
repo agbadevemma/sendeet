@@ -86,10 +86,10 @@ const CampaignId = (props: Props) => {
       />
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+          <div className=" bg-white flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <LoudSpeaker color="black" />
           </div>
-          <div className="flex flex-col gap-1 ">
+          <div className="flex flex-col gap-1  ">
             <p className="text-lg font-semibold flex items-end  gap-3">
               Campaigns <span className="text-xl text-[#D0D5DD]">/</span>{" "}
               <p className="max-w-32 w-full truncate text-nowrap text-sm text-primary-600">
@@ -101,7 +101,7 @@ const CampaignId = (props: Props) => {
             </p>
           </div>
         </div>
-        <div className=" flex  gap-3 mt-4 lg:mt-0">
+        <div className=" flex  gap-3 mt-4 lg:mt-0" >
           <Button
             size="sm"
             iconComponent={<FileDownload color="#383E49" />}
@@ -186,7 +186,7 @@ const CampaignId = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex mt-5 p-4  pb-10 w-full border border-[#E4E7EC] rounded-xl flex-col">
+      <div className="flex mt-5 p-4  pb-10 w-full bg-white  bg-white  border border-[#E4E7EC] rounded-xl flex-col">
         <div className="flex gap-4  items-center">
           <Link href="/dashboard/campaigns">
             <Button
@@ -204,7 +204,7 @@ const CampaignId = (props: Props) => {
             <div className="text-success-500 text-sm">Completed</div>
           </div>
         </div>
-        <div className="lg:pl-14 flex mt-8 flex-wrap md:flex-row  justify-between items-center">
+        <div className="lg:px-14 flex mt-8 flex-wrap md:flex-row  justify-between items-center">
           <div className="flex flex-col  gap-2 w-fit s[0.8px]  border-[#D0D5DD]">
             <p className="text-md text-[#667085]">Send Date</p>
             <div className="flex gap-2 items-center">
@@ -250,7 +250,7 @@ const CampaignId = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="p-5 w-full border border-[#E4E7EC] rounded-lg flex-col mt-4">
+      <div className="p-5 w-full bg-white  border border-[#E4E7EC] rounded-lg flex-col mt-4">
         <div className="flex gap-1 items-center">
           <span className="text-[18px] font-medium">Description</span>
           <PencilEdit height={20} width={20} color="#00AAF7" />
@@ -259,7 +259,7 @@ const CampaignId = (props: Props) => {
           Add a campaign description to provide more context
         </span>
       </div>
-      <div className="mt-4 border border-[#E4E7EC] rounded-lg flex-col">
+      <div className="mt-4 bg-white  border border-[#E4E7EC] rounded-lg flex-col">
         <div className=" p-4 lg:p-6  w-full  flex lg:flex-row flex-col gap-8 lg:gap-4  h-full">
           <div className="w-full">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
@@ -390,7 +390,7 @@ const CampaignId = (props: Props) => {
         </div>
       </div>
       <div className="w-full gap-2 flex md:flex-row flex-col  ">
-        <div className="mt-4 border border-[#E4E7EC] w-full rounded-lg flex-col p-6">
+        <div className="mt-4 bg-white  border border-[#E4E7EC] w-full rounded-lg flex-col p-6">
           <div className="w-full">
             <div className="flex gap-24 items-center ">
               <div className="flex items-center gap-2">
@@ -425,7 +425,7 @@ const CampaignId = (props: Props) => {
             <AdminBarChart />
           </div>
         </div>
-        <div className="mt-4 border border-[#E4E7EC] w-full rounded-lg flex-col p-6">
+        <div className="mt-4 bg-white  border border-[#E4E7EC] w-full rounded-lg flex-col p-6">
           <div className="flex  mb-14 mt-2 items-center gap-2 ">
             {" "}
             <p className="text-[18px] font-medium w-fit ">
