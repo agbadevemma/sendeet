@@ -90,12 +90,12 @@ const CampaignId = (props: Props) => {
             <LoudSpeaker color="black" />
           </div>
           <div className="flex flex-col gap-1  ">
-            <p className="text-lg font-semibold flex items-end  gap-3">
-              Campaigns <span className="text-xl text-[#D0D5DD]">/</span>{" "}
+            <div className="text-lg font-semibold flex items-end  gadiv-3">
+             <Link href={"/dashboard/campaigns"}> Campaigns</Link> <span className="text-xl text-[#D0D5DD]">/</span>{" "}
               <p className="max-w-32 w-full truncate text-nowrap text-sm text-primary-600">
                 Tech Requirements About Desktops
               </p>
-            </p>
+            </div>
             <p className="text-sm text-grey-800">
               Create and manage campaigns for your business
             </p>
