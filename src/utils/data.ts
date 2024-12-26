@@ -65,7 +65,7 @@ export interface Transaction {
 }
 
 export interface CampaignInterface {
-  id:number;
+  id: number;
   campaign: string;
   date: string;
   delivered: string;
@@ -213,7 +213,6 @@ export const initialCampaign: CampaignInterface[] = [
     status: "Completed",
   },
 ];
-
 
 export const timeZones: Option[] = [
   { value: "utc", label: "UTC +01:00: West Africa Time (WAT)" },
@@ -790,5 +789,93 @@ export const mockUploadsData: Uploads[] = [
     uploadedBy: "Sales Team",
     fileSize: "7.8MB",
     status: "In Progress",
+  },
+];
+
+export interface AudienceData2 {
+  id: number; // id field is now a number
+  name: string;
+  phoneNumber: string;
+  tags: Array<string>;
+  subscription: "Opted In" | "Opted Out";
+}
+
+export const audienceData2: Array<AudienceData2> = [
+  {
+    id: 1,
+    name: "Catherine Summer",
+    phoneNumber: "+2348012345678",
+    tags: ["Sales", "Church", "Financials"],
+    subscription: "Opted In",
+  },
+  {
+    id: 2,
+    name: "John Doe",
+    phoneNumber: "+2348023456789",
+    tags: ["Marketing", "Outreach", "Strategy"],
+    subscription: "Opted In",
+  },
+  {
+    id: 3,
+    name: "Grace Johnson",
+    phoneNumber: "+2348034567890",
+    tags: ["Tech", "Support", "IT"],
+    subscription: "Opted Out",
+  },
+  {
+    id: 4,
+    name: "Michael Smith",
+    phoneNumber: "+2348045678901",
+    tags: ["Development", "Engineering", "Innovation"],
+    subscription: "Opted In",
+  },
+  {
+    id: 5,
+    name: "Sarah Lee",
+    phoneNumber: "+2348056789012",
+    tags: ["Customer Service", "Feedback", "Clients"],
+    subscription: "Opted In",
+  },
+  {
+    id: 6,
+    name: "David Kim",
+    phoneNumber: "+2348067890123",
+    tags: ["Finance", "Reports", "Planning"],
+    subscription: "Opted Out",
+  },
+  {
+    id: 7,
+    name: "Emily Davis",
+    phoneNumber: "+2348078901234",
+    tags: ["HR", "Recruitment", "Employee Relations"],
+    subscription: "Opted In",
+  },
+  {
+    id: 8,
+    name: "Daniel Wright",
+    phoneNumber: "+2348089012345",
+    tags: ["Executive", "Leadership", "Strategy"],
+    subscription: "Opted In",
+  },
+  {
+    id: 9,
+    name: "Jessica Brown",
+    phoneNumber: "+2348090123456",
+    tags: ["Logistics", "Operations", "Distribution"],
+    subscription: "Opted Out",
+  },
+  {
+    id: 10,
+    name: "Anthony White",
+    phoneNumber: "+2348101234567",
+    tags: ["Legal", "Compliance", "Contracts"],
+    subscription: "Opted In",
+  },
+  {
+    id: 11,
+    name: "Olivia Clark",
+    phoneNumber: "+2348112345678",
+    tags: ["Design", "Branding", "Creatives"],
+    subscription: "Opted In",
   },
 ];

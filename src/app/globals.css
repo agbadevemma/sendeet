@@ -35,6 +35,7 @@ select:-webkit-autofill:focus {
 /* change default color to text-gray-900 */
 html{
   @apply text-gray-900;
+  color: #111827 !important;
 }
 
 
