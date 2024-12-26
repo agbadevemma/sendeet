@@ -26,6 +26,7 @@ import PencilEdit from "@/icons/pencil-edit";
 import Bin from "@/icons/bin";
 import Tag from "@/icons/tag";
 import AddContact from "@/components/AddContact";
+import BulkImport from "@/components/BulkImport";
 
 type Props = {};
 
@@ -111,8 +112,8 @@ const Audience = (props: Props) => {
   return (
     <div>
       <div>
-        <AddContact setIsOpen={setIsOpen} isOpen={isOpen}/>
-
+        {/* <AddContact setIsOpen={setIsOpen} isOpen={isOpen} /> */}
+        <BulkImport isOpen={isOpen} setIsOpen={setIsOpen} />
         <div>
           <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
             <div className="flex items-center gap-4">
@@ -188,163 +189,163 @@ const Audience = (props: Props) => {
                 />
               </div>
             </div>
-           <div className="overflow-x-auto ">
-           <table className="w-full">
-              <thead className="text-grey-600 rounded  top-0 z-10">
-                <tr className="bg-[#F9FAFB]">
-                  <th className="pl-6 pr-2 py-2 rounded-s-lg">
-                    <div className="flex items-center text-nowrap gap-2 text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                      <Checkbox
-                        checked={isAllSelected}
-                        indeterminate={isIndeterminate}
-                        onClick={handleSelectAll}
-                      />
-                      <span>Name</span>
-                      <div
-                        onClick={() => handleSort("name")}
-                        className={` transition-transform duration-300   ${
-                          sortConfig?.key === "name" &&
-                          sortConfig.direction === "asc"
-                            ? "transform rotate-180"
-                            : ""
-                        }`}
-                      >
-                        <ArrowUp color={"#5D6679"} />
-                      </div>
-                    </div>
-                  </th>
-                  <th className="p-2">
-                    <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                      Phone number
-                      <div
-                        onClick={() => handleSort("phoneNumber")}
-                        className={` transition-transform duration-300   ${
-                          sortConfig?.key === "phoneNumber" &&
-                          sortConfig.direction === "asc"
-                            ? "transform rotate-180"
-                            : ""
-                        }`}
-                      >
-                        <ArrowUp color={"#5D6679"} />
-                      </div>
-                    </div>
-                  </th>
-
-                  <th className="p-2 ">
-                    <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                      Tags
-                      <div
-                        onClick={() => handleSort("tags")}
-                        className={` transition-transform duration-300   ${
-                          sortConfig?.key === "tags" &&
-                          sortConfig.direction === "asc"
-                            ? "transform rotate-180"
-                            : ""
-                        }`}
-                      >
-                        <ArrowUp color={"#5D6679"} />
-                      </div>
-                    </div>
-                  </th>
-                  <th className="p-2">
-                    <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                      Subscription
-                      <div
-                        onClick={() => handleSort("subscription")}
-                        className={` transition-transform duration-300   ${
-                          sortConfig?.key === "subscription" &&
-                          sortConfig.direction === "asc"
-                            ? "transform rotate-180"
-                            : ""
-                        }`}
-                      >
-                        <ArrowUp color={"#5D6679"} />
-                      </div>
-                    </div>
-                  </th>
-                  <th className="p-2">
-                    <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                      Actions
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-
-              {audienceData2.length !== 0 && (
-                <tbody className="">
-                  {getFilteredOrganis().map((audience, index) => (
-                    <tr
-                      key={audience.id}
-                      className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
-                    >
-                      <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
+            <div className="overflow-x-auto ">
+              <table className="w-full">
+                <thead className="text-grey-600 rounded  top-0 z-10">
+                  <tr className="bg-[#F9FAFB]">
+                    <th className="pl-6 pr-2 py-2 rounded-s-lg">
+                      <div className="flex items-center text-nowrap gap-2 text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                         <Checkbox
-                          checked={selectedItems.includes(index)}
-                          onClick={() => handleSelectItem(index)}
+                          checked={isAllSelected}
+                          indeterminate={isIndeterminate}
+                          onClick={handleSelectAll}
                         />
-                        {audience.name}
-                      </td>
-                      <td className="text-sm font-medium text-grey-800 p-2 pr-8">
-                        {audience.phoneNumber}
-                      </td>
-
-                      <td className="text-sm font-medium text-grey-800 p-2  ">
-                        <div className="flex gap-2 items-center">
-                          {audience.tags.map((tag) => (
-                            <span className="flex text-xs items-center gap-2 p-2 px-4 bg-[#EFF8FF] text-[#175CD3] rounded-full">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </td>
-                      <td className="text-sm font-medium p-2">
+                        <span>Name</span>
                         <div
-                          className={`flex  w-fit items-center gap-[6px]  py-[2px] pl-2 pr-[10px] rounded-2xl ${
-                            audience.subscription == "Opted In"
-                              ? "bg-success-50 text-success-700"
-                              : "bg-[#F2F4F7] text-[#344054]"
+                          onClick={() => handleSort("name")}
+                          className={` transition-transform duration-300   ${
+                            sortConfig?.key === "name" &&
+                            sortConfig.direction === "asc"
+                              ? "transform rotate-180"
+                              : ""
                           }`}
                         >
-                          {" "}
-                          <div
-                            className={`h-2 w-2 bg-success-700 rounded-full  ${
-                              audience.subscription == "Opted In"
-                                ? " bg-success-700"
-                                : "bg-[#344054]"
-                            }`}
-                          ></div>{" "}
-                          <div className=" "> {audience.subscription}</div>
+                          <ArrowUp color={"#5D6679"} />
                         </div>
-                      </td>
-                      <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
-                        <Link
-                          href={`/admin/dashboard/usermanagement/organization/${audience.id}`}
+                      </div>
+                    </th>
+                    <th className="p-2">
+                      <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                        Phone number
+                        <div
+                          onClick={() => handleSort("phoneNumber")}
+                          className={` transition-transform duration-300   ${
+                            sortConfig?.key === "phoneNumber" &&
+                            sortConfig.direction === "asc"
+                              ? "transform rotate-180"
+                              : ""
+                          }`}
                         >
+                          <ArrowUp color={"#5D6679"} />
+                        </div>
+                      </div>
+                    </th>
+
+                    <th className="p-2 ">
+                      <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                        Tags
+                        <div
+                          onClick={() => handleSort("tags")}
+                          className={` transition-transform duration-300   ${
+                            sortConfig?.key === "tags" &&
+                            sortConfig.direction === "asc"
+                              ? "transform rotate-180"
+                              : ""
+                          }`}
+                        >
+                          <ArrowUp color={"#5D6679"} />
+                        </div>
+                      </div>
+                    </th>
+                    <th className="p-2">
+                      <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                        Subscription
+                        <div
+                          onClick={() => handleSort("subscription")}
+                          className={` transition-transform duration-300   ${
+                            sortConfig?.key === "subscription" &&
+                            sortConfig.direction === "asc"
+                              ? "transform rotate-180"
+                              : ""
+                          }`}
+                        >
+                          <ArrowUp color={"#5D6679"} />
+                        </div>
+                      </div>
+                    </th>
+                    <th className="p-2">
+                      <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
+                        Actions
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+
+                {audienceData2.length !== 0 && (
+                  <tbody className="">
+                    {getFilteredOrganis().map((audience, index) => (
+                      <tr
+                        key={audience.id}
+                        className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
+                      >
+                        <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
+                          <Checkbox
+                            checked={selectedItems.includes(index)}
+                            onClick={() => handleSelectItem(index)}
+                          />
+                          {audience.name}
+                        </td>
+                        <td className="text-sm font-medium text-grey-800 p-2 pr-8">
+                          {audience.phoneNumber}
+                        </td>
+
+                        <td className="text-sm font-medium text-grey-800 p-2  ">
+                          <div className="flex gap-2 items-center">
+                            {audience.tags.map((tag) => (
+                              <span className="flex text-xs items-center gap-2 p-2 px-4 bg-[#EFF8FF] text-[#175CD3] rounded-full">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </td>
+                        <td className="text-sm font-medium p-2">
+                          <div
+                            className={`flex  w-fit items-center gap-[6px]  py-[2px] pl-2 pr-[10px] rounded-2xl ${
+                              audience.subscription == "Opted In"
+                                ? "bg-success-50 text-success-700"
+                                : "bg-[#F2F4F7] text-[#344054]"
+                            }`}
+                          >
+                            {" "}
+                            <div
+                              className={`h-2 w-2 bg-success-700 rounded-full  ${
+                                audience.subscription == "Opted In"
+                                  ? " bg-success-700"
+                                  : "bg-[#344054]"
+                              }`}
+                            ></div>{" "}
+                            <div className=" "> {audience.subscription}</div>
+                          </div>
+                        </td>
+                        <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
+                          <Link
+                            href={`/admin/dashboard/usermanagement/organization/${audience.id}`}
+                          >
+                            <Button
+                              size="sm"
+                              icon_style="icon-only"
+                              iconComponent={<PencilEdit color="#858D9D" />}
+                              text="Edit"
+                            />
+                          </Link>
                           <Button
                             size="sm"
+                            onClick={() => setIsModalOpen(true)}
+                            iconComponent={<Tag color="#858D9D" />}
                             icon_style="icon-only"
-                            iconComponent={<PencilEdit color="#858D9D" />}
-                            text="Edit"
                           />
-                        </Link>
-                        <Button
-                          size="sm"
-                          onClick={() => setIsModalOpen(true)}
-                          iconComponent={<Tag color="#858D9D" />}
-                          icon_style="icon-only"
-                        />
-                        <Button
-                          size="sm"
-                          iconComponent={<Bin color="#858D9D" />}
-                          icon_style="icon-only"
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              )}
-            </table>
-           </div>
+                          <Button
+                            size="sm"
+                            iconComponent={<Bin color="#858D9D" />}
+                            icon_style="icon-only"
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                )}
+              </table>
+            </div>
             {audienceData.length >= 10 && (
               <div className="w-full  pt-[11px] pb-[16px] p-6 ">
                 <Pagination />

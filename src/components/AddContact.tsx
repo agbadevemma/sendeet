@@ -7,6 +7,8 @@ import InputField from "./InputField";
 import ChevronDown from "@/icons/cheveron-down";
 import UserTick from "@/icons/user-tick";
 import { toast } from "react-toastify";
+import UserCross from "@/icons/user-cross";
+import UserAdd from "@/icons/user-add";
 
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,7 +38,7 @@ const AddContact = ({ setIsOpen, isOpen }: Props) => {
         >
           <div className="w-full flex items-start gap-5">
             <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
-              <UserGroup color="black" />
+            <UserAdd color="black" />
             </div>
 
             <div className="w-full flex flex-col">
@@ -118,11 +120,11 @@ const AddContact = ({ setIsOpen, isOpen }: Props) => {
               icon_style="txt"
               size="sm"
               onClick={() => {
-                toast.success(
+                toast.error(
                   <div className="flex items-start justify-between w-full  py-2 px-4 ">
-                    <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
+                    <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-error-50 border border-error-500 shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,_189,_199,_0.20)]">
                       {" "}
-                      <UserTick color="#0F973D" />
+                      <UserCross color="#D42620" />
                     </div>
                     <div className="gap-1 flex flex-col mr-4 ">
                       <p className="!text-[14px] !font-medium text-[#101828]">
