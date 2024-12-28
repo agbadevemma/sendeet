@@ -19,7 +19,7 @@ import { setExplore } from "@/lib/slices/miscellaneousSlice";
 
 import illustration from "../../../../images/illustration3.svg";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { audienceData2, AudienceData2 } from "@/utils/data";
 import PencilEdit from "@/icons/pencil-edit";
@@ -27,11 +27,19 @@ import Bin from "@/icons/bin";
 import Tag from "@/icons/tag";
 import AddContact from "@/components/AddContact";
 import BulkImport from "@/components/BulkImport";
+import Multiply from "@/icons/multiply";
+import SelectField from "@/components/SelectField";
 
 type Props = {};
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 const Audience = (props: Props) => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(setExplore("singlecontact"));
   }, []);
@@ -109,6 +117,53 @@ const Audience = (props: Props) => {
       }
     });
   };
+
+  // For the select Fields
+  const [statusOpen, setStatusOpen] = useState<boolean>(false);
+  const [tagsOpen, setTagsOpen] = useState<boolean>(false);
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
+  const [selectedTags, setSelectedTags] = useState<string>("");
+
+  const statusOptions: Option[] = [
+    { value: "active", label: "Active" },
+    { value: "inactive", label: "Inactive" },
+    { value: "pending", label: "Pending" },
+  ];
+
+  const tagOptions: Option[] = [
+    { value: "urgent", label: "Urgent" },
+    { value: "high", label: "High Priority" },
+    { value: "low", label: "Low Priority" },
+  ];
+
+  const handleStatusSelect = (value: string) => {
+    setSelectedStatus(value);
+    setStatusOpen(false);
+  };
+
+  const handleTagSelect = (value: string) => {
+    setSelectedTags(value);
+    setTagsOpen(false);
+  };
+
+  // Filter dopdown
+  const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpenFilter(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
       <div>
@@ -153,7 +208,7 @@ const Audience = (props: Props) => {
                   description="Quickly add a new contact to your audience list manually."
                   onNext={() => dispatch(setExplore("bulkcontact"))}
                   title="Manually add a single contact"
-                />{" "}
+                />
                 <Button
                   size="sm"
                   onClick={() => setIsOpen(true)}
@@ -165,20 +220,118 @@ const Audience = (props: Props) => {
               </div>
             </div>
           </div>
-          <div className="rounded-xl mt-7 px-6  h-full w-full border border-[#E4E7EC] ">
+          {selectedItems.length > 0 && (
+            <div className="rounded-xl mt-7 px-9 py-4  h-full w-full border bg-white border-[#E4E7EC] p-2 flex items-center justify-between ">
+              <div className="flex items-center gap-4">
+                <span className="font-medium text-sm text-[#667085]">
+                  {" "}
+                  {selectedItems.length} Audience Selected
+                </span>
+                <Button
+                  text="Unselect"
+                  icon_style="txt"
+                  onClick={() => setSelectedItems([])}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  type="destructive"
+                  iconComponent={<Bin color="#fff" height={20} width={20} />}
+                  text="Delete Contacts"
+                  icon_style="leading-icon"
+                />
+                <Button
+                  iconComponent={<Tag color="#1D2939" height={20} width={20} />}
+                  text="Manage tags"
+                  icon_style="leading-icon"
+                />
+              </div>
+            </div>
+          )}
+          <div className="rounded-xl mt-7 px-6  h-full w-full border bg-white border-[#E4E7EC] ">
             <div className="flex flex-col lg:flex-row lg:gap-4  py-4 gap-8 lg:items-center  justify-between">
               <div className="text-lg font-medium">
                 {audienceData2.length} Audience
               </div>
 
               <div className="flex gap items-center gap-x-[18px] ">
-                <Button
-                  size="sm"
-                  className="!h-[40px]"
-                  text="Filters"
-                  icon_style="leading-icon"
-                  iconComponent={<FilterAlt color="#383E49" />}
-                />
+                <div ref={dropdownRef} className="relative">
+                  <Button
+                    size="sm"
+                    onClick={() => setIsOpenFilter(true)}
+                    className="!h-[40px]"
+                    text="Filters"
+                    icon_style="leading-icon"
+                    iconComponent={<FilterAlt color="#383E49" />}
+                  />
+
+                  <div
+                    className={`w-[362px] ${
+                      isOpenFilter ? "visible" : "invisible"
+                    } border border-[#E4E7EC] right-0 shadow-xs  py-3 rounded-2xl absolute bg-white mt-4`}
+                  >
+                    <div
+                      className="w-full border-b flex items-center justify-between  px-4 
+                    pb-2"
+                    >
+                      <span className="font-semibold text-md">Filter</span>
+                      <Button
+                        text="Cancel"
+                        icon_style="icon-only"
+                        onClick={() => setIsOpenFilter(false)}
+                        className="!h-8 !w-8"
+                        size="sm"
+                        iconComponent={
+                          <Multiply color="#101928" height={16} width={16} />
+                        }
+                      />
+                    </div>
+
+                    <div className=" px-4 flex flex-col gap-8 my-10">
+                      <SelectField
+                        isOpen={statusOpen}
+                        name="status"
+                        label="Status"
+                        onToggle={() => setStatusOpen(!statusOpen)}
+                        options={statusOptions}
+                        onSelect={handleStatusSelect}
+                        value={selectedStatus}
+                        placeholder="Select status"
+                      />
+
+                      <SelectField
+                        isOpen={tagsOpen}
+                        name="tags"
+                        label="Tags"
+                        onToggle={() => setTagsOpen(!tagsOpen)}
+                        options={tagOptions}
+                        onSelect={handleTagSelect}
+                        value={selectedTags}
+                        placeholder="Select tags"
+                      />
+                    </div>
+
+                    <div className="mt-4 px-4 gap-4 pt-4 border-t flex  w-full items-center">
+                      <div className="w-full">
+                        <Button
+                          size="sm"
+                          className="!w-full"
+                          icon_style="txt"
+                          text="Reset"
+                        />
+                      </div>
+                      <div className="w-full">
+                        <Button
+                          size="sm"
+                          className="!w-full"
+                          type="primary"
+                          icon_style="txt"
+                          text="Apply"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <SearchInput
                   placeholder="Search"
@@ -272,7 +425,7 @@ const Audience = (props: Props) => {
                 </thead>
 
                 {audienceData2.length !== 0 && (
-                  <tbody className="">
+                  <tbody>
                     {getFilteredOrganis().map((audience, index) => (
                       <tr
                         key={audience.id}
