@@ -221,8 +221,8 @@ const Audience = (props: Props) => {
             </div>
           </div>
           {selectedItems.length > 0 && (
-            <div className="rounded-xl mt-7 px-9 py-4  h-full w-full border bg-white border-[#E4E7EC] p-2 flex items-center justify-between ">
-              <div className="flex items-center gap-4">
+            <div className="rounded-xl mt-7 xl:px-8 py-4    h-full w-full border bg-white border-[#E4E7EC] p-2  gap-4 flex lg:flex-row flex-col items-center justify-between ">
+              <div className="flex items-center  gap-3 lg:gap-4">
                 <span className="font-medium text-sm text-[#667085]">
                   {" "}
                   {selectedItems.length} Audience Selected
@@ -233,7 +233,7 @@ const Audience = (props: Props) => {
                   onClick={() => setSelectedItems([])}
                 />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3 lg:gap-4">
                 <Button
                   type="destructive"
                   iconComponent={<Bin color="#fff" height={20} width={20} />}
