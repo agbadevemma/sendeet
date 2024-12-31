@@ -29,6 +29,9 @@ import AddContact from "@/components/AddContact";
 import BulkImport from "@/components/BulkImport";
 import Multiply from "@/icons/multiply";
 import SelectField from "@/components/SelectField";
+import DeleteModal from "@/components/DeleteModal";
+import TagsModal from "@/components/TagsModal";
+import EditContact from "@/components/EditContact";
 
 type Props = {};
 
@@ -40,13 +43,16 @@ interface Option {
 const Audience = (props: Props) => {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(setExplore("singlecontact"));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setExplore("singlecontact"));
+  // }, []);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const [isOpenAddContact, setIsOpenAddContact] = useState<boolean>(false);
+  const [isOpenEditContact, setIsOpenEditContact] = useState<boolean>(false);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
+  const [isOpenTagModal, setIsOpenTagModal] = useState<boolean>(false);
   const [audienceData, setAudienceData] =
     useState<AudienceData2[]>(audienceData2);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
@@ -125,15 +131,14 @@ const Audience = (props: Props) => {
   const [selectedTags, setSelectedTags] = useState<string>("");
 
   const statusOptions: Option[] = [
-    { value: "active", label: "Active" },
-    { value: "inactive", label: "Inactive" },
-    { value: "pending", label: "Pending" },
+    { value: "Opted In", label: "Opted In" },
+    { value: "Opted Out", label: "Opted Out" },
   ];
 
   const tagOptions: Option[] = [
-    { value: "urgent", label: "Urgent" },
-    { value: "high", label: "High Priority" },
-    { value: "low", label: "Low Priority" },
+    { value: "sales", label: "sales" },
+    { value: "church", label: "church" },
+    { value: "financial", label: "financial" },
   ];
 
   const handleStatusSelect = (value: string) => {
@@ -167,9 +172,22 @@ const Audience = (props: Props) => {
   return (
     <div>
       <div>
-        {/* <AddContact setIsOpen={setIsOpen} isOpen={isOpen} /> */}
+        {/* Modals */}
+        <AddContact setIsOpen={setIsOpenAddContact} isOpen={isOpenAddContact} />
         <BulkImport isOpen={isOpen} setIsOpen={setIsOpen} />
+        <DeleteModal
+          setIsOpen={setIsOpenDeleteModal}
+          isOpen={isOpenDeleteModal}
+        />
+
+        <TagsModal setIsOpen={setIsOpenTagModal} isOpen={isOpenTagModal} />
+        <EditContact
+          setIsOpen={setIsOpenEditContact}
+          isOpen={isOpenEditContact}
+        />
+
         <div>
+          {/* main Page */}
           <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
             <div className="flex items-center gap-4">
               <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
@@ -196,6 +214,7 @@ const Audience = (props: Props) => {
                 <Button
                   size="sm"
                   iconComponent={<UserAdd color="#383E49" />}
+                  onClick={() => setIsOpenAddContact(true)}
                   icon_style="leading-icon"
                   text="Add Contact"
                 />
@@ -237,6 +256,7 @@ const Audience = (props: Props) => {
                 <Button
                   type="destructive"
                   iconComponent={<Bin color="#fff" height={20} width={20} />}
+                  onClick={() => setIsOpenDeleteModal(true)}
                   text="Delete Contacts"
                   icon_style="leading-icon"
                 />
@@ -287,7 +307,10 @@ const Audience = (props: Props) => {
                       />
                     </div>
 
-                    <div className=" px-4 flex flex-col gap-8 my-10">
+                    <div
+                      ref={dropdownRef}
+                      className=" px-4 flex flex-col gap-8 my-10"
+                    >
                       <SelectField
                         isOpen={statusOpen}
                         name="status"
@@ -309,6 +332,14 @@ const Audience = (props: Props) => {
                         value={selectedTags}
                         placeholder="Select tags"
                       />
+                      <div className="flex items-center gap-2 -mt-5">
+                        <span className="flex text-xs items-center gap-2 p-2 px-4 bg-[#EFF8FF] text-[#175CD3] rounded-full">
+                          status
+                        </span>
+                        <span className="flex text-xs items-center gap-2 p-2 px-4 bg-[#EFF8FF] text-[#175CD3] rounded-full">
+                          cool
+                        </span>
+                      </div>
                     </div>
 
                     <div className="mt-4 px-4 gap-4 pt-4 border-t flex  w-full items-center">
@@ -471,24 +502,24 @@ const Audience = (props: Props) => {
                           </div>
                         </td>
                         <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
-                          <Link
-                            href={`/admin/dashboard/usermanagement/organization/${audience.id}`}
-                          >
-                            <Button
-                              size="sm"
-                              icon_style="icon-only"
-                              iconComponent={<PencilEdit color="#858D9D" />}
-                              text="Edit"
-                            />
-                          </Link>
                           <Button
                             size="sm"
-                            onClick={() => setIsModalOpen(true)}
+                            icon_style="icon-only"
+                            onClick={() => setIsOpenEditContact(true)}
+                            iconComponent={<PencilEdit color="#858D9D" />}
+                            text="Edit"
+                          />
+
+                          <Button
+                            size="sm"
+                            onClick={() => setIsOpenTagModal(true)}
+                            // setIsOpenTagModal
                             iconComponent={<Tag color="#858D9D" />}
                             icon_style="icon-only"
                           />
                           <Button
                             size="sm"
+                            onClick={() => setIsOpenDeleteModal(true)}
                             iconComponent={<Bin color="#858D9D" />}
                             icon_style="icon-only"
                           />
