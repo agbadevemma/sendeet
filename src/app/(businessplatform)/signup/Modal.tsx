@@ -27,7 +27,7 @@ const Modal = ({ isOpen, onClose }: Props) => {
               <Image src={whatsAppLogo} alt="whatsapp logo" />
               <div className="flex  flex-col">
                 <p className="  text-xl lg:text-[24px] lg:leading-[32px] font-semibold">
-                  Connect WhatsApp Business API
+                  Connect WhatsApp Organization API
                 </p>
                 <p className="text-[#5D6679] text-sm lg:text-md ">
                   Receive and reply to WhatsApp messages through your inbox{" "}
@@ -37,7 +37,7 @@ const Modal = ({ isOpen, onClose }: Props) => {
             <div className="mt-[10px] lg:mt-[32px] p-[24px] min-h-[152px] relative w-full border rounded-[10px] border-[#B0E5FD] bg-[#E6F7FE]">
               <div className="flex flex-col">
                 <p className=" font-semibold text-[16px] leading-[24px]">
-                  Connect your WhatsApp Business number in just one step
+                  Connect your WhatsApp Organization number in just one step
                 </p>
                 <p className="text-sm text-[#48505E] mt-[4px]">
                   Make sure you can receive a verification call from this number

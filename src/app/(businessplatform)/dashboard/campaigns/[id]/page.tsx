@@ -97,7 +97,7 @@ const CampaignId = (props: Props) => {
               </p>
             </div>
             <p className="text-sm text-grey-800">
-              Create and manage campaigns for your business
+              Create and manage campaigns for your organization
             </p>
           </div>
         </div>

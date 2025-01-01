@@ -228,7 +228,7 @@ const Audience = ({}: Props) => {
                   </th>
                   <th className="p-2">
                     <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                      Business
+                    Organization
                       <div
                         onClick={() => handleSort("business")}
                         className={` transition-transform duration-300   ${

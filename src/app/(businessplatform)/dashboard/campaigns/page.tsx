@@ -240,7 +240,7 @@ const Campaign = (props: Props) => {
           <div className="flex flex-col gap-1">
             <p className="text-lg font-semibold">Campaigns</p>
             <p className="text-sm text-grey-800">
-              Create and manage campaigns for your business
+              Create and manage campaigns for your organization
             </p>
           </div>
         </div>
