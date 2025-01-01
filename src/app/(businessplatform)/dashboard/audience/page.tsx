@@ -141,7 +141,7 @@ const Audience = (props: Props) => {
     { value: "financial", label: "financial" },
   ];
 
-  const handleStatusSelect = (value: string) => {
+  const handleStatusSelect = (value: string) => { 
     setSelectedStatus(value);
     setStatusOpen(false);
   };
