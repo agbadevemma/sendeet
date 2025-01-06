@@ -141,7 +141,7 @@ const Audience = (props: Props) => {
     { value: "financial", label: "financial" },
   ];
 
-  const handleStatusSelect = (value: string) => { 
+  const handleStatusSelect = (value: string) => {
     setSelectedStatus(value);
     setStatusOpen(false);
   };
@@ -315,6 +315,8 @@ const Audience = (props: Props) => {
                         isOpen={statusOpen}
                         name="status"
                         label="Status"
+                        fieldclassName="h-[38px]"
+                        colored={true}
                         onToggle={() => setStatusOpen(!statusOpen)}
                         options={statusOptions}
                         onSelect={handleStatusSelect}
@@ -326,6 +328,7 @@ const Audience = (props: Props) => {
                         isOpen={tagsOpen}
                         name="tags"
                         label="Tags"
+                        fieldclassName="h-[38px]"
                         onToggle={() => setTagsOpen(!tagsOpen)}
                         options={tagOptions}
                         onSelect={handleTagSelect}
@@ -347,6 +350,10 @@ const Audience = (props: Props) => {
                         <Button
                           size="sm"
                           className="!w-full"
+                          onClick={() => {
+                            setSelectedTags("");
+                            setSelectedStatus("");
+                          }}
                           icon_style="txt"
                           text="Reset"
                         />
@@ -357,6 +364,7 @@ const Audience = (props: Props) => {
                           className="!w-full"
                           type="primary"
                           icon_style="txt"
+                          onClick={() => setIsOpenFilter(false)}
                           text="Apply"
                         />
                       </div>
@@ -492,10 +500,10 @@ const Audience = (props: Props) => {
                           >
                             {" "}
                             <div
-                              className={`h-2 w-2 bg-success-700 rounded-full  ${
+                              className={`h-2 w-2 rounded-full  ${
                                 audience.subscription == "Opted In"
-                                  ? " bg-success-700"
-                                  : "bg-[#344054]"
+                                  ? " bg-success-500"
+                                  : "bg-grey-500"
                               }`}
                             ></div>{" "}
                             <div className=" "> {audience.subscription}</div>

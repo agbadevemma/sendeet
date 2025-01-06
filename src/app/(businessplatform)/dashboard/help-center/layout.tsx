@@ -23,11 +23,14 @@ import UserAdd from "@/icons/user-add";
 import UserGroup from "@/icons/user-group";
 import Verified from "@/icons/verified";
 import Link from "next/link";
+import { Rating } from "react-simple-star-rating";
 import React, { useEffect, useRef, useState } from "react";
 type Props = {};
 
 const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // Manage visibility state
+  const [rating, setRating] = useState(0);
+  const [isSendFeedbackOpen, setIsSendFeedbackOpen] = useState<boolean>(false); // Manage visibility state
   const dropdownRef = useRef<HTMLDivElement | null>(null); // Reference to the dropdown/modal
 
   // Close the modal when clicking outside
@@ -47,6 +50,18 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Catch Rating value
+  const handleRating = (rate: number) => {
+    setRating(rate);
+
+    // other logic
+  };
+  // Optinal callback functions
+  const onPointerEnter = () => console.log("Enter");
+  const onPointerLeave = () => console.log("Leave");
+  const onPointerMove = (value: number, index: number) =>
+    console.log(value, index);
 
   return (
     <div>
@@ -125,7 +140,7 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
                       Contact our support team for additional assistance.
                     </p>
                     <div className="flex mt-4 flex-col gap-4">
-                    <Link
+                      <Link
                         href={"/dashboard/help-center/form-ticket"}
                         onClick={() => setIsOpen((prev) => !prev)}
                         className="flex  items-center gap-2 w-full px-3"
@@ -134,8 +149,10 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
                         <span className="text-grey-700 text-sm">Email Us</span>
                       </Link>
                       <button
-                      
-                        onClick={() => setIsOpen((prev) => !prev)}
+                        onClick={() => {
+                          setIsSendFeedbackOpen((prev) => !prev);
+                          setIsOpen((prev) => !prev);
+                        }}
                         className="flex  items-center gap-2 w-full px-3"
                       >
                         <Star color="#667085" height={20} width={20} />
@@ -153,6 +170,41 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
                           Submit a ticket
                         </span>
                       </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {isSendFeedbackOpen && (
+                <div className="w-[311px] min-h-64 border flex flex-col border-[#E4E7EC] bg-white  shadow-sm rounded-[16px]">
+                  <div className=" flex  items-center justify-between  p-4 border-b border-b-grey-[#E4E7EC]">
+                    <p className=" font-semibold">Send Feedback</p>
+                    <Button
+                      iconComponent={<Multiply color="#101928" />}
+                      className=""
+                      onClick={() => setIsSendFeedbackOpen(false)}
+                      icon_style="icon-only"
+                    />
+                  </div>
+                  <div className="flex-1 px-4 rounded-b-[16px] p-2">
+                    <p className="text-[#667085] text-sm mt-4">
+                      Please rate your experience with Sendeet or a feature you
+                      are currently using
+                    </p>
+                    
+                    <div className="flex items-center justify-between gap-6  mt-6 ">
+                    <Rating
+                      onClick={handleRating}
+                      className="flex items-center gap-4 justify-between"
+                      SVGstrokeColor={"#48505E"}
+                      emptyClassName={"text-[#48505E] !bg-white"}
+                      SVGstorkeWidth={1}
+                      fillColor={"#fff"}
+                      // onPointerEnter={onPointerEnter}
+                      // onPointerLeave={onPointerLeave}
+                      // onPointerMove={onPointerMove}
+                     
+                    />
                     </div>
                   </div>
                 </div>

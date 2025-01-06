@@ -16,13 +16,16 @@ interface SelectFieldProps {
   errorText?: string;
   name: string;
   icon?: React.ReactNode;
-  labelClassName?:string;
+  labelClassName?: string;
+  colored?: boolean;
+  fieldclassName:string;
 }
 
 const SelectField: React.FC<SelectFieldProps> = ({
   label = "Label",
   placeholder = "Select an option",
   className = "",
+  colored = false,
   isOpen,
   onToggle,
   options = [],
@@ -32,6 +35,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   error = false,
   errorText = "",
   labelClassName,
+  fieldclassName,
   name,
 }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -62,7 +66,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
   return (
     <div className="relative w-full" ref={dropdownRef}>
       <div className="flex flex-col gap-1.5">
-        <label className={`text-[#344054] text-sm lg:text-md  whitespace-nowrap ${labelClassName}`}>{label}</label>
+        <label
+          className={`text-[#344054] text-sm lg:text-md  whitespace-nowrap ${labelClassName}`}
+        >
+          {label}
+        </label>
         <div
           className={`flex justify-between items-center gap-2 rounded-lg px-3.5 py-2.5 border ${
             error ? "border-[#D42620]" : "border-grey-100"
@@ -70,7 +78,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
             isOpen
               ? "shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05),_0px_0px_0px_4px_#E6F7FE]  border-[#8AD8FB]"
               : "shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)]  "
-          } cursor-pointer ${className}`}
+          } cursor-pointer ${fieldclassName} `}
           onClick={onToggle}
         >
           <div
@@ -79,7 +87,22 @@ const SelectField: React.FC<SelectFieldProps> = ({
             }`}
           >
             {icon && <span>{icon}</span>}
-            <span>{selectedOption ? selectedOption.label : placeholder}</span>
+            {!colored && (
+              <span>{selectedOption ? selectedOption.label : placeholder}</span>
+            )}
+            {colored && (
+              <span>
+                {selectedOption ? (
+                  <div className="bg-[#ECFDF3] text-success-700 px-2 py-0.5 gap-1 text-sm font-medium flex items-center rounded-lg ">
+                    {" "}
+                    <span className="h-2 w-2 rounded-full bg-[#12B76A]"></span>{" "}
+                    {selectedOption.label}
+                  </div>
+                ) : (
+                  placeholder
+                )}
+              </span>
+            )}
           </div>
           <Image
             src={arrowdown}
@@ -90,8 +113,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
           />
         </div>
       </div>
+
       {isOpen && (
-        <div className={`absolute ${className} z-50 w-full border mt-1 max-h-80 overflow-y-auto p-1 rounded-lg border-[#F2F4F7] shadow-[0px_12px_16px_-4px_rgba(16,_24,_40,_0.08),_0px_4px_6px_-2px_rgba(16,_24,_40,_0.03)] bg-white`}>
+        <div
+          className={`absolute ${className} z-50 w-full border mt-1 max-h-80 overflow-y-auto p-1 rounded-lg border-[#F2F4F7] shadow-[0px_12px_16px_-4px_rgba(16,_24,_40,_0.08),_0px_4px_6px_-2px_rgba(16,_24,_40,_0.03)] bg-white`}
+        >
           {options.map((option) => (
             <div
               key={option.value}

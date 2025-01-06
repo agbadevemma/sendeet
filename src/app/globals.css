@@ -138,3 +138,25 @@ html{
 .custom-date-range .rdrStartEdge, .custom-date-range .rdrEndEdge {
   border-color: #28a745 !important; /* Green border */
 }
+
+.rating-container {
+  display: flex !important;
+  justify-content: start!important;
+  align-items: center!important;
+}
+
+.rating-container .star-svg {
+  width: 100%;
+  display: inline-block!important;  /* Ensures stars are in a row */
+  margin-right: 5px!important;
+}
+
+.react-simple-star-rating{
+  width: 100%;
+  display: flex !important;
+  justify-content: start!important;
+}
+
+svg.star-svg {
+  display: inline !important;
+}
