@@ -18,7 +18,7 @@ interface SelectFieldProps {
   icon?: React.ReactNode;
   labelClassName?: string;
   colored?: boolean;
-  fieldclassName:string;
+  fieldclassName?:string;
 }
 
 const SelectField: React.FC<SelectFieldProps> = ({
