@@ -13,9 +13,10 @@ import Checkbox from "./Checkbox";
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isOpen: boolean;
+  setHighlightedItems: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-const TagsModal = ({ setIsOpen, isOpen }: Props) => {
+const TagsModal = ({ setIsOpen, isOpen, setHighlightedItems }: Props) => {
   const [tabs, setTabs] = useState<boolean>(false);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [inputValue, setInputValue] = useState<string>("");
@@ -166,18 +167,8 @@ const TagsModal = ({ setIsOpen, isOpen }: Props) => {
                 onClick={handleDivClick}
                 className="h-[200px] overflow-y-auto  "
               >
-                <InputField
-                  label="Tags"
-                  inputType="text"
-                  placeholder="Tags (Add a label to organize contacts)"
-                  
-                  value={inputValue}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setInputValue(e.target.value)
-                  }
-                  className="focus:outline-none !h-[44px] w-full mb-2 text-sm placeholder:text-[#B9BDC7]"
-                />
-                <div className="flex flex-col flex-wrap gap-2 mt-3.5">
+                <p className="font-semibold">Tags</p>
+                <div className="flex flex-col flex-wrap gap-2 mt-1.5">
                   {tags.map((tag, index) => (
                     <div
                       key={index}
@@ -197,13 +188,19 @@ const TagsModal = ({ setIsOpen, isOpen }: Props) => {
               <div className="flex items-center justify-end mt-8 gap-3">
                 <Button
                   className=""
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setHighlightedItems([]);
+                  }}
                   text="Create"
                   icon_style="txt"
                 />
                 <Button
                   className=""
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setHighlightedItems([]);
+                  }}
                   type="primary"
                   text="Remove"
                   icon_style="txt"

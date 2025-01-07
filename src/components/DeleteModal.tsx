@@ -7,8 +7,9 @@ import Multiply from "@/icons/multiply";
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isOpen: boolean;
+  setSelectedItems: React.Dispatch<React.SetStateAction<number[]>>;
 };
-const DeleteModal = ({ setIsOpen, isOpen }: Props) => {
+const DeleteModal = ({ setIsOpen, isOpen, setSelectedItems }: Props) => {
   return (
     <div
       onClick={() => setIsOpen(false)}
@@ -51,14 +52,20 @@ const DeleteModal = ({ setIsOpen, isOpen }: Props) => {
             <Button
               iconComponent={<Multiply color="#101928" />}
               className=""
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                setSelectedItems([]);
+              }}
               text="Cancel"
               icon_style="txt"
             />
             <Button
               iconComponent={<Multiply color="#101928" />}
               className=""
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                setSelectedItems([]);
+              }}
               type="destructive"
               text="Delete"
               icon_style="txt"

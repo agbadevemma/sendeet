@@ -14,9 +14,10 @@ import Checkbox from "./Checkbox";
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isOpen: boolean;
+  setSelectedItems: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-const EditContact = ({ setIsOpen, isOpen }: Props) => {
+const EditContact = ({ setIsOpen, isOpen, setSelectedItems }: Props) => {
   const [selectedCode, setSelectedCode] = useState<string>("NG +234");
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -53,7 +54,10 @@ const EditContact = ({ setIsOpen, isOpen }: Props) => {
             <Button
               text="Cancel"
               icon_style="icon-only"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                setSelectedItems([]);
+              }}
               className="!h-8 !w-8"
               size="sm"
               iconComponent={
@@ -228,6 +232,7 @@ const EditContact = ({ setIsOpen, isOpen }: Props) => {
                     }
                   );
                   setIsOpen(false);
+                  setSelectedItems([]);
                 }}
               />
               <Button

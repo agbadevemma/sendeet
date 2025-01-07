@@ -178,12 +178,14 @@ const Audience = (props: Props) => {
         <DeleteModal
           setIsOpen={setIsOpenDeleteModal}
           isOpen={isOpenDeleteModal}
+          setSelectedItems={setSelectedItems}
         />
 
-        <TagsModal setIsOpen={setIsOpenTagModal} isOpen={isOpenTagModal} />
+        <TagsModal setIsOpen={setIsOpenTagModal} isOpen={isOpenTagModal}  setHighlightedItems={setSelectedItems} />
         <EditContact
           setIsOpen={setIsOpenEditContact}
           isOpen={isOpenEditContact}
+          setSelectedItems={setSelectedItems}
         />
 
         <div>
@@ -263,6 +265,7 @@ const Audience = (props: Props) => {
                 <Button
                   iconComponent={<Tag color="#1D2939" height={20} width={20} />}
                   text="Manage tags"
+                  onClick={() => setIsOpenTagModal(true)}
                   icon_style="leading-icon"
                 />
               </div>
@@ -484,7 +487,7 @@ const Audience = (props: Props) => {
                         <td className="text-sm font-medium text-grey-800 p-2  ">
                           <div className="flex gap-2 items-center">
                             {audience.tags.map((tag) => (
-                              <span className="flex text-xs items-center gap-2 p-2 px-4 bg-[#EFF8FF] text-[#175CD3] rounded-full">
+                              <span className="flex text-xs items-center gap-2 py-[2px] pl-2 pr-[10px] bg-[#EFF8FF] text-[#175CD3] rounded-full">
                                 {tag}
                               </span>
                             ))}
@@ -506,7 +509,7 @@ const Audience = (props: Props) => {
                                   : "bg-grey-500"
                               }`}
                             ></div>{" "}
-                            <div className=" "> {audience.subscription}</div>
+                            <div className="text-sm "> {audience.subscription}</div>
                           </div>
                         </td>
                         <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
@@ -514,7 +517,7 @@ const Audience = (props: Props) => {
                             size="sm"
                             icon_style="icon-only"
                             onClick={() => setIsOpenEditContact(true)}
-                            iconComponent={<PencilEdit color="#858D9D" />}
+                            iconComponent={<PencilEdit color="#858D9D" height={16} width={16} />}
                             text="Edit"
                           />
 
@@ -522,13 +525,13 @@ const Audience = (props: Props) => {
                             size="sm"
                             onClick={() => setIsOpenTagModal(true)}
                             // setIsOpenTagModal
-                            iconComponent={<Tag color="#858D9D" />}
+                            iconComponent={<Tag color="#858D9D" height={16} width={16} />}
                             icon_style="icon-only"
                           />
                           <Button
                             size="sm"
                             onClick={() => setIsOpenDeleteModal(true)}
-                            iconComponent={<Bin color="#858D9D" />}
+                            iconComponent={<Bin color="#858D9D" height={16} width={16} />}
                             icon_style="icon-only"
                           />
                         </td>
