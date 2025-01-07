@@ -24,6 +24,19 @@ export const messageTypeOptions: Option[] = [
   { value: "Service", label: "Service" },
 ];
 
+export const issueTypeOptions: Option[] = [
+  { value: "Bug Report", label: "Bug Report" },
+  { value: "Feature Request", label: "Feature Request" },
+  { value: "UI/UX Issue", label: "UI/UX Issue" },
+  { value: "Performance", label: "Performance" },
+  { value: "Security", label: "Security" },
+  { value: "Billing", label: "Billing" },
+  { value: "Account Access", label: "Account Access" },
+  { value: "Integration", label: "Integration" },
+  { value: "Content Error", label: "Content Error" },
+  { value: "Other", label: "Other" },
+];
+
 export const targetAudienceOptions: Option[] = [
   { value: "All Contacts", label: "All Contacts" },
   { value: "Custom Selection", label: "Custom Selection" },

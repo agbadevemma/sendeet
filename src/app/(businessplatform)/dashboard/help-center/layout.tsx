@@ -25,9 +25,13 @@ import Verified from "@/icons/verified";
 import Link from "next/link";
 import { Rating } from "react-simple-star-rating";
 import React, { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 type Props = {};
 
 const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
+  const pathName = usePathname();
+  console.log("pathName", pathName);
+
   const [isOpen, setIsOpen] = useState<boolean>(false); // Manage visibility state
   const [rating, setRating] = useState(0);
   const [isSendFeedbackOpen, setIsSendFeedbackOpen] = useState<boolean>(false); // Manage visibility state
@@ -87,9 +91,16 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
             />
 
             <div className="mt-8 flex flex-col gap-3">
-              <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
+              <Link
+                href={"/dashboard/help-center"}
+                className={`flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer ${
+                  (pathName === "/dashboard/help-center/form-ticket" ||
+                    pathName === "/dashboard/help-center") &&
+                  "bg-[#F2F4F7]"
+                } text-[#667085]`}
+              >
                 <Home color="#667085" /> <span>Home</span>
-              </div>
+              </Link>
               <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
                 <RocketAlt color="#667085" />{" "}
                 <p className="w-full">Getting Started</p>
@@ -118,11 +129,11 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
               </div>
             </div>
           </div>
-          <div className="w-full relative border border-[#E4E7EC] bg-white rounded-[12px] p-6 flex flex-col ">
+          <div className="w-full  border border-[#E4E7EC] bg-white rounded-[12px] p-6 flex flex-col ">
             {children}
             <div
               ref={dropdownRef}
-              className=" flex flex-col items-end absolute right-[4%] gap-2 bottom-[4%]"
+              className=" flex flex-col items-end  fixed right-[4%] gap-2 bottom-[4%]"
             >
               {isOpen && (
                 <div className="w-[311px] min-h-64 border flex flex-col border-[#E4E7EC] bg-white  shadow-sm rounded-[16px]">
@@ -162,7 +173,7 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
                       </button>
                       <Link
                         onClick={() => setIsOpen((prev) => !prev)}
-                        href={"/dashboard/help-center/form-ticket"}
+                        href={"/dashboard/help-center/ticket"}
                         className="flex  items-center gap-2 w-full px-3"
                       >
                         <Ticket color="#667085" height={20} width={20} />
@@ -191,20 +202,19 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
                       Please rate your experience with Sendeet or a feature you
                       are currently using
                     </p>
-                    
+
                     <div className="flex items-center justify-between gap-6  mt-6 ">
-                    <Rating
-                      onClick={handleRating}
-                      className="flex items-center gap-4 justify-between"
-                      SVGstrokeColor={"#48505E"}
-                      emptyClassName={"text-[#48505E] !bg-white"}
-                      SVGstorkeWidth={1}
-                      fillColor={"#fff"}
-                      // onPointerEnter={onPointerEnter}
-                      // onPointerLeave={onPointerLeave}
-                      // onPointerMove={onPointerMove}
-                     
-                    />
+                      <Rating
+                        onClick={handleRating}
+                        className="flex items-center gap-4 justify-between"
+                        SVGstrokeColor={"#48505E"}
+                        emptyClassName={"text-[#48505E] !bg-white"}
+                        SVGstorkeWidth={1}
+                        fillColor={"#fff"}
+                        // onPointerEnter={onPointerEnter}
+                        // onPointerLeave={onPointerLeave}
+                        // onPointerMove={onPointerMove}
+                      />
                     </div>
                   </div>
                 </div>
