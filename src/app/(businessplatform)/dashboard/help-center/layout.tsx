@@ -31,8 +31,10 @@ type Props = {};
 const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
   console.log("pathName", pathName);
-
-  const [isOpen, setIsOpen] = useState<boolean>(false); // Manage visibility state
+  const [isOpen, setIsOpen] = useState<boolean>(false); // Manage visibility statex
+  const [gettingStartedDropdown, setGettingStartedDropdown] = useState(
+    pathName === "/dashboard/help-center/navigate-dashboard"
+  );
   const [rating, setRating] = useState(0);
   const [isSendFeedbackOpen, setIsSendFeedbackOpen] = useState<boolean>(false); // Manage visibility state
   const dropdownRef = useRef<HTMLDivElement | null>(null); // Reference to the dropdown/modal
@@ -92,6 +94,9 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
 
             <div className="mt-8 flex flex-col gap-3">
               <Link
+                onClick={() => {
+                  setGettingStartedDropdown(false);
+                }}
                 href={"/dashboard/help-center"}
                 className={`flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer ${
                   (pathName === "/dashboard/help-center/form-ticket" ||
@@ -99,32 +104,78 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
                   "bg-[#F2F4F7]"
                 } text-[#667085]`}
               >
-                <Home color="#667085" /> <span>Home</span>
+                <Home color="#667085" height={20} width={20} />{" "}
+                <span>Home</span>
               </Link>
+              <Link
+                href={"/dashboard/help-center/navigate-dashboard"}
+                onClick={() => {
+                  setGettingStartedDropdown(true);
+                }}
+                className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]"
+              >
+                <RocketAlt color="#667085" height={20} width={20} />{" "}
+                <p className="w-full text-sm">Getting Started</p>
+                <div
+                  className={`transition-transform duration-300 ${
+                    gettingStartedDropdown ? "transform rotate-180" : ""
+                  }`}
+                >
+                  <ChevronDown color="#667085" height={16} width={16} />
+                </div>
+              </Link>
+              {/* subgetting started */}
+              <div
+                className={`flex flex-col gap-3  ${
+                  gettingStartedDropdown ? "block" : "hidden"
+                } `}
+              >
+                <Link
+                  href={"/dashboard/help-center/navigate-dashboard"}
+                  className={`flex items-center px-3 gap-3 py-2 ${
+                    pathName === "/dashboard/help-center/navigate-dashboard"
+                      ? "bg-[#F2F4F7]"
+                      : ""
+                  } rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]`}
+                >
+                  <LoudSpeaker color="" />{" "}
+                  <p className="w-full text-sm">Navigating the Dashboard</p>
+                  <ChevronDown color="" />
+                </Link>{" "}
+                <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
+                  <LoudSpeaker color="" />{" "}
+                  <p className="w-full text-sm">WhatsApp API Status</p>
+                  <ChevronDown color="" height={16} width={16} />
+                </div>
+                <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
+                  <LoudSpeaker color="" />{" "}
+                  <p className="w-full text-sm">Importing Contacts</p>
+                  <ChevronDown color="" height={16} width={16} />
+                </div>
+                <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
+                  <LoudSpeaker color="" />{" "}
+                  <p className="w-full text-sm">Upload Guidelines</p>
+                  <ChevronDown color="" height={16} width={16} />
+                </div>
+                <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
+                  <LoudSpeaker color="#667085" height={20} width={20} />{" "}
+                  <p className="w-full text-sm">Campaign Management</p>
+                  <ChevronDown color="#667085" height={16} width={16} />
+                </div>
+              </div>
               <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
-                <RocketAlt color="#667085" />{" "}
-                <p className="w-full">Getting Started</p>
+                <User color="#667085" height={20} width={20} />{" "}
+                <p className="w-full text-sm">Account Management</p>
                 <ChevronDown color="#667085" height={16} width={16} />
               </div>
-
               <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
-                <LoudSpeaker color="#667085" />{" "}
-                <p className="w-full">Campaign Management</p>
+                <Money1 color="#667085" height={20} width={20} />{" "}
+                <p className="w-full text-sm">Credits & Billing</p>
                 <ChevronDown color="#667085" height={16} width={16} />
               </div>
               <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
-                <User color="#667085" />{" "}
-                <p className="w-full">Account Management</p>
-                <ChevronDown color="#667085" height={16} width={16} />
-              </div>
-              <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
-                <Money1 color="#667085" />{" "}
-                <p className="w-full">Credits & Billing</p>
-                <ChevronDown color="#667085" height={16} width={16} />
-              </div>
-              <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
-                <Code color="#667085" />{" "}
-                <p className="w-full">Troubleshooting</p>
+                <Code color="#667085" height={20} width={20} />{" "}
+                <p className="w-full text-sm">Troubleshooting</p>
                 <ChevronDown color="#667085" height={16} width={16} />
               </div>
             </div>
