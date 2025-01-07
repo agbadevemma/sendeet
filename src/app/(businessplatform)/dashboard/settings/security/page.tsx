@@ -1,11 +1,17 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const Security = (props: Props) => {
   return (
-    <div>Security</div>
-  )
-}
+    <div>
+      {" "}
+      <p className="text-[18px] font-medium">Account Info</p>
+      <p className="text-xs text-[#667085]">
+        Manage the information on your account
+      </p>
+    </div>
+  );
+};
 
-export default Security
+export default Security;

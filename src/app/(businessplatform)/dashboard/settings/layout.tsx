@@ -26,11 +26,16 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
+  const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [tabs, setTabs] = useState<Array<TabItem>>([
     { id: 1, title: "Profile", isActive: true, href: "/dashboard/settings" },
-    { id: 2, title: "Security", isActive: false, href: "/dashboard/settings/security" },
+    {
+      id: 2,
+      title: "Security",
+      isActive: false,
+      href: "/dashboard/settings/security",
+    },
     {
       id: 3,
       title: "Preferences",
@@ -102,7 +107,7 @@ export default function DashboardLayout({
               key={tab.id}
               onClick={() => handleTabClick(tab.id)}
               className={`flex  gap-[7px]  justify-center cursor-pointer items-center pb-4  ${
-                tab.isActive
+                tab.href === pathName
                   ? "border-b-2  border-b-primary-400"
                   : "border-b-2 border-b-transparent"
               }`}
