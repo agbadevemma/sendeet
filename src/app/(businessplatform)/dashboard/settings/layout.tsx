@@ -86,9 +86,9 @@ export default function DashboardLayout({
   };
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       {" "}
-      <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
+      <div className="flex flex-col  lg:flex-row items-start gap-4 lg:items-center justify-between">
         <div className="flex items-center gap-4">
           <div className=" flex items-center  bg-white  justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <Settings color="black" />
@@ -99,8 +99,8 @@ export default function DashboardLayout({
           </div>
         </div>
       </div>
-      <div className="flex mt-[25px] w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
-        <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12 border-t border-t-grey-50 h-[62px] items-end">
+      <div className="flex  mt-[25px] w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
+        <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12  h-[62px] items-end">
           {tabs.map((tab, index) => (
             <Link
               href={tab.href}
@@ -115,7 +115,11 @@ export default function DashboardLayout({
               <span
                 className={`
                   text-sm 
-                    ${tab.isActive ? "text-primary-400" : "text-grey-800"}`}
+                    ${
+                      tab.href === pathName
+                        ? "text-primary-400"
+                        : "text-grey-800"
+                    }`}
               >
                 {tab.title}
               </span>
@@ -123,7 +127,7 @@ export default function DashboardLayout({
           ))}
         </div>
       </div>
-      <div className="p-4 px-8 mt-4 flex  w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
+      <div className="p-4 flex-1 px-8 mt-4 flex  w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
         {children}
       </div>
     </div>

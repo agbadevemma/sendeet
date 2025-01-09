@@ -24,6 +24,13 @@ export const validationSchemaLogin = Yup.object({
   password: Yup.string().required("Password is required"),
 });
 
+// Validation schema for change Password
+export const validationSchemaChangePassword = Yup.object({
+  oldPassword: Yup.string().required("Password is required"),
+  newPassword: Yup.string().required("Password is required"),
+  confirmPassword: Yup.string().required("Password is required"),
+});
+
 // Validation schema for basic information
 export const validationSchemaBasicInfo = Yup.object({
   firstName: Yup.string()
@@ -58,5 +65,5 @@ export const validationSchemaCampaignSetup = Yup.object().shape({
   campaign: Yup.string().required("Campaign name is required"),
   campaignDescription: Yup.string(),
   messageType: Yup.string().required("Message type is required"),
-  targetAudience: Yup.string().required("Target audience is required")
+  targetAudience: Yup.string().required("Target audience is required"),
 });

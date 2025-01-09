@@ -99,11 +99,10 @@ const LoginPage = (props: Props) => {
                   </Link>
                 </div>
                 <Button
-                  text=  {isLoading ? 'Logging in...' : 'Continue'}
+                  text={isLoading ? "Logging in..." : "Continue"}
                   className="mt-8"
                   size="lg"
                   type="primary"
-                
                 />
               </form>
               <div className="flex items-center mt-10 justify-center gap-1">

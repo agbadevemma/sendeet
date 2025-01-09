@@ -892,3 +892,22 @@ export const audienceData2: Array<AudienceData2> = [
     subscription: "Opted In",
   },
 ];
+
+export interface ApiInterfaceTable {
+  id:number
+  name: string;
+  value: string;
+  lastUsed: string;
+  created: string;
+}
+
+export const apiTable: ApiInterfaceTable[] = [
+  {
+    id:1,
+    name: "Default API key",
+    value: "45d2c92c9002bb9bbb09686a51d0da",
+    lastUsed: "2025-01-01",
+    created: "2024-06-01",
+  },
+ 
+];
