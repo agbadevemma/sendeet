@@ -147,7 +147,7 @@ const Security = (props: Props) => {
             password
           </p>
         </div>
-        <div className=" w-full max-w-[546px] mx-auto ml-10">
+        <div className=" w-full max-w-[546px] mx-auto ml-20">
           <div className="flex gap-2 w-fit">
             <ToggleButton
               onToggle={() => setToggle((prev) => !prev)}
