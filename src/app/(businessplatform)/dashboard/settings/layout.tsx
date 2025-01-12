@@ -127,7 +127,7 @@ export default function DashboardLayout({
           ))}
         </div>
       </div>
-      <div className="p-4 flex-1 px-8 mt-4 flex  w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
+      <div className="p-4 flex-1 px-4 lg:px-6 xl:px-8 mt-4 flex  w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
         {children}
       </div>
     </div>
