@@ -40,9 +40,9 @@ const LoginPage = (props: Props) => {
   });
   return (
     <div>
-      <div className="w-full pt-[106px] lg:pt-24 flex flex-col gap-4 lg:gap-[57.2px] lg:mb-[242px]">
-        <Image src={logo} alt="logo" className="mx-auto w-32" />
-        <div className="relative w-full min-h-[582px] lg:max-w-[535px] h-56 lg:rounded-[16px] mx-auto lg:px-[1px] lg:py-[1px]">
+      <div className="w-full h-screen pt-[106px] lg:pt-0  flex flex-col items-center  justify-center gap-4 lg:gap-[57.2px]">
+        <Image src={logo} alt="logo" className=" w-32" />
+        <div className="relative w-full  lg:max-w-[535px] lg:rounded-[16px]  lg:px-[1px] lg:py-[1px]">
           <div className="absolute lg:block hidden inset-0 p-[0px] lg:rounded-[16px] bg-gradient-to-r from-secondary-500 to-primary-500"></div>
           <div className="relative w-full h-full lg:py-4 bg-white lg:rounded-[16px] px-[24px] md:px-[92px] lg:px-[28px]">
             <div className="lg:py-8 py-3 h-full">
