@@ -15,6 +15,8 @@ import { useState } from "react";
 import EyeSlash from "@/icons/eye-slash";
 import Mail from "@/icons/mail";
 import { useLoginMutation } from "@/lib/slices/authApi";
+import { toast } from "react-toastify";
+import ErrorToast from "@/components/ErrorToast";
 type Props = {};
 
 const LoginPage = (props: Props) => {
@@ -35,12 +37,25 @@ const LoginPage = (props: Props) => {
         router.push("/dashboard");
       } catch (error: any) {
         console.error("Login error:", error);
+        toast.error(<ErrorToast message={error.data.message} />, {
+          style: {
+            width: '100%', // Adjust width as needed
+            maxWidth: '',
+          },
+          className:
+            'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
+          bodyClassName:
+            'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
+          progressClassName: 'bg-red-200',
+          icon: false,
+          // closeButton: false, // Uncomment if you want to hide the close button
+        });
       }
     },
   });
   return (
     <div>
-      <div className="w-full h-screen pt-[106px] lg:pt-0  flex flex-col items-center  justify-center gap-4 lg:gap-[57.2px]">
+      <div className="w-full min-h-screen pt-[106px] lg:pt-1  flex flex-col items-center  justify-center gap-4 lg:gap-[57.2px]">
         <Image src={logo} alt="logo" className=" w-32" />
         <div className="relative w-full  lg:max-w-[535px] lg:rounded-[16px]  lg:px-[1px] lg:py-[1px]">
           <div className="absolute lg:block hidden inset-0 p-[0px] lg:rounded-[16px] bg-gradient-to-r from-secondary-500 to-primary-500"></div>
