@@ -58,9 +58,11 @@ export const validationSchemaCompany = Yup.object({
 
 // Validation schema for forgot password
 export const ForgotPasswordSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
+ email: Yup.string().email("Invalid email").required("Email is required"),
 });
-
+export const changePasswordSchema =Yup.object().shape({
+  password: Yup.string().required("Password is required"),
+ });
 export const validationSchemaCampaignSetup = Yup.object().shape({
   campaign: Yup.string().required("Campaign name is required"),
   campaignDescription: Yup.string(),

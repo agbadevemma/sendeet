@@ -44,6 +44,14 @@ export const authApi = createApi({
       }),
       onQueryStarted: withLoading(),
     }),
+    forgotPassword: builder.mutation<LoginResponse, LoginRequest>({
+      query: (credentials) => ({
+        url: "/forget-password",
+        method: "POST",
+        body: credentials,
+      }),
+      onQueryStarted: withLoading(),
+    }),
     verifyOtp: builder.mutation({
       query: (otp: string) => ({
         url: "/verifyOTP", // Matches the Next.js API route

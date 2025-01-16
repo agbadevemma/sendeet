@@ -2,6 +2,9 @@
 
 import { setLoading } from "@/lib/slices/loadingSlice";
 
+// export interface ErrorStructure{
+
+// }
 
 export const withLoading = (
   onQueryStartedCallback?: (

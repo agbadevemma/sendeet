@@ -4,6 +4,8 @@ type Option = {
   label: string;
 };
 
+
+
 export const industryOptions: Option[] = industries.industries.map(
   (industry) => {
     return { value: industry, label: industry };
