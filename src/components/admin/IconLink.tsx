@@ -53,7 +53,7 @@ const IconLink = ({
             isOpenDropDown ? "transform rotate-180" : ""
           } `}
         >
-          <ChevronUp color="#F0F1F3" height={20} width={20} />  
+          <ChevronDown color="#F0F1F3" height={20} width={20} />  
         </div>
       )}
     </Link>
