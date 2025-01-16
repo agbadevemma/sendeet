@@ -69,7 +69,7 @@ const FromTicket = (props: Props) => {
         </span>
       </div>
       <form
-        action=""
+   
         className="max-w-[512px] w-full mx-auto mt-10  gap-5 flex flex-col"
       >
         <SelectField

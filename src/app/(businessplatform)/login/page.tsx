@@ -11,17 +11,23 @@ import { validationSchemaLogin } from "@/utils/validation";
 import { useRouter } from "next/navigation";
 import Button from "@/components/buttons/Button";
 import Eye from "@/icons/eye";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EyeSlash from "@/icons/eye-slash";
 import Mail from "@/icons/mail";
 import { useLoginMutation } from "@/lib/slices/authApi";
 import { toast } from "react-toastify";
 import ErrorToast from "@/components/ErrorToast";
+import secureLocalStorage from "react-secure-storage";
 type Props = {};
 
 const LoginPage = (props: Props) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [login, { isLoading, isError, error }] = useLoginMutation();
+  
+  useEffect(() => {
+    secureLocalStorage.clear()
+  }, [])
+
   const router = useRouter();
   const formik = useFormik({
     initialValues: {

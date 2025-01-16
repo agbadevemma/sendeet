@@ -85,10 +85,10 @@ const Notifications = (props: Props) => {
                     Unread (2)
                   </span>
                 </div>
-                <div className="flex gap-2 pb-4 pr-4">
+                <button className="flex gap-2 pb-4 pr-4">
                   <TickDouble color="#667085" height={20} width={20} />
-                  <span>Mark all as read</span>
-                </div>
+                  <button>Mark all as read</button>
+                </button>
               </div>
             </div>
 

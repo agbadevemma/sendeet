@@ -12,10 +12,13 @@ import Link from "next/link";
 import { ForgotPasswordSchema } from "@/utils/validation";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
+import secureLocalStorage from "react-secure-storage";
 
 type Props = {};
 
 const Checkmail = (props: Props) => {
+  console.log("sds", secureLocalStorage?.getItem("email"));
+
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -37,11 +40,11 @@ const Checkmail = (props: Props) => {
           </p>
           <p className="text-grey-500  lg:mt-3 text-md text-center">
             <p className=""> We sent a password reset link to </p>
-            <p className="font-medium ">example@companyname.com</p>
+            <p className="font-medium ">{secureLocalStorage?.getItem("email")?.toString() ?? ""}</p>
           </p>
 
-          <Link href={"/createnewpassword"} className="w-full mt-[32px]">
-            <Button text="Open Email App" type="button" className=" " />
+          <Link href={"/otp"} className="w-full mt-[32px]">
+            <Button text="Enter OTP" type="button" className=" " />
           </Link>
           <div className=" flex items-center w-fit mx-auto mt-[32px] gap-[4px]">
             <span className="text-grey-500 text-sm">Didn’t receive the email?</span>

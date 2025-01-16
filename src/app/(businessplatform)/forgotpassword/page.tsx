@@ -11,20 +11,46 @@ import Link from "next/link";
 import { ForgotPasswordSchema } from "@/utils/validation";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
+import { useForgotPasswordMutation } from "@/lib/slices/resetApi";
+import ErrorToast from "@/components/ErrorToast";
+import { toast } from "react-toastify";
+import secureLocalStorage from "react-secure-storage";
 
 
 type Props = {};
 
 const ForgotPassword = (props: Props) => {
+  const [forgotPassword, { data, isLoading, isError }] = useForgotPasswordMutation();
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
     },
     validationSchema: ForgotPasswordSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("Form values:", values);
-      router.push("/checkmail")
+      try {
+        const res: any = await forgotPassword(values.email).unwrap();
+        router.push("/checkmail");
+        secureLocalStorage.setItem("email", values.email)
+
+      } catch (error: any) {
+   
+        // console.log("errr", err.data.message);
+        toast.error(<ErrorToast message={error.data.message} />, {
+          style: {
+            width: '100%', // Adjust width as needed
+            maxWidth: '',
+          },
+          className:
+            'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
+          bodyClassName:
+            'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
+          progressClassName: 'bg-red-200',
+          icon: false,
+          // closeButton: false, // Uncomment if you want to hide the close button
+        });
+      }
     },
   });
   return (

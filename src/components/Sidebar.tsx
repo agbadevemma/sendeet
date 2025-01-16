@@ -22,7 +22,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
     <div className=" bg-white">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`w-full bg-black/20 z-50 fixed  xl:static  transition-all duration-500  ${
+        className={`w-full bg-black/20 z-[500] fixed  xl:static  transition-all duration-500  ${
           isOpen ? "visible " : "invisible  xl:visible xl:opacity-100"
         } `}
       >
