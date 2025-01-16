@@ -23,7 +23,7 @@ type Props = {};
 const LoginPage = (props: Props) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [login, { isLoading, isError, error }] = useLoginMutation();
-  
+
   useEffect(() => {
     secureLocalStorage.clear()
   }, [])
@@ -42,8 +42,8 @@ const LoginPage = (props: Props) => {
         console.log("Token:", data.token);
         router.push("/dashboard");
       } catch (error: any) {
-        console.error("Login error:", error);
-        toast.error(<ErrorToast message={error.data.message} />, {
+        console.log("Login error:", error);
+        toast.error(<ErrorToast  message={error?.data.message} />, {
           style: {
             width: '100%', // Adjust width as needed
             maxWidth: '',

@@ -32,7 +32,7 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error: any) {
-    console.error("Login error:", error.response?.data || error.message);
+    console.log("Login error message", error.response?.data || error.message);
 
     // Handle errors from Axios and external API
     if (error.response) {

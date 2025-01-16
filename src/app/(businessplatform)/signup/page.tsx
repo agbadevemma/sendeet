@@ -18,6 +18,8 @@ import Message from "@/icons/message";
 import Mail from "@/icons/mail";
 import secureLocalStorage from "react-secure-storage";
 import { useSignupMutation } from "@/lib/slices/authApi";
+import { toast } from "react-toastify";
+import ErrorToast from "@/components/ErrorToast";
 
 type Props = {};
 
@@ -32,12 +34,25 @@ const Signup = (props: Props) => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      router.replace("signup/verification");
       try {
         const data = await signup({ ...values, role: "business" }).unwrap();
         console.log("value", data);
+        router.replace("signup/verification");
       } catch (err: any) {
         console.error("Registration error:", err);
+        toast.error(<ErrorToast message={err?.data.message} />, {
+          style: {
+            width: '100%', // Adjust width as needed
+            maxWidth: '',
+          },
+          className:
+            'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
+          bodyClassName:
+            'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
+          progressClassName: 'bg-red-200',
+          icon: false,
+          // closeButton: false, // Uncomment if you want to hide the close button
+        });
       }
       // secureLocalStorage.setItem("email", values.email);
       console.log(values);

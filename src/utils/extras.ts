@@ -24,4 +24,3 @@ export const formatPlainText = (html: string) => {
   };
   
 
-  

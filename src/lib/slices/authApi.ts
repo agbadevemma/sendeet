@@ -25,7 +25,7 @@ export const authApi = createApi({
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
       return headers;
-    },
+    },  
   }), // Adjust the base URL to match your API
   endpoints: (builder) => ({
     signup: builder.mutation<LoginResponse, SignupRequest>({
