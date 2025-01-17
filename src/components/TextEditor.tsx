@@ -9,9 +9,12 @@ import QuillNoSSRWrapper from "./QuillEditor";
 
 // Register the emoji module with Quill
 // Quill.register('modules/emoji', QuillEmoji);
+type Props = {
+  setValue: () => void;
+  value: string;
+};
+const TextEditor = ({ setValue, value }: Props) => {
 
-const TextEditor: React.FC = () => {
-  const [value, setValue] = useState<string>("");
 
   const modules = {
     toolbar: [
@@ -22,7 +25,7 @@ const TextEditor: React.FC = () => {
       [{ align: [] }],
       ["clean"],
     ],
-   
+
   };
 
   const formats = [
@@ -47,7 +50,7 @@ const TextEditor: React.FC = () => {
       .catch((err) => {
         console.error("Failed to copy text: ", err);
       });
-  };    
+  };
 
   // Open WhatsApp with plain text message
   const sendToWhatsApp = () => {
@@ -60,14 +63,14 @@ const TextEditor: React.FC = () => {
 
   return (
     <div>
-      <QuillNoSSRWrapper 
+      <QuillNoSSRWrapper
         value={value}
         onChange={setValue}
         modules={modules}
         formats={formats}
         className="h-36 text-sm  text-grey-700"
         placeholder="Enter a message....."
-        
+
       />
       {/* <button onClick={copyToClipboard} style={{ marginTop: "20px" }}>
         Copy Formatted Text

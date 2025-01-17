@@ -64,7 +64,7 @@ export const changePasswordSchema =Yup.object().shape({
   password: Yup.string().required("Password is required"),
  });
 export const validationSchemaCampaignSetup = Yup.object().shape({
-  campaign: Yup.string().required("Campaign name is required"),
+  campaignName: Yup.string().required("Campaign name is required"),
   campaignDescription: Yup.string(),
   messageType: Yup.string().required("Message type is required"),
   targetAudience: Yup.string().required("Target audience is required"),

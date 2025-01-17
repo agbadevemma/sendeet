@@ -17,6 +17,8 @@ import Eye from "@/icons/eye";
 import Bin from "@/icons/bin";
 import PdfViewer from "@/components/PdfViewer";
 import ChevronLeft from "@/icons/chevron-left";
+import { useRouter } from "next/navigation";
+import secureLocalStorage from "react-secure-storage";
 type Props = {};
 
 const Compose = (props: Props) => {
@@ -26,9 +28,14 @@ const Compose = (props: Props) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>("");
   const [dragging, setDragging] = useState<boolean>(false);
-  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>([
-    "",
-  ]);
+  // const [value, setValue] = useState<string>("");
+  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>([""]);
+
+  const handleChangeText = (index: number, value: string) => {
+    const newtextEditorInputValues = [...textEditorInputValues];
+    newtextEditorInputValues[index] = value; // Update the value at the specified index
+    setTextEditorInputValues(newtextEditorInputValues);
+  };
   const handleAddTextEditInput = () => {
     setTextEditorInputValues((prev) => [...prev, ""]); // Append an empty string for the new input
   };
@@ -43,6 +50,8 @@ const Compose = (props: Props) => {
   const handleAddInput = () => {
     setInputValues((prev) => [...prev, ""]); // Append an empty string for the new input
   };
+
+
 
   // Function to handle input value change
   const handleInputChange = (index: number, value: string) => {
@@ -93,7 +102,7 @@ const Compose = (props: Props) => {
     if (files.length === 0) return;
 
     const reader = new FileReader();
-    reader.onloadend = async () => {};
+    reader.onloadend = async () => { };
   };
 
   const handleRemoveFile = (index: number) => {
@@ -153,7 +162,25 @@ const Compose = (props: Props) => {
     const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
     return `${sizeInMB} MB`;
   };
-
+  const router = useRouter()
+  type uploadedFile = {
+    "url": string,
+    "dateTime": string
+  }
+  interface Step2Interface {
+    message: string;
+    uploadFiles: Array<uploadedFile>;
+    actionButtons: Array<string>;
+  }
+  const handleNextPage = () => {
+    const step2Data: Step2Interface = {
+      message: "",
+      uploadFiles: files.map((file, index) => ({ url: "", dateTime: "" })),
+      actionButtons: inputValues
+    }
+    secureLocalStorage.setItem("step2", step2Data)
+    router.push("/createcampaign/schedule")
+  }
   return (
     <div>
       {/* modal  ${
@@ -161,15 +188,13 @@ const Compose = (props: Props) => {
         }`}*/}
       <div
         onClick={() => setisModal((prev) => !prev)}
-        className={`fixed p-2 lg:p-5 lg:pb-0 z-[100] bg-black/20 inset-0 flex justify-end modal transition-all duration-500  ${
-          isModal ? "visible opacity-100" : "invisible opacity-0"
-        } `}
+        className={`fixed p-2 lg:p-5 lg:pb-0 z-[100] bg-black/20 inset-0 flex justify-end modal transition-all duration-500  ${isModal ? "visible opacity-100" : "invisible opacity-0"
+          } `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`bg-white rounded-t-3xl min-h-full w-full lg:w-[49%]   p-6 pb-0 gap-y-[21px]  transition-all duration-500 ${
-            isModal ? "translate-y-0" : "translate-y-full"
-          }`}
+          className={`bg-white rounded-t-3xl min-h-full w-full lg:w-[49%]   p-6 pb-0 gap-y-[21px]  transition-all duration-500 ${isModal ? "translate-y-0" : "translate-y-full"
+            }`}
         >
           <div className="flex items-start mb-4 gap-5 pb-6 border-b border-b-grey-100 ">
             <Button
@@ -200,10 +225,10 @@ const Compose = (props: Props) => {
           >
             Message 1
           </label>
-          {typeof window  !== undefined && (
+          {typeof window !== undefined && (
             <div className="flex flex-col gap-y-14">
               {textEditorInputValues.map((item, index) => (
-                <TextEditor />
+                <TextEditor setValue={()=>handleInputChange(index,item)} value={textEditorInputValues[index]} />
               ))}
             </div>
           )}
@@ -222,11 +247,10 @@ const Compose = (props: Props) => {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`w-full py-7 px-6 rounded-lg border-dashed border-[1.5px]  flex flex-col items-center     ${
-              dragging
-                ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
-                : "border-[#D0D5DD] border-dashed "
-            }`}
+            className={`w-full py-7 px-6 rounded-lg border-dashed border-[1.5px]  flex flex-col items-center     ${dragging
+              ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
+              : "border-[#D0D5DD] border-dashed "
+              }`}
           >
             <div className="rounded-full h-14 w-14 bg-[#F0F2F5] flex items-center justify-center">
               <CloudUpload color="#475367" />
@@ -385,14 +409,15 @@ const Compose = (props: Props) => {
               size="sm"
               className="font-semibold text-md"
             />
-            <Link href={"/createcampaign/schedule"}>
-              <Button
-                text="Next: Schedule Campaign"
-                type="primary"
-                size="sm"
-                className="font-semibold text-md"
-              />
-            </Link>
+
+            <Button
+              text="Next: Schedule Campaign"
+              type="primary"
+              size="sm"
+              className="font-semibold text-md"
+              onClick={() => handleNextPage()}
+            />
+
           </div>
         </div>
       </div>

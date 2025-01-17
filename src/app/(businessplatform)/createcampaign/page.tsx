@@ -11,6 +11,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { useRouter } from "next/navigation";
+import { useCreateCampaignMutation } from "@/lib/slices/campaign";
 
 type Props = {};
 interface DropdownStates {
@@ -19,25 +20,34 @@ interface DropdownStates {
 }
 
 interface FormValues {
-  campaign: string;
+  campaignName: string;
   campaignDescription: string;
   messageType: string;
   targetAudience: string;
 }
 const Setup = (props: Props) => {
   const router = useRouter();
+  const [createCampaign, { isLoading }] = useCreateCampaignMutation();
+  console.log("secureLocalStorage.getItem(step1)", secureLocalStorage.getItem("step1"));
+
+
   const formik = useFormik<FormValues>({
     initialValues: {
-      campaign: "",
-      campaignDescription: "",
-      messageType: "",
-      targetAudience: "",
+      campaignName: secureLocalStorage.getItem("step1")?.campaignName || "",
+      campaignDescription: secureLocalStorage.getItem("step1")?.campaignDescription || "",
+      messageType: secureLocalStorage.getItem("step1")?.messageType || "",
+      targetAudience: secureLocalStorage.getItem("step1")?.targetAudience || "",
     },
     validationSchema: validationSchemaCampaignSetup,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
-      secureLocalStorage.setItem("step1", values);
-      router.push("/createcampaign/compose");
+      try {
+        secureLocalStorage.setItem("step1", values);
+
+        router.push("/createcampaign/compose");
+      } catch (error) {
+
+      }
     },
   });
   const [dropdownStates, setDropdownStates] = useState<DropdownStates>({
@@ -75,12 +85,12 @@ const Setup = (props: Props) => {
             inputType="text"
             label="Campaign Name"
             placeholder="Enter a name for your campaign"
-            value={formik.values.campaign}
-            name="campaign"
+            value={formik.values.campaignName}
+            name="campaignName"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.touched.campaign && Boolean(formik.errors.campaign)}
-            errorText={formik.touched.campaign ? formik.errors.campaign : ""}
+            error={formik.touched.campaignName && Boolean(formik.errors.campaignName)}
+            errorText={formik.touched.campaignName ? formik.errors.campaignName : ""}
           />
           <TextArea
             label="Campaign Description"
