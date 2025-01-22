@@ -60,6 +60,13 @@ const Compose = (props: Props) => {
     setInputValues(newInputValues);
   };
 
+  const handleEditorInputChange = (index: number, value: string) => {
+    setTextEditorInputValues((prevValues) => {
+      const updatedValues = [...prevValues];
+      updatedValues[index] = value;
+      return updatedValues;
+    });
+  };
   // Function to remove an input field
   const handleRemoveInput = (index: number) => {
     const newInputValues = inputValues.filter((_, i) => i !== index); // Remove the input at the specified index
@@ -218,21 +225,25 @@ const Compose = (props: Props) => {
           2.Compose Message
         </p>
 
-        <div className="flex flex-col">
-          <label
-            htmlFor=""
-            className="text-[#344054] mt-8 mb-3 text-base font-medium"
-          >
-            Message 1
-          </label>
-          {typeof window !== undefined && (
-            <div className="flex flex-col gap-y-14">
-              {textEditorInputValues.map((item, index) => (
-                <TextEditor setValue={()=>handleInputChange(index,item)} value={textEditorInputValues[index]} />
-              ))}
+
+        {typeof window !== undefined && (
+          textEditorInputValues.map((item, index) => (
+            <div className="flex flex-col">
+              <label
+                htmlFor=""
+                className="text-[#344054] mt-8 mb-3 text-base font-medium"
+              >
+                Message {index+1}
+              </label>
+              <div className="flex flex-col gap-y-14 mb-10">
+
+                <TextEditor setValue={(value) => handleEditorInputChange(index, value)} value={textEditorInputValues[index]} />
+
+              </div>
             </div>
-          )}
-        </div>
+          ))
+        )}
+
         <div className="mt-14">
           <div
             onClick={handleAddTextEditInput}

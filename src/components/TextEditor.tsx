@@ -10,7 +10,7 @@ import QuillNoSSRWrapper from "./QuillEditor";
 // Register the emoji module with Quill
 // Quill.register('modules/emoji', QuillEmoji);
 type Props = {
-  setValue: () => void;
+  setValue: (value: string) => void;
   value: string;
 };
 const TextEditor = ({ setValue, value }: Props) => {

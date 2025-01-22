@@ -27,7 +27,10 @@ const data: CampaignPerformanceData[] = [
   { day: "Sun", performance: 90 },
 ];
 
-const CampaignPerformanceChart = () => {
+type Props = {
+  type?: "admin" | "organization"
+}
+const CampaignPerformanceChart = ({ type = "organization" }: Props) => {
   const allZero = data.every((item) => item.performance === 0);
   return (
     <div className="h-[245px] w-full mt-10">
@@ -37,7 +40,11 @@ const CampaignPerformanceChart = () => {
           margin={{ top: 10, right: 30, left: 10, bottom: 0 }}
         >
           <defs>
-            <linearGradient
+            {type === "admin" ? <linearGradient id="paint0_linear_1385_22205" x1="337" y1="0.125" x2="337" y2="179.636" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00AAF7" />
+              <stop offset="1" stop-color="#00AAF7" stop-opacity="0" />
+            </linearGradient> :
+             <linearGradient
               id="paint"
               x1="290"
               y1="108"
@@ -47,7 +54,7 @@ const CampaignPerformanceChart = () => {
             >
               <stop stop-color="#00E9C4" stop-opacity="0" />
               <stop offset="0.619345" stop-color="#00836E" stop-opacity="0.1" />
-            </linearGradient>
+            </linearGradient>}
           </defs>
           <CartesianGrid
             vertical={false}
@@ -57,12 +64,12 @@ const CampaignPerformanceChart = () => {
           <XAxis
             dataKey="day"
             tickFormatter={(day) => day}
-            tickMargin={12} 
+            tickMargin={12}
             interval={0}
             tick={{ fontSize: 12, fill: "#667085" }}
             axisLine={{ stroke: allZero ? "#00AAF7" : "#F2F4F7" }}
             tickLine={false}
-            
+
           />
           <YAxis
             domain={[0, 100]} // Extend range to 100
@@ -95,7 +102,7 @@ const CampaignPerformanceChart = () => {
           <Area
             type="monotone"
             dataKey="performance"
-              stroke="#00E9C4"
+            stroke={type == "admin" ? "#009BE1" : "#00E9C4"}
             fillOpacity={1}
             fill="url(#paint)"
           />

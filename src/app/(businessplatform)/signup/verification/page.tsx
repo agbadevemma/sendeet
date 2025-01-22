@@ -2,6 +2,7 @@
 import Button from "@/components/buttons/Button";
 import OtpFields from "@/components/OtpFields";
 import SuccessToast from "@/components/SuccessToast";
+import SuccessToast2 from "@/components/SuccessToast2";
 import { useAppDispatch } from "@/lib/hooks";
 import { useVerifyOtpMutation } from "@/lib/slices/authApi";
 import { toggleBasicInfo } from "@/lib/slices/miscellaneousSlice";
@@ -30,17 +31,17 @@ const Verification = () => {
       const response = await verifyOtp(otp.join("")).unwrap();
       console.log("OTP Verified:", response);
       // dispatch(toggleBasicInfo(true));
-    } catch (err) {
-      // toast.error("Error verifying OTP");
       toast.success(
-        <SuccessToast
-          message="Credits Added"
-          details="Credits successfully topped up for SkyHigh Travel Co."
+        <SuccessToast2
+          message="Success"
         />,
         {
           icon: false, // Optional: Disable default icon
         }
       );
+    } catch (err) {
+      // toast.error("Error verifying OTP");
+
       console.log("Error verifying OTP:", err);
     }
   };

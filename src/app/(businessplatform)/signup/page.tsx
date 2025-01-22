@@ -20,6 +20,8 @@ import secureLocalStorage from "react-secure-storage";
 import { useSignupMutation } from "@/lib/slices/authApi";
 import { toast } from "react-toastify";
 import ErrorToast from "@/components/ErrorToast";
+import SuccessToast from "@/components/SuccessToast";
+import SuccessToast2 from "@/components/SuccessToast2";
 
 type Props = {};
 
@@ -37,7 +39,20 @@ const Signup = (props: Props) => {
       try {
         const data = await signup({ ...values, role: "business" }).unwrap();
         console.log("value", data);
-        router.replace("signup/verification");
+        toast.success(<SuccessToast2 message={"Success"} />, {
+          style: {
+            width: '100%',
+            maxWidth: '',
+          },
+          className:
+            'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
+          bodyClassName:
+            'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
+          progressClassName: 'bg-red-200',
+          icon: false,
+        });
+        router.push("signup/verification");
+
       } catch (err: any) {
         console.error("Registration error:", err);
         toast.error(<ErrorToast message={err?.data.message} />, {
@@ -115,38 +130,34 @@ const Signup = (props: Props) => {
               />
               <div className="flex  flex-wrap items-center gap-2 mt-2">
                 <div
-                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${
-                    hasEightCharacters
-                      ? "border-success-500 text-success-500 bg-[#ECFDF3]"
-                      : "border-grey-100 border-[0.5px]  "
-                  }`}
+                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${hasEightCharacters
+                    ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                    : "border-grey-100 border-[0.5px]  "
+                    }`}
                 >
                   8 characters
                 </div>
                 <div
-                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${
-                    hasUppercase
-                      ? "border-success-500 text-success-500 bg-[#ECFDF3]"
-                      : "border-grey-100 border-[0.5px]  "
-                  }`}
+                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${hasUppercase
+                    ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                    : "border-grey-100 border-[0.5px]  "
+                    }`}
                 >
                   1 uppercase letter
                 </div>
                 <div
-                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm ${
-                    hasNumber
-                      ? "border-success-500 text-success-500 bg-[#ECFDF3]"
-                      : "border-grey-100 border-[0.5px]  "
-                  }`}
+                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm ${hasNumber
+                    ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                    : "border-grey-100 border-[0.5px]  "
+                    }`}
                 >
                   1 number
                 </div>
                 <div
-                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${
-                    hasSpecialChar
-                      ? "border-success-500 text-success-500 bg-[#ECFDF3]"
-                      : "border-grey-100 border-[0.5px]  "
-                  }`}
+                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${hasSpecialChar
+                    ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                    : "border-grey-100 border-[0.5px]  "
+                    }`}
                 >
                   1 special character
                 </div>

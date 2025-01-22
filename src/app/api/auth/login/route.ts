@@ -19,26 +19,33 @@ export async function POST(req: Request) {
     const { data } = await axios.post(
       `${BASE_URL}/api/v1/auth/login`,
       { email, password },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+      { headers: { "Content-Type": "application/json" } }
     );
-    console.log("Login successful", data);
 
-    return NextResponse.json(
+    // Create the response with the token and user information
+    const response = NextResponse.json(
       { message: "Login successful", token: data.token, user: data.user },
       { status: 200 }
     );
-  } catch (error: any) {
-    console.log("Login error message", error.response?.data || error.message);
 
-    // Handle errors from Axios and external API
+    // Set the token cookie securely
+    response.cookies.set("token", data.token, {
+      httpOnly: true,
+      path: "/",
+      sameSite: "lax", // Prevents CSRF issues
+    });
+
+
+    return response;
+  } catch (error: any) {
+    // Log the error for debugging (in production, consider using a proper logging service)
+    console.error("Login error:", error.response?.data || error.message);
+
+    // Handle errors from Axios and the external API
     if (error.response) {
-      const errorData = error.response.data;
+      const { message = "Login failed" } = error.response.data;
       return NextResponse.json(
-        { message: errorData.message || "Login failed" },
+        { message },
         { status: error.response.status }
       );
     }

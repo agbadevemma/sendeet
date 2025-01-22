@@ -456,10 +456,105 @@ export const organizations: Organization[] = [
   },
 ];
 
+
+export type OrganizationAdmin = {
+  id: string;
+  organizationName: string,
+  industry: string;
+  totalCampaigns: string;
+  totalCreditsUsed: string;
+  optInRate: string;
+
+};
+
+export const adminOrganizations: OrganizationAdmin[] = [
+  {
+    id: "1",
+    organizationName: "Peak Performance Training",
+    industry: "Technology",
+    totalCampaigns: "120",
+    totalCreditsUsed: "3450",
+    optInRate: "85%",
+  },
+  {
+    id: "2",
+    organizationName: "Peak Performance Training",
+    industry: "Healthcare",
+    totalCampaigns: "98",
+    totalCreditsUsed: "1290",
+    optInRate: "72%",
+  },
+  {
+    id: "3",
+    organizationName: "Peak Performance Training",
+    industry: "Education",
+    totalCampaigns: "76",
+    totalCreditsUsed: "890",
+    optInRate: "68%",
+  },
+  {
+    id: "4",
+    organizationName: "Peak Performance Training",
+    industry: "Finance",
+    totalCampaigns: "145",
+    totalCreditsUsed: "5600",
+    optInRate: "91%",
+  },
+  {
+    id: "5",
+    organizationName: "Peak Performance Training",
+    industry: "Retail",
+    totalCampaigns: "87",
+    totalCreditsUsed: "1023",
+    optInRate: "78%",
+  },
+  {
+    id: "6",
+    organizationName: "Peak Performance Training",
+    industry: "Automotive",
+    totalCampaigns: "43",
+    totalCreditsUsed: "670",
+    optInRate: "65%",
+  },
+  {
+    id: "7",
+    organizationName: "Peak Performance Training",
+    industry: "Entertainment",
+    totalCampaigns: "110",
+    totalCreditsUsed: "4300",
+    optInRate: "88%",
+  },
+  {
+    id: "8",
+    organizationName: "Peak Performance Training",
+    industry: "Real Estate",
+    totalCampaigns: "65",
+    totalCreditsUsed: "2100",
+    optInRate: "80%",
+  },
+  {
+    id: "9",
+    organizationName: "Peak Performance Training",
+    industry: "Food & Beverage",
+    totalCampaigns: "93",
+    totalCreditsUsed: "1340",
+    optInRate: "74%",
+  },
+  {
+    id: "10",
+    organizationName: "Peak Performance Training",
+    industry: "Energy",
+    totalCampaigns: "50",
+    totalCreditsUsed: "950",
+    optInRate: "69%",
+  },
+];
+
 export type OrganizationCredit = {
   id: number;
   organizationName: string;
-  industry: string;
+  industry
+  : string;
   creditBalance: string;
   lastPurchase: string;
   creditStatus: "Normal" | "Low";
@@ -896,7 +991,7 @@ export const audienceData2: Array<AudienceData2> = [
 ];
 
 export interface ApiInterfaceTable {
-  id:number
+  id: number
   name: string;
   value: string;
   lastUsed: string;
@@ -905,11 +1000,11 @@ export interface ApiInterfaceTable {
 
 export const apiTable: ApiInterfaceTable[] = [
   {
-    id:1,
+    id: 1,
     name: "Default API key",
     value: "45d2c92c9002bb9bbb09686a51d0da",
     lastUsed: "2025-01-01",
     created: "2024-06-01",
   },
- 
+
 ];

@@ -9,7 +9,7 @@ interface LoginRequest {
 
 interface LoginResponse {
   user: { id: string; email: string };
-  token: string;
+  message:string;
 }
 
 interface SignupRequest {

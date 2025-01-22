@@ -18,6 +18,7 @@ import { useLoginMutation } from "@/lib/slices/authApi";
 import { toast } from "react-toastify";
 import ErrorToast from "@/components/ErrorToast";
 import secureLocalStorage from "react-secure-storage";
+import SuccessToast2 from "@/components/SuccessToast2";
 type Props = {};
 
 const LoginPage = (props: Props) => {
@@ -39,11 +40,24 @@ const LoginPage = (props: Props) => {
       console.log("Form data:", values);
       try {
         const data = await login(values).unwrap();
-        console.log("Token:", data.token);
-        router.push("/dashboard");
+        console.log("Token:", data?.message);
+        toast.success(<SuccessToast2 message={data?.message} />, {
+          style: {
+            width: '100%', // Adjust width as needed
+            maxWidth: '',
+          },
+          className:
+            'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
+          bodyClassName:
+            'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
+          progressClassName: 'bg-red-200',
+          icon: false,
+          // closeButton: false, // Uncomment if you want to hide the close button
+        });
+        // router.push("/dashboard");
       } catch (error: any) {
         console.log("Login error:", error);
-        toast.error(<ErrorToast  message={error?.data.message} />, {
+        toast.error(<ErrorToast message={error?.data.message} />, {
           style: {
             width: '100%', // Adjust width as needed
             maxWidth: '',
@@ -120,7 +134,7 @@ const LoginPage = (props: Props) => {
                   </Link>
                 </div>
                 <Button
-                  text={isLoading ? "Logging in..." : "Continue"}
+                  text={"Continue"}
                   className="mt-8"
                   size="lg"
                   type="primary"

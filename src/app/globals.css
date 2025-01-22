@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 /* styles.css */
 /* Remove arrows from number input for Webkit browsers (Chrome, Safari, newer versions of Opera) */
@@ -31,11 +34,11 @@ select:-webkit-autofill:focus {
 }
 
 
-
 /* change default color to text-gray-900 */
 html{
   @apply text-gray-900;
   color: #111827 !important;
+  font-family: "Inter", serif !important;
 }
 
 
@@ -160,3 +163,32 @@ html{
 svg.star-svg {
   display: inline !important;
 }
+
+
+.loader {
+  box-sizing: border-box;
+  position: relative;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+}
+.loader:after, .loader:before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  border-radius: 50%;
+  background: #19AEF1;
+  animation: spin 1s linear infinite;
+  transform-origin: 0px 100%;
+}
+.loader:before {
+  transform-origin: 0 50%;
+  background: #fff;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+    

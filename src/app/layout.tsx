@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import GlobalLoading from "@/components/GlobalLoading";
 
 
+
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
