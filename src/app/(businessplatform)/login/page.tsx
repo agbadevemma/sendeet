@@ -32,15 +32,15 @@ const LoginPage = (props: Props) => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "olaimarnoel@gmail.com",
+      password: "emma@123ASD",
     },
     validationSchema: validationSchemaLogin,
     onSubmit: async (values) => {
       console.log("Form data:", values);
       try {
         const data = await login(values).unwrap();
-        console.log("Token:", data?.message);
+        secureLocalStorage.setItem("token",data.token )
         toast.success(<SuccessToast2 message={data?.message} />, {
           style: {
             width: '100%', // Adjust width as needed
@@ -54,7 +54,7 @@ const LoginPage = (props: Props) => {
           icon: false,
           // closeButton: false, // Uncomment if you want to hide the close button
         });
-        // router.push("/dashboard");
+        router.push("/dashboard");
       } catch (error: any) {
         console.log("Login error:", error);
         toast.error(<ErrorToast message={error?.data.message} />, {
@@ -75,13 +75,13 @@ const LoginPage = (props: Props) => {
   });
   return (
     <div>
-      <div className="w-full min-h-screen pt-[106px] lg:pt-1  flex flex-col items-center  justify-center gap-4 lg:gap-[57.2px]">
+      <div className="w-full min-h-screen overflow-y-auto pt-[106px] lg:pt-1  flex flex-col items-center  justify-center gap-3 lg:gap-[50px]">
         <Image src={logo} alt="logo" className=" w-32" />
         <div className="relative w-full  lg:max-w-[535px] lg:rounded-[16px]  lg:px-[1px] lg:py-[1px]">
           <div className="absolute lg:block hidden inset-0 p-[0px] lg:rounded-[16px] bg-gradient-to-r from-secondary-500 to-primary-500"></div>
           <div className="relative w-full h-full lg:py-4 bg-white lg:rounded-[16px] px-[24px] md:px-[92px] lg:px-[28px]">
             <div className="lg:py-8 py-3 h-full">
-              <p className=" text-display-xs lg:text-display-sm font-semibold ">
+              <p className=" text-display-xs lg:text-display-sm xl:text-display-sm font-semibold ">
                 Login to your account
               </p>
               <p className=" text-sm lg:text-md  mt-[14px] text-grey-300">

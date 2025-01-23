@@ -42,7 +42,7 @@ const CampaignPerformanceChart = ({ type = "organization" }: Props) => {
           <defs>
             {type === "admin" ? <linearGradient id="paint0_linear_1385_22205" x1="337" y1="0.125" x2="337" y2="179.636" gradientUnits="userSpaceOnUse">
               <stop stop-color="#00AAF7" />
-              <stop offset="1" stop-color="#00AAF7" stop-opacity="0" />
+              <stop offset="1" stop-color="#00AAF7" stopOpacity="0" />
             </linearGradient> :
              <linearGradient
               id="paint"
@@ -52,8 +52,8 @@ const CampaignPerformanceChart = ({ type = "organization" }: Props) => {
               y2="-61"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#00E9C4" stop-opacity="0" />
-              <stop offset="0.619345" stop-color="#00836E" stop-opacity="0.1" />
+              <stop stop-color="#00E9C4" stopOpacity="0" />
+              <stop offset="0.619345" stop-color="#00836E" stopOpacity="0.1" />
             </linearGradient>}
           </defs>
           <CartesianGrid

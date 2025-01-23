@@ -8,8 +8,8 @@ interface LoginRequest {
 }
 
 interface LoginResponse {
-  user: { id: string; email: string };
-  message:string;
+  token: string;
+  message: string;
 }
 
 interface SignupRequest {
@@ -25,7 +25,7 @@ export const authApi = createApi({
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
       return headers;
-    },  
+    },
   }), // Adjust the base URL to match your API
   endpoints: (builder) => ({
     signup: builder.mutation<LoginResponse, SignupRequest>({
@@ -41,6 +41,13 @@ export const authApi = createApi({
         url: "/login",
         method: "POST",
         body: credentials,
+      }),
+      onQueryStarted: withLoading(),
+    }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
       }),
       onQueryStarted: withLoading(),
     }),
@@ -63,5 +70,5 @@ export const authApi = createApi({
   }),
 });
 
-export const { useSignupMutation, useLoginMutation, useVerifyOtpMutation } =
+export const { useSignupMutation, useLoginMutation, useLogoutMutation, useVerifyOtpMutation } =
   authApi;

@@ -24,12 +24,13 @@ export async function POST(req: Request) {
 
     // Create the response with the token and user information
     const response = NextResponse.json(
-      { message: "Login successful", token: data.token, user: data.user },
+      { message: "Login successful", token: data.data.token },
       { status: 200 }
     );
+    console.log("response", response);
 
     // Set the token cookie securely
-    response.cookies.set("token", data.token, {
+    response.cookies.set("token", data.data.token, {
       httpOnly: true,
       path: "/",
       sameSite: "lax", // Prevents CSRF issues
