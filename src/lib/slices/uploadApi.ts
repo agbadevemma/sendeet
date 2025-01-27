@@ -1,11 +1,17 @@
 import axios, { AxiosProgressEvent } from "axios";
 import secureLocalStorage from "react-secure-storage";
 
+
+interface UserData {
+  token: string;
+}
+
+
 // Utility function to get the token
-const getAuthToken = () => secureLocalStorage.getItem("userData")?.token??"";
+const getAuthToken = secureLocalStorage.getItem("userData") as unknown as UserData | null;;
 
 export const uploadFile = (file: FormData, onProgress: (percentage: number) => void) => {
-  const token = getAuthToken();
+  const token = getAuthToken?.token ?? "";;
 
   return axios.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/upload`, // Replace with your API endpoint
