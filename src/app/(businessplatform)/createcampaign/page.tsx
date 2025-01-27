@@ -30,13 +30,20 @@ const Setup = (props: Props) => {
   const [createCampaign, { isLoading }] = useCreateCampaignMutation();
   console.log("secureLocalStorage.getItem(step1)", secureLocalStorage.getItem("step1"));
 
+  interface Step1Data {
+    campaignName: string;
+    campaignDescription: string;
+    messageType: string;
+    targetAudience: string;
+  }
 
+  const storedData = secureLocalStorage.getItem("step1") as unknown as Step1Data | null;
   const formik = useFormik<FormValues>({
     initialValues: {
-      campaignName: secureLocalStorage.getItem("step1")?.campaignName || "",
-      campaignDescription: secureLocalStorage.getItem("step1")?.campaignDescription || "",
-      messageType: secureLocalStorage.getItem("step1")?.messageType || "",
-      targetAudience: secureLocalStorage.getItem("step1")?.targetAudience || "",
+      campaignName: storedData?.campaignName || "",
+      campaignDescription: storedData?.campaignDescription || "",
+      messageType: storedData?.messageType || "",
+      targetAudience: storedData?.targetAudience || "",
     },
     validationSchema: validationSchemaCampaignSetup,
     onSubmit: async (values) => {

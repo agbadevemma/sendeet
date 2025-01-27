@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import ErrorToast from "@/components/ErrorToast";
 import secureLocalStorage from "react-secure-storage";
 import SuccessToast2 from "@/components/SuccessToast2";
+
 type Props = {};
 
 const LoginPage = (props: Props) => {
