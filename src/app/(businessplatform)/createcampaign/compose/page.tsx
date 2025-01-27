@@ -32,11 +32,16 @@ const Compose = (props: Props) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>("");
   const [dragging, setDragging] = useState<boolean>(false);
+  interface Step2Data {
+    message: string[];
+    actionButtons: string[];
+  }
 
+  const storedData = secureLocalStorage.getItem("step2") as unknown as Step2Data | null;
 
   // const [value, setValue] = useState<string>("");
-  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>(secureLocalStorage.getItem("step2")?.message??[""]);
-console.log("secureLocalStorage.getItem(step2)",secureLocalStorage.getItem("step2"));
+  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>(storedData?.message ?? [""]);
+  console.log("secureLocalStorage.getItem(step2)", secureLocalStorage.getItem("step2"));
 
   const handleChangeText = (index: number, value: string) => {
     const newtextEditorInputValues = [...textEditorInputValues];
@@ -51,7 +56,7 @@ console.log("secureLocalStorage.getItem(step2)",secureLocalStorage.getItem("step
 
   const [value, setValue] = useState<string>("");
   // State to store the input values as an array
-  const [inputValues, setInputValues] = useState<string[]>(secureLocalStorage.getItem("step2")?.actionButtons??[""]);
+  const [inputValues, setInputValues] = useState<string[]>(storedData?.actionButtons ?? [""]);
 
   // Function to add a new input field
   const handleAddInput = () => {
@@ -199,10 +204,10 @@ console.log("secureLocalStorage.getItem(step2)",secureLocalStorage.getItem("step
     return `${sizeInMB} MB`;
   };
   const router = useRouter()
-type FileInterface={
-  url:string;
-  dateTime:string;
-}
+  type FileInterface = {
+    url: string;
+    dateTime: string;
+  }
   interface Step2Interface {
     message: Array<String>;
     uploadFiles: Array<FileInterface>;
@@ -214,8 +219,8 @@ type FileInterface={
       uploadFiles: [{
         "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
         "dateTime": "2024-11-18 21:28:47.644"
-    }],
-    actionButtons: inputValues
+      }],
+      actionButtons: inputValues
 
     }
     secureLocalStorage.setItem("step2", step2Data)
@@ -226,7 +231,7 @@ type FileInterface={
       {/* modal  ${
          isModalOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}*/}
-  
+
       <div
         onClick={() => setisModal((prev) => !prev)}
         className={`fixed p-2 lg:p-5 lg:pb-0 z-[100] bg-black/20 inset-0 flex justify-end modal transition-all duration-500  ${isModal ? "visible opacity-100" : "invisible opacity-0"
