@@ -18,7 +18,9 @@ const Avatar = (props: Props) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [logout, { isLoading, isError, error }] = useLogoutMutation();
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
+  const toggleDropdown = () =>{
+ 
+    setIsOpen((prev) => !prev)};
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -60,7 +62,7 @@ const Avatar = (props: Props) => {
   return (
     <div>
       {" "}
-      <div className="relative" ref={dropdownRef}>
+      <div className="relatives" ref={dropdownRef}>
         <Image
           src={profile}
           alt=""
@@ -68,7 +70,7 @@ const Avatar = (props: Props) => {
           onClick={toggleDropdown}
         />
         {isOpen && (
-          <div className="shadow-lg absolute w-[240px] rounded-lg flex-col right-0 mt-2 bg-white z-[80] cursor-pointer">
+          <div className="shadow-lg absolute w-[240px] rounded-lg flex-col right-2 mt-2 bg-white z-[80] cursor-pointer">
             <div className="flex w-full gap-4 px-4  py-[12px] border-b border-b-grey-50 ">
               <Image
                 src={profile}

@@ -19,17 +19,24 @@ import PdfViewer from "@/components/PdfViewer";
 import ChevronLeft from "@/icons/chevron-left";
 import { useRouter } from "next/navigation";
 import secureLocalStorage from "react-secure-storage";
+import { uploadFile } from "@/lib/slices/uploadApi";
+import fileType from "@/images/filetype.svg"
+
 type Props = {};
 
 const Compose = (props: Props) => {
   // Handles
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [files, setFiles] = useState<File[]>([]);
+  const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>("");
   const [dragging, setDragging] = useState<boolean>(false);
+
+
   // const [value, setValue] = useState<string>("");
-  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>([""]);
+  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>(secureLocalStorage.getItem("step2")?.message??[""]);
+console.log("secureLocalStorage.getItem(step2)",secureLocalStorage.getItem("step2"));
 
   const handleChangeText = (index: number, value: string) => {
     const newtextEditorInputValues = [...textEditorInputValues];
@@ -44,7 +51,7 @@ const Compose = (props: Props) => {
 
   const [value, setValue] = useState<string>("");
   // State to store the input values as an array
-  const [inputValues, setInputValues] = useState<string[]>([""]);
+  const [inputValues, setInputValues] = useState<string[]>(secureLocalStorage.getItem("step2")?.actionButtons??[""]);
 
   // Function to add a new input field
   const handleAddInput = () => {
@@ -90,16 +97,38 @@ const Compose = (props: Props) => {
     setDragging(false);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     setDragging(false);
 
     const droppedFiles = Array.from(e.dataTransfer.files);
+    console.log("e.dataTransfer.files", droppedFiles);
+
     const validFiles = droppedFiles.filter(
       (file) => file.type === "application/pdf" // Accept only PDF files
     );
+
     if (validFiles.length > 0) {
       setFiles((prevFiles) => [...prevFiles, ...validFiles]);
+      const formData = new FormData();
+      // console.log("secureLocalStorage.setItem(userData, data?.data )", secureLocalStorage.getItem("userData"));
+
+      formData.append("file", validFiles[0]);
+      setUploading(true);
+      uploadFile(formData, (percentage: number) => {
+        setProgress(percentage); // Update progress state
+      })
+        .then((response) => {
+          console.log("File uploaded successfully", response.data);
+          setProgress(0);
+
+        })
+        .catch((error) => {
+          console.error("Error uploading file", error);
+          setProgress(0);
+        }).finally(() => {
+          setUploading(false);
+        });
     } else {
       toast.error("Please drop valid PDF files.");
     }
@@ -170,20 +199,24 @@ const Compose = (props: Props) => {
     return `${sizeInMB} MB`;
   };
   const router = useRouter()
-  type uploadedFile = {
-    "url": string,
-    "dateTime": string
-  }
+type FileInterface={
+  url:string;
+  dateTime:string;
+}
   interface Step2Interface {
-    message: string;
-    uploadFiles: Array<uploadedFile>;
+    message: Array<String>;
+    uploadFiles: Array<FileInterface>;
     actionButtons: Array<string>;
   }
   const handleNextPage = () => {
     const step2Data: Step2Interface = {
-      message: "",
-      uploadFiles: files.map((file, index) => ({ url: "", dateTime: "" })),
-      actionButtons: inputValues
+      message: textEditorInputValues,
+      uploadFiles: [{
+        "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        "dateTime": "2024-11-18 21:28:47.644"
+    }],
+    actionButtons: inputValues
+
     }
     secureLocalStorage.setItem("step2", step2Data)
     router.push("/createcampaign/schedule")
@@ -193,6 +226,7 @@ const Compose = (props: Props) => {
       {/* modal  ${
          isModalOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}*/}
+  
       <div
         onClick={() => setisModal((prev) => !prev)}
         className={`fixed p-2 lg:p-5 lg:pb-0 z-[100] bg-black/20 inset-0 flex justify-end modal transition-all duration-500  ${isModal ? "visible opacity-100" : "invisible opacity-0"
@@ -233,7 +267,7 @@ const Compose = (props: Props) => {
                 htmlFor=""
                 className="text-[#344054] mt-8 mb-3 text-base font-medium"
               >
-                Message {index+1}
+                Message {index + 1}
               </label>
               <div className="flex flex-col gap-y-14 mb-10">
 
@@ -254,13 +288,28 @@ const Compose = (props: Props) => {
         </div>
         <div className="mt-8 flex flex-col gap-3">
           <p className="text-[#344054] text-md font-medium">Upload files</p>
-          <div
+          {uploading ? <div
+
+            className={`w-full py-7 px-6 rounded-lg  border-dashed border-[1.5px]  flex flex-col items-center     
+ bg-[#B0E5FD]/[0.2] border-[#B0E5FD] pb-64  max-h-[264px]`}
+          >
+            <Image src={fileType} alt="pdf" className="mt-7" />
+            <span className="text-center font-semibold text-md text-grey-400 mt-6">{progress}%</span>
+            <div className="w-full h-[6px] mt-2 max-w-[313px] bg-[#B0E5FD]  rounded-full">
+              <div style={{
+                width: `${progress}%`
+              }} className=" h-[6px] rounded-full bg-[#00AAF7] "></div>
+            </div>
+            <span className="text-center text-sm font-semibold text-[#1D2739] mt-4">Uploading Document...</span>
+            <span className="text-center text-xs text-grey-400 mt-2">October Issue 324.pdf</span>
+
+          </div> : <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             className={`w-full py-7 px-6 rounded-lg border-dashed border-[1.5px]  flex flex-col items-center     ${dragging
               ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
-              : "border-[#D0D5DD] border-dashed "
+              : "border-[#D0D5DD] border-dashed  max-h-[264px] h-full"
               }`}
           >
             <div className="rounded-full h-14 w-14 bg-[#F0F2F5] flex items-center justify-center">
@@ -298,7 +347,7 @@ const Compose = (props: Props) => {
             >
               Browse files
             </p>
-          </div>
+          </div>}
           {files.length > 0 && (
             <div className="flex gap-2 items-center mt-3">
               <span> Uploaded Files</span>

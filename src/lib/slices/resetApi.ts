@@ -28,10 +28,10 @@ export const resetApi = createApi({
     }),
     endpoints: (builder) => ({
         forgotPassword: builder.mutation({
-            query: (email: string) => ({
+            query: (credentials) => ({
                 url: "/forget-password",
                 method: "POST",
-                body: { email },
+                body: credentials,
             }),
             onQueryStarted: withLoading(),
         }),

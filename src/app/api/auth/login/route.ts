@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     // Create the response with the token and user information
     const response = NextResponse.json(
-      { message: "Login successful", token: data.data.token },
+      { message: "Login successful", data },
       { status: 200 }
     );
     console.log("response", response);

@@ -30,7 +30,7 @@ const ForgotPassword = (props: Props) => {
     onSubmit: async (values) => {
       console.log("Form values:", values);
       try {
-        const res: any = await forgotPassword(values.email).unwrap();
+        const res = await forgotPassword(values.email).unwrap();
         router.push("/checkmail");
         secureLocalStorage.setItem("email", values.email)
 

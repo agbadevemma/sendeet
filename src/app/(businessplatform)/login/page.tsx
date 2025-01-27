@@ -32,7 +32,7 @@ const LoginPage = (props: Props) => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      email: "olaimarnoel@gmail.com",
+      email: "utielizy@yahoo.com",
       password: "emma@123ASD",
     },
     validationSchema: validationSchemaLogin,
@@ -40,7 +40,9 @@ const LoginPage = (props: Props) => {
       console.log("Form data:", values);
       try {
         const data = await login(values).unwrap();
-        secureLocalStorage.setItem("token",data.token )
+        console.log("data", data);
+        
+        secureLocalStorage.setItem("userData", data?.data?.data)
         toast.success(<SuccessToast2 message={data?.message} />, {
           style: {
             width: '100%', // Adjust width as needed

@@ -15,6 +15,9 @@ import CalendarAlt from "@/icons/calender-alt";
 import Eye from "@/icons/eye";
 import secureLocalStorage from "react-secure-storage";
 import CheckCircle from "@/icons/check-circle";
+import Notification from "@/components/Notification";
+import Avatar from "@/components/Avatar";
+import Notifications from "@/components/Notifications";
 export default function CreateLayout({
   children,
 }: {
@@ -31,16 +34,8 @@ export default function CreateLayout({
           <Image src={logo} alt="logo" className="w-32" />
         </div>
         <div className=" flex gap-1.5 lg:gap-7 px-7 items-center">
-          <Button
-            icon_style="icon-only"
-            size="lg"
-            iconComponent={<BellBorder color="black" />}
-          />
-          <Image
-            src={profile}
-            alt=""
-            className="rounded-full h-10 w-10 object-cover"
-          />
+        <Notifications />
+        <Avatar />
         </div>
       </div>
       <div className="w-full flex flex-col   lg:flex-row    border-grey-100 border-t-0 border-r-0 ">

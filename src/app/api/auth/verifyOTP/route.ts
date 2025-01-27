@@ -13,6 +13,7 @@ export async function POST(req: Request) {
     }
 
     const response = await axios.post(`${BASE_URL}/api/v1/auth/verify`, { otp });
+console.log("response", response);
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {

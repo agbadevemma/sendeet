@@ -36,7 +36,7 @@ export const authApi = createApi({
       }),
       onQueryStarted: withLoading(),
     }),
-    login: builder.mutation<LoginResponse, LoginRequest>({
+    login: builder.mutation({
       query: (credentials) => ({
         url: "/login",
         method: "POST",
@@ -48,14 +48,6 @@ export const authApi = createApi({
       query: () => ({
         url: "/logout",
         method: "POST",
-      }),
-      onQueryStarted: withLoading(),
-    }),
-    forgotPassword: builder.mutation<LoginResponse, LoginRequest>({
-      query: (credentials) => ({
-        url: "/forget-password",
-        method: "POST",
-        body: credentials,
       }),
       onQueryStarted: withLoading(),
     }),
