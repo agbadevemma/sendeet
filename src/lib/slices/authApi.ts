@@ -21,7 +21,7 @@ interface SignupRequest {
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "/api/auth",
+    baseUrl: process.env.NEXT_INTERNAL_API_BASE_URL || "/api/auth",
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
       return headers;
