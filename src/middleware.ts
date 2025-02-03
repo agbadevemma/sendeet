@@ -15,10 +15,10 @@ export function middleware(req: NextRequest) {
     }
 
     // Protect admin dashboard routes
-    if (pathname.startsWith("/admin/dashboard") && !adminToken) {
-        const adminLoginUrl = new URL("/admin/login", req.url);
-        return NextResponse.redirect(adminLoginUrl);
-    }
+    // if (pathname.startsWith("/admin/dashboard") && !adminToken) {
+    //     const adminLoginUrl = new URL("/admin/login", req.url);
+    //     return NextResponse.redirect(adminLoginUrl);
+    // }
 
     // Protect general user dashboard routes
     if (pathname.startsWith("/dashboard") && !userToken) {
@@ -33,7 +33,7 @@ export function middleware(req: NextRequest) {
 // Middleware matcher configuration
 export const config = {
     matcher: [
-        "/admin/dashboard/:path*", // Admin dashboard routes
+        // "/admin/dashboard/:path*", // Admin dashboard routes
         "/dashboard/:path*",       // User dashboard routes
         "/login",                  // Redirect if authenticated
         "/signup",                 // Redirect if authenticated

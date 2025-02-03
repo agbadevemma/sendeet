@@ -6,7 +6,7 @@ import SelectField from "@/components/SelectField";
 import TextArea from "@/components/TextArea";
 import LoudSpeaker from "@/icons/loudspeaker";
 import UserGroup from "@/icons/user-group";
-import { messageTypeOptions, targetAudienceOptions } from "@/utils/data";
+import { messageTypeOptions, Step1Data, targetAudienceOptions } from "@/utils/data";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
@@ -30,12 +30,6 @@ const Setup = (props: Props) => {
   const [createCampaign, { isLoading }] = useCreateCampaignMutation();
   console.log("secureLocalStorage.getItem(step1)", secureLocalStorage.getItem("step1"));
 
-  interface Step1Data {
-    campaignName: string;
-    campaignDescription: string;
-    messageType: string;
-    targetAudience: string;
-  }
 
   const storedData = secureLocalStorage.getItem("step1") as unknown as Step1Data | null;
   const formik = useFormik<FormValues>({

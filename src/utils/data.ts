@@ -4,6 +4,11 @@ type Option = {
   label: string;
 };
 
+type deliveryOption = {
+  value: Array<string>;
+  label: string;
+};
+
 
 
 export const industryOptions: Option[] = industries.industries.map(
@@ -229,12 +234,19 @@ export const initialCampaign: CampaignInterface[] = [
   },
 ];
 
+export interface Step1Data {
+  campaignName: string;
+  campaignDescription: string;
+  messageType: string;
+  targetAudience: string;
+}
+
 export const timeZones: Option[] = [
-  { value: "utc", label: "UTC +01:00: West Africa Time (WAT)" },
-  { value: "est", label: "EST (Eastern Standard Time)" },
-  { value: "pst", label: "PST (Pacific Standard Time)" },
-  { value: "cet", label: "CET (Central European Time)" },
-  { value: "jst", label: "JST (Japan Standard Time)" },
+  { value: "UTC +01:00: West Africa Time (WAT)", label: "UTC +01:00: West Africa Time (WAT)" },
+  { value: "EST (Eastern Standard Time)", label: "EST (Eastern Standard Time)" },
+  { value: "PST (Pacific Standard Time)", label: "PST (Pacific Standard Time)" },
+  { value: "CET (Central European Time)", label: "CET (Central European Time)" },
+  { value: "JST (Japan Standard Time)", label: "JST (Japan Standard Time)" },
 ];
 
 export const deliveryWindows: Option[] = [

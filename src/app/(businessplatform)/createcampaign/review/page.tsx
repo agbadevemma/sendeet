@@ -9,7 +9,7 @@ import LoudSpeaker from "@/icons/loudspeaker";
 import CheckCircleBg from "@/icons/check-circle-bg";
 import Button from "@/components/buttons/Button";
 import Calendar from "@/icons/calendar";
-import { documents } from "@/utils/data";
+import { documents, Step1Data } from "@/utils/data";
 import Link from "next/link";
 import ReorderAlt from "@/icons/reorder-alt";
 import Multiply from "@/icons/multiply";
@@ -21,6 +21,7 @@ import ShareAlt from "@/icons/share-alt";
 import preview from "../../../../images/preview.png";
 import doc from "../../../../images/Doc.svg";
 import SuccessToast from "@/components/SuccessToast";
+import secureLocalStorage from "react-secure-storage";
 type Props = {};
 
 const Review = (props: Props) => {
@@ -50,7 +51,11 @@ const Review = (props: Props) => {
     const walk = (y - startY) * 1.5; // Adjust scroll speed here
     scrollRef.current.scrollTop = scrollTop - walk;
   };
+console.log("console.log(secureLocalStorage.getItem(step1));",secureLocalStorage.getItem("step1"));
 
+console.log("console.log(secureLocalStorage.getItem(step2));",secureLocalStorage.getItem("step2"));
+console.log("console.log(secureLocalStorage.getItem(step3));",secureLocalStorage.getItem("step3"));
+const storedData = secureLocalStorage.getItem("step1") as unknown as Step1Data | null;
   return (
     <div>
       {" "}
@@ -64,6 +69,7 @@ const Review = (props: Props) => {
               label="Campaign Name"
               placeholder="Welcome Back to the Space"
               inputType="text"
+              value={storedData?.campaignName??""}
               size="sm"
             />
             <div className="flex items-center  gap-4 mt-4">

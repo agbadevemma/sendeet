@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import secureLocalStorage from "react-secure-storage";
 import { uploadFile } from "@/lib/slices/uploadApi";
 import fileType from "@/images/filetype.svg"
+import useLogout from "@/hooks/useLogout";
 
 type Props = {};
 
@@ -32,6 +33,7 @@ const Compose = (props: Props) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>("");
   const [dragging, setDragging] = useState<boolean>(false);
+  const { handleLogout } = useLogout();
   interface Step2Data {
     message: string[];
     actionButtons: string[];
@@ -120,9 +122,7 @@ const Compose = (props: Props) => {
 
       formData.append("file", validFiles[0]);
       setUploading(true);
-      uploadFile(formData, (percentage: number) => {
-        setProgress(percentage); // Update progress state
-      })
+      uploadFile(formData, setProgress, handleLogout)
         .then((response) => {
           console.log("File uploaded successfully", response.data);
           setProgress(0);

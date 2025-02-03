@@ -10,15 +10,18 @@ import Clock from "@/icons/clock";
 import Plus from "@/icons/plus";
 import SendAlt from "@/icons/send-alt";
 import { deliveryWindows, timeZones } from "@/utils/data";
+import { formatDeliveryTime } from "@/utils/extras";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import secureLocalStorage from "react-secure-storage";
 
 type Props = {};
 
 const Schedule = (props: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpen2, setIsOpen2] = useState(false);
-  const [selectedTimezone, setSelectedTimezone] = useState<string>("utc");
+  const [selectedTimezone, setSelectedTimezone] = useState<string>("UTC +01:00: West Africa Time (WAT)");
   const [selectedWindow, setSelectedWindow] = useState("09:00 AM - 12:00 PM");
   const [sendOption, setSendOption] = useState<string>("sendNow");
 
@@ -84,6 +87,27 @@ const Schedule = (props: Props) => {
     },
   ];
 
+  const router=useRouter();
+  // const storedData = secureLocalStorage.getItem("step1") as unknown as Step2Data | null;
+  const scheduleCampaign = () => {
+    // interface Step2Interface {
+    //   message: Array<String>;
+    //   uploadFiles: Array<FileInterface>;
+    //   actionButtons: Array<string>;
+    // }
+    const  step3Data = {
+      sendOption: sendOption,
+      timezone: selectedTimezone,
+      deliveryTime:formatDeliveryTime(selectedWindow),
+
+    }
+    console.log("step3Data", step3Data);
+    
+    secureLocalStorage.setItem("step3", step3Data)
+    router.push("/createcampaign/review")
+  }
+
+  
   return (
     <div>
       <div className=" px-4">
@@ -96,7 +120,7 @@ const Schedule = (props: Props) => {
             When do you want to send it ?
           </p>
           <div className="flex mt-3 gap-2 items-start cursor-pointer " onClick={() => setSendOption("sendNow")}>
-          <RadioButton checked={sendOption === "sendNow"} />
+            <RadioButton checked={sendOption === "sendNow"} />
             <div className="flex flex-col">
               <span className="text-grey-800 font-medium  text-sm">
                 Send Now
@@ -108,8 +132,8 @@ const Schedule = (props: Props) => {
           </div>
         </div>
 
-        <div className="flex mt-6 gap-2 items-start cursor-pointer " onClick={() => setSendOption("schedule")}>
-        <RadioButton checked={sendOption === "schedule"} />
+        <div className="flex mt-6 gap-2 items-start cursor-pointer " onClick={() => setSendOption("later")}>
+          <RadioButton checked={sendOption === "later"} />
           <div className="flex flex-col">
             <span className="text-grey-800 font-medium  text-sm">
               Schedule for a specific time
@@ -127,7 +151,7 @@ const Schedule = (props: Props) => {
             options={timeZones}
             onSelect={handleSelect}
             value={selectedTimezone}
-            className="text-sn"
+            className="text-sm"
             name="timezone"
             label="Time Zone"
           />
@@ -203,14 +227,15 @@ const Schedule = (props: Props) => {
               size="sm"
               className="font-semibold text-md"
             />
-            <Link href={"/createcampaign/review"}>
-            <Button
-              text="Next: Review Campaign"
-              type="primary"
-              size="sm"
-              className="font-semibold text-md"
-            />
-            </Link>
+          
+              <Button
+                text="Next: Review Campaign"
+                type="primary"
+                size="sm"
+                onClick={()=>scheduleCampaign()}
+                className="font-semibold text-md"
+              />
+           
           </div>
         </div>
       </div>
