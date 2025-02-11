@@ -16,11 +16,13 @@ const SuccessToast2 = ({ message,
         <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
             <CheckCircle color="#0F973D" />
         </div>
-        <div className="gap-1 mr-4 w-full">
-            <p className="  !text-[18px] !font-medium text-[#101828]">
+        <div className="gap-1 flex flex-col mr-4 w-full">
+            <p className="  !text-[14px] !font-medium text-[#101828]">
                 {message || 'Success'}
             </p>
-
+            <p className=" !text-[14px] !font-normal text-[#667085]">
+                {subMessage ?? ""}
+            </p>
         </div>
     </div>
 

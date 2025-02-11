@@ -33,7 +33,7 @@ const LoginPage = (props: Props) => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      email: "utielizy@yahoo.com",
+      email: "olaimarnoel@gmail.com",
       password: "emma@123ASD",
     },
     validationSchema: validationSchemaLogin,
@@ -53,7 +53,7 @@ const LoginPage = (props: Props) => {
             'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
           bodyClassName:
             'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
-          progressClassName: 'bg-red-200',
+          progressClassName: 'bg-red-200', 
           icon: false,
           // closeButton: false, // Uncomment if you want to hide the close button
         });

@@ -21,7 +21,7 @@ import illustration from "../../../../images/illustration3.svg";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { audienceData2, AudienceData2 } from "@/utils/data";
+import { AudienceData2 } from "@/utils/data";
 import PencilEdit from "@/icons/pencil-edit";
 import Bin from "@/icons/bin";
 import Tag from "@/icons/tag";
@@ -32,6 +32,11 @@ import SelectField from "@/components/SelectField";
 import DeleteModal from "@/components/DeleteModal";
 import TagsModal from "@/components/TagsModal";
 import EditContact from "@/components/EditContact";
+import { useDeleteContactMutation, useGetContactsQuery } from "@/lib/slices/contactApi";
+import Spinner from "@/components/spinner";
+import { toast } from "react-toastify";
+import UserCross from "@/icons/user-cross";
+import useLogout from "@/hooks/useLogout";
 
 type Props = {};
 
@@ -42,10 +47,73 @@ interface Option {
 
 const Audience = (props: Props) => {
   const dispatch = useAppDispatch();
+  const { data, error, isLoading: isContactsLoading } = useGetContactsQuery(undefined);
 
-  // useEffect(() => {
-  //   dispatch(setExplore("singlecontact"));
-  // }, []);
+
+  console.log("contacts", error);
+  const { handleLogout } = useLogout();
+  useEffect(() => {
+    setAudienceData(data)
+    if (error) {
+      if ("status" in error) {
+        // Now TypeScript knows error is FetchBaseQueryError
+        const errorMessage =
+          error.data && typeof error.data === "object" && "message" in error.data
+            ? (error.data as { message?: string }).message
+            : "An unexpected error occurred";
+
+        if (error.status === 401) {
+          console.log("Unauthorized! Logging out...");
+          toast.error(
+            <div className="flex items-start justify-between w-full py-2 px-4">
+              <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-error-50 border border-error-500 shadow">
+                <UserCross color="#D42620" />
+              </div>
+              <div className="gap-1 flex flex-col mr-4 w-full">
+                <p className="!text-[14px] !font-medium text-[#101828]">
+                  An error occurred
+                </p>
+                <p className="w-full !text-[14px] !font-normal text-[#667085]">
+                  {errorMessage}
+                </p>
+              </div>
+            </div>,
+            {
+              className: "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
+              progressClassName: "bg-red-200",
+              icon: false,
+            }
+          );
+          // handleLogout();
+        } else {
+          toast.error(
+            <div className="flex items-start justify-between w-full py-2 px-4">
+              <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-error-50 border border-error-500 shadow">
+                <UserCross color="#D42620" />
+              </div>
+              <div className="gap-1 flex flex-col mr-4 w-full">
+                <p className="!text-[14px] !font-medium text-[#101828]">
+                  Failed to Add contacts
+                </p>
+                <p className="w-full !text-[14px] !font-normal text-[#667085]">
+                  {errorMessage}
+                </p>
+              </div>
+            </div>,
+            {
+              className: "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
+              progressClassName: "bg-red-200",
+              icon: false,
+            }
+          );
+        }
+      } else {
+        console.error("Unexpected error format:", error);
+      }
+    }
+
+  }, [data, error])
+  const [selectedIndex, setselectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -54,10 +122,12 @@ const Audience = (props: Props) => {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
   const [isOpenTagModal, setIsOpenTagModal] = useState<boolean>(false);
   const [audienceData, setAudienceData] =
-    useState<AudienceData2[]>(audienceData2);
+    useState<AudienceData2[]>([]);
+
+
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const isAllSelected =
-    audienceData.length > 0 && selectedItems.length === audienceData.length;
+    audienceData?.length > 0 && selectedItems.length === audienceData.length;
   const isIndeterminate =
     selectedItems.length > 0 && selectedItems.length < audienceData.length;
   const [sortConfig, setSortConfig] = useState<{
@@ -85,7 +155,7 @@ const Audience = (props: Props) => {
   const handleSelectAll = () => {
     if (selectedItems.length < audienceData.length) {
       // Select all audienceData
-      setSelectedItems(audienceData.map((_, index) => index));
+      setSelectedItems(audienceData.map((audience, index) => audience.id));
     } else {
       // Deselect all
       setSelectedItems([]);
@@ -93,9 +163,9 @@ const Audience = (props: Props) => {
   };
 
   const getFilteredOrganis = () => {
-    const searchableFields: (keyof AudienceData2)[] = ["name", "phoneNumber"];
+    const searchableFields: (keyof AudienceData2)[] = ["firstName", "lastName", "phoneNumber"];
 
-    return audienceData.filter((organization) => {
+    return audienceData?.filter((organization) => {
       // Check if any of the specified fields match the search query
       const matchesFields = searchableFields.some((field) =>
         organization[field]
@@ -112,14 +182,14 @@ const Audience = (props: Props) => {
   };
 
   // Function to handle individual checkbox selection
-  const handleSelectItem = (index: number) => {
+  const handleSelectItem = (audienceId: number) => {
     setSelectedItems((prev) => {
-      if (prev.includes(index)) {
+      if (prev.includes(audienceId)) {
         // Remove if already selected
-        return prev.filter((i) => i !== index);
+        return prev.filter((i) => i !== audienceId);
       } else {
         // Add if not selected
-        return [...prev, index];
+        return [...prev, audienceId];
       }
     });
   };
@@ -154,6 +224,7 @@ const Audience = (props: Props) => {
   // Filter dopdown
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -169,25 +240,30 @@ const Audience = (props: Props) => {
     };
   }, []);
 
+  if (isContactsLoading) return (<div className="h-screen w-full flex items-center justify-center"><Spinner /></div>);
+  // if (error) return <p>Error loading contacts</p>;
   return (
     <div>
       <div>
         {/* Modals */}
-        <AddContact setIsOpen={setIsOpenAddContact} isOpen={isOpenAddContact} />
-        <BulkImport isOpen={isOpen} setIsOpen={setIsOpen} />
-        <DeleteModal
+        {isOpenAddContact && <AddContact setIsOpen={setIsOpenAddContact} isOpen={isOpenAddContact} />}
+        {isOpen && <BulkImport isOpen={isOpen} setIsOpen={setIsOpen} />}
+        {isOpenDeleteModal && <DeleteModal
           setIsOpen={setIsOpenDeleteModal}
+          selectedItems={selectedItems}
           isOpen={isOpenDeleteModal}
           setSelectedItems={setSelectedItems}
-        />
-
-        <TagsModal setIsOpen={setIsOpenTagModal} isOpen={isOpenTagModal}  setHighlightedItems={setSelectedItems} />
-        <EditContact
+          selectedIndex={selectedIndex}
+        />}
+        {isOpenTagModal && <TagsModal setIsOpen={setIsOpenTagModal} isOpen={isOpenTagModal} setHighlightedItems={setSelectedItems} selectedIndex={selectedIndex} />}
+        {isOpenEditContact && <EditContact
           setIsOpen={setIsOpenEditContact}
+          setIsOpenDeleteModal={setIsOpenDeleteModal}
           isOpen={isOpenEditContact}
+          selectedIndex={selectedIndex}
           setSelectedItems={setSelectedItems}
         />
-
+        }
         <div>
           {/* main Page */}
           <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
@@ -274,7 +350,7 @@ const Audience = (props: Props) => {
           <div className="rounded-xl mt-7 px-6  h-full w-full border bg-white border-[#E4E7EC] ">
             <div className="flex flex-col lg:flex-row lg:gap-4  py-4 gap-8 lg:items-center  justify-between">
               <div className="text-lg font-medium">
-                {audienceData2.length} Audience
+                {data?.length} Audience
               </div>
 
               <div className="flex gap items-center gap-x-[18px] ">
@@ -289,9 +365,8 @@ const Audience = (props: Props) => {
                   />
 
                   <div
-                    className={`w-[362px] ${
-                      isOpenFilter ? "visible" : "invisible"
-                    } border border-[#E4E7EC] right-0 shadow-xs  py-3 rounded-2xl absolute bg-white mt-4`}
+                    className={`w-[362px] ${isOpenFilter ? "visible" : "invisible"
+                      } border border-[#E4E7EC] right-0 shadow-xs  py-3 rounded-2xl absolute bg-white mt-4`}
                   >
                     <div
                       className="w-full border-b flex items-center justify-between  px-4 
@@ -398,12 +473,11 @@ const Audience = (props: Props) => {
                         <span>Name</span>
                         <div
                           onClick={() => handleSort("name")}
-                          className={` transition-transform duration-300   ${
-                            sortConfig?.key === "name" &&
+                          className={` transition-transform duration-300   ${sortConfig?.key === "name" &&
                             sortConfig.direction === "asc"
-                              ? "transform rotate-180"
-                              : ""
-                          }`}
+                            ? "transform rotate-180"
+                            : ""
+                            }`}
                         >
                           <ArrowUp color={"#5D6679"} />
                         </div>
@@ -414,12 +488,11 @@ const Audience = (props: Props) => {
                         Phone number
                         <div
                           onClick={() => handleSort("phoneNumber")}
-                          className={` transition-transform duration-300   ${
-                            sortConfig?.key === "phoneNumber" &&
+                          className={` transition-transform duration-300   ${sortConfig?.key === "phoneNumber" &&
                             sortConfig.direction === "asc"
-                              ? "transform rotate-180"
-                              : ""
-                          }`}
+                            ? "transform rotate-180"
+                            : ""
+                            }`}
                         >
                           <ArrowUp color={"#5D6679"} />
                         </div>
@@ -431,12 +504,11 @@ const Audience = (props: Props) => {
                         Tags
                         <div
                           onClick={() => handleSort("tags")}
-                          className={` transition-transform duration-300   ${
-                            sortConfig?.key === "tags" &&
+                          className={` transition-transform duration-300   ${sortConfig?.key === "tags" &&
                             sortConfig.direction === "asc"
-                              ? "transform rotate-180"
-                              : ""
-                          }`}
+                            ? "transform rotate-180"
+                            : ""
+                            }`}
                         >
                           <ArrowUp color={"#5D6679"} />
                         </div>
@@ -447,12 +519,11 @@ const Audience = (props: Props) => {
                         Subscription
                         <div
                           onClick={() => handleSort("subscription")}
-                          className={` transition-transform duration-300   ${
-                            sortConfig?.key === "subscription" &&
+                          className={` transition-transform duration-300   ${sortConfig?.key === "subscription" &&
                             sortConfig.direction === "asc"
-                              ? "transform rotate-180"
-                              : ""
-                          }`}
+                            ? "transform rotate-180"
+                            : ""
+                            }`}
                         >
                           <ArrowUp color={"#5D6679"} />
                         </div>
@@ -466,27 +537,27 @@ const Audience = (props: Props) => {
                   </tr>
                 </thead>
 
-                {audienceData2.length !== 0 && (
+                {data?.length !== 0 && (
                   <tbody>
-                    {getFilteredOrganis().map((audience, index) => (
+                    {getFilteredOrganis()?.map((audience, index) => (
                       <tr
                         key={audience.id}
                         className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
                       >
                         <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
                           <Checkbox
-                            checked={selectedItems.includes(index)}
-                            onClick={() => handleSelectItem(index)}
+                            checked={selectedItems.includes(audience.id)}
+                            onClick={() => handleSelectItem(audience.id)}
                           />
-                          {audience.name}
+                          {audience.firstName + " " + audience.lastName}
                         </td>
                         <td className="text-sm font-medium text-grey-800 p-2 pr-8">
-                          {audience.phoneNumber}
+                          {audience.phoneNumber.replace(/^.*\+/, "+").replace(/-/g, "")}
                         </td>
 
                         <td className="text-sm font-medium text-grey-800 p-2  ">
                           <div className="flex gap-2 items-center">
-                            {audience.tags.map((tag) => (
+                            {audience?.tags.map((tag) => (
                               <span className="flex text-xs items-center gap-2 py-[2px] pl-2 pr-[10px] bg-[#EFF8FF] text-[#175CD3] rounded-full">
                                 {tag}
                               </span>
@@ -495,42 +566,50 @@ const Audience = (props: Props) => {
                         </td>
                         <td className="text-sm font-medium p-2">
                           <div
-                            className={`flex  w-fit items-center gap-[6px]  py-[2px] pl-2 pr-[10px] rounded-2xl ${
-                              audience.subscription == "Opted In"
-                                ? "bg-success-50 text-success-700"
-                                : "bg-[#F2F4F7] text-[#344054]"
-                            }`}
+                            className={`flex  w-fit items-center gap-[6px]  py-[2px] pl-2 pr-[10px] rounded-2xl ${audience.subscription == "Opted In"
+                              ? "bg-success-50 text-success-700"
+                              : "bg-[#F2F4F7] text-[#344054]"
+                              }`}
                           >
                             {" "}
                             <div
-                              className={`h-2 w-2 rounded-full  ${
-                                audience.subscription == "Opted In"
-                                  ? " bg-success-500"
-                                  : "bg-grey-500"
-                              }`}
+                              className={`h-2 w-2 rounded-full  ${audience.subscription == "Opted In"
+                                ? " bg-success-500"
+                                : "bg-grey-500"
+                                }`}
                             ></div>{" "}
-                            <div className="text-sm "> {audience.subscription}</div>
+                            <div className="text-sm "> {audience.subscription ?? "Opted In"}</div>
                           </div>
                         </td>
                         <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
                           <Button
                             size="sm"
                             icon_style="icon-only"
-                            onClick={() => setIsOpenEditContact(true)}
+                            onClick={() => {
+                              setIsOpenEditContact(true)
+                              // console.log("sm", selectedIndex);
+                              setselectedIndex(audience.id);
+
+                            }}
                             iconComponent={<PencilEdit color="#858D9D" height={16} width={16} />}
                             text="Edit"
                           />
 
                           <Button
                             size="sm"
-                            onClick={() => setIsOpenTagModal(true)}
+                            onClick={() => { setIsOpenTagModal(true); setselectedIndex(audience.id); }}
                             // setIsOpenTagModal
                             iconComponent={<Tag color="#858D9D" height={16} width={16} />}
                             icon_style="icon-only"
                           />
                           <Button
                             size="sm"
-                            onClick={() => setIsOpenDeleteModal(true)}
+                            onClick={() => {
+                              setIsOpenDeleteModal(true);
+                              setselectedIndex(audience.id);
+
+
+                            }}
                             iconComponent={<Bin color="#858D9D" height={16} width={16} />}
                             icon_style="icon-only"
                           />
@@ -541,12 +620,12 @@ const Audience = (props: Props) => {
                 )}
               </table>
             </div>
-            {audienceData.length >= 10 && (
+            {audienceData?.length >= 10 && (
               <div className="w-full  pt-[11px] pb-[16px] p-6 ">
                 <Pagination />
               </div>
             )}
-            {audienceData.length === 0 && (
+            {audienceData?.length === 0 && (
               <div className="w-full h-80 flex flex-col  text-center  mt-32 mb-32 items-center justify-center mx-auto">
                 <Image src={illustration} alt="img" className="mx-auto" />
                 <p className="text-lg font-semibold">No Organizations Yet</p>

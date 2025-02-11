@@ -6,6 +6,7 @@ import UserGroup from "@/icons/user-group";
 import UserAdd from "@/icons/user-add";
 import { toast } from "react-toastify";
 import CloudUpload from "@/icons/cloud-upload";
+import Papa from "papaparse";
 
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,25 +36,47 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
     setDragging(false);
   };
 
+  const [data, setData] = useState<any[]>([]);
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setDragging(false);
 
     const droppedFile = e.dataTransfer.files[0]; // Take only the first file
-    if (droppedFile && droppedFile.type === "application/pdf") {
+
+
+    if (droppedFile && droppedFile.type === "text/csv") {
       setFile(droppedFile);
+      console.log("Started");
+      Papa.parse(droppedFile, {
+        header: true, // Treat first row as headers
+        skipEmptyLines: true,
+        complete: (result: any) => {
+          setData(result.data);
+          console.log("Parsed Data:", result.data);
+        },
+      });
+
     } else {
-      toast.error("Please drop a valid PDF file.");
+      toast.error("Please select a valid CSV file.");
     }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files ? e.target.files[0] : null; // Take only the first file
 
-    if (selectedFile && selectedFile.type === "application/pdf") {
+    if (selectedFile && selectedFile.type === "text/csv") {
       setFile(selectedFile);
+      console.log("Started");
+      Papa.parse(selectedFile, {
+        header: true, // Treat first row as headers
+        skipEmptyLines: true,
+        complete: (result: any) => {
+          setData(result.data);
+          console.log("Parsed Data:", result.data);
+        },
+      });
     } else {
-      toast.error("Please select a valid PDF file.");
+      toast.error("Please select a valid CSV file.");
     }
   };
 
@@ -61,15 +84,13 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
     <div>
       <div
         onClick={() => setIsOpen(false)}
-        className={`pt-[6%] top-0 left-0 z-50 h-screen w-full bg-black/20 fixed overflow   ${
-          isOpen ? "visible" : "invisible"
-        } `}
+        className={`pt-[6%] top-0 left-0 z-50 h-screen w-full bg-black/20 fixed overflow   ${isOpen ? "visible" : "invisible"
+          } `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`max-w-[589px] mx-auto w-full h-fit min-h-32 flex flex-col gap-8  bg-white rounded-[12px]  p-6  ease-in-out transition-all duration-700 ${
-            isOpen ? "opacity-[100%] " : " opacity-0"
-          }`}
+          className={`max-w-[589px] mx-auto w-full h-fit min-h-32 flex flex-col gap-8  bg-white rounded-[12px]  p-6  ease-in-out transition-all duration-700 ${isOpen ? "opacity-[100%] " : " opacity-0"
+            }`}
         >
           <div className="w-full flex items-start gap-5">
             <div className=" flex items-center justify-center p-3 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
@@ -81,7 +102,7 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
                 Import Bulk Contacts
               </p>
               <p className="text-[#5D6679] text-[14px] ">
-                Upload your existing contacts using a CSV file. 
+                Upload your existing contacts using a CSV file.
               </p>
             </div>
             <Button
@@ -99,11 +120,10 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`w-full py-5 px-6 rounded-lg border-dashed border-[1.5px]  flex flex-col items-center     ${
-              dragging
-                ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
-                : "border-[#D0D5DD] border-dashed "
-            }`}
+            className={`w-full py-5 px-6 rounded-lg border-dashed border-[1.5px]  flex flex-col items-center     ${dragging
+              ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
+              : "border-[#D0D5DD] border-dashed "
+              }`}
           >
             <div className="rounded-full h-14 w-14 bg-[#F0F2F5] flex items-center justify-center">
               <CloudUpload color="#475367" />
@@ -119,7 +139,7 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
                   id="file-upload"
                   ref={fileInputRef}
                   className="hidden"
-                  accept="application/pdf"
+                  accept="text/csv"
                   onChange={handleFileChange}
                   multiple
                 />
@@ -127,7 +147,7 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
               <span className="text-[#475367]  text-sm">or drag and drop</span>
             </div>
             <p className="text-[12px]  font-normal text-[#98A2B3]">
-            CSV (max. 50MB)
+              CSV (max. 50MB)
             </p>
             <div className="flex w-full  items-center gap-2 mt-4">
               <div className="h-px w-full bg-[#F0F2F5]"></div>
@@ -146,14 +166,14 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
               text="Cancel"
               icon_style="txt"
               size="sm"
-              onClick={() => {}}
+              onClick={() => { }}
             />
             <Button
               text="Import"
               type="primary"
               icon_style="txt"
               size="sm"
-              onClick={() => {}}
+              onClick={() => { }}
             />
           </div>
         </div>

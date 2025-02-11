@@ -13,6 +13,10 @@ import {
   subscriberRangeOptions,
 } from "@/utils/data";
 import Button from "@/components/buttons/Button";
+import { useUpdateBusinessMutation } from "@/lib/slices/authApi";
+import SuccessToast2 from "@/components/SuccessToast2";
+import { toast } from "react-toastify";
+import ErrorToast from "@/components/ErrorToast";
 
 interface FormValues {
   brn: string;
@@ -29,6 +33,7 @@ interface DropdownStates {
 
 const Company: React.FC = () => {
   const router = useRouter();
+  const [updateBusiness] = useUpdateBusinessMutation()
 
   const [dropdownStates, setDropdownStates] = useState<DropdownStates>({
     industry: false,
@@ -46,9 +51,44 @@ const Company: React.FC = () => {
       subscriberRange: "",
     },
     validationSchema: validationSchemaCompany,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
-      setModalOpen(true);
+
+      try {
+        const response = await updateBusiness({
+          businessRegistrationNumber: values.brn,
+          industry: values.industry,
+          noOfEmployees: values.employeeCount,
+          noOfSubscribers: values.subscriberRange
+        }).unwrap()
+        toast.success(
+          <SuccessToast2
+            message={"Success"}
+            subMessage={response?.message || ""}
+          />,
+          {
+            icon: false, // Optional: Disable default icon
+          }
+        );
+        setModalOpen(true);
+
+      } catch (err: any) {
+        // toast.error("Error verifying OTP");
+
+        toast.error(
+          <ErrorToast
+            subMessage={err?.data?.error}
+            message={err?.data?.error}
+          />,
+          {
+            icon: false, // Optional: Disable default icon
+          }
+        );
+        console.log("Error resending OTP:", err);
+
+      }
+
+
     },
   });
 

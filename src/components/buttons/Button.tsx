@@ -20,6 +20,7 @@ type Props = {
   iconComponent?: React.ReactNode;
   iconcolor?: string;
   className?: string;
+  btntype?:"submit" | "reset" | "button" | undefined
 };
 
 const Button = ({
@@ -31,6 +32,8 @@ const Button = ({
   iconComponent,
   iconcolor,
   className,
+  btntype,
+
   type = "secondary",
 }: Props) => {
   return (
@@ -39,6 +42,7 @@ const Button = ({
       <button
         onClick={onClick}
         disabled={disabled}
+        type={btntype}
         className={`font-semibold whitespace-nowrap
            ${
              size == "sm" &&

@@ -1,5 +1,6 @@
 // src/features/campaignApi.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import secureLocalStorage from 'react-secure-storage';
 
 export interface UploadFile {
     url: string;
@@ -22,9 +23,26 @@ export interface Campaign {
     isPublished: boolean;
 }
 
+
+interface UserData {
+    token: string;
+}
+
+// Utility function to get the token
+const getAuthToken = secureLocalStorage.getItem("userData") as unknown as UserData | null;
+
 export const campaignApi = createApi({
     reducerPath: 'campaignApi',
-    baseQuery: fetchBaseQuery({ baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/campaign`}), // Replace with your API URL
+    baseQuery: fetchBaseQuery({
+        baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/campaign`, prepareHeaders: (headers) => {
+            console.log("token", getAuthToken);
+
+            if (getAuthToken?.token) {
+                headers.set("authorization", `Bearer ${getAuthToken?.token ?? ""}`);
+            }
+            return headers;
+        },
+    }), // Replace with your API URL
     tagTypes: ['Campaign'],
     endpoints: (builder) => ({
         createCampaign: builder.mutation<Campaign, Campaign>({

@@ -28,9 +28,11 @@ export async function POST(req: Request) {
         },
       }
     );
+    console.log(data);
+    
 
     return NextResponse.json(
-      { message: 'Signup successful', user: data.user },
+      { message: 'Signup successful'},
       { status: 201 }
     );
   } catch (error: any) {
@@ -40,7 +42,7 @@ export async function POST(req: Request) {
     if (error.response) {
       const errorData = error.response.data;
       return NextResponse.json(
-        { message: errorData.message || 'Signup failed' },
+        { message: errorData?.message.toString() || 'Signup failed' },
         { status: error.response.status }
       );
     }

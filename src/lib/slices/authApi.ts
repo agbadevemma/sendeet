@@ -17,6 +17,13 @@ interface SignupRequest {
   password: string;
   role: string;
 }
+interface BusinessUpdateRequest {
+  businessRegistrationNumber: string;
+  industry: string;
+  noOfEmployees: string;
+  noOfSubscribers: string;
+}
+
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -51,6 +58,14 @@ export const authApi = createApi({
       }),
       onQueryStarted: withLoading(),
     }),
+    resendOtp: builder.mutation({
+      query: (email: string) => ({
+        url: "/resendOTP", // Matches the Next.js API route
+        method: "POST",
+        body: { email },
+      }),
+      onQueryStarted: withLoading(),
+    }),
     verifyOtp: builder.mutation({
       query: (otp: string) => ({
         url: "/verifyOTP", // Matches the Next.js API route
@@ -59,8 +74,15 @@ export const authApi = createApi({
       }),
       onQueryStarted: withLoading(),
     }),
+    updateBusiness: builder.mutation({
+      query: (businessData: BusinessUpdateRequest) => ({
+        url: "/company", // Matches the Next.js API route
+        method: "PUT",
+        body: businessData,
+      }),
+      onQueryStarted: withLoading(),
+    }),
   }),
 });
 
-export const { useSignupMutation, useLoginMutation, useLogoutMutation, useVerifyOtpMutation } =
-  authApi;
+export const { useSignupMutation, useLoginMutation, useLogoutMutation, useVerifyOtpMutation, useResendOtpMutation, useUpdateBusinessMutation } = authApi;

@@ -38,6 +38,7 @@ import OnboardCard from "@/components/onboarding/OnboardCard";
 import HelpCircle from "@/icons/help-circle";
 import CompletedTour from "@/components/onboarding/CompletedTour";
 import ExploreCard from "@/components/onboarding/ExploreCard";
+import secureLocalStorage from "react-secure-storage";
 
 type Props = {};
 
@@ -48,9 +49,12 @@ const page = (props: Props) => {
     (state) => state.miscellaneous
   );
   const stepsArray = ["step1", "step2", "step3"];
-  
+
   useEffect(() => {
     dispatch(setExplore("credit"));
+    if (!secureLocalStorage.getItem("userData")) {
+      window.location.reload()
+    }
   }, []);
 
   return (
@@ -115,9 +119,8 @@ const page = (props: Props) => {
                   )}
                 </div>
                 <div
-                  className={` flex     mt-[39.5px] ${
-                    explore == "credit" ? "flex-col-reverse" : "flex-col"
-                  }`}
+                  className={` flex     mt-[39.5px] ${explore == "credit" ? "flex-col-reverse" : "flex-col"
+                    }`}
                 >
                   <Link
                     onClick={() => dispatch(openModal())}
@@ -385,7 +388,7 @@ const page = (props: Props) => {
               size="sm"
               text="Filters"
               icon_style="leading-icon"
-              
+
               iconComponent={<FilterAlt color="#383E49" />}
             />
             <SearchInput

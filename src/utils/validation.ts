@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 // Validation schema for registration
 export const validationSchema = Yup.object({
@@ -58,14 +59,36 @@ export const validationSchemaCompany = Yup.object({
 
 // Validation schema for forgot password
 export const ForgotPasswordSchema = Yup.object().shape({
- email: Yup.string().email("Invalid email").required("Email is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
 });
-export const changePasswordSchema =Yup.object().shape({
+export const changePasswordSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
- });
+});
 export const validationSchemaCampaignSetup = Yup.object().shape({
   campaignName: Yup.string().required("Campaign name is required"),
   campaignDescription: Yup.string(),
   messageType: Yup.string().required("Message type is required"),
   targetAudience: Yup.string().required("Target audience is required"),
 });
+
+
+export const validationSchemaContactSetup = Yup.object({
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last Name is required"),
+  countryCode: Yup.string()
+  .required("Country code is required"),
+phoneNumber: Yup.string()
+  .required("Phone number is required")
+  .test("is-valid-phone", "Invalid phone number for the selected country", function (value) {
+    const { countryCode } = this.parent; // Access countryCode from the form values
+    if (!value || !countryCode) return false;
+
+    // Validate phone number using libphonenumber-js
+    const phoneNumber = parsePhoneNumberFromString(value, countryCode.split(" ")[0]);
+ 
+    
+    return phoneNumber && phoneNumber.isValid();
+  }),
+  
+  tags: Yup.string() .required("tags is required"),
+})
