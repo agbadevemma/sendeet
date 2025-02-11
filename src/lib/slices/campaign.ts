@@ -35,6 +35,7 @@ export const campaignApi = createApi({
     reducerPath: 'campaignApi',
     baseQuery: fetchBaseQuery({
         baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/campaign`, prepareHeaders: (headers) => {
+            const getAuthToken = secureLocalStorage.getItem("userData") as unknown as UserData | null;
             console.log("token", getAuthToken);
 
             if (getAuthToken?.token) {

@@ -4,7 +4,7 @@ import logo from "../../../images/Logo.png";
 import Image from "next/image";
 import mailicon from "../../../images/icons/mail.svg";
 import passwordopenicon from "../../../images/icons/eye.svg";
-
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useFormik } from "formik";
 import { validationSchemaLogin } from "@/utils/validation";
@@ -42,8 +42,9 @@ const LoginPage = (props: Props) => {
       try {
         const data = await login(values).unwrap();
         console.log("data", data);
-        
+
         secureLocalStorage.setItem("userData", data?.data?.data)
+        Cookies.set("userToken", data?.data?.data)
         toast.success(<SuccessToast2 message={data?.message} />, {
           style: {
             width: '100%', // Adjust width as needed
@@ -53,7 +54,7 @@ const LoginPage = (props: Props) => {
             'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
           bodyClassName:
             'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
-          progressClassName: 'bg-red-200', 
+          progressClassName: 'bg-red-200',
           icon: false,
           // closeButton: false, // Uncomment if you want to hide the close button
         });

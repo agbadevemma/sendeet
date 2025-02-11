@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import secureLocalStorage from 'react-secure-storage';
-
+import Cookies from "js-cookie";
 // Define the Contact type
 export interface Contact {
     id?: number;
@@ -16,14 +16,16 @@ interface UserData {
 }
 
 // Utility function to get the token
-const getAuthToken = secureLocalStorage.getItem("userData") as unknown as UserData | null;
 
 export const contactApi = createApi({
     reducerPath: 'contactApi',
     baseQuery: fetchBaseQuery({
         baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/`,
         prepareHeaders: (headers) => {
+            const getAuthToken = secureLocalStorage.getItem("userData") as unknown as UserData | null;
             console.log("token", getAuthToken?.token);
+            const token = Cookies.set("userToken","adsadsadasd" );
+            console.log("Token from cookie:",Cookies.get("userToken"));
             // if (!getAuthToken?.token) {
             //     window.location.reload()
             // }

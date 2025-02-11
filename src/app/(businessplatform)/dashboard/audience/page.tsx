@@ -84,7 +84,7 @@ const Audience = (props: Props) => {
               icon: false,
             }
           );
-          // handleLogout();
+          handleLogout();
         } else {
           toast.error(
             <div className="flex items-start justify-between w-full py-2 px-4">
