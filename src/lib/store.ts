@@ -5,6 +5,7 @@ import { authApi } from "./slices/authApi";
 import { resetApi } from "./slices/resetApi";
 import { campaignApi } from "./slices/campaign";
 import { contactApi } from "./slices/contactApi";
+import { userApi } from "./slices/userApi";
 
 export const makeStore = () => {
   return configureStore({
@@ -15,9 +16,10 @@ export const makeStore = () => {
       [resetApi.reducerPath]: resetApi.reducer,
       [campaignApi.reducerPath]: campaignApi.reducer,
       [contactApi.reducerPath]: contactApi.reducer,
+      [userApi.reducerPath]: userApi.reducer
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(authApi.middleware, resetApi.middleware, campaignApi.middleware, contactApi.middleware),
+      getDefaultMiddleware().concat(authApi.middleware, resetApi.middleware, campaignApi.middleware, contactApi.middleware, userApi.middleware),
   });
 };
 

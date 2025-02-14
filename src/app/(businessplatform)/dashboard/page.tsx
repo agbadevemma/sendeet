@@ -52,9 +52,7 @@ const page = (props: Props) => {
 
   useEffect(() => {
     dispatch(setExplore("credit"));
-    if (!secureLocalStorage.getItem("userData")) {
-      window.location.reload()
-    }
+ 
   }, []);
 
   return (

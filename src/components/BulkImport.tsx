@@ -7,6 +7,12 @@ import UserAdd from "@/icons/user-add";
 import { toast } from "react-toastify";
 import CloudUpload from "@/icons/cloud-upload";
 import Papa from "papaparse";
+import countrycallcode from "../utils/CountryCodes.json";
+import { useAddContactMutation } from "@/lib/slices/contactApi";
+import UserTick from "@/icons/user-tick";
+import UserCross from "@/icons/user-cross";
+import useLogout from "@/hooks/useLogout";
+import Spinner from "./spinner";
 
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +21,14 @@ type Props = {
 
 const BulkImport = ({ setIsOpen, isOpen }: Props) => {
   const [selectedCode, setSelectedCode] = useState<string>("NG +234");
+  const [addContact, { isLoading }] = useAddContactMutation();
+  const { handleLogout } = useLogout();
+  const callCodes = countrycallcode.map((item, index) => {
+    return {
+      value: item.code,
+      option: `${item.code} ${item.dial_code}`
+    }
+  })
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
@@ -50,9 +64,136 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
       Papa.parse(droppedFile, {
         header: true, // Treat first row as headers
         skipEmptyLines: true,
-        complete: (result: any) => {
+        complete: async (result: any) => {
           setData(result.data);
-          console.log("Parsed Data:", result.data);
+          const values = result.data
+          console.log("Parsed Data:", result.data[0]['First name']);
+          const tagsArray = values.map((val: any) =>
+            val["Tags"]
+              .split(",")
+              .map((tag: any) => tag.trim())
+              .filter(Boolean) // Filters out empty strings
+          );
+          console.log("tags", tagsArray);
+
+          try {
+            await Promise.all(values.map((val: any, index: number) => {
+              return addContact({
+                firstName: val['First name'],
+                lastName: val['Last Name'],
+                phoneNumber: val['Phone number'],
+                tags: tagsArray[index]
+              }).unwrap()
+            }));
+            toast.success(
+              <div className="flex items-start justify-between w-full  py-2 px-4 ">
+                <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-success-50 border border-success-500">
+                  <UserTick color="#0F973D" />
+                </div>
+                <div className="gap-1 flex flex-col mr-4 ">
+                  <p className="!text-[14px] !font-medium text-[#101828]">
+                    Contact Added
+                  </p>
+                  <p className=" !text-[14px] !font-normal text-[#667085]">
+                    <span className="text-[#009BE1]">{result.data.firstName} {result.data.lastName}</span> has been added to your contacts list
+                  </p>
+                </div>
+              </div>,
+
+              {
+                style: {
+                  width: "100%", // Adjust width as needed
+                  maxWidth: "",
+                },
+                className:
+                  " text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]  ", // Tailwind classes
+                bodyClassName:
+                  "text-sm  flex flex-col w-full max-w-[400px]  !w-full !p-12",
+                progressClassName: "bg-red-200",
+                icon: false,
+
+                // closeButton: false,
+              }
+            );
+
+            setIsOpen(false);
+
+
+          } catch (error: any) {
+            // error
+            console.log("error", error.data.message);
+
+
+            if (error?.status === 401) {
+              console.log("Unauthorized! Logging out...");
+              toast.error(
+                <div className="flex items-start justify-between w-full  py-2 px-4 ">
+                  <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-error-50 border border-error-500 shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,_189,_199,_0.20)]">
+                    {" "}
+                    <UserCross color="#D42620" />
+                  </div>
+                  <div className="gap-1 flex flex-col mr-4 w-full">
+                    <p className="!text-[14px] !font-medium text-[#101828]">
+                      Failed to Add contacts
+                    </p>
+                    <p className=" w-full !text-[14px] !font-normal text-[#667085]">
+                      {error.data.message}
+                    </p>
+                  </div>
+                </div>,
+
+                {
+                  style: {
+                    width: "100%", // Adjust width as needed
+                    maxWidth: "",
+                  },
+                  className:
+                    " text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]  ", // Tailwind classes
+                  bodyClassName:
+                    "text-sm  flex flex-col w-full max-w-[400px]  !w-full !p-12",
+                  progressClassName: "bg-red-200",
+                  icon: false,
+
+                  // closeButton: false,
+                }
+              );
+              handleLogout();
+
+            } else {
+              toast.error(
+                <div className="flex items-start justify-between w-full  py-2 px-4 ">
+                  <div className="rounded-lg flex items-center mr-5 justify-center p-2 bg-error-50 border border-error-500 shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),0px_0px_0px_1px_rgba(185,_189,_199,_0.20)]">
+                    {" "}
+                    <UserCross color="#D42620" />
+                  </div>
+                  <div className="gap-1 flex flex-col mr-4 ">
+                    <p className="!text-[14px] !font-medium text-[#101828]">
+                      Failed to Add contacts
+                    </p>
+                    <p className=" !text-[14px] !font-normal text-[#667085]">
+                      {error.data.message}
+                    </p>
+                  </div>
+                </div>,
+
+                {
+                  style: {
+                    width: "100%", // Adjust width as needed
+                    maxWidth: "",
+                  },
+                  className:
+                    " text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]  ", // Tailwind classes
+                  bodyClassName:
+                    "text-sm  flex flex-col w-full max-w-[400px]  !w-full !p-12",
+                  progressClassName: "bg-red-200",
+                  icon: false,
+
+                  // closeButton: false,
+                }
+              );
+            }
+
+          }
         },
       });
 
@@ -83,11 +224,20 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
   return (
     <div>
       <div
-        onClick={() => setIsOpen(false)}
+        onClick={() => {
+          if (isLoading) {
+            return;
+          }
+          setIsOpen(false)
+        }}
         className={`pt-[6%] top-0 left-0 z-50 h-screen w-full bg-black/20 fixed overflow   ${isOpen ? "visible" : "invisible"
           } `}
       >
-        <div
+
+        <div className="w-full flex items-center justify-center">
+          {isLoading && <Spinner />}
+        </div>
+        {!isLoading && <div
           onClick={(e) => e.stopPropagation()}
           className={`max-w-[589px] mx-auto w-full h-fit min-h-32 flex flex-col gap-8  bg-white rounded-[12px]  p-6  ease-in-out transition-all duration-700 ${isOpen ? "opacity-[100%] " : " opacity-0"
             }`}
@@ -176,7 +326,7 @@ const BulkImport = ({ setIsOpen, isOpen }: Props) => {
               onClick={() => { }}
             />
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );

@@ -12,6 +12,9 @@ import dashlogo from "../../../../images/dashlogo.svg";
 import { toast } from "react-toastify";
 import CloudUpload from "@/icons/cloud-upload";
 import TextButton from "@/components/buttons/TextButton";
+import { useFormik } from "formik";
+import { validationSchemaUserDetials } from "@/utils/validation";
+import { useGetUserDetailsQuery } from "@/lib/slices/userApi";
 type Props = {};
 
 type TabItem = {
@@ -66,6 +69,27 @@ const SettingsPage = (props: Props) => {
       toast.error("Please select a valid PDF file.");
     }
   };
+
+  const { data, isLoading } = useGetUserDetailsQuery(undefined);
+  console.log("data", data);
+
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: data?.firstName ?? "",
+      lastName: data?.lastName ?? "",
+      email: data?.email ?? "",
+      phoneNumber: data?.email ?? "",
+      companyName: data?.email ?? "",
+    },
+    validationSchema: validationSchemaUserDetials,
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      console.log("Form submitted:", values);
+      toast.success("Profile updated successfully!");
+    },
+  });
+
   return (
     <div>
       {" "}
@@ -110,6 +134,12 @@ const SettingsPage = (props: Props) => {
                 inputType=""
                 placeholder=""
                 className="w-full !h-[56px]"
+                name="firstName"
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+                errorText={formik.errors.firstName}
               />
             </div>
             <div className="w-full">
@@ -119,6 +149,12 @@ const SettingsPage = (props: Props) => {
                 inputType=""
                 placeholder=""
                 className="w-full !h-[56px]"
+                name="lastName"
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+                errorText={formik.errors.lastName}
               />
             </div>
           </div>
@@ -127,18 +163,35 @@ const SettingsPage = (props: Props) => {
             inputType=""
             placeholder=""
             className="w-full !h-[56px]"
+            name="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={Boolean(formik.touched.email && formik.errors.email)}
+            errorText={formik.errors.email}
           />
           <InputField
             label="WhatsApp Business Number"
             inputType=""
             placeholder=""
             className="w-full !h-[56px]"
+            value={formik.values.phoneNumber}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
+            errorText={formik.errors.phoneNumber}
           />
           <InputField
             label="Company Name"
             inputType=""
             placeholder=""
             className="w-full !h-[56px]"
+            name="companyName"
+            value={formik.values.companyName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={Boolean(formik.touched.companyName && formik.errors.companyName)}
+            errorText={formik.errors.companyName}
           />
         </div>
       </div>
@@ -157,11 +210,10 @@ const SettingsPage = (props: Props) => {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`w-full py-6 px-6 rounded-lg border-dashed border-[1.5px] max-w-[308px]  flex flex-col items-center     ${
-              dragging
-                ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
-                : "border-[#D0D5DD] border-dashed "
-            }`}
+            className={`w-full py-6 px-6 rounded-lg border-dashed border-[1.5px] max-w-[308px]  flex flex-col items-center     ${dragging
+              ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
+              : "border-[#D0D5DD] border-dashed "
+              }`}
           >
             <div className="rounded-full h-14 w-14 bg-[#F0F2F5] flex items-center justify-center">
               <CloudUpload color="#475367" />

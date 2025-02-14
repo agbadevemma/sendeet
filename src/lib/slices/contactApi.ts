@@ -23,12 +23,13 @@ export const contactApi = createApi({
         baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/`,
         prepareHeaders: (headers) => {
             const getAuthToken = secureLocalStorage.getItem("userData") as unknown as UserData | null;
-            console.log("token", getAuthToken?.token);
-            const token = Cookies.set("userToken","adsadsadasd" );
-            console.log("Token from cookie:",Cookies.get("userToken"));
+            // console.log("token", getAuthToken?.token);
+            // const token = Cookies.set("userToken","adsadsadasd" );
+            // console.log("Token from cookie:",Cookies.get("userToken"));
             // if (!getAuthToken?.token) {
             //     window.location.reload()
             // }
+        
             if (getAuthToken?.token) {
                 headers.set("authorization", `Bearer ${getAuthToken?.token ?? ""}`);
             }

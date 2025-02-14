@@ -42,10 +42,13 @@ const DeleteModal: React.FC<Props> = ({
 
   return (
     <div
-      onClick={() => setIsOpen(false)}
-      className={`fixed top-0 left-0 z-50 h-screen w-full flex items-center justify-center bg-black/20 ${
-        isOpen ? "visible" : "invisible"
-      }`}
+      onClick={() => {
+        if (isLoading) {
+          return;
+        }
+        setIsOpen(false)}}
+      className={`fixed top-0 left-0 z-50 h-screen w-full flex items-center justify-center bg-black/20 ${isOpen ? "visible" : "invisible"
+        }`}
     >
       {isLoading ? (
         <div className="h-screen w-full flex items-center justify-center">
@@ -54,9 +57,8 @@ const DeleteModal: React.FC<Props> = ({
       ) : (
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`flex rounded-[12px] items-start justify-between w-full p-6 bg-white max-w-[544px] mx-auto transition-all duration-700 ${
-            isOpen ? "opacity-100" : "opacity-0"
-          }`}
+          className={`flex rounded-[12px] items-start justify-between w-full p-6 bg-white max-w-[544px] mx-auto transition-all duration-700 ${isOpen ? "opacity-100" : "opacity-0"
+            }`}
         >
           <div className="rounded-lg flex items-center mr-5 justify-center p-3 bg-[#FBE9E9] border border-solid border-[rgba(212,_38,_32,_0.50)]">
             <InfoCircle color="#D42620" height={20} width={20} />
@@ -69,12 +71,12 @@ const DeleteModal: React.FC<Props> = ({
                   Are you sure you want to delete this contact? This action cannot be undone.
                 </p>
               </div>
-              <Button iconComponent={<Multiply color="#101928" />} onClick={() => setIsOpen(false)} />
+              <Button icon_style="icon-only" iconComponent={<Multiply color="#101928" />} onClick={() => setIsOpen(false)} />
             </div>
 
             <div className="flex items-center justify-end mt-8 gap-3">
               <Button
-                iconComponent={<Multiply color="#101928" />}
+
                 onClick={() => {
                   setIsOpen(false);
                   setSelectedItems([]);
@@ -82,7 +84,7 @@ const DeleteModal: React.FC<Props> = ({
                 text="Cancel"
               />
               <Button
-                iconComponent={<Multiply color="#101928" />}
+
                 onClick={() => {
                   setIsOpen(false);
                   setSelectedItems([]);

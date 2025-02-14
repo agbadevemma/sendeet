@@ -55,6 +55,7 @@ const Avatar = (props: Props) => {
         // closeButton: false, // Uncomment if you want to hide the close button
       });
       router.push("/login")
+    location.reload();
     } catch (error) {
       console.log("error", error);
     }

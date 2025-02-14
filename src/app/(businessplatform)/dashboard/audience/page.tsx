@@ -255,7 +255,7 @@ const Audience = (props: Props) => {
           setSelectedItems={setSelectedItems}
           selectedIndex={selectedIndex}
         />}
-        {isOpenTagModal && <TagsModal setIsOpen={setIsOpenTagModal} isOpen={isOpenTagModal} setHighlightedItems={setSelectedItems} selectedIndex={selectedIndex} />}
+        {/* {isOpenTagModal && <TagsModal setIsOpen={setIsOpenTagModal} isOpen={isOpenTagModal} setHighlightedItems={setSelectedItems} selectedIndex={selectedIndex} />} */}
         {isOpenEditContact && <EditContact
           setIsOpen={setIsOpenEditContact}
           setIsOpenDeleteModal={setIsOpenDeleteModal}
@@ -402,25 +402,7 @@ const Audience = (props: Props) => {
                         placeholder="Select status"
                       />
 
-                      <SelectField
-                        isOpen={tagsOpen}
-                        name="tags"
-                        label="Tags"
-                        fieldclassName="h-[38px]"
-                        onToggle={() => setTagsOpen(!tagsOpen)}
-                        options={tagOptions}
-                        onSelect={handleTagSelect}
-                        value={selectedTags}
-                        placeholder="Select tags"
-                      />
-                      <div className="flex items-center gap-2 -mt-5">
-                        <span className="flex text-xs items-center gap-2 p-2 px-4 bg-[#EFF8FF] text-[#175CD3] rounded-full">
-                          status
-                        </span>
-                        <span className="flex text-xs items-center gap-2 p-2 px-4 bg-[#EFF8FF] text-[#175CD3] rounded-full">
-                          cool
-                        </span>
-                      </div>
+                      
                     </div>
 
                     <div className="mt-4 px-4 gap-4 pt-4 border-t flex  w-full items-center">
@@ -501,7 +483,7 @@ const Audience = (props: Props) => {
 
                     <th className="p-2 ">
                       <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                        Tags
+                      Last Engagement 
                         <div
                           onClick={() => handleSort("tags")}
                           className={` transition-transform duration-300   ${sortConfig?.key === "tags" &&
@@ -556,13 +538,14 @@ const Audience = (props: Props) => {
                         </td>
 
                         <td className="text-sm font-medium text-grey-800 p-2  ">
-                          <div className="flex gap-2 items-center">
+                        02/10/24
+                          {/* <div className="flex gap-2 items-center">
                             {audience?.tags.map((tag) => (
                               <span className="flex text-xs items-center gap-2 py-[2px] pl-2 pr-[10px] bg-[#EFF8FF] text-[#175CD3] rounded-full">
                                 {tag}
                               </span>
                             ))}
-                          </div>
+                          </div> */}
                         </td>
                         <td className="text-sm font-medium p-2">
                           <div
@@ -578,7 +561,7 @@ const Audience = (props: Props) => {
                                 : "bg-grey-500"
                                 }`}
                             ></div>{" "}
-                            <div className="text-sm "> {audience.subscription ?? "Opted In"}</div>
+                            <div className="text-sm "> {audience.subscription ?? "Opted Out"}</div>
                           </div>
                         </td>
                         <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
@@ -595,13 +578,13 @@ const Audience = (props: Props) => {
                             text="Edit"
                           />
 
-                          <Button
+                          {/* <Button
                             size="sm"
                             onClick={() => { setIsOpenTagModal(true); setselectedIndex(audience.id); }}
                             // setIsOpenTagModal
                             iconComponent={<Tag color="#858D9D" height={16} width={16} />}
                             icon_style="icon-only"
-                          />
+                          /> */}
                           <Button
                             size="sm"
                             onClick={() => {

@@ -149,7 +149,12 @@ const EditContact = ({ setIsOpen, isOpen, setSelectedItems, selectedIndex, setIs
   return (
     <div>
       <div
-        onClick={() => setIsOpen(false)}
+        onClick={() => {
+          if (isLoading || isUpdating) {
+            return;
+          }
+          setIsOpen(false)
+        }}
         className={`pt-[4%] top-0 left-0 z-50 pb-10 h-screen w-full bg-black/20 fixed overflow-y-auto   ${isOpen ? "visible" : "invisible"
           } `}
       >

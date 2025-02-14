@@ -76,19 +76,30 @@ export const validationSchemaContactSetup = Yup.object({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
   countryCode: Yup.string()
-  .required("Country code is required"),
-phoneNumber: Yup.string()
-  .required("Phone number is required")
-  .test("is-valid-phone", "Invalid phone number for the selected country", function (value) {
-    const { countryCode } = this.parent; // Access countryCode from the form values
-    if (!value || !countryCode) return false;
+    .required("Country code is required"),
+  phoneNumber: Yup.string()
+    .required("Phone number is required")
+    .test("is-valid-phone", "Invalid phone number for the selected country", function (value) {
+      const { countryCode } = this.parent; // Access countryCode from the form values
+      if (!value || !countryCode) return false;
 
-    // Validate phone number using libphonenumber-js
-    const phoneNumber = parsePhoneNumberFromString(value, countryCode.split(" ")[0]);
- 
-    
-    return phoneNumber && phoneNumber.isValid();
-  }),
-  
-  tags: Yup.string() .required("tags is required"),
+      // Validate phone number using libphonenumber-js
+      const phoneNumber = parsePhoneNumberFromString(value, countryCode.split(" ")[0]);
+
+
+      return phoneNumber && phoneNumber.isValid();
+    }),
+
+  tags: Yup.string().required("tags is required"),
 })
+
+
+
+export const validationSchemaUserDetials = Yup.object({
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
+  email: Yup.string().email("Invalid email format").required("Email is required"),
+  phoneNumber: Yup.string().required("Phone number is required"),
+  companyName: Yup.string().required("Company name is required"),
+});
+
