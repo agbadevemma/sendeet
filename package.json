@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-      "vercel-build": "apt-get update && apt-get install -y pkg-config libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential && npm install"
+    "lint": "next lint"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.1",
@@ -19,7 +18,7 @@
     "@types/recharts": "^1.8.29",
     "apexcharts": "^4.0.0",
     "axios": "^1.7.9",
-    "canvas": "^3.0.1",
+    "canvas": "^3.1.0",
     "chart.js": "^4.4.6",
     "chartjs-chart-geo": "^4.3.4",
     "emoji-picker-react": "^4.12.0",
