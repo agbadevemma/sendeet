@@ -11,7 +11,7 @@ import UserCross from "@/icons/user-cross";
 import UserAdd from "@/icons/user-add";
 import Checkbox from "./Checkbox";
 import { useGetContactByIdQuery, useUpdateContactMutation } from "@/lib/slices/contactApi";
-import countrycallcode from "../utils/CountryCodes.json";
+import countrycallcode from "../utils/countrycodes.json";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Spinner from "./spinner";

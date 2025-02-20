@@ -7,7 +7,7 @@ import UserAdd from "@/icons/user-add";
 import { toast } from "react-toastify";
 import CloudUpload from "@/icons/cloud-upload";
 import Papa from "papaparse";
-import countrycallcode from "../utils/CountryCodes.json";
+import countrycallcode from "../utils/countrycodes.json";
 import { useAddContactMutation } from "@/lib/slices/contactApi";
 import UserTick from "@/icons/user-tick";
 import UserCross from "@/icons/user-cross";

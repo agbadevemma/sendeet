@@ -8,7 +8,7 @@ import ChevronDown from "@/icons/cheveron-down";
 import UserTick from "@/icons/user-tick";
 import { toast } from "react-toastify";
 import UserCross from "@/icons/user-cross";
-import countrycallcode from "../utils/CountryCodes.json";
+import countrycallcode from "../utils/countrycodes.json";
 import UserAdd from "@/icons/user-add";
 import { useFormik } from "formik";
 import { validationSchemaContactSetup } from "@/utils/validation";
