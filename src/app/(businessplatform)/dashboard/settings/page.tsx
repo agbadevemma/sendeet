@@ -7,11 +7,12 @@ import Settings from "@/icons/settings";
 import Image from "next/image";
 import profile from "../../../../images/profile.jpg";
 import React, { useRef, useState } from "react";
-import InputField from "@/components/InputField";
 import dashlogo from "../../../../images/dashlogo.svg";
 import { toast } from "react-toastify";
 import CloudUpload from "@/icons/cloud-upload";
 import TextButton from "@/components/buttons/TextButton";
+import Checkbox from "@/components/Checkbox";
+import InputField from "@/components/InputField";
 import { useFormik } from "formik";
 import { validationSchemaUserDetials } from "@/utils/validation";
 import { useGetUserDetailsQuery } from "@/lib/slices/userApi";
@@ -73,10 +74,9 @@ const SettingsPage = (props: Props) => {
   const { data, isLoading } = useGetUserDetailsQuery(undefined);
   console.log("data", data);
 
-
   const formik = useFormik({
     initialValues: {
-      firstName: data?.firstName ?? "",
+      firstName: data?.firstName || "",
       lastName: data?.lastName ?? "",
       email: data?.email ?? "",
       phoneNumber: data?.email ?? "",
@@ -130,16 +130,20 @@ const SettingsPage = (props: Props) => {
             <div className="w-full">
               {" "}
               <InputField
-                label="First name"
-                inputType=""
-                placeholder=""
-                className="w-full !h-[56px]"
+                inputType="text"
+                label="First Name"
+                placeholder="Your first name"
+                id="firstName"
                 name="firstName"
                 value={formik.values.firstName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-                errorText={formik.errors.firstName}
+                error={
+                  formik.touched.firstName && Boolean(formik.errors.firstName)
+                }
+                errorText={
+                  typeof formik.errors.firstName === "string" ? formik.errors.firstName : undefined
+                }
               />
             </div>
             <div className="w-full">
@@ -153,8 +157,12 @@ const SettingsPage = (props: Props) => {
                 value={formik.values.lastName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.lastName && formik.errors.lastName)}
-                errorText={formik.errors.lastName}
+                error={Boolean(
+                  formik.touched.lastName && formik.errors.lastName
+                )}
+                errorText={
+                  typeof formik.errors.lastName === "string" ? formik.errors.lastName : undefined
+                }
               />
             </div>
           </div>
@@ -168,7 +176,9 @@ const SettingsPage = (props: Props) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={Boolean(formik.touched.email && formik.errors.email)}
-            errorText={formik.errors.email}
+            errorText={
+              typeof formik.errors.email === "string" ? formik.errors.email : undefined
+            }
           />
           <InputField
             label="WhatsApp Business Number"
@@ -178,8 +188,12 @@ const SettingsPage = (props: Props) => {
             value={formik.values.phoneNumber}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
-            errorText={formik.errors.phoneNumber}
+            error={Boolean(
+              formik.touched.phoneNumber && formik.errors.phoneNumber
+            )}
+            errorText={
+              typeof formik.errors.phoneNumber === "string" ? formik.errors.phoneNumber : undefined
+            }
           />
           <InputField
             label="Company Name"
@@ -190,8 +204,12 @@ const SettingsPage = (props: Props) => {
             value={formik.values.companyName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={Boolean(formik.touched.companyName && formik.errors.companyName)}
-            errorText={formik.errors.companyName}
+            error={Boolean(
+              formik.touched.companyName && formik.errors.companyName
+            )}
+            errorText={
+              typeof formik.errors.companyName === "string" ? formik.errors.companyName : undefined
+            }
           />
         </div>
       </div>
@@ -210,10 +228,11 @@ const SettingsPage = (props: Props) => {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`w-full py-6 px-6 rounded-lg border-dashed border-[1.5px] max-w-[308px]  flex flex-col items-center     ${dragging
-              ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
-              : "border-[#D0D5DD] border-dashed "
-              }`}
+            className={`w-full py-6 px-6 rounded-lg border-dashed border-[1.5px] max-w-[308px]  flex flex-col items-center     ${
+              dragging
+                ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
+                : "border-[#D0D5DD] border-dashed "
+            }`}
           >
             <div className="rounded-full h-14 w-14 bg-[#F0F2F5] flex items-center justify-center">
               <CloudUpload color="#475367" />
