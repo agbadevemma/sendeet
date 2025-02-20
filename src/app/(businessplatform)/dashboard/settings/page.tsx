@@ -106,7 +106,7 @@ const SettingsPage = (props: Props) => {
           profilePicture: uploadedProfileImage,
         }).unwrap();
         console.log("Update Success:", response);
-        window.location.reload();
+        // window.location.reload();
       } catch (error) {
         console.error("Update Error:", error);
       }

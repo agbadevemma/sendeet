@@ -38,14 +38,16 @@ export const userApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["userDetails"], // ✅ Define cache tags
   endpoints: (builder) => ({
     getUserDetails: builder.query({
+      query: () => "user",
       transformResponse: (response: {
         success: boolean;
         message: string;
         data: any;
       }) => response.data,
-      query: () => "user",
+      providesTags: ["userDetails"], // ✅ Provides "User" cache tag
     }),
     updateUser: builder.mutation<any, UpdateUserPayload>({
       query: (userData) => ({
@@ -53,20 +55,22 @@ export const userApi = createApi({
         method: "PUT",
         body: userData,
       }),
+      invalidatesTags: ["userDetails"], // ✅ Invalidates and triggers `getUserDetails` refetch
     }),
     updateBusiness: builder.mutation<any, UpdateBusinessPayload>({
       query: (businessData) => ({
-        url: "business/update", // Ensure this is the correct API endpoint
-        method: "PUT", // Use PUT or PATCH depending on the API spec
+        url: "business/update",
+        method: "PUT",
         body: businessData,
       }),
+      invalidatesTags: ["userDetails"], // ✅ Ensures `getUserDetails` and business info are refetched
     }),
   }),
 });
 
 // Export hooks
-export const { 
-  useGetUserDetailsQuery, 
-  useUpdateUserMutation, 
-  useUpdateBusinessMutation 
+export const {
+  useGetUserDetailsQuery,
+  useUpdateUserMutation,
+  useUpdateBusinessMutation,
 } = userApi;
