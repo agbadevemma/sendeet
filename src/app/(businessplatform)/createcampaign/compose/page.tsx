@@ -20,7 +20,7 @@ import ChevronLeft from "@/icons/chevron-left";
 import { useRouter } from "next/navigation";
 import secureLocalStorage from "react-secure-storage";
 import { uploadFile } from "@/lib/slices/uploadApi";
-import fileType from "@/images/filetype.svg"
+import fileType from "@/images/filetype.svg";
 import useLogout from "@/hooks/useLogout";
 
 type Props = {};
@@ -39,17 +39,26 @@ const Compose = (props: Props) => {
     actionButtons: string[];
   }
 
-  const storedData = secureLocalStorage.getItem("step2") as unknown as Step2Data | null;
+  const storedData = secureLocalStorage.getItem(
+    "step2"
+  ) as unknown as Step2Data | null;
 
   // const [value, setValue] = useState<string>("");
-  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>(storedData?.message ?? [""]);
-  console.log("secureLocalStorage.getItem(step2)", secureLocalStorage.getItem("step2"));
+  const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>(
+    storedData?.message ?? [""]
+  );
+  console.log(
+    "secureLocalStorage",
+    secureLocalStorage.getItem("step2")
+  );
 
   const handleChangeText = (index: number, value: string) => {
     const newtextEditorInputValues = [...textEditorInputValues];
     newtextEditorInputValues[index] = value; // Update the value at the specified index
     setTextEditorInputValues(newtextEditorInputValues);
   };
+
+
   const handleAddTextEditInput = () => {
     setTextEditorInputValues((prev) => [...prev, ""]); // Append an empty string for the new input
   };
@@ -57,15 +66,16 @@ const Compose = (props: Props) => {
   const [isModal, setisModal] = useState<boolean>(false);
 
   const [value, setValue] = useState<string>("");
+
   // State to store the input values as an array
-  const [inputValues, setInputValues] = useState<string[]>(storedData?.actionButtons ?? [""]);
+  const [inputValues, setInputValues] = useState<string[]>(
+    storedData?.actionButtons ?? [""]
+  );
 
   // Function to add a new input field
   const handleAddInput = () => {
     setInputValues((prev) => [...prev, ""]); // Append an empty string for the new input
   };
-
-
 
   // Function to handle input value change
   const handleInputChange = (index: number, value: string) => {
@@ -122,16 +132,16 @@ const Compose = (props: Props) => {
 
       formData.append("file", validFiles[0]);
       setUploading(true);
-      uploadFile(formData, setProgress, handleLogout)
+      uploadFile(formData, handleLogout, setProgress)
         .then((response) => {
           console.log("File uploaded successfully", response.data);
           setProgress(0);
-
         })
         .catch((error) => {
           console.error("Error uploading file", error);
           setProgress(0);
-        }).finally(() => {
+        })
+        .finally(() => {
           setUploading(false);
         });
     } else {
@@ -143,7 +153,7 @@ const Compose = (props: Props) => {
     if (files.length === 0) return;
 
     const reader = new FileReader();
-    reader.onloadend = async () => { };
+    reader.onloadend = async () => {};
   };
 
   const handleRemoveFile = (index: number) => {
@@ -203,11 +213,11 @@ const Compose = (props: Props) => {
     const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
     return `${sizeInMB} MB`;
   };
-  const router = useRouter()
+  const router = useRouter();
   type FileInterface = {
     url: string;
     dateTime: string;
-  }
+  };
   interface Step2Interface {
     message: Array<String>;
     uploadFiles: Array<FileInterface>;
@@ -216,16 +226,17 @@ const Compose = (props: Props) => {
   const handleNextPage = () => {
     const step2Data: Step2Interface = {
       message: textEditorInputValues,
-      uploadFiles: [{
-        "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-        "dateTime": "2024-11-18 21:28:47.644"
-      }],
-      actionButtons: inputValues
-
-    }
-    secureLocalStorage.setItem("step2", step2Data)
-    router.push("/createcampaign/schedule")
-  }
+      uploadFiles: [
+        {
+          url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+          dateTime: "2024-11-18 21:28:47.644",
+        },
+      ],
+      actionButtons: inputValues,
+    };
+    secureLocalStorage.setItem("step2", step2Data);
+    router.push("/createcampaign/schedule");
+  };
   return (
     <div>
       {/* modal  ${
@@ -234,13 +245,15 @@ const Compose = (props: Props) => {
 
       <div
         onClick={() => setisModal((prev) => !prev)}
-        className={`fixed p-2 lg:p-5 lg:pb-0 z-[100] bg-black/20 inset-0 flex justify-end modal transition-all duration-500  ${isModal ? "visible opacity-100" : "invisible opacity-0"
-          } `}
+        className={`fixed p-2 lg:p-5 lg:pb-0 z-[100] bg-black/20 inset-0 flex justify-end modal transition-all duration-500  ${
+          isModal ? "visible opacity-100" : "invisible opacity-0"
+        } `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`bg-white rounded-t-3xl min-h-full w-full lg:w-[49%]   p-6 pb-0 gap-y-[21px]  transition-all duration-500 ${isModal ? "translate-y-0" : "translate-y-full"
-            }`}
+          className={`bg-white rounded-t-3xl min-h-full w-full lg:w-[49%]   p-6 pb-0 gap-y-[21px]  transition-all duration-500 ${
+            isModal ? "translate-y-0" : "translate-y-full"
+          }`}
         >
           <div className="flex items-start mb-4 gap-5 pb-6 border-b border-b-grey-100 ">
             <Button
@@ -264,8 +277,7 @@ const Compose = (props: Props) => {
           2.Compose Message
         </p>
 
-
-        {typeof window !== undefined && (
+        {typeof window !== undefined &&
           textEditorInputValues.map((item, index) => (
             <div className="flex flex-col">
               <label
@@ -275,13 +287,13 @@ const Compose = (props: Props) => {
                 Message {index + 1}
               </label>
               <div className="flex flex-col gap-y-14 mb-10">
-
-                <TextEditor setValue={(value) => handleEditorInputChange(index, value)} value={textEditorInputValues[index]} />
-
+                <TextEditor
+                  setValue={(value) => handleEditorInputChange(index, value)}
+                  value={textEditorInputValues[index]}
+                />
               </div>
             </div>
-          ))
-        )}
+          ))}
 
         <div className="mt-14">
           <div
@@ -293,66 +305,79 @@ const Compose = (props: Props) => {
         </div>
         <div className="mt-8 flex flex-col gap-3">
           <p className="text-[#344054] text-md font-medium">Upload files</p>
-          {uploading ? <div
-
-            className={`w-full py-7 px-6 rounded-lg  border-dashed border-[1.5px]  flex flex-col items-center     
- bg-[#B0E5FD]/[0.2] border-[#B0E5FD] pb-64  max-h-[264px]`}
-          >
-            <Image src={fileType} alt="pdf" className="mt-7" />
-            <span className="text-center font-semibold text-md text-grey-400 mt-6">{progress}%</span>
-            <div className="w-full h-[6px] mt-2 max-w-[313px] bg-[#B0E5FD]  rounded-full">
-              <div style={{
-                width: `${progress}%`
-              }} className=" h-[6px] rounded-full bg-[#00AAF7] "></div>
-            </div>
-            <span className="text-center text-sm font-semibold text-[#1D2739] mt-4">Uploading Document...</span>
-            <span className="text-center text-xs text-grey-400 mt-2">October Issue 324.pdf</span>
-
-          </div> : <div
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-            className={`w-full py-7 px-6 rounded-lg border-dashed border-[1.5px]  flex flex-col items-center     ${dragging
-              ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
-              : "border-[#D0D5DD] border-dashed  max-h-[264px] h-full"
-              }`}
-          >
-            <div className="rounded-full h-14 w-14 bg-[#F0F2F5] flex items-center justify-center">
-              <CloudUpload color="#475367" />
-            </div>
-            <div className="mt-4 flex items-center gap-1">
-              <p
-                className="text-primary-600 text-sm font-semibold cursor-pointer"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                Click to upload
-                <input
-                  type="file"
-                  id="file-upload"
-                  ref={fileInputRef}
-                  className="hidden"
-                  accept="application/pdf"
-                  onChange={handleFileChange}
-                  multiple
-                />
-              </p>
-              <span className="text-[#475367]  text-sm">or drag and drop</span>
-            </div>
-            <p className="text-[12px]  font-normal text-[#98A2B3]">
-              PDF, DOC, SVG, PNG, JPG or GIF (max. 10MB)
-            </p>
-            <div className="flex w-full  items-center gap-2 mt-4">
-              <div className="h-px w-full bg-[#F0F2F5]"></div>
-              <span className="text-xs font-semibold text-[#98A2B3]">OR</span>
-              <div className="h-px w-full  bg-[#F0F2F5]"></div>
-            </div>
-            <p
-              onClick={() => fileInputRef.current?.click()}
-              className="mt-4 text-primary-600 cursor-pointer"
+          {uploading ? (
+            <div
+              className={`w-full py-7 px-6 rounded-lg  border-dashed border-[1.5px]  flex flex-col items-center bg-[#B0E5FD]/[0.2] border-[#B0E5FD] pb-64  max-h-[264px]`}
             >
-              Browse files
-            </p>
-          </div>}
+              <Image src={fileType} alt="pdf" className="mt-7" />
+              <span className="text-center font-semibold text-md text-grey-400 mt-6">
+                {progress}%
+              </span>
+              <div className="w-full h-[6px] mt-2 max-w-[313px] bg-[#B0E5FD]  rounded-full">
+                <div
+                  style={{
+                    width: `${progress}%`,
+                  }}
+                  className=" h-[6px] rounded-full bg-[#00AAF7] "
+                ></div>
+              </div>
+              <span className="text-center text-sm font-semibold text-[#1D2739] mt-4">
+                Uploading Document...
+              </span>
+              <span className="text-center text-xs text-grey-400 mt-2">
+                October Issue 324.pdf
+              </span>
+            </div>
+          ) : (
+            <div
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={`w-full py-7 px-6 rounded-lg border-dashed border-[1.5px]  flex flex-col items-center     ${
+                dragging
+                  ? "border-solid bg-[#B0E5FD] border-[#E6F7FE]/[0.5]"
+                  : "border-[#D0D5DD] border-dashed  max-h-[264px] h-full"
+              }`}
+            >
+              <div className="rounded-full h-14 w-14 bg-[#F0F2F5] flex items-center justify-center">
+                <CloudUpload color="#475367" />
+              </div>
+              <div className="mt-4 flex items-center gap-1">
+                <p
+                  className="text-primary-600 text-sm font-semibold cursor-pointer"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Click to upload
+                  <input
+                    type="file"
+                    id="file-upload"
+                    ref={fileInputRef}
+                    className="hidden"
+                    accept="application/pdf"
+                    onChange={handleFileChange}
+                    multiple
+                  />
+                </p>
+                <span className="text-[#475367]  text-sm">
+                  or drag and drop
+                </span>
+              </div>
+              <p className="text-[12px]  font-normal text-[#98A2B3]">
+                PDF, DOC, SVG, PNG, JPG or GIF (max. 10MB)
+              </p>
+              <div className="flex w-full  items-center gap-2 mt-4">
+                <div className="h-px w-full bg-[#F0F2F5]"></div>
+                <span className="text-xs font-semibold text-[#98A2B3]">OR</span>
+                <div className="h-px w-full  bg-[#F0F2F5]"></div>
+              </div>
+              <p
+                onClick={() => fileInputRef.current?.click()}
+                className="mt-4 text-primary-600 cursor-pointer"
+              >
+                Browse files
+              </p>
+            </div>
+          )}
           {files.length > 0 && (
             <div className="flex gap-2 items-center mt-3">
               <span> Uploaded Files</span>
@@ -482,7 +507,6 @@ const Compose = (props: Props) => {
               className="font-semibold text-md"
               onClick={() => handleNextPage()}
             />
-
           </div>
         </div>
       </div>

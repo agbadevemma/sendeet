@@ -75,7 +75,7 @@ export const validationSchemaCampaignSetup = Yup.object().shape({
 export const validationSchemaContactSetup = Yup.object({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
-  countryCode: Yup.string()
+  dialCode: Yup.string()
     .required("Country code is required"),
   phoneNumber: Yup.string()
     .required("Phone number is required")
@@ -96,10 +96,10 @@ export const validationSchemaContactSetup = Yup.object({
 
 
 export const validationSchemaUserDetials = Yup.object({
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
-  email: Yup.string().email("Invalid email format").required("Email is required"),
-  phoneNumber: Yup.string().required("Phone number is required"),
-  companyName: Yup.string().required("Company name is required"),
+  firstName: Yup.string(),
+  lastName: Yup.string(),
+  email: Yup.string().email("Invalid email format"),
+  brn: Yup.string(),
+  companyName: Yup.string(),
 });
 

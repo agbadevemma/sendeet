@@ -32,7 +32,10 @@ import SelectField from "@/components/SelectField";
 import DeleteModal from "@/components/DeleteModal";
 import TagsModal from "@/components/TagsModal";
 import EditContact from "@/components/EditContact";
-import { useDeleteContactMutation, useGetContactsQuery } from "@/lib/slices/contactApi";
+import {
+  useDeleteContactMutation,
+  useGetContactsQuery,
+} from "@/lib/slices/contactApi";
 import Spinner from "@/components/spinner";
 import { toast } from "react-toastify";
 import UserCross from "@/icons/user-cross";
@@ -47,18 +50,23 @@ interface Option {
 
 const Audience = (props: Props) => {
   const dispatch = useAppDispatch();
-  const { data, error, isLoading: isContactsLoading } = useGetContactsQuery(undefined);
-
+  const {
+    data,
+    error,
+    isLoading: isContactsLoading,
+  } = useGetContactsQuery(undefined);
 
   console.log("contacts", error);
   const { handleLogout } = useLogout();
   useEffect(() => {
-    setAudienceData(data)
+    setAudienceData(data);
     if (error) {
       if ("status" in error) {
         // Now TypeScript knows error is FetchBaseQueryError
         const errorMessage =
-          error.data && typeof error.data === "object" && "message" in error.data
+          error.data &&
+          typeof error.data === "object" &&
+          "message" in error.data
             ? (error.data as { message?: string }).message
             : "An unexpected error occurred";
 
@@ -79,7 +87,8 @@ const Audience = (props: Props) => {
               </div>
             </div>,
             {
-              className: "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
+              className:
+                "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
               progressClassName: "bg-red-200",
               icon: false,
             }
@@ -101,7 +110,8 @@ const Audience = (props: Props) => {
               </div>
             </div>,
             {
-              className: "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
+              className:
+                "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
               progressClassName: "bg-red-200",
               icon: false,
             }
@@ -111,8 +121,7 @@ const Audience = (props: Props) => {
         console.error("Unexpected error format:", error);
       }
     }
-
-  }, [data, error])
+  }, [data, error]);
   const [selectedIndex, setselectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -121,9 +130,7 @@ const Audience = (props: Props) => {
   const [isOpenEditContact, setIsOpenEditContact] = useState<boolean>(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
   const [isOpenTagModal, setIsOpenTagModal] = useState<boolean>(false);
-  const [audienceData, setAudienceData] =
-    useState<AudienceData2[]>([]);
-
+  const [audienceData, setAudienceData] = useState<AudienceData2[]>([]);
 
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const isAllSelected =
@@ -163,7 +170,11 @@ const Audience = (props: Props) => {
   };
 
   const getFilteredOrganis = () => {
-    const searchableFields: (keyof AudienceData2)[] = ["firstName", "lastName", "phoneNumber"];
+    const searchableFields: (keyof AudienceData2)[] = [
+      "firstName",
+      "lastName",
+      "phoneNumber",
+    ];
 
     return audienceData?.filter((organization) => {
       // Check if any of the specified fields match the search query
@@ -240,35 +251,48 @@ const Audience = (props: Props) => {
     };
   }, []);
 
-  if (isContactsLoading) return (<div className="h-screen w-full flex items-center justify-center"><Spinner /></div>);
+  if (isContactsLoading)
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
   // if (error) return <p>Error loading contacts</p>;
   return (
     <div>
       <div>
         {/* Modals */}
-        {isOpenAddContact && <AddContact setIsOpen={setIsOpenAddContact} isOpen={isOpenAddContact} />}
+        {isOpenAddContact && (
+          <AddContact
+            setIsOpen={setIsOpenAddContact}
+            isOpen={isOpenAddContact}
+          />
+        )}
         {isOpen && <BulkImport isOpen={isOpen} setIsOpen={setIsOpen} />}
-        {isOpenDeleteModal && <DeleteModal
-          setIsOpen={setIsOpenDeleteModal}
-          selectedItems={selectedItems}
-          isOpen={isOpenDeleteModal}
-          setSelectedItems={setSelectedItems}
-          selectedIndex={selectedIndex}
-        />}
+        {isOpenDeleteModal && (
+          <DeleteModal
+            setIsOpen={setIsOpenDeleteModal}
+            selectedItems={selectedItems}
+            isOpen={isOpenDeleteModal}
+            setSelectedItems={setSelectedItems}
+            selectedIndex={selectedIndex}
+          />
+        )}
         {/* {isOpenTagModal && <TagsModal setIsOpen={setIsOpenTagModal} isOpen={isOpenTagModal} setHighlightedItems={setSelectedItems} selectedIndex={selectedIndex} />} */}
-        {isOpenEditContact && <EditContact
-          setIsOpen={setIsOpenEditContact}
-          setIsOpenDeleteModal={setIsOpenDeleteModal}
-          isOpen={isOpenEditContact}
-          selectedIndex={selectedIndex}
-          setSelectedItems={setSelectedItems}
-        />
-        }
+        {isOpenEditContact && (
+          <EditContact
+            setIsOpen={setIsOpenEditContact}
+            setIsOpenDeleteModal={setIsOpenDeleteModal}
+            isOpen={isOpenEditContact}
+            selectedIndex={selectedIndex}
+            setSelectedItems={setSelectedItems}
+          />
+        )}
         <div>
           {/* main Page */}
           <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+              <div className=" flex items-center bg-white justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
                 <UserGroup color="black" />
               </div>
               <div className="flex flex-col gap-1">
@@ -349,9 +373,7 @@ const Audience = (props: Props) => {
           )}
           <div className="rounded-xl mt-7 px-6  h-full w-full border bg-white border-[#E4E7EC] ">
             <div className="flex flex-col lg:flex-row lg:gap-4  py-4 gap-8 lg:items-center  justify-between">
-              <div className="text-lg font-medium">
-                {data?.length} Audience
-              </div>
+              <div className="text-lg font-medium">{data?.length} Audience</div>
 
               <div className="flex gap items-center gap-x-[18px] ">
                 <div ref={dropdownRef} className="relative">
@@ -365,8 +387,9 @@ const Audience = (props: Props) => {
                   />
 
                   <div
-                    className={`w-[362px] ${isOpenFilter ? "visible" : "invisible"
-                      } border border-[#E4E7EC] right-0 shadow-xs  py-3 rounded-2xl absolute bg-white mt-4`}
+                    className={`w-[362px] ${
+                      isOpenFilter ? "visible" : "invisible"
+                    } border border-[#E4E7EC] right-0 shadow-xs  py-3 rounded-2xl absolute bg-white mt-4`}
                   >
                     <div
                       className="w-full border-b flex items-center justify-between  px-4 
@@ -401,8 +424,6 @@ const Audience = (props: Props) => {
                         value={selectedStatus}
                         placeholder="Select status"
                       />
-
-                      
                     </div>
 
                     <div className="mt-4 px-4 gap-4 pt-4 border-t flex  w-full items-center">
@@ -455,11 +476,12 @@ const Audience = (props: Props) => {
                         <span>Name</span>
                         <div
                           onClick={() => handleSort("name")}
-                          className={` transition-transform duration-300   ${sortConfig?.key === "name" &&
+                          className={` transition-transform duration-300   ${
+                            sortConfig?.key === "name" &&
                             sortConfig.direction === "asc"
-                            ? "transform rotate-180"
-                            : ""
-                            }`}
+                              ? "transform rotate-180"
+                              : ""
+                          }`}
                         >
                           <ArrowUp color={"#5D6679"} />
                         </div>
@@ -470,11 +492,12 @@ const Audience = (props: Props) => {
                         Phone number
                         <div
                           onClick={() => handleSort("phoneNumber")}
-                          className={` transition-transform duration-300   ${sortConfig?.key === "phoneNumber" &&
+                          className={` transition-transform duration-300   ${
+                            sortConfig?.key === "phoneNumber" &&
                             sortConfig.direction === "asc"
-                            ? "transform rotate-180"
-                            : ""
-                            }`}
+                              ? "transform rotate-180"
+                              : ""
+                          }`}
                         >
                           <ArrowUp color={"#5D6679"} />
                         </div>
@@ -483,14 +506,15 @@ const Audience = (props: Props) => {
 
                     <th className="p-2 ">
                       <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                      Last Engagement 
+                        Last Engagement
                         <div
                           onClick={() => handleSort("tags")}
-                          className={` transition-transform duration-300   ${sortConfig?.key === "tags" &&
+                          className={` transition-transform duration-300   ${
+                            sortConfig?.key === "tags" &&
                             sortConfig.direction === "asc"
-                            ? "transform rotate-180"
-                            : ""
-                            }`}
+                              ? "transform rotate-180"
+                              : ""
+                          }`}
                         >
                           <ArrowUp color={"#5D6679"} />
                         </div>
@@ -501,11 +525,12 @@ const Audience = (props: Props) => {
                         Subscription
                         <div
                           onClick={() => handleSort("subscription")}
-                          className={` transition-transform duration-300   ${sortConfig?.key === "subscription" &&
+                          className={` transition-transform duration-300   ${
+                            sortConfig?.key === "subscription" &&
                             sortConfig.direction === "asc"
-                            ? "transform rotate-180"
-                            : ""
-                            }`}
+                              ? "transform rotate-180"
+                              : ""
+                          }`}
                         >
                           <ArrowUp color={"#5D6679"} />
                         </div>
@@ -534,11 +559,13 @@ const Audience = (props: Props) => {
                           {audience.firstName + " " + audience.lastName}
                         </td>
                         <td className="text-sm font-medium text-grey-800 p-2 pr-8">
-                          {audience.phoneNumber.replace(/^.*\+/, "+").replace(/-/g, "")}
+                          {audience.phoneNumber
+                            .replace(/^.*\+/, "+")
+                            .replace(/-/g, "")}
                         </td>
 
                         <td className="text-sm font-medium text-grey-800 p-2  ">
-                        02/10/24
+                          02/10/24
                           {/* <div className="flex gap-2 items-center">
                             {audience?.tags.map((tag) => (
                               <span className="flex text-xs items-center gap-2 py-[2px] pl-2 pr-[10px] bg-[#EFF8FF] text-[#175CD3] rounded-full">
@@ -549,19 +576,24 @@ const Audience = (props: Props) => {
                         </td>
                         <td className="text-sm font-medium p-2">
                           <div
-                            className={`flex  w-fit items-center gap-[6px]  py-[2px] pl-2 pr-[10px] rounded-2xl ${audience.subscription == "Opted In"
-                              ? "bg-success-50 text-success-700"
-                              : "bg-[#F2F4F7] text-[#344054]"
-                              }`}
+                            className={`flex  w-fit items-center gap-[6px]  py-[2px] pl-2 pr-[10px] rounded-2xl ${
+                              audience.subscription == "Opted In"
+                                ? "bg-success-50 text-success-700"
+                                : "bg-[#F2F4F7] text-[#344054]"
+                            }`}
                           >
                             {" "}
                             <div
-                              className={`h-2 w-2 rounded-full  ${audience.subscription == "Opted In"
-                                ? " bg-success-500"
-                                : "bg-grey-500"
-                                }`}
+                              className={`h-2 w-2 rounded-full  ${
+                                audience.subscription == "Opted In"
+                                  ? " bg-success-500"
+                                  : "bg-grey-500"
+                              }`}
                             ></div>{" "}
-                            <div className="text-sm "> {audience.subscription ?? "Opted Out"}</div>
+                            <div className="text-sm ">
+                              {" "}
+                              {audience.subscription ?? "Opted Out"}
+                            </div>
                           </div>
                         </td>
                         <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
@@ -569,12 +601,17 @@ const Audience = (props: Props) => {
                             size="sm"
                             icon_style="icon-only"
                             onClick={() => {
-                              setIsOpenEditContact(true)
+                              setIsOpenEditContact(true);
                               // console.log("sm", selectedIndex);
                               setselectedIndex(audience.id);
-
                             }}
-                            iconComponent={<PencilEdit color="#858D9D" height={16} width={16} />}
+                            iconComponent={
+                              <PencilEdit
+                                color="#858D9D"
+                                height={16}
+                                width={16}
+                              />
+                            }
                             text="Edit"
                           />
 
@@ -590,10 +627,10 @@ const Audience = (props: Props) => {
                             onClick={() => {
                               setIsOpenDeleteModal(true);
                               setselectedIndex(audience.id);
-
-
                             }}
-                            iconComponent={<Bin color="#858D9D" height={16} width={16} />}
+                            iconComponent={
+                              <Bin color="#858D9D" height={16} width={16} />
+                            }
                             icon_style="icon-only"
                           />
                         </td>

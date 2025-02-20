@@ -1,20 +1,26 @@
 import axios, { AxiosProgressEvent } from "axios";
 import secureLocalStorage from "react-secure-storage";
-import  useLogout  from '@/hooks/useLogout'; // Import useLogout hook
+import useLogout from "@/hooks/useLogout"; // Import useLogout hook
 
 interface UserData {
   token: string;
 }
 
 // Utility function to get the token
-const getAuthToken = secureLocalStorage.getItem("userData") as unknown as UserData | null;
+const getAuthToken = secureLocalStorage.getItem(
+  "userData"
+) as unknown as UserData | null;
 
-export const uploadFile = async (file: FormData, onProgress: (percentage: number) => void, handleLogout: () => void) => {
+export const uploadFile = async (
+  file: FormData,
+  handleLogout: () => void,
+  onProgress?: (percentage: number) => void,
+) => {
   const token = getAuthToken?.token ?? "";
 
   try {
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/upload`, // Replace with your API endpoint
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/upload`,
       file,
       {
         headers: {
@@ -26,13 +32,15 @@ export const uploadFile = async (file: FormData, onProgress: (percentage: number
             const percentage = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
-            onProgress(percentage); // Call the progress callback
+            if (onProgress) {
+              onProgress(percentage);
+            } // Call the progress callback
           }
         },
       }
     );
     return response.data;
-  } catch (error:any) {
+  } catch (error: any) {
     // Check if the error is a 401 Unauthorized
     if (error.response?.status === 401) {
       console.log("Unauthorized! Logging out...");

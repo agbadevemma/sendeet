@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import profile from "../images/profile.jpg";
+import profile from "../images/dp.jpg";
 
 import Building5 from "@/icons/building-5";
 import Settings from "@/icons/settings";
@@ -10,6 +10,7 @@ import { useLogoutMutation } from "@/lib/slices/authApi";
 import SuccessToast2 from "./SuccessToast2";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useGetUserDetailsQuery } from "@/lib/slices/userApi";
 type Props = {};
 
 const Avatar = (props: Props) => {
@@ -60,13 +61,17 @@ const Avatar = (props: Props) => {
       console.log("error", error);
     }
   }
+    const { data } = useGetUserDetailsQuery(undefined);
   return (
     <div>
       {" "}
       <div className="relatives" ref={dropdownRef}>
         <Image
-          src={profile}
-          alt=""
+           src={data?.profilePicture ?? profile}
+           alt="profile"
+           height={50}
+           
+           width={50}
           className="rounded-full h-10 w-10 object-cover cursor-pointer"
           onClick={toggleDropdown}
         />
@@ -74,15 +79,18 @@ const Avatar = (props: Props) => {
           <div className="shadow-lg absolute w-[240px] rounded-lg flex-col right-2 mt-2 bg-white z-[80] cursor-pointer">
             <div className="flex w-full gap-4 px-4  py-[12px] border-b border-b-grey-50 ">
               <Image
-                src={profile}
-                alt=""
+                src={data?.profilePicture ?? profile}
+                alt="profile"
+                height={50}
+                
+                width={50}
                 className="rounded-full h-10 w-10 object-cover cursor-pointer"
               />
               <div className="flex flex-col ">
                 <p className="text-sm font-medium text-[#344054]">
-                  Tunde Stark
+                {data?.firstName} {data?.lastName}
                 </p>
-                <p className="text-xs  text-[#667085]">tunde@business.com</p>
+                <p className="text-xs  text-[#667085]">{data?.email}</p>
               </div>
             </div>
 

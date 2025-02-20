@@ -29,6 +29,7 @@ const DeleteModal: React.FC<Props> = ({
     try {
       if (selectedItems.length === 0) {
         await deleteContact(selectedIndex).unwrap();
+        setIsOpen(false)
       } else {
         await Promise.all(selectedItems.map((id) => deleteContact(id).unwrap()));
         setSelectedItems([]); // Reset selection after deletion
@@ -86,7 +87,7 @@ const DeleteModal: React.FC<Props> = ({
               <Button
 
                 onClick={() => {
-                  setIsOpen(false);
+                  // setIsOpen(false);
                   setSelectedItems([]);
                   handleDelete();
                 }}

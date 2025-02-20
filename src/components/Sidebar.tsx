@@ -1,3 +1,4 @@
+"use client"
 import React, { Dispatch, SetStateAction } from "react";
 import logo from "../images/Logo.png";
 import dashlogo from "../images/dashlogo.svg";
@@ -11,6 +12,7 @@ import BarChartv from "@/icons/bar-chart-v";
 import Settings from "@/icons/settings";
 import Messages from "@/icons/messages";
 import IconLink from "./IconLink";
+import { useGetUserDetailsQuery } from "@/lib/slices/userApi";
 
 type Props = {
   isOpen: boolean;
@@ -18,6 +20,9 @@ type Props = {
 };
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
+      const { data } = useGetUserDetailsQuery(undefined);
+      console.log("data",data);
+      
   return (
     <div className=" bg-white">
       <div
@@ -39,9 +44,9 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
           <div className="w-full px-4 mt-5">
             <div className="mx-auto rounded-lg gap-4 border-grey-50 bg-[#F9FAFB] shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.10)] border border-solid p-3 flex items-center justify-between cursor-pointer">
               <div className="flex items-center">
-                <Image src={dashlogo} alt="logo" />
+                <Image src={data?.companyLogo??dashlogo} alt="logo" height={40} width={40} className="rounded-lg"/>
                 <div className="flex flex-col ml-3">
-                  <p className="text-xs font-semibold">Testing Company</p>
+                  <p className="text-xs font-semibold">{data?.business[0].companyName??"Testing Company"}</p>
                   <p className="text-xs font-semibold text-grey-600">
                     Team - 1 Member
                   </p>
