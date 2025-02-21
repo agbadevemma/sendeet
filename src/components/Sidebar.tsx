@@ -21,7 +21,7 @@ type Props = {
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
       const { data } = useGetUserDetailsQuery(undefined);
-      console.log("data",data);
+      // console.log("data",data);
       
   return (
     <div className=" bg-white">

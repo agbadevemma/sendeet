@@ -9,7 +9,7 @@ export function middleware(req: NextRequest) {
     const adminToken = req.cookies.get("adminToken")?.value;
     const userToken = req.cookies.get("token")?.value;
     const userTokens = req.cookies.get("userToken")?.value;
-    console.log("user", userTokens);
+    // console.log("user", userTokens);
     
 
     // Redirect authenticated users from /login or /signup to /dashboard

@@ -41,7 +41,7 @@ const LoginPage = (props: Props) => {
       console.log("Form data:", values);
       try {
         const data = await login(values).unwrap();
-        console.log("data", data);
+        // console.log("data", data);
 
         secureLocalStorage.setItem("userData", data?.data?.data)
         Cookies.set("userToken", data?.data?.data)
