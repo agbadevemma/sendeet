@@ -17,6 +17,7 @@ import { useFormik } from "formik";
 import { validationSchemaUserDetials } from "@/utils/validation";
 import {
   useGetUserDetailsQuery,
+  useUpdateBusinessMutation,
   useUpdateUserMutation,
 } from "@/lib/slices/userApi";
 import Spinner from "@/components/spinner";
@@ -82,8 +83,9 @@ const SettingsPage = (props: Props) => {
   };
 
   const { data, isLoading } = useGetUserDetailsQuery(undefined);
-  const [updateUser, { isLoading: updating, isError: error }] =
-    useUpdateUserMutation();
+  const [updateUser, { isLoading: updating }] = useUpdateUserMutation();
+  const [updateBusiness, { isLoading: udatingBusiness }] =
+    useUpdateBusinessMutation();
 
   const formik = useFormik({
     initialValues: {
@@ -104,6 +106,10 @@ const SettingsPage = (props: Props) => {
           lastName: values.lastName,
           companyLogo: uploadedCompanyImage,
           profilePicture: uploadedProfileImage,
+        }).unwrap();
+        await updateBusiness({
+          companyName: values.companyName,
+          businessRegistrationNumber: values.brn,
         }).unwrap();
         console.log("Update Success:", response);
         // window.location.reload();
@@ -266,12 +272,16 @@ const SettingsPage = (props: Props) => {
               }
             />
             <InputField
-              label="WhatsApp Business Number"
+              label="Business Registration Number"
               inputType=""
               placeholder=""
+              name="brn"
               className="w-full !h-[56px]"
               value={formik.values.brn}
-              onChange={formik.handleChange}
+              onChange={(e) => {
+                const onlyNumbers = e.target.value.replace(/\D/g, ""); // ✅ Remove non-numeric characters
+                formik.setFieldValue("brn", onlyNumbers);
+              }}
               onBlur={formik.handleBlur}
               error={Boolean(formik.touched.brn && formik.errors.brn)}
               errorText={

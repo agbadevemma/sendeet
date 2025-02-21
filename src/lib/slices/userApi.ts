@@ -14,14 +14,8 @@ interface UpdateUserPayload {
 
 interface UpdateBusinessPayload {
   companyName: string;
-  address: string;
-  website: string;
+
   businessRegistrationNumber: string;
-  industry: string;
-  noOfEmployees: string;
-  noOfSubscribers: string;
-  apiKey: string;
-  fullName: string;
 }
 
 export const userApi = createApi({
@@ -59,7 +53,7 @@ export const userApi = createApi({
     }),
     updateBusiness: builder.mutation<any, UpdateBusinessPayload>({
       query: (businessData) => ({
-        url: "business/update",
+        url: "business",
         method: "PUT",
         body: businessData,
       }),

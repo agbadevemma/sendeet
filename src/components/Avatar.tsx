@@ -11,6 +11,7 @@ import SuccessToast2 from "./SuccessToast2";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useGetUserDetailsQuery } from "@/lib/slices/userApi";
+import Link from "next/link";
 type Props = {};
 
 const Avatar = (props: Props) => {
@@ -94,14 +95,14 @@ const Avatar = (props: Props) => {
               </div>
             </div>
 
-            <div className="flex w-full gap-4 px-4  py-[12px] items-center ">
+            <Link href={'/dashboard/settings'}     onClick={toggleDropdown}className="flex w-full gap-4 px-4  py-[12px] items-center ">
               <Building5 color="#858D9D" width={20} height={20} />
               <p className="text-sm text-grey-500">Business Profile</p>
-            </div>
-            <div className="flex w-full gap-4 px-4  py-[12px] items-center ">
+            </Link>
+            <Link href={'/dashboard/settings'}     onClick={toggleDropdown} className="flex w-full gap-4 px-4  py-[12px] items-center ">
               <Settings color="#858D9D" width={20} height={20} />
               <p className="text-sm text-grey-500">Settings</p>
-            </div>
+            </Link>
             <div onClick={() => { toggleDropdown();
                handleLogout() }} className="flex w-full gap-4 px-4  border-t border-t-grey-50 py-[12px] items-center ">
               <Logout color="#858D9D" width={20} height={20} />
