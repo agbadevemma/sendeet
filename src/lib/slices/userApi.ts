@@ -1,5 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import secureLocalStorage from "react-secure-storage";
+import baseQueryWithAuth from "./interceptor";
 
 interface UserData {
   token: string;
@@ -18,30 +19,35 @@ interface UpdateBusinessPayload {
   businessRegistrationNumber: string;
 }
 
+interface UpdatePasswordPayload {
+  currentPassword: string;
+  newPassword: string;
+}
+
+interface NotificationPreferences {
+  lowCreditsPush: boolean;
+  lowCreditsEmail: boolean;
+  remindersPush: boolean;
+  remindersEmail: boolean;
+  campaignCompletionPush: boolean;
+  campaignCompletionEmail: boolean;
+}
 export const userApi = createApi({
   reducerPath: "userApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/`,
-    prepareHeaders: (headers) => {
-      const getAuthToken = secureLocalStorage.getItem(
-        "userData"
-      ) as unknown as UserData | null;
-      if (getAuthToken?.token) {
-        headers.set("authorization", `Bearer ${getAuthToken?.token ?? ""}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery:baseQueryWithAuth,
   tagTypes: ["userDetails"], // ✅ Define cache tags
   endpoints: (builder) => ({
     getUserDetails: builder.query({
-      query: () => "user",
+      query: (): FetchArgs => ({
+        url: "user", 
+        method: "GET",
+      }),
       transformResponse: (response: {
         success: boolean;
         message: string;
         data: any;
       }) => response.data,
-      providesTags: ["userDetails"], // ✅ Provides "User" cache tag
+      providesTags: ["userDetails"], 
     }),
     updateUser: builder.mutation<any, UpdateUserPayload>({
       query: (userData) => ({
@@ -49,7 +55,7 @@ export const userApi = createApi({
         method: "PUT",
         body: userData,
       }),
-      invalidatesTags: ["userDetails"], // ✅ Invalidates and triggers `getUserDetails` refetch
+      invalidatesTags: ["userDetails"],
     }),
     updateBusiness: builder.mutation<any, UpdateBusinessPayload>({
       query: (businessData) => ({
@@ -57,7 +63,29 @@ export const userApi = createApi({
         method: "PUT",
         body: businessData,
       }),
-      invalidatesTags: ["userDetails"], // ✅ Ensures `getUserDetails` and business info are refetched
+      invalidatesTags: ["userDetails"], 
+    }),
+    updatePassword: builder.mutation<any, UpdatePasswordPayload>({
+      query: (passwordData) => ({
+        url: "user/update-password", 
+        method: "PUT",
+        body: passwordData,
+      }),
+    }),
+    getNotificationSettings: builder.query({
+      query:(): FetchArgs => ({
+        url: "user/notification-settings", 
+        method: "GET",
+      }),
+     
+    }),
+    updateNotificationPreferences: builder.mutation<void, NotificationPreferences>({
+      query: (preferences) => ({
+        url: "user/notification-settings",
+        method: "PUT",
+        body: preferences,
+      }),
+     
     }),
   }),
 });
@@ -67,4 +95,7 @@ export const {
   useGetUserDetailsQuery,
   useUpdateUserMutation,
   useUpdateBusinessMutation,
+  useUpdatePasswordMutation,
+  useUpdateNotificationPreferencesMutation,
+  useGetNotificationSettingsQuery
 } = userApi;
