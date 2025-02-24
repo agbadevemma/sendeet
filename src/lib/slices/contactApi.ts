@@ -15,7 +15,7 @@ export const contactApi = createApi({
   baseQuery: baseQueryWithAuth, // ✅ Uses shared baseQueryWithAuth
   tagTypes: ["Contacts"],
   endpoints: (builder) => ({
-    getContacts: builder.query<Contact[], void>({
+    getContacts: builder.query<any, void>({
       query: () => ({ url: "contact" }),
       transformResponse: (response: { success: boolean; message: string; data: Contact[] }) =>
         response.data,
