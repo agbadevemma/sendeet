@@ -67,7 +67,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   onClick={() => setIsOpenDropDown(false)}
                 />
                 <IconLink
-                  href="/admin/dashboard/campaigns"
+                  href="/admin/dashboard/notifications"
                   IconComponent={BellBorder}
                   label="Notifications"
                   onClick={() => setIsOpenDropDown(false)}

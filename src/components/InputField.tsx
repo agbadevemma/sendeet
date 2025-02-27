@@ -21,6 +21,7 @@ type Props = {
   size?: "sm" | "lg";
   disabled?: boolean;
   icon_style?: "leading-icon" | "trailing icon";
+  labelClassName?:string
 };
 
 const InputField = ({
@@ -42,6 +43,7 @@ const InputField = ({
   className,
   inputclassName,
   disabled = false,
+  labelClassName
 }: Props) => {
   return (
     <div className={``}>
@@ -49,7 +51,7 @@ const InputField = ({
       <div className={`flex flex-col gap-1 group `}>
         <label
           htmlFor=""
-          className={`text-sm lg:text-md ${
+          className={`text-sm lg:text-md ${labelClassName} ${
             size === "sm" ? "font-medium" : "font-normal"
           }`}
         >

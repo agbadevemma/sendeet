@@ -13,6 +13,7 @@ import Logout from "@/icons/logout";
 import Notifications from "../Notifications";
 import SearchInput from "../SearchInput";
 import Avatar from "../Avatar";
+import AdminAvatar from "./AdminAvatar";
 
 
 type Props = {
@@ -43,7 +44,8 @@ const Header = ({ setIsOpen }: Props) => {
             iconComponent={<LightingBorderIcon color="black" />}
           /> */}
           <Notifications/>
-         <Avatar />
+         {/* <Avatar /> */}
+         <AdminAvatar />
         </div>
       </div>
     </div>

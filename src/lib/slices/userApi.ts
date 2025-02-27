@@ -35,7 +35,7 @@ interface NotificationPreferences {
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery:baseQueryWithAuth,
-  tagTypes: ["userDetails"], // ✅ Define cache tags
+  tagTypes: ["userDetails"], 
   endpoints: (builder) => ({
     getUserDetails: builder.query({
       query: (): FetchArgs => ({

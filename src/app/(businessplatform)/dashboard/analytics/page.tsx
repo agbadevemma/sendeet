@@ -315,7 +315,7 @@ const Analytics = (props: Props) => {
                     text="Open Rate"
                   />
                   {isFirstDropdownOpen && (
-                    <div className="w-[15rem] mt-2 bg-white absolute drop-shadow-[0px_1px_2px_rgba(16,24,40,0.05)] border-[0.9px] border-[#F0F1F3] right-0 rounded-[10px] p-2 flex flex-col gap-2 z-50">
+                    <div className=" mt-2 bg-white absolute drop-shadow-[0px_1px_2px_rgba(16,24,40,0.05)] border-[0.9px] border-[#F0F1F3] right-0 rounded-[10px] p-2 flex flex-col gap-2 z-50">
                       {[
                         "Total Messages",
                         "Delivered",
@@ -329,7 +329,7 @@ const Analytics = (props: Props) => {
                       ].map((item) => (
                         <div
                           key={item}
-                          className="text-[#383E49] font-normal text-[13px] rounded-lg cursor-pointer whitespace-nowrap px-[10px] py-2 hover:bg-[#F9FAFB]"
+                          className="text-[#383E49] text-nowrap font-normal text-[13px] rounded-lg cursor-pointer whitespace-nowrap px-[10px] py-2 hover:bg-[#F9FAFB]"
                         >
                           {item}
                         </div>
@@ -347,12 +347,12 @@ const Analytics = (props: Props) => {
                     text="7 Days"
                   />
                   {isSecondDropdownOpen && (
-                    <div className="w-32 mt-2 bg-white absolute drop-shadow-[0px_1px_2px_rgba(16,24,40,0.05)] border-[0.9px] border-[#F0F1F3] rounded-[10px] p-2 flex flex-col gap-2 z-50">
+                    <div className="mt-2 bg-white absolute drop-shadow-[0px_1px_2px_rgba(16,24,40,0.05)] border-[0.9px] border-[#F0F1F3] rounded-[10px] p-2 flex flex-col gap-2 z-50">
                       {["7 Days", "30 Days", "6 Months", "12 Months"].map(
                         (item) => (
                           <div
                             key={item}
-                            className="text-[#383E49] font-normal text-[13px]  rounded-lg cursor-pointer px-[10px] py-2 hover:bg-[#F9FAFB]"
+                            className="text-[#383E49] text-nowrap font-normal text-[13px]  rounded-lg cursor-pointer px-[10px] py-2 hover:bg-[#F9FAFB]"
                           >
                             {item}
                           </div>
