@@ -280,10 +280,7 @@ const SettingsPage = (props: Props) => {
               name="brn"
               className="w-full !h-[56px]"
               value={formik.values.brn}
-              onChange={(e) => {
-                const onlyNumbers = e.target.value.replace(/\D/g, ""); // ✅ Remove non-numeric characters
-                formik.setFieldValue("brn", onlyNumbers);
-              }}
+              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={Boolean(formik.touched.brn && formik.errors.brn)}
               errorText={
