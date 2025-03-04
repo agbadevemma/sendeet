@@ -166,7 +166,7 @@ const SettingsPage = (props: Props) => {
           Manage the information on your account
         </p>
         <hr className="bg-[#E4E7EC]  mt-4" />
-        <div className="mt-10 flex gap-4 ">
+        <div className="mt-10 flex gap-4  justify-between">
           <div className="flex flex-col">
             <p className="">Profile photo</p>
             <p className="text-xs">
@@ -190,7 +190,8 @@ const SettingsPage = (props: Props) => {
               onChange={(e) => handleUploadImage(e, "dp")}
             />
           </div>
-          <Image
+        <div className="w-full max-w-[632px]">
+        <Image
             src={
               uploadedProfileImage
                 ? uploadedProfileImage
@@ -201,6 +202,7 @@ const SettingsPage = (props: Props) => {
             width={50}
             className="rounded-full h-32 w-32 object-cover cursor-pointer"
           />
+        </div>
         </div>
         <hr className="bg-[#E4E7EC]  mt-10" />
         <div className="mt-10 flex gap-2 justify-between">
@@ -311,7 +313,7 @@ const SettingsPage = (props: Props) => {
           </div>
         </div>
         <hr className="bg-[#E4E7EC]  mt-10" />
-        <div className="flex mt-10  ">
+        <div className="flex mt-10 justify-between ">
           <div className="flex flex-col">
             <p className="text-base font-medium">Company Logo</p>
             <p className="text-[#667085] text-sm text-nowrap">
@@ -319,7 +321,7 @@ const SettingsPage = (props: Props) => {
             </p>
           </div>
 
-          <div className="flex gap-4  w-full justify-center">
+          <div className="flex gap-4 w-full max-w-[632px]  ">
             <Image
               src={
                 uploadedCompanyImage
