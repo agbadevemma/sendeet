@@ -33,8 +33,8 @@ const LoginPage = (props: Props) => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      email: "testadmin@sendit.com",
-      password: "123456",
+      email: "",
+      password: "",
     },
     validationSchema: validationSchemaLogin,
     onSubmit: async (values) => {

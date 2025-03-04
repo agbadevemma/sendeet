@@ -41,30 +41,29 @@ const Signup = (props: Props) => {
         console.log("value", data);
         toast.success(<SuccessToast2 message={"Success"} />, {
           style: {
-            width: '100%',
-            maxWidth: '',
+            width: "100%",
+            maxWidth: "",
           },
           className:
-            'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
+            "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
           bodyClassName:
-            'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
-          progressClassName: 'bg-red-200',
+            "text-sm flex flex-col w-full max-w-[400px] !w-full !p-12",
+          progressClassName: "bg-red-200",
           icon: false,
         });
         router.push("signup/verification");
-
       } catch (err: any) {
         console.error("Registration error:", err);
         toast.error(<ErrorToast message={err?.data.message} />, {
           style: {
-            width: '100%', // Adjust width as needed
-            maxWidth: '',
+            width: "100%", // Adjust width as needed
+            maxWidth: "",
           },
           className:
-            'text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]',
+            "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
           bodyClassName:
-            'text-sm flex flex-col w-full max-w-[400px] !w-full !p-12',
-          progressClassName: 'bg-red-200',
+            "text-sm flex flex-col w-full max-w-[400px] !w-full !p-12",
+          progressClassName: "bg-red-200",
           icon: false,
           // closeButton: false, // Uncomment if you want to hide the close button
         });
@@ -78,7 +77,7 @@ const Signup = (props: Props) => {
   const hasEightCharacters = password.length >= 8;
   const hasUppercase = /[A-Z]/.test(password);
   const hasNumber = /\d/.test(password);
-  const hasSpecialChar = /[@$!%*?&]/.test(password);
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   return (
     <div>
@@ -130,34 +129,38 @@ const Signup = (props: Props) => {
               />
               <div className="flex  flex-wrap items-center gap-2 mt-2">
                 <div
-                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${hasEightCharacters
-                    ? "border-success-500 text-success-500 bg-[#ECFDF3]"
-                    : "border-grey-100 border-[0.5px]  "
-                    }`}
+                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${
+                    hasEightCharacters
+                      ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                      : "border-grey-100 border-[0.5px]  "
+                  }`}
                 >
                   8 characters
                 </div>
                 <div
-                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${hasUppercase
-                    ? "border-success-500 text-success-500 bg-[#ECFDF3]"
-                    : "border-grey-100 border-[0.5px]  "
-                    }`}
+                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${
+                    hasUppercase
+                      ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                      : "border-grey-100 border-[0.5px]  "
+                  }`}
                 >
                   1 uppercase letter
                 </div>
                 <div
-                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm ${hasNumber
-                    ? "border-success-500 text-success-500 bg-[#ECFDF3]"
-                    : "border-grey-100 border-[0.5px]  "
-                    }`}
+                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm ${
+                    hasNumber
+                      ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                      : "border-grey-100 border-[0.5px]  "
+                  }`}
                 >
                   1 number
                 </div>
                 <div
-                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${hasSpecialChar
-                    ? "border-success-500 text-success-500 bg-[#ECFDF3]"
-                    : "border-grey-100 border-[0.5px]  "
-                    }`}
+                  className={`p-[6px] border-grey-100 border-[0.5px] rounded-lg text-sm  ${
+                    hasSpecialChar
+                      ? "border-success-500 text-success-500 bg-[#ECFDF3]"
+                      : "border-grey-100 border-[0.5px]  "
+                  }`}
                 >
                   1 special character
                 </div>

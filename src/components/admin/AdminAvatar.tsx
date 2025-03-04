@@ -62,7 +62,7 @@ const AdminAvatar = (props: Props) => {
       console.log("error", error);
     }
   };
-  const { data } = useGetUserDetailsQuery(undefined);
+  // const { data } = useGetUserDetailsQuery(undefined);
   return (
     <div>
       {" "}
@@ -87,9 +87,11 @@ const AdminAvatar = (props: Props) => {
               />
               <div className="flex flex-col ">
                 <p className="text-sm font-medium text-[#344054]">
-                  {data?.firstName} {data?.lastName}
+                  {/* {data?.firstName} {data?.lastName} */}
                 </p>
-                <p className="text-xs  text-[#667085]">{data?.email}</p>
+                <p className="text-xs  text-[#667085]">
+                  {/* {data?.email} */}
+                  </p>
               </div>
             </div>
 
