@@ -10,6 +10,7 @@ const IconLink = ({
   onClick,
   route = true,
   subroute = false,
+  notifyValue,
   isOpenDropDown,
 }: {
   href: string;
@@ -22,6 +23,7 @@ const IconLink = ({
   route?: boolean;
   subroute?: boolean;
   isOpenDropDown?: boolean;
+  notifyValue?: string;
   onClick?: () => void;
 }) => {
   const pathname = usePathname();
@@ -47,13 +49,19 @@ const IconLink = ({
         />
         <span className="text-[13px] whitespace-nowrap">{label}</span>
       </div>
+
+      {notifyValue && (
+        <div className="py-[2px] text-[#101928] text-xs px-1.5 flex items-center justify-center bg-[#E6F7FE] rounded-lg">
+          {notifyValue}
+        </div>
+      )}
       {!route && (
         <div
           className={` transition-transform duration-500 ${
             isOpenDropDown ? "transform rotate-180" : ""
           } `}
         >
-          <ChevronDown color="#F0F1F3" height={20} width={20} />  
+          <ChevronDown color="#F0F1F3" height={20} width={20} />
         </div>
       )}
     </Link>

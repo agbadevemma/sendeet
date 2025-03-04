@@ -191,7 +191,7 @@ const AddContact = ({ setIsOpen, isOpen }: Props) => {
             }`}
         >
           <div className="w-full flex items-start gap-5">
-            <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+            <div className=" flex items-center justify-center p-3 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
               <UserAdd color="black" />
             </div>
 

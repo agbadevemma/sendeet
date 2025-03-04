@@ -3,17 +3,31 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface MiscellaneousState {
   isModalOpen: boolean;
   switchToBasicInfo: boolean;
-  onboarding:null | "welcome" | "step1" | "step2" | "step3"| "step4"|"completed";
-  explore:null | "credit" | "startcampaign" | "singlecontact" | "bulkcontact"| "sendcampaign";
+  onboarding:
+    | null
+    | "welcome"
+    | "step1"
+    | "step2"
+    | "step3"
+    | "step4"
+    | "completed";
+  explore:
+    | null
+    | "credit"
+    | "startcampaign"
+    | "singlecontact"
+    | "bulkcontact"
+    | "sendcampaign";
+  notificationModal: boolean;
 }
 
 const initialState: MiscellaneousState = {
   isModalOpen: false,
   switchToBasicInfo: false,
-  onboarding:null,
-  explore: null, 
+  onboarding: null,
+  notificationModal: false,
+  explore: null,
 };
-
 
 const miscellaneousSlice = createSlice({
   name: "miscellaneous",
@@ -31,15 +45,27 @@ const miscellaneousSlice = createSlice({
     toggleBasicInfo: (state, action: PayloadAction<boolean>) => {
       state.switchToBasicInfo = action.payload;
     },
+    setNotification: (state, action: PayloadAction<boolean>) => {
+      state.notificationModal = action.payload;
+    },
     setOnboarding: (
       state,
-      action: PayloadAction<null | "welcome" | "step1" | "step2" | "step3"| "step4"|"completed">
+      action: PayloadAction<
+        null | "welcome" | "step1" | "step2" | "step3" | "step4" | "completed"
+      >
     ) => {
       state.onboarding = action.payload;
     },
     setExplore: (
       state,
-      action: PayloadAction<null | "credit" | "startcampaign" | "singlecontact" | "bulkcontact"| "sendcampaign">
+      action: PayloadAction<
+        | null
+        | "credit"
+        | "startcampaign"
+        | "singlecontact"
+        | "bulkcontact"
+        | "sendcampaign"
+      >
     ) => {
       state.explore = action.payload;
     },
@@ -52,7 +78,8 @@ export const {
   toggleModal,
   toggleBasicInfo,
   setOnboarding,
-  setExplore
+  setExplore,
+  setNotification
 } = miscellaneousSlice.actions;
 
 export default miscellaneousSlice.reducer;

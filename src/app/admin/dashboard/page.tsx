@@ -1,4 +1,6 @@
+"use client";
 import AdminBarChart from "@/components/admin/AdminBarChart";
+import NotificationModal from "@/components/admin/NotificationModal";
 import Button from "@/components/buttons/Button";
 import Graph from "@/components/Graph";
 import ArrowDown from "@/icons/arrow-down";
@@ -8,23 +10,29 @@ import Elements from "@/icons/elements";
 import Eye from "@/icons/eye";
 import FileDownload from "@/icons/file-download";
 import Money1 from "@/icons/money-1";
+import Settings from "@/icons/settings";
 import TickDouble from "@/icons/tick-double";
 import UserAdd from "@/icons/user-add";
 import UserGroup from "@/icons/user-group";
 import UserRemove from "@/icons/user-remove";
 import UserTick from "@/icons/user-tick";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {};
 
 const AdminDashboard = (props: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  
   return (
     <div className="">
+     
       <div className="w-full ">
         <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
           <div className="flex items-center gap-4">
-            <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+            <div className=" flex items-center justify-center p-3 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
               <Elements color="black" />
             </div>
             <div className="flex flex-col gap-1">
@@ -59,13 +67,15 @@ const AdminDashboard = (props: Props) => {
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <UserGroup color="#667085" height={20} width={20}/>
+              <UserGroup color="#667085" height={20} width={20} />
             </div>
           </div>
           <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Active Users</span>
-              <span className="text-[#344054] text-xl font-semibold">1,751,369</span>
+              <span className="text-[#344054] text-xl font-semibold">
+                1,751,369
+              </span>
               <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
@@ -74,16 +84,17 @@ const AdminDashboard = (props: Props) => {
                 </div>
                 <span className=" text-xs">vs lastweek</span>
               </div>
-             
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <UserTick  height={20} width={20} color="#667085" />
+              <UserTick height={20} width={20} color="#667085" />
             </div>
           </div>
           <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Businesses</span>
-              <span className="text-[#344054] text-xl font-semibold">342,891</span>
+              <span className="text-[#344054] text-xl font-semibold">
+                342,891
+              </span>
               <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
@@ -100,8 +111,10 @@ const AdminDashboard = (props: Props) => {
           <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Subscribers</span>
-              <span className="text-[#344054] text-xl font-semibold">1,325,464</span>
-                <div className="flex text-success-600 items-center gap-[6px] ">
+              <span className="text-[#344054] text-xl font-semibold">
+                1,325,464
+              </span>
+              <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />

@@ -16,6 +16,8 @@ import Users from "@/icons/users";
 import NewsPaper from "@/icons/newspaper";
 import IconLink from "./IconLink";
 import { usePathname } from "next/navigation";
+import { useAppDispatch } from "@/lib/hooks";
+import { setNotification } from "@/lib/slices/miscellaneousSlice";
 
 type Props = {
   isOpen: boolean;
@@ -24,6 +26,7 @@ type Props = {
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
   const pathName = usePathname();
   const baseRoute: string = "/admin/dashboard/usermanagement/audience";
   // Check if the current pathname matches the base route
@@ -70,7 +73,11 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   href="/admin/dashboard/notifications"
                   IconComponent={BellBorder}
                   label="Notifications"
-                  onClick={() => setIsOpenDropDown(false)}
+                  notifyValue="12"
+                  onClick={() => {
+                    dispatch(setNotification(true));
+                    setIsOpenDropDown(false);
+                  }}
                 />
               </div>
             </div>
@@ -79,7 +86,9 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
               <div className="flex flex-col gap-1">
                 <IconLink
                   href={
-                    pathName === "/admin/dashboard/usermanagement/organization"||"/admin/dashboard/usermanagement/audience"
+                    pathName ===
+                      "/admin/dashboard/usermanagement/organization" ||
+                    "/admin/dashboard/usermanagement/audience"
                       ? ""
                       : "/admin/dashboard/usermanagement/organization"
                   }

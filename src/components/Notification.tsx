@@ -34,14 +34,13 @@ const Notification = ({ setIsOpen, isOpen }: NotificationProps) => {
             <TextButton
               className="py-2 px-4 text-sm lg:text-md"
               icon_style=""
-              size="lg"
+              size="sm"
               text="New Campaign"
               type="primary"
             />
             <Link href={"/dashboard/campaigns/1"}>
               <Button
-                size="sm"
-                text="View Report"
+                                text="View Report"
                 type="primary"
                 className="!px-4 !py-2 !text-sm"
                 onClick={() => setIsOpen && setIsOpen(false)} // Close dropdown when button is clicked

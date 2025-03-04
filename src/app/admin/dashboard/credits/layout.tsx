@@ -44,7 +44,7 @@ const CreditLayout = ({ children }: { children: React.ReactNode }) => {
     <div>
       <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
         <div className="flex items-center gap-4">
-          <div className=" flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+          <div className=" flex items-center justify-center p-3 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <Money1 color="#383E49" width={24} height={24} />
           </div>
           <div className="flex flex-col gap-1">

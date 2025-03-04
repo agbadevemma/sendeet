@@ -823,6 +823,48 @@ export const mockCampaignData: Campaign[] = [
   },
 ];
 
+
+
+
+export interface Alert  {
+  id:number;
+  alertType: string;
+  date: string;
+  recipient: string;
+  status: "Acknowledged" | "Pending";
+};
+
+export const mockAlertData: Alert[] = [
+  {
+    id:1,
+    alertType: "System Maintenance",
+    date: "02/10/2024",
+    recipient: "GreenEarth Innovations",
+    status: "Acknowledged",
+  },
+  {
+    id:2,
+    alertType: "Security Breach",
+    date: "02/09/2024",
+    recipient: "GreenEarth Innovations",
+    status: "Pending",
+  },
+  {
+    id:3,
+    alertType: "Policy Update",
+    date: "02/08/2024",
+    recipient: "GreenEarth Innovations",
+    status: "Acknowledged",
+  },
+  {
+    id:4,
+    alertType: "Scheduled Downtime",
+    date: "02/07/2024",
+    recipient: "GreenEarth Innovations",
+    status: "Pending",
+  },
+];
+
 export interface Uploads {
   id: number;
   fileName: string;

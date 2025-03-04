@@ -86,7 +86,7 @@ const CampaignId = (props: Props) => {
       />
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className=" bg-white flex items-center justify-center p-4 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
+          <div className=" bg-white flex items-center justify-center p-3 shadow-[0px_1px_1px_0px_rgba(16,_24,_40,_0.10)] rounded-lg border border-grey-50">
             <LoudSpeaker color="black" />
           </div>
           <div className="flex flex-col gap-1  ">
