@@ -110,8 +110,8 @@ const Security = (props: Props) => {
       <hr className="bg-[#E4E7EC]  mt-6" />
       <form onSubmit={formik.handleSubmit}>
         {" "}
-        <div className="flex mt-5">
-          <div className="flex flex-col">
+        <div className="flex mt-5 justify-between">
+          <div className="flex flex-col max-w-[305px] w-full">
             {" "}
             <p className="text-[18px] size font-medium">Change Password</p>
             <p className="text-xs text-[#667085]">Input the new password</p>
@@ -191,8 +191,8 @@ const Security = (props: Props) => {
           </div>
         </div>
         <hr className="bg-[#E4E7EC]  mt-5" />
-        <div className="flex mt-5 ">
-          <div className="flex flex-col max-w-[305px]">
+        <div className="flex mt-5 justify-between ">
+          <div className="flex flex-col max-w-[305px] ">
             <p className="text-[18px] size font-medium">
               Two - step verification
             </p>
@@ -201,7 +201,7 @@ const Security = (props: Props) => {
               password
             </p>
           </div>
-          <div className=" w-full max-w-[546px] mx-auto ml-20">
+          <div className=" w-full max-w-[546px] mx-auto ">
             <div className="flex gap-2 w-fit">
               <ToggleButton
                 onToggle={() => setToggle((prev) => !prev)}
