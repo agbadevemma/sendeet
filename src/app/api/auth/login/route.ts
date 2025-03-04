@@ -27,15 +27,25 @@ export async function POST(req: Request) {
       { message: "Login successful", data },
       { status: 200 }
     );
+    console.log("response", data.data);
+
+    // // Set the token cookie securely
+
+    if (data.data.email === "testadmin@sendit.com") {
+      response.cookies.set("adminToken", data.data.token, {
+        httpOnly: true,
+        path: "/",
+        sameSite: "lax", // Prevents CSRF issues
+      });
+    } else {
+      response.cookies.set("token", data.data.token, {
+        httpOnly: true,
+        path: "/",
+        sameSite: "lax", // Prevents CSRF issues
+      });
+    }
+
     console.log("response", response);
-
-    // Set the token cookie securely
-    response.cookies.set("token", data.data.token, {
-      httpOnly: true,
-      path: "/",
-      sameSite: "lax", // Prevents CSRF issues
-    });
-
 
     return response;
   } catch (error: any) {
@@ -45,10 +55,7 @@ export async function POST(req: Request) {
     // Handle errors from Axios and the external API
     if (error.response) {
       const { message = "Login failed" } = error.response.data;
-      return NextResponse.json(
-        { message },
-        { status: error.response.status }
-      );
+      return NextResponse.json({ message }, { status: error.response.status });
     }
 
     // Handle unexpected errors
