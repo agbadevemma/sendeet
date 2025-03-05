@@ -1,83 +1,53 @@
 "use client";
+import { ChartData } from "@/utils/data";
 import React from "react";
-import { Area } from "recharts";
 import {
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   AreaChart,
+  Area,
 } from "recharts";
 
-type Props = {};
-interface ChartData {
-  name: string;
-  subscribers: number;
-  unsubscribers: number;
-  amt: number;
-}
-const data: ChartData[] = [
-  { name: "Jan", subscribers: 4000, unsubscribers: 2400, amt: 2400 },
-  { name: "Feb", subscribers: 3000, unsubscribers: 1398, amt: 2210 },
-  { name: "Mar", subscribers: 2000, unsubscribers: 9800, amt: 2290 },
-  { name: "Apr", subscribers: 2780, unsubscribers: 3908, amt: 2000 },
-  { name: "May", subscribers: 1890, unsubscribers: 4800, amt: 2181 },
-  { name: "Jun", subscribers: 2390, unsubscribers: 3800, amt: 2500 },
-  { name: "Jul", subscribers: 3490, unsubscribers: 4300, amt: 2100 },
-  { name: "Aug", subscribers: 4000, unsubscribers: 2400, amt: 2400 },
-  { name: "Sep", subscribers: 3000, unsubscribers: 1398, amt: 2210 },
-  { name: "Oct", subscribers: 2000, unsubscribers: 9800, amt: 2290 },
-  { name: "Nov", subscribers: 2780, unsubscribers: 3908, amt: 2000 },
-  { name: "Dec", subscribers: 1890, unsubscribers: 4800, amt: 2181 },
-];
+type Props = {
+  data: ChartData[];
+};
 
 const formatNumber = (value: number) => {
   return value.toLocaleString();
 };
-const Graph = (props: Props) => {
-  const allZero = data.every(
-    (item) => item.subscribers === 0 && item.unsubscribers === 0
+
+const Graph = ({ data }: Props) => {
+  // Check whether data contains subscribers/unsubscribers or optin/optout
+  const hasSubscribers = data.some((item) => item.subscribers !== undefined);
+  const hasOptin = data.some((item) => item.optin !== undefined);
+
+  const allZero = data.every((item) =>
+    hasSubscribers
+      ? item.subscribers === 0 && item.unsubscribers === 0
+      : item.optin === 0 && item.optout === 0
   );
+
   return (
     <div className="mt-5 w-full">
       <ResponsiveContainer width="100%" height={214}>
         <AreaChart
           data={data}
-          margin={{ top: 10, right: 10, left: -9, bottom: 0 }}
+          margin={{ top: 10, right: 10, left: -24, bottom: 0 }}
         >
           <defs>
-            <linearGradient
-              id="colorsubscribers"
-              x1="290"
-              y1="108"
-              x2="288"
-              y2="-61"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#00E9C4" stop-opacity="0" />
-              <stop offset="0.619345" stop-color="#00836E" stop-opacity="0.1" />
+            <linearGradient id="colorPrimary" x1="0" y1="0" x2="0" y2="1">
+              <stop stopColor="#00E9C4" stopOpacity={0.4} />
+              <stop offset="1" stopColor="#00836E" stopOpacity={0} />
             </linearGradient>
-            <linearGradient
-              id="colorunsubscribers"
-              x1="320.5"
-              y1="0.125"
-              x2="320.5"
-              y2="179.636"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#00AAF7" />
-              <stop offset="1" stop-color="#00AAF7" stop-opacity="0" />
+            <linearGradient id="colorSecondary" x1="0" y1="0" x2="0" y2="1">
+              <stop stopColor="#00AAF7" stopOpacity={0.4} />
+              <stop offset="1" stopColor="#00AAF7" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid
-            vertical={false}
-            stroke="#F2F4F7"
-            strokeDasharray="0"
-          />
+          <CartesianGrid vertical={false} stroke="#F2F4F7" />
           <XAxis
             dataKey="name"
             tick={{ fontSize: 12, fill: "#667085" }}
@@ -101,20 +71,43 @@ const Graph = (props: Props) => {
             />
           )}
 
-          <Area
-            type="monotone"
-            dataKey="unsubscribers"
-            stroke="#00E9C4"
-            fillOpacity={1}
-            fill="url(#colorsubscribers)"
-          />
-          <Area
-            type="monotone"
-            dataKey="subscribers"
-            stroke="#00AAF7"
-            fillOpacity={1}
-            fill="url(#colorunsubscribers)"
-          />
+          {hasSubscribers && (
+            <>
+              <Area
+                type="monotone"
+                dataKey="subscribers"
+                stroke="#00E9C4"
+                fillOpacity={1}
+                fill="url(#colorPrimary)"
+              />
+              <Area
+                type="monotone"
+                dataKey="unsubscribers"
+                stroke="#00AAF7"
+                fillOpacity={1}
+                fill="url(#colorSecondary)"
+              />
+            </>
+          )}
+
+          {hasOptin && (
+            <>
+              <Area
+                type="monotone"
+                dataKey="optin"
+                stroke="#00E9C4"
+                fillOpacity={1}
+                fill="url(#colorPrimary)"
+              />
+              <Area
+                type="monotone"
+                dataKey="optout"
+                stroke="#00AAF7"
+                fillOpacity={1}
+                fill="url(#colorSecondary)"
+              />
+            </>
+          )}
         </AreaChart>
       </ResponsiveContainer>
     </div>

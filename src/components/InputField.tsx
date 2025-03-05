@@ -84,6 +84,7 @@ const InputField = ({
             value={value}
             onChange={onChange}
             onBlur={onBlur}
+          
           />
           {iconSrc && icon_style == "trailing icon" ? (
             <Image src={iconSrc} alt={`${label} icon`} width={20} height={20} />

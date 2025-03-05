@@ -826,6 +826,45 @@ export const mockCampaignData: Campaign[] = [
 
 
 
+export interface ChartData {
+  name: string;
+  subscribers?: number;
+  unsubscribers?: number;
+  optin?: number;
+  optout?: number;
+  amt: number;
+}
+
+export const chartDataSubscribers: ChartData[] = [
+  { name: "Jan", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Feb", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Mar", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Apr", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "May", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Jun", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Jul", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Aug", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Sep", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Oct", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Nov", subscribers: 0, unsubscribers: 0, amt: 0 },
+  { name: "Dec", subscribers: 0, unsubscribers: 0, amt: 0 },
+];
+
+export const chartDataOpt: ChartData[] = [
+  { name: "Jan", optin: 0, optout: 0, amt: 0 },
+  { name: "Feb", optin: 0, optout: 0, amt: 0 },
+  { name: "Mar", optin: 0, optout: 0, amt: 0 },
+  { name: "Apr", optin: 0, optout: 0, amt: 0 },
+  { name: "May", optin: 0, optout: 0, amt: 0 },
+  { name: "Jun", optin: 0, optout: 0, amt: 0 },
+  { name: "Jul", optin: 0, optout: 0, amt: 0 },
+  { name: "Aug", optin: 0, optout: 0, amt: 0 },
+  { name: "Sep", optin: 0, optout: 0, amt: 0 },
+  { name: "Oct", optin: 0, optout: 0, amt: 0 },
+  { name: "Nov", optin: 0, optout: 0, amt: 0 },
+  { name: "Dec", optin: 0, optout: 0, amt: 0 },
+];
+
 export interface Alert  {
   id:number;
   alertType: string;

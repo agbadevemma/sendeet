@@ -39,6 +39,7 @@ import HelpCircle from "@/icons/help-circle";
 import CompletedTour from "@/components/onboarding/CompletedTour";
 import ExploreCard from "@/components/onboarding/ExploreCard";
 import secureLocalStorage from "react-secure-storage";
+import { chartDataOpt } from "@/utils/data";
 
 type Props = {};
 
@@ -50,10 +51,10 @@ const page = (props: Props) => {
   );
   const stepsArray = ["step1", "step2", "step3"];
 
-  useEffect(() => {
-    dispatch(setExplore("credit"));
- 
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setExplore("credit"));
+
+  // }, []);
 
   return (
     <div className="w-full pb-32">
@@ -117,8 +118,9 @@ const page = (props: Props) => {
                   )}
                 </div>
                 <div
-                  className={` flex     mt-[39.5px] ${explore == "credit" ? "flex-col-reverse" : "flex-col"
-                    }`}
+                  className={` flex     mt-[39.5px] ${
+                    explore == "credit" ? "flex-col-reverse" : "flex-col"
+                  }`}
                 >
                   <Link
                     onClick={() => dispatch(openModal())}
@@ -307,7 +309,7 @@ const page = (props: Props) => {
               </div>
             </div>
 
-            <div className="p-6  w-full border rounded-xl h-full bg-white">
+            <div className="p-5  w-full border rounded-xl h-full bg-white">
               <div className="flex  justify-between items-center gap-4">
                 <div className="text-lg font-medium flex items-center gap-2 relative">
                   Audience Growth
@@ -328,7 +330,7 @@ const page = (props: Props) => {
                   />
                 </div>
                 <Link href={"/dashboard/audience"}>
-                  <Button icon_style="txt" size="md" text="View Report" />
+                  <Button icon_style="txt" size="sm" text="View Report" />
                 </Link>
               </div>
               <p className="text-grey-500 text-base">Total Subscribers</p>
@@ -342,15 +344,15 @@ const page = (props: Props) => {
                 <div className="flex self-end items-center gap-[13px]">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary-600 rounded-full"></span>
-                    <span className="text-gray-500 text-sm">Subscribers</span>
+                    <span className="text-gray-500 text-sm">Opt Ins</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-[#00D4B2] rounded-full"></span>
-                    <span className="text-gray-500 text-sm">Unsubscribers</span>
+                    <span className="text-gray-500 text-sm">Opt Outs</span>
                   </div>
                 </div>
               </div>
-              <Graph />
+              <Graph data={chartDataOpt} />
             </div>
           </div>
         </div>
@@ -386,9 +388,10 @@ const page = (props: Props) => {
               size="sm"
               text="Filters"
               icon_style="leading-icon"
-
+              className={`${!available ? "visible" : "invisible"}`}
               iconComponent={<FilterAlt color="#383E49" />}
             />
+
             <SearchInput
               placeholder="Search"
               className=""
@@ -396,7 +399,7 @@ const page = (props: Props) => {
             />
           </div>
         </div>
-        {available ? (
+        {!available ? (
           <div className="mt-6 ">
             <div className="w-full flex flex-col sidebar gap-4 ">
               <Campaign status="draft" />
@@ -434,7 +437,7 @@ const page = (props: Props) => {
           </div>
         )}
 
-        {available && (
+        {!available && (
           <div className="w-full mt-8 pt-[11px] pb-[16px] px-6 border rounded-lg border-[#E4E7EC]">
             <Pagination />
           </div>

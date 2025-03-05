@@ -17,6 +17,8 @@ import UserGroup from "@/icons/user-group";
 import UserRemove from "@/icons/user-remove";
 import UserTick from "@/icons/user-tick";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { chartDataSubscribers } from "@/utils/data";
+
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -252,7 +254,7 @@ const AdminDashboard = (props: Props) => {
                 </div>
               </div>
 
-              <Graph />
+              <Graph data={chartDataSubscribers} />
             </div>
           </div>
         </div>

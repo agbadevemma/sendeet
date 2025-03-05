@@ -194,8 +194,8 @@ const SettingsPage = (props: Props) => {
           <Image
             src={profile}
             alt="profile"
-            height={50}
-            width={50}
+            height={500}
+            width={500}
             className="rounded-full h-32 w-32 object-cover cursor-pointer"
           />
         </div>

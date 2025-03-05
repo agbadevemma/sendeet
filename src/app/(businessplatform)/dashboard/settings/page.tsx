@@ -190,19 +190,19 @@ const SettingsPage = (props: Props) => {
               onChange={(e) => handleUploadImage(e, "dp")}
             />
           </div>
-        <div className="w-full max-w-[632px]">
-        <Image
-            src={
-              uploadedProfileImage
-                ? uploadedProfileImage
-                : data?.profilePicture ?? profile
-            }
-            alt="profile"
-            height={500}
-            width={500}
-            className="rounded-full h-32 w-32 object-cover cursor-pointer"
-          />
-        </div>
+          <div className="w-full max-w-[632px]">
+            <Image
+              src={
+                uploadedProfileImage
+                  ? uploadedProfileImage
+                  : data?.profilePicture ?? profile
+              }
+              alt="profile"
+              height={500}
+              width={500}
+              className="rounded-full h-32 w-32 object-cover cursor-pointer"
+            />
+          </div>
         </div>
         <hr className="bg-[#E4E7EC]  mt-10" />
         <div className="mt-10 flex gap-2 justify-between">
@@ -261,6 +261,7 @@ const SettingsPage = (props: Props) => {
               label="Email"
               inputType=""
               placeholder=""
+              disabled={true}
               className="w-full !h-[56px]"
               name="email"
               value={formik.values.email}
@@ -277,6 +278,24 @@ const SettingsPage = (props: Props) => {
               label="Business Registration Number"
               inputType=""
               placeholder=""
+              disabled={true}
+              name="brn"
+              className="w-full !h-[56px]"
+              value={formik.values.brn}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={Boolean(formik.touched.brn && formik.errors.brn)}
+              errorText={
+                typeof formik.errors.brn === "string"
+                  ? formik.errors.brn
+                  : undefined
+              }
+            />
+             <InputField
+              label="Whatsapp Business Number"
+              inputType=""
+              placeholder=""
+              disabled={true}
               name="brn"
               className="w-full !h-[56px]"
               value={formik.values.brn}
