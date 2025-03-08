@@ -79,7 +79,7 @@ const LoginPage = (props: Props) => {
   });
   return (
     <div>
-      <div className="w-full min-h-screen overflow-y-auto pt-[106px] lg:pt-1  flex flex-col items-center  justify-center gap-3 lg:gap-[50px]">
+      <div className="w-full min-h-screen overflow-y-auto lg:pt-[106px] xl:pt-1  flex flex-col items-center  justify-center gap-3 lg:gap-[50px]">
         <Image src={logo} alt="logo" className=" w-32" />
         <div className="relative w-full  lg:max-w-[535px] lg:rounded-[16px]  lg:px-[1px] lg:py-[1px]">
           <div className="absolute lg:block hidden inset-0 p-[0px] lg:rounded-[16px] bg-gradient-to-r from-secondary-500 to-primary-500"></div>

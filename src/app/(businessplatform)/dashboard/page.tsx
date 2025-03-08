@@ -84,12 +84,12 @@ const page = (props: Props) => {
       </div>
 
       <div className="mt-[27px]  w-full">
-        <div className="flex  flex-col-reverse  lg:flex-row gap-6 w-full">
-          <div className="flex flex-col  gap-5 w-full lg:max-w-[361px]  ">
+        <div className="flex  flex-col-reverse  lg:flex-row  gap-6 lg:gap-4 xl:gap-6 w-full">
+          <div className="flex lg:w-1/2  flex-col  gap-5   ">
             <div className="p-4 hidden   w-full lg:flex items-center justify-between border-solid bg-white border border-[#E4E7EC] rounded-xl ">
               <div className="flex flex-col gap-2">
                 <span className="text text-sm">Total Messages Sent</span>
-                <span className="text-[#344054] text-xl font-semibold">0</span>
+                <span className="text-[#344054] text-lg xl:text-xl font-semibold">0</span>
                 <div className="flex items-center gap-[6px]">
                   <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
                     -%
@@ -128,38 +128,38 @@ const page = (props: Props) => {
                     className="w-full"
                   >
                     <div className="flex justify-between items-center ">
-                      <div className="flex gap-4">
+                      <div className="flex gap-2 xl:gap-4">
                         <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                           <LoudSpeaker color="black" />
                         </div>
                         <p className="flex flex-col gap-1">
-                          <span className="text-md font-medium">
+                          <span className=" text-sm xl:text-md font-medium">
                             Create Campaign
                           </span>
-                          <span className="text-sm">Start a new campaign</span>
+                          <span className=" text-xs xl:text-sm">Start a new campaign</span>
                         </p>
                       </div>
-                      <ChevronRight color="#667185" />
+                      <ChevronRight color="#667185"  height={20} width={20}/>
                     </div>
                   </Link>
-                  <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
+                  <div className="border-[0.9px] -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
                   <div className="flex justify-between items-center ">
-                    <div className="flex gap-4">
+                    <div className="flex gap-2 xl:gap-4">
                       <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                         <UserAdd color="black" />
                       </div>
                       <div className="flex flex-col gap-1">
-                        <span className="text-md font-medium">
+                        <span className="text-sm xl:text-md font-medium">
                           Import Contacts
                         </span>
-                        <span className="text-sm">
+                        <span className=" text-xs xl:text-sm">
                           Add or import CSV or XLS files
                         </span>
                       </div>
                     </div>
-                    <ChevronRight color="#667185" />
+                    <ChevronRight color="#667185" height={20} width={20} />
                   </div>
-                  <div className="border -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
+                  <div className="border-[0.9px] -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
                   <div className="relative w-full">
                     {" "}
                     <ExploreCard
@@ -174,21 +174,21 @@ const page = (props: Props) => {
                       href={"/dashboard/credits"}
                       className="flex justify-between items-center  relative"
                     >
-                      <div className="flex gap-4">
+                      <div className="flex  gap-2 xl:gap-4">
                         <div className="flex items-center justify-center rounded-full border p-3 border-[#E4E7EC]">
                           <Plus color="black" />
                         </div>
                         <p className="flex flex-col gap-1">
                           <div className="flex items-center justify-between w-full">
                             {" "}
-                            <span className="text-md font-medium">
+                            <span className="text-sm xl:text-md font-medium">
                               Top up Credits
                             </span>
                             {explore === "credit" && (
                               <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
                             )}
                           </div>
-                          <span className="text-sm">
+                          <span className="text-xs xl:text-sm">
                             Get more Sendeet credits
                           </span>
                         </p>
@@ -209,12 +209,12 @@ const page = (props: Props) => {
               />
             </div>
           </div>
-          <div className="flex flex-col w-full gap-5">
+          <div className="flex  flex-col  gap-5 w-full ">
             <div className="flex flex-col lg:flex-row items-center gap-3 w-full">
               <div className="p-4 lg:hidden    w-full flex items-center justify-between border-solid bg-white border border-[#E4E7EC] rounded-xl ">
                 <div className="flex flex-col gap-2">
                   <span className="text text-sm">Total Messages Sent</span>
-                  <span className="text-[#344054] text-xl font-semibold">
+                  <span className="text-[#344054] text-lg xl:text-xl font-semibold">
                     0
                   </span>
                   <div className="flex items-center gap-[6px]">
@@ -228,11 +228,12 @@ const page = (props: Props) => {
                   <Message color="#667085" />
                 </div>
               </div>
-              <div className="relative w-full group inline-block">
+
+              <div className="relative  w-full group inline-block">
                 <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white  border-[#E4E7EC]  border-solid  ">
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 w-full">
                     <span className="text text-sm">Delivered</span>
-                    <span className="text-[#344054] text-xl font-semibold">
+                    <span className="text-[#344054] text-lg xl:text-xl font-semibold">
                       0
                     </span>
                     <div className="flex items-center gap-[6px]">
@@ -265,7 +266,7 @@ const page = (props: Props) => {
                 {" "}
                 <div className="flex flex-col gap-2">
                   <span className="text text-sm">Open Rate</span>
-                  <span className="text-[#344054] text-xl font-semibold">
+                  <span className="text-[#344054] text-lg xl:text-xl font-semibold">
                     0%
                   </span>
                   <div className="flex items-center gap-[6px]">
@@ -288,7 +289,7 @@ const page = (props: Props) => {
                 {" "}
                 <div className="flex flex-col gap-2">
                   <span className="text text-sm">Click Rate</span>
-                  <span className="text-[#344054] text-xl font-semibold ">
+                  <span className="text-[#344054] text-lg xl:text-xl font-semibold ">
                     0%
                   </span>
                   <div className="flex items-center gap-[6px]">
@@ -383,12 +384,12 @@ const page = (props: Props) => {
               Keep track of recent campaigns and their statistics
             </p>
           </div>
-          <div className="flex items-center gap-[18px] w-full">
+          <div className="flex lg:flex-row flex-col items-center gap-[18px] w-full">
             <Button
               size="sm"
               text="Filters"
               icon_style="leading-icon"
-              className={`${!available ? "visible" : "invisible"}`}
+              className={`${!available ? "visible" : " hidden lg:invisible"}`}
               iconComponent={<FilterAlt color="#383E49" />}
             />
 
@@ -409,7 +410,7 @@ const page = (props: Props) => {
             </div>
           </div>
         ) : (
-          <div className="mt-[74px] flex flex-col items-center ">
+          <div className="mt-[74px] flex flex-col items-center pb-10 ">
             <Image src={illustration} alt="images" className="mx-auto" />
             <p className="text-lg font-semibold mt-1">
               Ready to start your first campaign ?

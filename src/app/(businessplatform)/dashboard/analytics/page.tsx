@@ -208,18 +208,18 @@ const Analytics = (props: Props) => {
             <PencilEdit color="#00AAF7" height={24} width={24} />
           </button>
         </div>
-        <div className="flex flex-col lg:flex-row gap-4">
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
+        <div className="flex flex-col lg:flex-row gap-2 xl:gap-4">
+          <div className=" p-2 py-4  xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Total Opens</span>
-              <span className="text-[#344054] text-xl font-semibold">
+              <span className="text-[#344054]  text-sm xl:text-xl font-semibold">
                 1,943,219
               </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
+              <div className="flex text-success-600 items-center gap-[6px]  ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
+                  <span className="font-medium text-xs">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
               </div>
@@ -228,10 +228,10 @@ const Analytics = (props: Props) => {
               <Eye height={20} width={20} color="#667085" />
             </div>
           </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
+          <div className="p-2 xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Opt Ins</span>
-              <span className="text-[#344054] text-xl font-semibold">
+              <span className=" text-[#344054] text-sm xl:text-xl font-semibold">
                 1,751,369
               </span>
               <div className="flex text-success-600 items-center gap-[6px] ">
@@ -247,10 +247,10 @@ const Analytics = (props: Props) => {
               <TickDouble height={20} width={20} color="#667085" />
             </div>
           </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
+          <div className="p-2 xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Opt Outs</span>
-              <span className="text-[#344054] text-xl font-semibold">
+              <span className=" text-[#344054] text-sm xl:text-xl font-semibold">
                 89.9%
               </span>
               <div className="flex text-success-600 items-center gap-[6px] ">
@@ -266,10 +266,10 @@ const Analytics = (props: Props) => {
               <Multiply height={20} width={20} color="#667085" />
             </div>
           </div>{" "}
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
+          <div className="p-2 xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Average Engagement Rate</span>
-              <span className="text-[#344054] text-xl font-semibold">
+              <span className=" text-[#344054] text-sm xl:text-xl font-semibold">
                 1,751,369
               </span>
               <div className="flex text-success-600 items-center gap-[6px] ">
@@ -292,7 +292,7 @@ const Analytics = (props: Props) => {
           <div className="w-full">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
               <div className="flex gap-2 items-center">
-                <p className="text-lg  font-medium ">Campaign Performance</p>
+                <p className="text-lg lg:text-md  xl:text-lg font-medium ">Campaign Performance</p>
                 <span className="cursor-pointer">
                   <HelpCircle color="#98A2B3" />
                 </span>
@@ -306,7 +306,7 @@ const Analytics = (props: Props) => {
                 <div className="relative" ref={firstDropdownRef}>
                   <Button
                     onClick={() => setIsFirstDropdownOpen((prev) => !prev)}
-                    className="!px-4 !py-[10px] !text-sm"
+                    className="!px-4 lg:!px-1.5 xl:!px-4  !py-[10px] !text-sm"
                     size="md"
                     icon_style="trailing icon"
                     iconComponent={
@@ -414,23 +414,23 @@ const Analytics = (props: Props) => {
             </p>{" "}
             <HeatmapChart />
           </div>
-          <div className="w-full flex flex-col gap-8 lg:w-[40%] px-4 py-2 pt-4 border-[#EAECF0] bg-white items-start border  rounded-lg ">
+          <div className="w-full flex flex-col gap-8 lg:w-[40%] px-4 lg:px-2.5 xl:px-4 py-2 pt-4 border-[#EAECF0] bg-white items-start border  rounded-lg ">
             <div className="flex justify-between items-center w-full mb-4">
-              <p className="text-lg  font-medium">Audience Metrics</p>
-              <Button text="12 Months" className="p-4" />
+              <p className=" text-lg lg:text-base xl:text-lg  font-medium">Audience Metrics</p>
+              <Button text="12 Months" className="p-4 lg:!p-1.5 xl:p-4" />
             </div>
             <div className="flex justify-between items-center w-full">
               <div className="flex flex-col items-center ">
                 <div className="flex items-center gap-1">
                   <span className="h-4 w-2 rounded-full bg-[#54C6FA]"></span>
-                  <div className="text-lg text-[#667085]">Opt In</div>
+                  <div className="text-lg lg:text-md xl:text-lg text-[#667085]">Opt In</div>
                 </div>
                 <div className="font-medium text-[22px]">762</div>
               </div>
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-1">
                   <span className="h-4 w-2 rounded-full bg-[#B0E5FD]"></span>
-                  <div className="text-lg text-[#667085]">Opt Out</div>
+                  <div className="text-lg lg:text-md xl:text-lg text-[#667085]">Opt Out</div>
                 </div>
                 <div className="font-medium text-[22px]">215</div>
               </div>
@@ -560,7 +560,7 @@ const Analytics = (props: Props) => {
                         onClick={() => handleSelectItem(index)}
                       />{" "}
                       <div
-                        className={`h-5 w-5 p-4 flex items-center justify-center shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] border ${
+                        className={`h-5 w-5 p-2 lg:p-4  flex items-center justify-center shadow-[0px_1px_2px_0px_rgba(16,24,40,0.10),_0px_0px_0px_1px_rgba(185,_189,_199,_0.20)] border ${
                           campaign.status === "Draft" &&
                           "bg-grey-50 border-[#475467]"
                         }  ${

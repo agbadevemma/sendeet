@@ -274,7 +274,7 @@ const Campaign = (props: Props) => {
       </div>
 
       <div className="flex mt-[25px] w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
-        <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12 border-t border-t-grey-50 h-[62px] items-end">
+        <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12  h-[62px] items-end">
           {tabs.map((tab, index) => (
             <div
               key={tab.id}
