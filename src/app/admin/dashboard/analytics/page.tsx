@@ -238,7 +238,7 @@ const Analytics = (props: Props) => {
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Total Opens</span>
               <span className="text-[#344054] text-xl font-semibold">
-                1,943,219
+            0
               </span>
               <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
@@ -257,7 +257,7 @@ const Analytics = (props: Props) => {
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Opt Ins</span>
               <span className="text-[#344054] text-xl font-semibold">
-                1,751,369
+              0
               </span>
               <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}

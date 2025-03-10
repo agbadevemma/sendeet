@@ -89,7 +89,9 @@ const page = (props: Props) => {
             <div className="p-4 hidden   w-full lg:flex items-center justify-between border-solid bg-white border border-[#E4E7EC] rounded-xl ">
               <div className="flex flex-col gap-2">
                 <span className="text text-sm">Total Messages Sent</span>
-                <span className="text-[#344054] text-lg xl:text-xl font-semibold">0</span>
+                <span className="text-[#344054] text-lg xl:text-xl font-semibold">
+                  0
+                </span>
                 <div className="flex items-center gap-[6px]">
                   <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
                     -%
@@ -136,10 +138,12 @@ const page = (props: Props) => {
                           <span className=" text-sm xl:text-md font-medium">
                             Create Campaign
                           </span>
-                          <span className=" text-xs xl:text-sm">Start a new campaign</span>
+                          <span className=" text-xs xl:text-sm">
+                            Start a new campaign
+                          </span>
                         </p>
                       </div>
-                      <ChevronRight color="#667185"  height={20} width={20}/>
+                      <ChevronRight color="#667185" height={20} width={20} />
                     </div>
                   </Link>
                   <div className="border-[0.9px] -ml-2 -mr-2 border-solid border-[#F0F2F5] mt-9 mb-9"></div>
@@ -421,7 +425,6 @@ const page = (props: Props) => {
             </p>
             <Link
               onClick={() => {
-                toast.success("");
                 dispatch(openModal());
               }}
               href={"/dashboard/campaigns"}

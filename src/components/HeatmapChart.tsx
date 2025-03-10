@@ -58,7 +58,7 @@ const HeatmapChart: React.FC = () => {
       Math.floor(intensity * colorCodes.length),
       colorCodes.length - 1
     );
-    return colorCodes[colorIndex];
+    return colorCodes[0];
   };
 
   return (

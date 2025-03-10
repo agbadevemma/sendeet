@@ -18,13 +18,13 @@ interface CampaignPerformanceData {
 
 // Sample data with type annotation
 const data: CampaignPerformanceData[] = [
-  { day: "Mon", performance: 20 },
-  { day: "Tue", performance: 40 },
-  { day: "Wed", performance: 60 },
-  { day: "Thu", performance: 50 },
-  { day: "Fri", performance: 70 },
-  { day: "Sat", performance: 80 },
-  { day: "Sun", performance: 90 },
+  { day: "Mon", performance: 0 },
+  { day: "Tue", performance: 0 },
+  { day: "Wed", performance: 0 },
+  { day: "Thu", performance: 0 },
+  { day: "Fri", performance: 0 },
+  { day: "Sat", performance: 0 },
+  { day: "Sun", performance: 0 },
 ];
 
 type Props = {

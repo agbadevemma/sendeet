@@ -28,6 +28,7 @@ import donut from "../../../../images/donut.svg";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ChevronDown from "@/icons/cheveron-down";
 import HelpCircle from "@/icons/help-circle";
+import ProgressChart from "@/components/ProgressChart";
 
 type Props = {};
 
@@ -213,15 +214,21 @@ const Analytics = (props: Props) => {
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Total Opens</span>
               <span className="text-[#344054]  text-sm xl:text-xl font-semibold">
-                1,943,219
+                0
               </span>
-              <div className="flex text-success-600 items-center gap-[6px]  ">
+              {/* <div className="flex text-success-600 items-center gap-[6px]  ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="font-medium text-xs">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
+              </div> */}
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -231,16 +238,22 @@ const Analytics = (props: Props) => {
           <div className="p-2 xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Opt Ins</span>
-              <span className=" text-[#344054] text-sm xl:text-xl font-semibold">
-                1,751,369
+              <span className="text-[#344054]  text-sm xl:text-xl font-semibold">
+                0
               </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
+              {/* <div className="flex text-success-600 items-center gap-[6px]  ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
+                  <span className="font-medium text-xs">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
+              </div> */}
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -251,15 +264,22 @@ const Analytics = (props: Props) => {
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Opt Outs</span>
               <span className=" text-[#344054] text-sm xl:text-xl font-semibold">
-                89.9%
+                0%
               </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
+
+              {/* <div className="flex text-success-600 items-center gap-[6px]  ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
+                  <span className="font-medium text-xs">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
+              </div> */}
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -269,16 +289,22 @@ const Analytics = (props: Props) => {
           <div className="p-2 xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Average Engagement Rate</span>
-              <span className=" text-[#344054] text-sm xl:text-xl font-semibold">
-                1,751,369
+              <span className="text-[#344054]  text-sm xl:text-xl font-semibold">
+                0
               </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
+              {/* <div className="flex text-success-600 items-center gap-[6px]  ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
+                  <span className="font-medium text-xs">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
+              </div> */}
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -292,7 +318,9 @@ const Analytics = (props: Props) => {
           <div className="w-full">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
               <div className="flex gap-2 items-center">
-                <p className="text-lg lg:text-md  xl:text-lg font-medium ">Campaign Performance</p>
+                <p className="text-lg lg:text-md  xl:text-lg font-medium ">
+                  Campaign Performance
+                </p>
                 <span className="cursor-pointer">
                   <HelpCircle color="#98A2B3" />
                 </span>
@@ -368,12 +396,18 @@ const Analytics = (props: Props) => {
               <span className="text-md text-grey-500">Open Rate</span>
               <div className="flex justify-between lg:justify-normal  items-center lg:gap-4 w-full mt-2 ">
                 <span className="text-xl lg:text-[1.4rem] font-medium">
-                  78.2%
+                0
                 </span>
-                <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
+                {/* <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="text-success-700 font-medium">7.2%</span>
+                </div> */}
+                <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
                 </div>
+                <span className="text-grey-400 text-xs">No data</span>
+              </div>
               </div>
             </div>
 
@@ -385,21 +419,21 @@ const Analytics = (props: Props) => {
             <div className="flex flex-col mt-6 gap-10 justify-between  flex-1">
               <div className="pb-10 border-b border-b-[#F0F1F3] flex items-center justify-between">
                 <span className="text-grey-400 text-sm">Total Campaigns</span>
-                <span className="font-medium text-sm">25</span>
+                <span className="font-medium text-sm">0</span>
               </div>{" "}
               <div className="pb-10 border-b border-b-[#F0F1F3] flex items-center justify-between">
                 <span className="text-grey-400 text-sm">Active Campaigns</span>
-                <span className="font-medium text-sm">5</span>
+                <span className="font-medium text-sm">0</span>
               </div>{" "}
               <div className="pb-10 border-b border-b-[#F0F1F3] flex items-center justify-between">
                 <span className="text-grey-400 text-sm">Failed Campaigns</span>
-                <span className="font-medium text-sm">14</span>
+                <span className="font-medium text-sm">0</span>
               </div>
               <div className="pb-10 border-b border-b-[#F0F1F3] flex items-center justify-between">
                 <span className="text-grey-400 text-sm">
                   Successful Campaigns
                 </span>
-                <span className="font-medium text-sm">1</span>
+                <span className="font-medium text-sm">0</span>
               </div>
             </div>
           </div>
@@ -416,26 +450,33 @@ const Analytics = (props: Props) => {
           </div>
           <div className="w-full flex flex-col gap-8 lg:w-[40%] px-4 lg:px-2.5 xl:px-4 py-2 pt-4 border-[#EAECF0] bg-white items-start border  rounded-lg ">
             <div className="flex justify-between items-center w-full mb-4">
-              <p className=" text-lg lg:text-base xl:text-lg  font-medium">Audience Metrics</p>
+              <p className=" text-lg lg:text-base xl:text-lg  font-medium">
+                Audience Metrics
+              </p>
               <Button text="12 Months" className="p-4 lg:!p-1.5 xl:p-4" />
             </div>
             <div className="flex justify-between items-center w-full">
               <div className="flex flex-col items-center ">
                 <div className="flex items-center gap-1">
                   <span className="h-4 w-2 rounded-full bg-[#54C6FA]"></span>
-                  <div className="text-lg lg:text-md xl:text-lg text-[#667085]">Opt In</div>
+                  <div className="text-lg lg:text-md xl:text-lg text-[#667085]">
+                    Opt In
+                  </div>
                 </div>
-                <div className="font-medium text-[22px]">762</div>
+                <div className="font-medium text-[22px]">0</div>
               </div>
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-1">
                   <span className="h-4 w-2 rounded-full bg-[#B0E5FD]"></span>
-                  <div className="text-lg lg:text-md xl:text-lg text-[#667085]">Opt Out</div>
+                  <div className="text-lg lg:text-md xl:text-lg text-[#667085]">
+                    Opt Out
+                  </div>
                 </div>
-                <div className="font-medium text-[22px]">215</div>
+                <div className="font-medium text-[22px]">0</div>
               </div>
             </div>
-            <Image src={donut} alt="donut" />
+            {/* <Image src={donut} alt="donut" /> */}
+            <ProgressChart innerValue={0} outerValue={0} maxValue={0} />
           </div>
         </div>
       </div>
