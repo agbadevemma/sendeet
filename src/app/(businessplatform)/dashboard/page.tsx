@@ -1,45 +1,36 @@
 "use client";
 import Button from "@/components/buttons/Button";
+import Campaign from "@/components/Campaign";
+import Graph from "@/components/Graph";
+import CompletedTour from "@/components/onboarding/CompletedTour";
+import ExploreCard from "@/components/onboarding/ExploreCard";
+import OnboardCard from "@/components/onboarding/OnboardCard";
+import Welcome from "@/components/onboarding/Welcome";
+import Pagination from "@/components/Pagination";
 import SearchInput from "@/components/SearchInput";
-import Calendar from "@/icons/calendar";
 import ChevronRight from "@/icons/chevron-right";
 import Elements from "@/icons/elements";
+import Eye from "@/icons/eye";
 import FileDownload from "@/icons/file-download";
 import FilterAlt from "@/icons/filter-alt";
+import HandClick from "@/icons/hand-click";
+import HelpCircle from "@/icons/help-circle";
 import LoudSpeaker from "@/icons/loudspeaker";
 import Message from "@/icons/message";
 import Plus from "@/icons/plus";
 import SearchIcon from "@/icons/search-icon";
-import SendAlt from "@/icons/send-alt";
+import TickDouble from "@/icons/tick-double";
 import UserAdd from "@/icons/user-add";
-import React, { useEffect } from "react";
-import img from "../../../images/illustration.svg";
-import Image from "next/image";
-import illustration from "../../../images/illustration2.svg";
-import Graph from "@/components/Graph";
-import Campaign from "@/components/Campaign";
-import ArrowLeft from "@/icons/arrow-left";
-import ArrowRight from "@/icons/arrow-right";
-import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import {
   openModal,
-  setOnboarding,
   setExplore,
+  setOnboarding,
 } from "@/lib/slices/miscellaneousSlice";
-import Pagination from "@/components/Pagination";
-import { toast } from "react-toastify";
-import TickDouble from "@/icons/tick-double";
-import Eye from "@/icons/eye";
-import HandClick from "@/icons/hand-click";
-import Welcome from "@/components/onboarding/Welcome";
-import TextButton from "@/components/buttons/TextButton";
-import OnboardCard from "@/components/onboarding/OnboardCard";
-import HelpCircle from "@/icons/help-circle";
-import CompletedTour from "@/components/onboarding/CompletedTour";
-import ExploreCard from "@/components/onboarding/ExploreCard";
-import secureLocalStorage from "react-secure-storage";
 import { chartDataOpt } from "@/utils/data";
+import Image from "next/image";
+import Link from "next/link";
+import illustration from "../../../images/illustration2.svg";
 
 type Props = {};
 
@@ -316,7 +307,7 @@ const page = (props: Props) => {
 
             <div className="p-5  w-full border rounded-xl h-full bg-white">
               <div className="flex  justify-between items-center gap-4">
-                <div className="text-lg font-medium flex items-center gap-2 relative">
+                <div className="text-sm lg:text-lg font-medium flex items-center gap-2 relative">
                   Audience Growth
                   <span className="cursor-pointer">
                     <HelpCircle color="" />

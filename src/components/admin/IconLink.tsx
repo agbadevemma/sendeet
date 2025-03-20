@@ -50,7 +50,7 @@ const IconLink = ({
         <span className="text-[13px] whitespace-nowrap">{label}</span>
       </div>
 
-      {notifyValue && (
+      {Number(notifyValue) > 0 && (
         <div className="py-[2px] text-[#101928] text-xs px-1.5 flex items-center justify-center bg-[#E6F7FE] rounded-lg">
           {notifyValue}
         </div>

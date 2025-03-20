@@ -12,6 +12,7 @@ import empty from "../../images/empty.svg";
 import Image from "next/image";
 import illustration from "../../images/illustration.svg";
 import Notification from "../Notification";
+import Link from "next/link";
 
 const NotificationModal = () => {
   const dispatch = useAppDispatch();
@@ -46,33 +47,37 @@ const NotificationModal = () => {
               </p>
             </div>
             <div className="flex gap-2">
-              <Button
-                icon_style="icon-only"
-                btntype="button"
-                onClick={() => {
-                  dispatch(setNotification(false));
-                }}
-                className="!h-8 !w-8"
-                size="sm"
-                iconComponent={
-                  <Maximise2 color="#101928" height={16} width={16} />
-                }
-              />
+              <Link href="notifications/history">
+                <Button
+                  icon_style="icon-only"
+                  btntype="button"
+                  onClick={() => {
+                    dispatch(setNotification(false));
+                  }}
+                  className="!h-8 !w-8"
+                  size="sm"
+                  iconComponent={
+                    <Maximise2 color="#101928" height={16} width={16} />
+                  }
+                />
+              </Link>
 
-              <Button
-                icon_style="icon-only"
-                btntype="button"
-                onClick={() => {
-                  dispatch(setNotification(false));
-                  
-                  // dispatch(setNotification(false));
-                }}
-                className="!h-8 !w-8"
-                size="sm"
-                iconComponent={
-                  <Multiply color="#101928" height={16} width={16} />
-                }
-              />
+              <Link href="notifications/history">
+                <Button
+                  icon_style="icon-only"
+                  btntype="button"
+                  onClick={() => {
+                    dispatch(setNotification(false));
+
+                    // dispatch(setNotification(false));
+                  }}
+                  className="!h-8 !w-8"
+                  size="sm"
+                  iconComponent={
+                    <Multiply color="#101928" height={16} width={16} />
+                  }
+                />
+              </Link>
             </div>
           </div>
 

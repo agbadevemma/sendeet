@@ -28,7 +28,7 @@ interface BusinessUpdateRequest {
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_INTERNAL_API_BASE_URL || "/api/auth",
+    baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth`,
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
       return headers;

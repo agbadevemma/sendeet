@@ -63,17 +63,17 @@ const Preferences = () => {
   return (
     <div>
       <p className="text-[18px] size font-medium">Notification Settings</p>
-      <p className="text-xs text-[#667085]">
+      <p className="text-xs md:mt-0 mt-1 text-[#667085]">
         Select when and how you’ll be notified
       </p>
 
       {/* Campaign Completion */}
       <div className="mt-6 pt-5 pb-5 flex items-center border-t border-b border-t-[#E4E7EC]">
         <div className="flex flex-col w-full max-w-[454px]">
-          <p className="text-[18px] size font-medium text-[#344054]">
+          <p className="text-[15px] md:text-[18px] size font-medium text-[#344054]">
             Campaign Completion
           </p>
-          <p className="text-xs text-[#667085]">
+          <p className="text-xs md:mt-0 mt-1 text-[#667085]">
             These are notifications for updates on campaigns and other content.
           </p>
         </div>
@@ -94,10 +94,10 @@ const Preferences = () => {
       {/* Low Credits */}
       <div className="pt-5 pb-5 flex items-center border-b border-b-[#E4E7EC]">
         <div className="flex flex-col w-full max-w-[454px]">
-          <p className="text-[18px] size font-medium text-[#344054]">
+          <p className="text-[15px] md:text-[18px] size font-medium text-[#344054]">
             Low Credits
           </p>
-          <p className="text-xs text-[#667085]">
+          <p className="text-xs md:mt-0 mt-1 text-[#667085]">
             These are notifications for when you’re running low on Sendeet
             credits.
           </p>
@@ -119,10 +119,10 @@ const Preferences = () => {
       {/* Reminders */}
       <div className="pt-5 pb-5 flex items-center border-b border-b-[#E4E7EC]">
         <div className="flex flex-col w-full max-w-[454px]">
-          <p className="text-[18px] size font-medium text-[#344054]">
+          <p className="text-[15px] md:text-[18px] size font-medium text-[#344054]">
             Reminders
           </p>
-          <p className="text-xs text-[#667085]">
+          <p className="text-xs md:mt-0 mt-1 text-[#667085]">
             These are notifications to remind you of updates you might have
             missed.
           </p>

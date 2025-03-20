@@ -114,28 +114,28 @@ const Overview = (props: Props) => {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 pb-10 mt-10">
         <Card
           title="Total Revenue Generated"
-          value="$59,786,231"
+          value="$0"
           oppositeFlow={true}
           className="py-6"
           mainIcon={<Coinstack height={20} width={20} color="#667085" />}
         />
         <Card
           title="Total Revenue Generated"
-          value="₦59,786,231"
+          value="₦0"
           oppositeFlow={true}
           className="py-6"
           mainIcon={<Coinstack height={20} width={20} color="#667085" />}
         />{" "}
         <Card
           title="Total Credits"
-          value="5,986,231"
+          value="0"
           oppositeFlow={true}
           className="py-6"
           mainIcon={<Coinstack height={20} width={20} color="#667085" />}
         />{" "}
         <Card
           title="Avg. Credit Balance "
-          value="148,790"
+          value="0"
           oppositeFlow={true}
           className="py-6"
           mainIcon={<Coinstack height={20} width={20} color="#667085" />}
@@ -286,7 +286,7 @@ const Overview = (props: Props) => {
                   </td>
                   <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
                     <Link
-                      href={`/admin/dashboard/usermanagement/organization/${org.id}`}
+                      href={``}
                     >
                       {" "}
                       <Button
@@ -313,12 +313,12 @@ const Overview = (props: Props) => {
             </tbody>
           )}
         </table>
-        {organizations.length >= 10 && (
+        {organizationCredits.length >= 10 && (
           <div className="w-full  pt-[11px] pb-[16px] p-6 ">
             <Pagination />
           </div>
         )}
-        {organizations.length === 0 && (
+        {organizationCredits.length === 0 && (
           <div className="w-full h-80 flex flex-col  text-center  mt-32 mb-32 items-center justify-center mx-auto">
             <Image src={illustration} alt="img" className="mx-auto" />
             <p className="text-lg font-semibold">No Organizations Yet</p>

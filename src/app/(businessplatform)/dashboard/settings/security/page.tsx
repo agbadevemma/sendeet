@@ -110,7 +110,7 @@ const Security = (props: Props) => {
       <hr className="bg-[#E4E7EC]  mt-6" />
       <form onSubmit={formik.handleSubmit}>
         {" "}
-        <div className="flex mt-5 justify-between">
+        <div className="flex  md:flex-row flex-col mt-5 gap-4 justify-between">
           <div className="flex flex-col max-w-[305px] w-full">
             {" "}
             <p className="text-[18px] size font-medium">Change Password</p>
@@ -191,8 +191,8 @@ const Security = (props: Props) => {
           </div>
         </div>
         <hr className="bg-[#E4E7EC]  mt-5" />
-        <div className="flex mt-5 justify-between ">
-          <div className="flex flex-col max-w-[305px] ">
+        <div className="flex mt-5  md:flex-row flex-col  gap-4 justify-between  w-full">
+          <div className="flex w-full flex-col max-w-[305px] ">
             <p className="text-[18px] size font-medium">
               Two - step verification
             </p>
@@ -213,8 +213,8 @@ const Security = (props: Props) => {
             </div>
           </div>
         </div>
-        <hr className="bg-[#E4E7EC]  mt-5" />
-        <div className="flex mt-16 items-center justify-end gap-3 mb-10">
+        <hr className="bg-[#E4E7EC] mt-6 md:mt-5" />
+        <div className="flex mt-6 md:mt-16 items-center justify-end gap-3 md:mb-10">
           <TextButton
             text="Cancel"
             size="sm"

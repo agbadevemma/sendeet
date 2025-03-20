@@ -26,7 +26,7 @@ const Notifications = ({ children }: { children: React.ReactNode }) => {
   };
   const pathName = usePathname();
   const [tabs, setTabs] = useState<Array<TabItem>>([
-    { id: 1, title: "Overview", isActive: true, href: "/admin/dashboard/notifications" },
+    // { id: 1, title: "Overview", isActive: true, href: "/admin/dashboard/notifications" },
     {
       id: 2,
       title: "History",

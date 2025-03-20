@@ -2,6 +2,7 @@ import ArrowDown from "@/icons/arrow-down";
 import ArrowUp from "@/icons/arrow-up";
 import ArrowUp2 from "@/icons/arrow-up2";
 import React from "react";
+import AnalyticsData from "./AnalyticsData";
 
 type Props = {
   title: string; // Card title, e.g., "Active Users"
@@ -19,7 +20,7 @@ const Card = ({
   title,
   value,
   percentage,
-  comparisonText = "vs last week",
+  comparisonText,
   mainIcon,
   className1,
   className,
@@ -33,7 +34,7 @@ const Card = ({
       <div className="flex flex-col gap-2 w-full">
         <span className={`text-sm ${className1} text-[#475367] `}>{title}</span>
         <span className={`text-[#344054] text-xl font-semibold`}>{value}</span>
-        {percentage && (
+        {Number(percentage) > 0  && (
           <div
             className={`flex ${
               oppositeFlow ? "text-error-600" : "text-success-600"
@@ -51,16 +52,19 @@ const Card = ({
               ) : (
                 <ArrowUp2 color="#0B6B2B" height={12} width={12} />
               )}
-              <span className="font-medium">{percentage}</span>
+              <span className="font-medium">{Number(percentage)}%</span>
             </div>
             <span className="text-xs">{comparisonText}</span>
           </div>
         )}
+        {Number(percentage) === 0 && (
+          <div className="w-full">
+            <AnalyticsData />
+          </div>
+        )}
       </div>
       <div
-        className={`rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center ${
-          coloredbackground 
-        } flex-shrink-0`}
+        className={`rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center ${coloredbackground} flex-shrink-0`}
       >
         {mainIcon}
       </div>

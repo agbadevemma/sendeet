@@ -108,23 +108,13 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
                 <Home color="#667085" height={20} width={20} />{" "}
                 <span>Home</span>
               </Link>
-              <Link
-                href={"/admin/dashboard/help-center/navigate-dashboard"}
-                onClick={() => {
-                  setGettingStartedDropdown(true);
-                }}
-                className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]"
-              >
+              <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
                 <Building5 color="#667085" height={20} width={20} />{" "}
                 <p className="w-full text-sm">Organization Management</p>
-                <div
-                  className={`transition-transform duration-300 ${
-                    gettingStartedDropdown ? "transform rotate-180" : ""
-                  }`}
-                >
+                <div className={`transition-transform duration-300 `}>
                   <ChevronDown color="#667085" height={16} width={16} />
                 </div>
-              </Link>
+              </div>
 
               <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
                 <User color="#667085" height={20} width={20} />{" "}
@@ -164,14 +154,8 @@ const HelpCenterRootLayout = ({ children }: { children: React.ReactNode }) => {
                       : ""
                   } rounded-lg cursor-pointer pl-10 hover:bg-[#F2F4F7] text-[#667085]`}
                 >
-                
-                  <p className="w-full text-sm">
-                  Resolving Delivery Failures
-                  </p>
-                  
+                  <p className="w-full text-sm">Resolving Delivery Failures</p>
                 </Link>{" "}
-               
-                
               </div>
               <div className="flex items-center px-3 gap-3 py-2 rounded-lg cursor-pointer hover:bg-[#F2F4F7] text-[#667085]">
                 <Code color="#667085" height={20} width={20} />{" "}

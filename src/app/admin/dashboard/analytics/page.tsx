@@ -1,37 +1,43 @@
-"use client"
-import Button from '@/components/buttons/Button'
-import CampaignPerformanceChart from '@/components/CampaignPerformanceChart'
-import Checkbox from '@/components/Checkbox'
-import SearchInput from '@/components/SearchInput'
-import ArrowUp from '@/icons/arrow-up'
-import BarChartv from '@/icons/bar-chart-v'
-import Calendar from '@/icons/calendar'
-import ChevronDown from '@/icons/cheveron-down'
-import DotV from '@/icons/dot-v'
+"use client";
+import Button from "@/components/buttons/Button";
+import CampaignPerformanceChart from "@/components/CampaignPerformanceChart";
+import Checkbox from "@/components/Checkbox";
+import SearchInput from "@/components/SearchInput";
+import ArrowUp from "@/icons/arrow-up";
+import BarChartv from "@/icons/bar-chart-v";
+import Calendar from "@/icons/calendar";
+import ChevronDown from "@/icons/cheveron-down";
+import DotV from "@/icons/dot-v";
 import Engagement from "@/icons/engagement";
-import Eye from '@/icons/eye'
-import FileDownload from '@/icons/file-download'
-import HelpCircle from '@/icons/help-circle'
-import Multiply from '@/icons/multiply'
-import PencilEdit from '@/icons/pencil-edit'
-import SearchIcon from '@/icons/search-icon'
-import SendAlt from '@/icons/send-alt'
-import TickDouble from '@/icons/tick-double'
-import { CampaignInterface, initialCampaign, organizations, OrganizationAdmin, adminOrganizations } from '@/utils/data'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import map from "../../../../images/map.svg"
-import Image from 'next/image'
+import Eye from "@/icons/eye";
+import FileDownload from "@/icons/file-download";
+import HelpCircle from "@/icons/help-circle";
+import Multiply from "@/icons/multiply";
+import PencilEdit from "@/icons/pencil-edit";
+import SearchIcon from "@/icons/search-icon";
+import SendAlt from "@/icons/send-alt";
+import TickDouble from "@/icons/tick-double";
+import {
+  CampaignInterface,
+  initialCampaign,
+  organizations,
+  OrganizationAdmin,
+  adminOrganizations,
+} from "@/utils/data";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import map from "../../../../images/map.svg";
+import Image from "next/image";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import FilterAlt from '@/icons/filter-alt'
-import Pagination from '@/components/Pagination'
-import AnalyticsModal from '@/components/AnalyticsModal'
-import AdminAnalyticModal from '@/components/admin/AdminAnalyticModal'
+import FilterAlt from "@/icons/filter-alt";
+import Pagination from "@/components/Pagination";
+import AnalyticsModal from "@/components/AnalyticsModal";
+import AdminAnalyticModal from "@/components/admin/AdminAnalyticModal";
+import AnalyticsData from "@/components/AnalyticsData";
 
 
-type Props = {}
+type Props = {};
 
 const Analytics = (props: Props) => {
-
   const timeDropdownRef = useRef<HTMLDivElement>(null);
   const [isTimeDropdownOpen, setIsTimeDropdownOpen] = useState(false);
   const contentDropdownRef = useRef<HTMLDivElement>(null);
@@ -110,16 +116,12 @@ const Analytics = (props: Props) => {
     setOrganizations(sortedOrganizations);
   };
 
-
-
   interface TabItem {
     id: number;
     title: string;
     value: number;
     isActive: boolean;
   }
-
-
 
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
@@ -134,7 +136,6 @@ const Analytics = (props: Props) => {
     }
   };
   const getFilteredOrganizations = () => {
-
     return organization.filter((organ) => {
       const matchesSearch = organ.industry
         .toLowerCase()
@@ -161,7 +162,7 @@ const Analytics = (props: Props) => {
   const isIndeterminate =
     selectedItems.length > 0 && selectedItems.length < organizations.length;
   const [isOpen, setIsOpen] = useState(false);
-  const value = 35;
+  const value = 0;
   const percentage = Math.min((value / 100) * 100, 100);
   // Define the type for the chart data
   interface DataItem {
@@ -171,26 +172,22 @@ const Analytics = (props: Props) => {
 
   // Sample data
   const data: DataItem[] = [
-    { name: "Documents", value: 121799 },
-    { name: "Images", value: 66734 },
-    { name: "Audio", value: 21567 },
-    { name: "Video", value: 11387 },
-    { name: "Others", value: 7806 },
-
+    { name: "Documents", value: 1 },
+    { name: "Images", value: 0 },
+    { name: "Audio", value: 0 },
+    { name: "Video", value: 0 },
+    { name: "Others", value: 0},
   ];
   interface MergedDataItem extends DataItem {
     color: string;
   }
 
-
-
   // Colors for the pie chart
   const COLORS = ["#E6F7FE", "#8AD8FB", "#54C6FA", "#009BE1", "#0079AF"];
 
-
   const mergedData: MergedDataItem[] = data.map((item, index) => ({
     ...item,
-    color: COLORS[index]
+    color: COLORS[index],
   }));
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
   return (
@@ -237,16 +234,19 @@ const Analytics = (props: Props) => {
           <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Total Opens</span>
-              <span className="text-[#344054] text-xl font-semibold">
-            0
-              </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
+              <span className="text-[#344054] text-xl font-semibold">0</span>
+              {/* <div className="flex text-success-600 items-center gap-[6px] ">
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="font-medium">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
+              </div> */}
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -256,16 +256,19 @@ const Analytics = (props: Props) => {
           <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Opt Ins</span>
-              <span className="text-[#344054] text-xl font-semibold">
-              0
-              </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
+              <span className="text-[#344054] text-xl font-semibold">0</span>
+              {/* <div className="flex text-success-600 items-center gap-[6px] ">
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="font-medium">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
+              </div> */}
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -278,13 +281,18 @@ const Analytics = (props: Props) => {
               <span className="text-[#344054] text-xl font-semibold">
                 89.9%
               </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
+              {/* <div className="flex text-success-600 items-center gap-[6px] ">
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="font-medium">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
+              </div> */}
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -294,16 +302,19 @@ const Analytics = (props: Props) => {
           <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-[13px]">Average Engagement Rate</span>
-              <span className="text-[#344054] text-xl font-semibold">
-                1,751,369
-              </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
+              <span className="text-[#344054] text-xl font-semibold">0</span>
+              {/* <div className="flex text-success-600 items-center gap-[6px] ">
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="font-medium">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
+              </div> */}
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -392,17 +403,17 @@ const Analytics = (props: Props) => {
             <div className="flex flex-col item-center  justify-between mt-1 w-full ">
               <span className="text-md text-grey-500">Open Rate</span>
               <div className="flex justify-between lg:justify-normal  items-center lg:gap-4 w-full mt-2 ">
-                <span className="text-xl lg:text-[1.4rem] font-medium">
-                  78.2%
-                </span>
-                <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
+                <span className="text-xl lg:text-[1.4rem] font-medium">0%</span>
+                {/* <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="text-success-700 font-medium">7.2%</span>
-                </div>
+                </div> */}
+
+                <AnalyticsData />
               </div>
             </div>
 
-            <CampaignPerformanceChart type='admin' />
+            <CampaignPerformanceChart type="admin" />
           </div>
           <div className="h-[24rem] hidden lg:block bg-[#F0F1F3] w-px "></div>
           <div className="w-full lg:w-1/2  flex flex-col">
@@ -410,44 +421,47 @@ const Analytics = (props: Props) => {
             <div className="flex flex-col mt-6 gap-2 justify-between  flex-1">
               <div className="pb-4 border-b border-b-[#F0F1F3] flex items-center justify-between">
                 <span className="text-grey-400 text-sm">Total Campaigns</span>
-                <span className="font-medium text-sm">25</span>
+                <span className="font-medium text-sm">0</span>
               </div>{" "}
               <div className="pb-4 border-b border-b-[#F0F1F3] flex items-center justify-between">
                 <span className="text-grey-400 text-sm">Active Campaigns</span>
-                <span className="font-medium text-sm">1435</span>
+                <span className="font-medium text-sm">0</span>
               </div>{" "}
               <div className="pb-4 border-b border-b-[#F0F1F3] flex items-center justify-between">
                 <span className="text-grey-400 text-sm">Failed Campaigns</span>
-                <span className="font-medium text-sm">19</span>
+                <span className="font-medium text-sm">0</span>
               </div>
               <div className="pb-4 border-b border-b-[#F0F1F3] flex items-center justify-between">
                 <span className="text-grey-400 text-sm">
                   Successful Campaigns
                 </span>
-                <span className="font-medium text-sm">1</span>
+                <span className="font-medium text-sm">0</span>
               </div>
               <div className="pb-4 border-b border-b-[#F0F1F3] flex items-center justify-between">
-                <span className="text-grey-400 text-sm">Scheduled vs. Sent Campaigns</span>
-                <span className="font-medium text-sm">30/200</span>
+                <span className="text-grey-400 text-sm">
+                  Scheduled vs. Sent Campaigns
+                </span>
+                <span className="font-medium text-sm">0/0</span>
               </div>
               <div className="pb-4 border-b border-b-[#F0F1F3] flex items-center justify-between">
-                <span className="text-grey-400 text-sm">Average Time to Send</span>
-                <span className="font-medium text-sm">2 mins</span>
+                <span className="text-grey-400 text-sm">
+                  Average Time to Send
+                </span>
+                <span className="font-medium text-sm">0 mins</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex lg:flex-row flex-col gap-4 w-full mt-5">
-        <div className="w-full gap-3  p-4 lg:p-6 bg-white   border rounded-lg  h-full">
+      <div className="flex lg:flex-row flex-col i gap-4 w-full mt-5">
+        <div className="w-full gap-3  p-4 lg:p-6 bg-white   border rounded-lg ">
           <div className="flex w-full justify-between items-start">
             <div className="flex flex-col">
               <p className="text-[18px] font-medium">Active Opt Ins</p>
-              <div className="flex gap-2 mt-4"><span className='text-lg font-medium'>16,843</span>  <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
-                <ArrowUp color="#12B76A" height={12} width={12} />
-                <span className="text-success-700  font-medium">7.2%</span>
-              </div></div>
+              <div className="mt-2">
+                <AnalyticsData />
+              </div>
             </div>
             <div ref={timeDropdownRef} className="relative">
               <Button
@@ -458,27 +472,30 @@ const Analytics = (props: Props) => {
               />
               {isTimeDropdownOpen && (
                 <div className="w-32 mt-2 bg-white absolute drop-shadow-[0px_1px_2px_rgba(16,24,40,0.05)] border-[0.9px] border-[#F0F1F3] rounded-[10px] p-2 flex flex-col gap-2 z-50">
-                  {["7 Days", "30 Days", "6 Months", "12 Months"].map((item) => (
-                    <div
-                      key={item}
-                      className="text-[#383E49] font-normal text-[13px] rounded-lg cursor-pointer px-[10px] py-2 hover:bg-[#F9FAFB]"
-                    >
-                      {item}
-                    </div>
-                  ))}
+                  {["7 Days", "30 Days", "6 Months", "12 Months"].map(
+                    (item) => (
+                      <div
+                        key={item}
+                        className="text-[#383E49] font-normal text-[13px] rounded-lg cursor-pointer px-[10px] py-2 hover:bg-[#F9FAFB]"
+                      >
+                        {item}
+                      </div>
+                    )
+                  )}
                 </div>
               )}
             </div>
-
           </div>
 
-          <div className="flex mt-6 gap-4 items-center w-full">
-            <Image src={map} alt='map' className=' object-contain' />
+          <div className="flex mt-6 gap-4 xl:gap-10 items-center w-full">
+            <Image src={map} alt="map" className=" object-contain w-full" />
             <div className="flex flex-col gap-8 w-full">
               <div className="flex items-center gap-2">
-                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">LG</div>
+                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">
+                  LG
+                </div>
                 <div className="flex flex-col w-full">
-                  <span>Lagos</span>
+                  <span className="text-sm">Lagos</span>
                   <div className="flex gap-3 w-full items-center ">
                     <div className="w-full rounded-full h-2  bg-[#E6F7FE]">
                       <div
@@ -486,15 +503,16 @@ const Analytics = (props: Props) => {
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <span className='text-[#383E49]'>30%</span>
-
+                    <span className="text-sm text-[#383E49]">0%</span>
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">AK</div>
+                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">
+                  AK
+                </div>
                 <div className="flex flex-col w-full">
-                  <span>Akwa-Ibom</span>
+                  <span className="text-sm">Akwa-Ibom</span>
                   <div className="flex gap-3 w-full items-center ">
                     <div className="w-full rounded-full h-2  bg-[#E6F7FE]">
                       <div
@@ -502,15 +520,16 @@ const Analytics = (props: Props) => {
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <span className='text-[#383E49]'>30%</span>
-
+                    <span className="text-sm text-[#383E49]">0%</span>
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">KN</div>
+                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">
+                  KN
+                </div>
                 <div className="flex flex-col w-full">
-                  <span>Kano</span>
+                  <span className="text-sm">Kano</span>
                   <div className="flex gap-3 w-full items-center ">
                     <div className="w-full rounded-full h-2  bg-[#E6F7FE]">
                       <div
@@ -518,14 +537,16 @@ const Analytics = (props: Props) => {
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <span className='text-[#383E49]'>30%</span>
-
+                    <span className="text-sm text-[#383E49]">0%</span>
                   </div>
                 </div>
-              </div><div className="flex items-center gap-2">
-                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">LG</div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">
+                  LG
+                </div>
                 <div className="flex flex-col w-full">
-                  <span>Lagos</span>
+                  <span className="text-sm">Lagos</span>
                   <div className="flex gap-3 w-full items-center ">
                     <div className="w-full rounded-full h-2  bg-[#E6F7FE]">
                       <div
@@ -533,14 +554,16 @@ const Analytics = (props: Props) => {
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <span className='text-[#383E49]'>30%</span>
-
+                    <span className="text-sm text-[#383E49]">0%</span>
                   </div>
                 </div>
-              </div><div className="flex items-center gap-2">
-                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">LG</div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="size-10 p-3 rounded-full border  font-medium text-grey-800 flex items-center justify-center border-grey-100 ">
+                  LG
+                </div>
                 <div className="flex flex-col w-full">
-                  <span>Lagos</span>
+                  <span className="text-sm">Lagos</span>
                   <div className="flex gap-3 w-full items-center ">
                     <div className="w-full rounded-full h-2  bg-[#E6F7FE]">
                       <div
@@ -548,8 +571,7 @@ const Analytics = (props: Props) => {
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <span className='text-[#383E49]'>30%</span>
-
+                    <span className="text-sm text-[#383E49]">0%</span>
                   </div>
                 </div>
               </div>
@@ -569,53 +591,65 @@ const Analytics = (props: Props) => {
               />
               {isContentDropdownOpen && (
                 <div className="w-32 mt-2 bg-white absolute drop-shadow-[0px_1px_2px_rgba(16,24,40,0.05)] border-[0.9px] border-[#F0F1F3] rounded-[10px] p-2 flex flex-col gap-2 z-50">
-                  {["7 Days", "30 Days", "6 Months", "12 Months"].map((item) => (
-                    <div
-                      key={item}
-                      className="text-[#383E49] font-normal text-[13px] rounded-lg cursor-pointer px-[10px] py-2 hover:bg-[#F9FAFB]"
-                    >
-                      {item}
-                    </div>
-                  ))}
+                  {["7 Days", "30 Days", "6 Months", "12 Months"].map(
+                    (item) => (
+                      <div
+                        key={item}
+                        className="text-[#383E49] font-normal text-[13px] rounded-lg cursor-pointer px-[10px] py-2 hover:bg-[#F9FAFB]"
+                      >
+                        {item}
+                      </div>
+                    )
+                  )}
                 </div>
               )}
-
             </div>
           </div>
-          <div className="w-full flex items-center justify-center -mt-1"><PieChart width={200} height={200}>
-            <Pie
-              data={data}
-              cx="50%" // Center X
-              cy="50%" // Center Y
-              outerRadius={100} // Size of the pie
-              fill="#8884d8"
-              dataKey="value" // Key to fetch values
-              nameKey="name" // Key to fetch names
-
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-
-          </PieChart></div>
+          <div className="w-full flex items-center justify-center -mt-1">
+            <PieChart width={200} height={200}>
+              <Pie
+                data={data}
+                cx="50%" // Center X
+                cy="50%" // Center Y
+                outerRadius={100} // Size of the pie
+                fill="#8884d8"
+                dataKey="value" // Key to fetch values
+                nameKey="name" // Key to fetch names
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </div>
 
           <div className="flex flex-col gap-4">
-            {mergedData.map((item, index) => (<div key={index} className='flex items-center justify-between'>
-              <div className="flex items-center gap-2">
-                <div className={`size-2 rounded-full`} style={{ backgroundColor: item.color }}></div>
-                <div>{item.name}</div>
+            {mergedData.map((item, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`size-2 rounded-full`}
+                    style={{ backgroundColor: item.color }}
+                  ></div>
+                  <div>{item.name}</div>
+                </div>
+                <span className="text-sm font-medium">
+                  {item.value.toLocaleString()}
+                </span>
               </div>
-              <span className='text-sm font-medium'>{item.value.toLocaleString()}</span>
-
-            </div>))}
+            ))}
           </div>
         </div>
       </div>
 
       <div className="w-full mt-5 bg-white rounded-[12px] border border-solid border-[#E4E7EC]">
         <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
-          <div className="text-lg font-medium">Top Performing Organizations</div>
+          <div className="text-lg font-medium">
+            Top Performing Organizations
+          </div>
 
           <div className=" flex items-center gap-2">
             <SearchInput
@@ -649,11 +683,12 @@ const Analytics = (props: Props) => {
                     <span> OrganizationAdmin Name</span>
                     <div
                       onClick={() => handleSort("organizationName")}
-                      className={` transition-transform duration-300   ${sortConfig?.key === "organizationName" &&
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "organizationName" &&
                         sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                        }`}
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
                     >
                       <ArrowUp color={"#5D6679"} />
                     </div>
@@ -664,11 +699,12 @@ const Analytics = (props: Props) => {
                     Industry
                     <div
                       onClick={() => handleSort("industry")}
-                      className={` transition-transform duration-300   ${sortConfig?.key === "industry" &&
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "industry" &&
                         sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                        }`}
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
                     >
                       <ArrowUp color={"#5D6679"} />
                     </div>
@@ -679,11 +715,12 @@ const Analytics = (props: Props) => {
                     Total Campaigns
                     <div
                       onClick={() => handleSort("totalCampaigns")}
-                      className={` transition-transform duration-300   ${sortConfig?.key === "totalCampaigns" &&
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "totalCampaigns" &&
                         sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                        }`}
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
                     >
                       <ArrowUp color={"#5D6679"} />
                     </div>
@@ -694,11 +731,12 @@ const Analytics = (props: Props) => {
                     Total Credits Used
                     <div
                       onClick={() => handleSort("totalCreditsUsed")}
-                      className={` transition-transform duration-300   ${sortConfig?.key === "totalCreditsUsed" &&
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "totalCreditsUsed" &&
                         sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                        }`}
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
                     >
                       <ArrowUp color={"#5D6679"} />
                     </div>
@@ -708,11 +746,12 @@ const Analytics = (props: Props) => {
                   <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                     Opt In Rate
                     <div
-                      className={` transition-transform duration-300   ${sortConfig?.key === "optInRate" &&
+                      className={` transition-transform duration-300   ${
+                        sortConfig?.key === "optInRate" &&
                         sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                        }`}
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
                     >
                       <ArrowUp color={"#5D6679"} />
                     </div>
@@ -737,7 +776,6 @@ const Analytics = (props: Props) => {
                         checked={selectedItems.includes(index)}
                         onClick={() => handleSelectItem(index)}
                       />{" "}
-
                       {campaign.organizationName}
                     </td>
                     <td className="text-sm font-medium text-grey-800 p-2 pr-8">
@@ -755,14 +793,12 @@ const Analytics = (props: Props) => {
 
                     <td className="text-sm font-medium text-grey-800 p-2">
                       <div className="flex gap-x-2 justify-start">
-
                         <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
                           <Eye color="#858D9D" height={16} width={16} />
                         </div>
                         <div className="h-8 w-8 p-2 jus flex items-center rounded-lg border border-[#E4E7EC]">
                           <DotV color="#858D9D" />
                         </div>
-
                       </div>
                     </td>
                   </tr>
@@ -777,10 +813,8 @@ const Analytics = (props: Props) => {
           )}
         </div>
       </div>
-
-
     </div>
-  )
-}
+  );
+};
 
-export default Analytics
+export default Analytics;

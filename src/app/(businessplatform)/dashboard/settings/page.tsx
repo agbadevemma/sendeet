@@ -166,7 +166,7 @@ const SettingsPage = (props: Props) => {
           Manage the information on your account
         </p>
         <hr className="bg-[#E4E7EC]  mt-4" />
-        <div className="mt-10 flex gap-4  justify-between">
+        <div className="mt-10 flex flex-col-reverse md:flex-row items-center md:items-stretch gap-4  justify-between">
           <div className="flex flex-col">
             <p className="">Profile photo</p>
             <p className="text-xs">
@@ -190,7 +190,7 @@ const SettingsPage = (props: Props) => {
               onChange={(e) => handleUploadImage(e, "dp")}
             />
           </div>
-          <div className="w-full max-w-[632px]">
+          <div className="mx-auto md:m-0 md:w-full md:max-w-[632px]">
             <Image
               src={
                 uploadedProfileImage
@@ -205,7 +205,7 @@ const SettingsPage = (props: Props) => {
           </div>
         </div>
         <hr className="bg-[#E4E7EC]  mt-10" />
-        <div className="mt-10 flex gap-2 justify-between">
+        <div className="mt-10 flex md:flex-row flex-col  gap-4 justify-between">
           <div className="flex flex-col">
             <span className="text-[#101928]">Personal Information</span>
             <span className="text-[#667085] text-xs">
@@ -291,7 +291,7 @@ const SettingsPage = (props: Props) => {
                   : undefined
               }
             />
-             <InputField
+            <InputField
               label="Whatsapp Business Number"
               inputType=""
               placeholder=""
@@ -329,10 +329,10 @@ const SettingsPage = (props: Props) => {
           </div>
         </div>
         <hr className="bg-[#E4E7EC]  mt-10" />
-        <div className="flex mt-10 justify-between ">
+        <div className="flex   md:flex-row flex-col gap-4 mt-10 justify-between ">
           <div className="flex flex-col">
             <p className="text-base font-medium">Company Logo</p>
-            <p className="text-[#667085] text-sm text-nowrap">
+            <p className="text-[#667085] text-sm ">
               Update your company logo here
             </p>
           </div>
@@ -344,7 +344,7 @@ const SettingsPage = (props: Props) => {
                   ? uploadedCompanyImage
                   : data?.companyLogo ?? dashlogo
               }
-              alt="cool"
+              alt="company-Logo"
               width={78}
               height={78}
               className="w-[78px] h-[78px] object-contain rounded-xl"

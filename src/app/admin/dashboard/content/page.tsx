@@ -138,21 +138,21 @@ const Content = (props: Props) => {
         {/* Insight Cards */}
         <Card
           title="Total Campaigns"
-          value="349"
+          value="0"
           className="py-6"
           mainIcon={<LoudSpeaker height={20} width={20} color="#667085" />}
         />
 
         <Card
           title="Active Campaigns"
-          value="23,853"
+          value="0"
           className="py-6"
           mainIcon={<Messages height={20} width={20} color="#667085" />}
         />
 
         <Card
           title="Successful Campaigns"
-          value="1,234"
+          value="0"
           oppositeFlow={true}
           className="py-6"
           mainIcon={<Check height={20} width={20} color="#667085" />}
@@ -160,7 +160,7 @@ const Content = (props: Props) => {
 
         <Card
           title="Failed Campaigns"
-          value="21"
+          value="0"
           oppositeFlow={true}
           className="py-6"
           mainIcon={<Multiply height={20} width={20} color="#667085" />}
@@ -362,9 +362,7 @@ const Content = (props: Props) => {
                         </div>
                       </td>
                       <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
-                        <Link
-                          href={`/admin/dashboard/usermanagement/campaignience/${campaign.id}`}
-                        >
+                        <Link href={``}>
                           {" "}
                           <Button
                             size="sm"
@@ -395,7 +393,7 @@ const Content = (props: Props) => {
               <Image src={illustration} alt="img" className="mx-auto" />
               <p className="text-lg font-semibold">No Content Yet</p>
               <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
-                It looks like no Audience have opted in through Organizationes.
+                It looks like no campaigns Performance data isa available .
               </p>
             </div>
           )}

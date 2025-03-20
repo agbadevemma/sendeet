@@ -19,19 +19,20 @@
   }
 
   const data: ChartData[] = [
-    { name: "Jan", Purchase: 4000, Used: 2400 },
-    { name: "Feb", Purchase: 3000, Used: 1398 },
-    { name: "Mar", Purchase: 2000, Used: 9800 },
-    { name: "Apr", Purchase: 2780, Used: 3908 },
-    { name: "May", Purchase: 1890, Used: 4800 },
-    { name: "Jun", Purchase: 2390, Used: 3800 },
-    { name: "Jul", Purchase: 3490, Used: 4300 },
-    { name: "Aug", Purchase: 3200, Used: 4100 },
-    { name: "Sep", Purchase: 2500, Used: 3900 },
-    { name: "Oct", Purchase: 3000, Used: 4500 },
-    { name: "Nov", Purchase: 2700, Used: 4200 },
-    { name: "Dec", Purchase: 2900, Used: 3800 },
-  ];
+    { name: "Jan", Purchase: 0, Used: 0 },
+    { name: "Feb", Purchase: 0, Used: 0 },
+    { name: "Mar", Purchase: 0, Used: 0 },
+    { name: "Apr", Purchase: 0, Used: 0 },
+    { name: "May", Purchase: 0, Used: 0 },
+    { name: "Jun", Purchase: 0, Used: 0 },
+    { name: "Jul", Purchase: 0, Used: 0 },
+    { name: "Aug", Purchase: 0, Used: 0 },
+    { name: "Sep", Purchase: 0, Used: 0 },
+    { name: "Oct", Purchase: 0, Used: 0 },
+    { name: "Nov", Purchase: 0, Used: 0 },
+    { name: "Dec", Purchase: 0, Used: 0 },
+];
+
 
   const formatNumber = (value: number) => {
     return value.toLocaleString();

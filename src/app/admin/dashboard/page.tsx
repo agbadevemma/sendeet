@@ -27,10 +27,8 @@ type Props = {};
 const AdminDashboard = (props: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  
   return (
     <div className="">
-     
       <div className="w-full ">
         <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
           <div className="flex items-center gap-4">
@@ -58,14 +56,19 @@ const AdminDashboard = (props: Props) => {
           <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Users</span>
-              <span className="text-[#344054] text-xl font-semibold">
-                1,943,219
-              </span>
-              <div className="flex items-center gap-[6px]  ">
+              <span className="text-[#344054] text-xl font-semibold">0</span>
+              {/* <div className="flex items-center gap-[6px]  ">
                 <div className="px-1 rounded-[10px] text-xs flex  items-center gap-[2px] text-error-600 bg-error-50">
                   <ArrowDown height={12} width={12} color="#971B17" /> 1%
                 </div>
                 <span className="text-error-600 text-xs">vs last week</span>
+              </div> */}
+
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
               </div>
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
@@ -75,17 +78,22 @@ const AdminDashboard = (props: Props) => {
           <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Active Users</span>
-              <span className="text-[#344054] text-xl font-semibold">
-                1,751,369
-              </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
+              <span className="text-[#344054] text-xl font-semibold">0</span>
+
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
+              </div>
+              {/* <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="font-medium">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
-              </div>
+              </div> */}
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
               <UserTick height={20} width={20} color="#667085" />
@@ -94,17 +102,22 @@ const AdminDashboard = (props: Props) => {
           <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Businesses</span>
-              <span className="text-[#344054] text-xl font-semibold">
-                342,891
-              </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
+              <span className="text-[#344054] text-xl font-semibold">0</span>
+
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
+              </div>
+              {/* <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="font-medium">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
-              </div>
+              </div> */}
             </div>
             <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
               <Building5 color="#667085" height={20} width={20} />
@@ -113,17 +126,22 @@ const AdminDashboard = (props: Props) => {
           <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Subscribers</span>
-              <span className="text-[#344054] text-xl font-semibold">
-                1,325,464
-              </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
+              <span className="text-[#344054] text-xl font-semibold">0</span>
+
+              <div className="flex items-center gap-[6px]">
+                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                  -%
+                </div>
+                <span className="text-grey-400 text-xs">No data</span>
+              </div>
+              {/* <div className="flex text-success-600 items-center gap-[6px] ">
                 {" "}
                 <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
                   <ArrowUp color="#12B76A" height={12} width={12} />
                   <span className="font-medium">2%</span>
                 </div>
                 <span className=" text-xs">vs lastweek</span>
-              </div>
+              </div> */}
             </div>
             <div className="rounded-full p-[10px] flex-nowrap border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
               <UserAdd color="#667085" height={20} width={20} />
@@ -161,13 +179,16 @@ const AdminDashboard = (props: Props) => {
 
               <div className="flex item-center  justify-between mt-1 w-full ">
                 <div className="flex justify-between lg:justify-normal  items-center lg:gap-4 w-full mt-2 ">
-                  <span className="text-xl lg:text-3xl font-medium">
-                    $107,843.82
-                  </span>
-                  <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
+                  <span className="text-xl lg:text-3xl font-medium">$0</span>
+
+                  <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                    -%
+                  </div>
+
+                  {/* <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
                     <ArrowUp color="#12B76A" height={12} width={12} />
                     <span className="text-success-700 font-medium">7.2%</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="flex  w-full justify-end  items-center gap-[13px] mt-2">
@@ -182,7 +203,7 @@ const AdminDashboard = (props: Props) => {
               </div>
               <AdminBarChart />
             </div>
-            <div className="h-96 hidden lg:block bg-[#F0F1F3] w-px mt-6"></div>
+            {/* <div className="h-96 hidden lg:block bg-[#F0F1F3] w-px mt-6"></div>
             <div className="w-full lg:w-1/2  flex flex-col">
               <p className="font-medium text-md ">Low Credit Balance</p>
               <div className="flex flex-col mt-6 gap-4  flex-1">
@@ -213,7 +234,7 @@ const AdminDashboard = (props: Props) => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="lg:p-6 p-4  border rounded-xl h-full">
             <div className="w-full">
@@ -232,12 +253,16 @@ const AdminDashboard = (props: Props) => {
               </p>
               <div className="flex item-center  justify-between mt-1 ">
                 <div className="flex items-center justify-between lg:justify-normal lg:gap-4 w-full">
-                  <span className=" text-xl lg:text-3xl font-medium">
-                    4,538
-                  </span>
-                  <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
+                  <span className=" text-xl lg:text-3xl font-medium">0</span>
+                  {/* <div className="py-[2px] pl-[10px] flex gap-1 items-center pr-[8px] text-xs bg-success-50 text-[#344054] rounded-2xl">
                     <ArrowUp color="#12B76A" height={12} width={12} />
                     <span className="text-success-700 font-medium">7.2%</span>
+                  </div> */}
+                  <div className="flex items-center gap-[6px]">
+                    <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
+                      -%
+                    </div>
+                    {/* <span className="text-grey-400 text-xs">No data</span> */}
                   </div>
                 </div>
               </div>

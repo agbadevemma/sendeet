@@ -6,6 +6,7 @@ import InputField from "@/components/InputField";
 import Pagination from "@/components/Pagination";
 import ArrowUp from "@/icons/arrow-up";
 import DotV from "@/icons/dot-v";
+import illustration from "../../../../../images/illustrationcampaign.svg";
 import Eye from "@/icons/eye";
 import FilterAlt from "@/icons/filter-alt";
 import SearchIcon from "@/icons/search-icon";
@@ -256,10 +257,9 @@ const History = (props: Props) => {
 
           {mockAlertData.length == 0 && (
             <div className="w-full h-80 flex flex-col  text-center  mt-32 mb-32 items-center justify-center mx-auto">
-              <Image src={""} alt="img" className="mx-auto" />
-              <p className="text-lg font-semibold">No Content Yet</p>
+             <Image src={illustration} alt="img" className="mx-auto" />
+              <p className="text-lg font-semibold">No Notification History Yet</p>
               <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
-                It looks like no Audience have opted in through Organizationes.
               </p>
             </div>
           )}

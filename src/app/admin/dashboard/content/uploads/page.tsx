@@ -165,7 +165,7 @@ const Upload = (props: Props) => {
         {/* Insight Cards */}
         <Card
           title="Documents"
-          value="349 Files"
+          value="0 Files"
           coloredbackground="!border-none bg-success-50"
           className="py-6"
           mainIcon={<FileIcon height={20} width={20} color="#0F973D" />}
@@ -173,7 +173,7 @@ const Upload = (props: Props) => {
 
         <Card
           title="Videos"
-          value="65 Files"
+          value="0 Files"
           oppositeFlow={true}
           coloredbackground="!border-none bg-warning-50"
           className="py-6"
@@ -182,7 +182,7 @@ const Upload = (props: Props) => {
 
         <Card
           title="Images"
-          value="54 Files"
+          value="0 Files"
           coloredbackground="!border-none bg-primary-50"
           oppositeFlow={true}
           className="py-6"
@@ -190,7 +190,7 @@ const Upload = (props: Props) => {
         />
         <Card
           title="Audio"
-          value="3 Files"
+          value="0 Files"
           oppositeFlow={true}
           coloredbackground="!border-none bg-[#F4EBFF]"
           className="py-6"

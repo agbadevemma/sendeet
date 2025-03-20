@@ -78,17 +78,16 @@ const OrganizationPage = (props: Props) => {
     ];
   
     return organizationsData.filter((organization) => {
-      // Check if any of the specified fields match the search query
+     
       const matchesFields = searchableFields.some((field) =>
         organization[field]?.toString().toLowerCase().includes(searchQuery.toLowerCase())
       );
   
-      // Check if the registration date matches the search query
-      const matchesRegistrationDate = organization.registrationDate
+const matchesRegistrationDate = organization.registrationDate
         ?.toLowerCase()
         .includes(searchQuery.toLowerCase());
   
-      // Return true if any condition matches
+    
       return matchesFields || matchesRegistrationDate;
     });
   };
@@ -134,22 +133,22 @@ const OrganizationPage = (props: Props) => {
         {/* Insight Cards */}
         <Card
           title="Total Organization"
-          value="125"
+          value="0"
           className1="text-[#475367]"
-          percentage="5%"
+          percentage="0"
           mainIcon={<UserGroup height={20} width={20} color="#667085" />}
         />
         <Card
           title="Active Organization"
-          value="89"
-          percentage="2%"
+          value="0"
+          percentage="0"
           className1="text-[#475367]"
           mainIcon={<UserTick height={20} width={20} color="#667085" />}
         />{" "}
         <Card
           title="Inactive Organization"
-          value="36"
-          percentage="1%"
+          value="0"
+          percentage="0"
           className1="text-[#475367]"
           oppositeFlow={true}
           mainIcon={<UserAdd height={20} width={20} color="#667085" />}

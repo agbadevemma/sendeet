@@ -6,8 +6,7 @@ import StoreProvider from "./StoreProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GlobalLoading from "@/components/GlobalLoading";
-
-
+import Providers from "@/lib/providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,6 +38,7 @@ export default function RootLayout({
           bodyClassName="text-sm flex flex-col w-full max-w-[400px] !w-full !p-12" // Tailwind classes applied to body
         />
         <StoreProvider> {children}</StoreProvider>
+        {/* <Providers> {children}</Providers> */}
       </body>
     </html>
   );

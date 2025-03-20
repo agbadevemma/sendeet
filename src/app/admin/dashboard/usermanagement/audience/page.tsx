@@ -19,6 +19,7 @@ import Eye from "@/icons/eye";
 import DotV from "@/icons/dot-v";
 import FilterAlt from "@/icons/filter-alt";
 import Link from "next/link";
+import Card from "@/components/Card";
 
 type Props = {};
 
@@ -106,61 +107,31 @@ const Audience = ({}: Props) => {
           </div>
         </div>
         <div className="flex  lg:flex-row flex-col w-full gap-4 mt-12">
-          <div className="p-4 flex  items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-sm">Total Users</span>
-              <span className="text-[#344054] text-xl font-semibold">
-                2,376
-              </span>
+          <Card
+            title="Total Users"
+            value="0"
+            className1="text-[#475367]"
+            percentage="0"
+            comparisonText="vs lastweek"
+            mainIcon={<UserGroup height={20} width={20} color="#667085" />}
+          />
 
-              <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <UserGroup color="#667085" height={20} width={20} />
-            </div>
-          </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-sm">Active Users</span>
-              <span className="text-[#344054] text-xl font-semibold">
-                1,452
-              </span>
-              <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <UserTick height={20} width={20} color="#667085" />
-            </div>
-          </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-sm">Inactive Users</span>
-              <span className="text-[#344054] text-xl font-semibold">422</span>
-
-              <div className="flex items-center gap-[6px]  ">
-                <div className="px-1 rounded-[10px] text-xs flex  items-center gap-[2px] text-error-600 bg-error-50">
-                  <ArrowDown height={12} width={12} color="#971B17" /> 1%
-                </div>
-                <span className="text-error-600 text-xs">vs last week</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <UserAdd height={20} width={20} color="#667085" />
-            </div>
-          </div>
+          <Card
+            title="Active Users"
+            value="0"
+            className1="text-[#475367]"
+            percentage="0"
+            comparisonText="vs lastweek"
+            mainIcon={<UserTick height={20} width={20} color="#667085" />}
+          />
+          <Card
+            title="Inactive Users"
+            value="0"
+            className1="text-[#475367]"
+            percentage="0"
+            comparisonText="vs lastweek"
+            mainIcon={<UserAdd height={20} width={20} color="#667085" />}
+          />
         </div>
         <div className="rounded-xl mt-7 h-full w-full border border-[#E4E7EC]">
           <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center justify-between">
@@ -228,7 +199,7 @@ const Audience = ({}: Props) => {
                   </th>
                   <th className="p-2">
                     <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                    Organization
+                      Organization
                       <div
                         onClick={() => handleSort("business")}
                         className={` transition-transform duration-300   ${

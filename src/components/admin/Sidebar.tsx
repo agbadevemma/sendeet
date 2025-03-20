@@ -73,7 +73,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   href="/admin/dashboard/notifications"
                   IconComponent={BellBorder}
                   label="Notifications"
-                  notifyValue="12"
+                  notifyValue="0"
                   onClick={() => {
                     dispatch(setNotification(true));
                     setIsOpenDropDown(false);

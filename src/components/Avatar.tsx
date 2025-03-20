@@ -20,6 +20,7 @@ import Call from "@/icons/call";
 import Mail from "@/icons/mail";
 import CalendarAlt from "@/icons/calender-alt";
 import UserGroup from "@/icons/user-group";
+import useLogout from "@/hooks/useLogout";
 type Props = {};
 
 const Avatar = (props: Props) => {
@@ -48,27 +49,7 @@ const Avatar = (props: Props) => {
     };
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await logout().unwrap();
-      toast.success(<SuccessToast2 message={"Logout successful!"} />, {
-        style: {
-          width: "100%", // Adjust width as needed
-          maxWidth: "",
-        },
-        className: "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
-        bodyClassName:
-          "text-sm flex flex-col w-full max-w-[400px] !w-full !p-12",
-        progressClassName: "bg-red-200",
-        icon: false,
-        // closeButton: false, // Uncomment if you want to hide the close button
-      });
-      router.push("/login");
-      location.reload();
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  const { handleLogout } = useLogout();
   const { data } = useGetUserDetailsQuery(undefined);
   console.log("data", data);
 
@@ -166,9 +147,7 @@ const Avatar = (props: Props) => {
           </div> */}
           <div className="flex items-center gap-3">
             <Image
-              src={
-                 data?.companyLogo ?? ""
-              }
+              src={data?.companyLogo ?? ""}
               alt="profile"
               height={500}
               width={500}
@@ -180,7 +159,9 @@ const Avatar = (props: Props) => {
 
           <div className="flex flex-col mt-6 gap-1">
             <div className="flex gap-2">
-              <span className="text-base font-medium">{data?.business[0]?.companyName}</span>
+              <span className="text-base font-medium">
+                {data?.business[0]?.companyName}
+              </span>
               <span className="text-sm flex items-center justify-center rounded-2xl px-3 bg-[#E0F2FE] text-[#065986] font-medium">
                 NGO
               </span>
@@ -208,7 +189,7 @@ const Avatar = (props: Props) => {
               <div className="flex gap-2 items-center">
                 <Mail color="#667085" height={15} width={15} />
                 <div className="w-full text-grey-500 text-sm">
-                {data?.email}
+                  {data?.email}
                 </div>
               </div>
 

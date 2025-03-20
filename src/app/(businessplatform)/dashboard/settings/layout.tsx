@@ -100,7 +100,7 @@ export default function DashboardLayout({
         </div>
       </div>
       <div className="flex  mt-[25px] w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
-        <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12  h-[62px] items-end">
+        <div className="flex overflow-auto mx-auto md:mx-0 md:px-6 lg:px-11 gap-8 lg:gap-12  h-[62px] items-end">
           {tabs.map((tab, index) => (
             <Link
               href={tab.href}

@@ -167,7 +167,7 @@ const SettingsPage = (props: Props) => {
           Manage the information on your account
         </p>
         <hr className="bg-[#E4E7EC]  mt-4" />
-        <div className="mt-10 flex gap-4 ">
+        <div className="mt-10 flex justify-between gap-4 ">
           <div className="flex flex-col">
             <p className="">Profile photo</p>
             <p className="text-xs">
@@ -191,13 +191,18 @@ const SettingsPage = (props: Props) => {
               onChange={(e) => handleUploadImage(e, "dp")}
             />
           </div>
-          <Image
-            src={profile}
-            alt="profile"
-            height={500}
-            width={500}
-            className="rounded-full h-32 w-32 object-cover cursor-pointer"
-          />
+
+          <div className="w-full max-w-[632px]">
+            {" "}
+            <Image
+              src={profile}
+              alt="profile"
+              height={500}
+              width={500}
+              className="rounded-full h-32 w-32 object-cover cursor-pointer"
+            />
+          </div>
+          {/* max-w-[632px] */}
         </div>
         <hr className="bg-[#E4E7EC]  mt-10" />
         <div className="mt-10 flex gap-2 justify-between">
@@ -268,11 +273,9 @@ const SettingsPage = (props: Props) => {
                   : undefined
               }
             />
-            
-            
           </div>
         </div>
-     
+
         <hr className="bg-[#E4E7EC]  mt-10" />
         <div className="flex justify-end gap-4 items-center mt-10">
           <TextButton
