@@ -60,7 +60,7 @@ export const authApi = createApi({
     }),
     resendOtp: builder.mutation({
       query: (email: string) => ({
-        url: "/resendOTP", // Matches the Next.js API route
+        url: "/resendOTP", 
         method: "POST",
         body: { email },
       }),
@@ -68,7 +68,7 @@ export const authApi = createApi({
     }),
     verifyOtp: builder.mutation({
       query: (otp: string) => ({
-        url: "/verifyOTP", // Matches the Next.js API route
+        url: "/verifyOTP", 
         method: "POST",
         body: { otp },
       }),
@@ -76,7 +76,7 @@ export const authApi = createApi({
     }),
     updateBusiness: builder.mutation({
       query: (businessData: BusinessUpdateRequest) => ({
-        url: "/company", // Matches the Next.js API route
+        url: "/company", 
         method: "PUT",
         body: businessData,
       }),
