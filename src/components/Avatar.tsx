@@ -49,7 +49,7 @@ const Avatar = (props: Props) => {
     };
   }, []);
 
-  const { handleLogout } = useLogout();
+  const { handleLogout } = useLogout({role:"organization"});
   const { data } = useGetUserDetailsQuery(undefined);
   console.log("data", data);
 

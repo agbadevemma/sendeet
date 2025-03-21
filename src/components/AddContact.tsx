@@ -38,7 +38,7 @@ const AddContact = ({ setIsOpen, isOpen }: Props) => {
     tags: string[];
   }
 
-  const { handleLogout } = useLogout();
+  const { handleLogout } = useLogout({role:"organization"});
   const formik = useFormik({
     initialValues: {
       firstName: "",

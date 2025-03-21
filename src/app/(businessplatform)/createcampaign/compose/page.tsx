@@ -33,7 +33,7 @@ const Compose = (props: Props) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>("");
   const [dragging, setDragging] = useState<boolean>(false);
-  const { handleLogout } = useLogout();
+  const { handleLogout } = useLogout({role:"organization"});
   interface Step2Data {
     message: string[];
     actionButtons: string[];

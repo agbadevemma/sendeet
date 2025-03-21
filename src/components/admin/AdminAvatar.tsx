@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useGetUserDetailsQuery } from "@/lib/slices/userApi";
 import Link from "next/link";
 import SuccessToast2 from "../SuccessToast2";
+import useLogout from "@/hooks/useLogout";
 type Props = {};
 
 const AdminAvatar = (props: Props) => {
@@ -41,27 +42,7 @@ const AdminAvatar = (props: Props) => {
     };
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await logout().unwrap();
-      toast.success(<SuccessToast2 message={"Logout successful!"} />, {
-        style: {
-          width: "100%", // Adjust width as needed
-          maxWidth: "",
-        },
-        className: "text-white rounded-lg p-4 shadow-lg !w-full max-w-[400px]",
-        bodyClassName:
-          "text-sm flex flex-col w-full max-w-[400px] !w-full !p-12",
-        progressClassName: "bg-red-200",
-        icon: false,
-        // closeButton: false, // Uncomment if you want to hide the close button
-      });
-      router.push("/admin/login");
-      location.reload();
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  const { handleLogout } = useLogout({ role: "admin" });
   // const { data } = useGetUserDetailsQuery(undefined);
   return (
     <div>
@@ -89,9 +70,7 @@ const AdminAvatar = (props: Props) => {
                 <p className="text-sm font-medium text-[#344054]">
                   {/* {data?.firstName} {data?.lastName} */}
                 </p>
-                <p className="text-xs  text-[#667085]">
-                  {/* {data?.email} */}
-                  </p>
+                <p className="text-xs  text-[#667085]">{/* {data?.email} */}</p>
               </div>
             </div>
 

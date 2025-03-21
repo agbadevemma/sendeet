@@ -33,18 +33,18 @@ const LoginPage = (props: Props) => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "testadmin@sendit.com",
+      password: "123456",
     },
     validationSchema: validationSchemaLogin,
     onSubmit: async (values) => {
       console.log("Form data:", values);
       try {
         const data = await login(values).unwrap();
-        // console.log("data", data);
+        console.log("data", data.data.token);
 
-        secureLocalStorage.setItem("adminUserData", data?.data?.data);
-
+        secureLocalStorage.setItem("adminToken", data.data.token);
+     
         toast.success(<SuccessToast2 message={data?.message} />, {
           style: {
             width: "100%", // Adjust width as needed
@@ -79,16 +79,16 @@ const LoginPage = (props: Props) => {
   });
   return (
     <div>
-      <div className="w-full min-h-screen overflow-y-auto pt-[106px] lg:pt-1  flex flex-col items-center  justify-center gap-3 lg:gap-[50px]">
+      <div className="w-full min-h-screen overflow-y-auto lg:pt-[106px] xl:pt-1  flex flex-col items-center  justify-center gap-3 lg:gap-[50px]">
         <Image src={logo} alt="logo" className=" w-32" />
-        <div className="relative w-full  lg:max-w-[535px] lg:rounded-[16px]  lg:px-[1px] lg:py-[1px]">
+        <div className="relative w-full  lg:max-w-[500px] lg:rounded-[16px]  lg:px-[1px] lg:py-[1px]">
           <div className="absolute lg:block hidden inset-0 p-[0px] lg:rounded-[16px] bg-gradient-to-r from-secondary-500 to-primary-500"></div>
           <div className="relative w-full h-full lg:py-4 bg-white lg:rounded-[16px] px-[24px] md:px-[92px] lg:px-[28px]">
-            <div className="lg:py-8 py-3 h-full">
-              <p className=" text-display-xs lg:text-display-sm xl:text-display-sm font-semibold ">
+            <div className="lg:py-4 py-3 h-full">
+              <p className=" text-display-xs lg:text-display-sm xl:text-2xl font-semibold ">
                 Login to your account
               </p>
-              <p className=" text-sm lg:text-md  mt-[14px] text-grey-300">
+              <p className=" text-sm lg:text-sm  mt-[14px] lg:mt-4 text-grey-300">
                 Welcome back! Let’s get you into Sendeet
               </p>
               <form onSubmit={formik.handleSubmit} className="w-full">
@@ -99,6 +99,7 @@ const LoginPage = (props: Props) => {
                     label="Work Email Address"
                     id="email"
                     name="email"
+                    className="!h-[50px]"
                     placeholder="example@companyname.com"
                     value={formik.values.email}
                     onChange={formik.handleChange}
@@ -119,6 +120,7 @@ const LoginPage = (props: Props) => {
                     label="Password"
                     id="password"
                     name="password"
+                    className="!h-[50px]"
                     placeholder="*********"
                     value={formik.values.password}
                     onChange={formik.handleChange}
@@ -139,7 +141,7 @@ const LoginPage = (props: Props) => {
                 </div>
                 <Button
                   text={"Continue"}
-                  className="mt-8"
+                  className="mt-8 !h-[50px]"
                   size="lg"
                   type="primary"
                 />

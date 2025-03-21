@@ -9,7 +9,7 @@ import secureLocalStorage from "react-secure-storage";
 const adminWithAuth = <P extends object>(Component: React.ComponentType<P>) => {
   const WrappedComponent = (props: P) => {
     const currentPathname = usePathname();
-    const { handleLogout } = useLogout();
+    const { handleLogout } = useLogout({role:"admin"});
     const router = useRouter();
 
     useEffect(() => {
@@ -17,8 +17,8 @@ const adminWithAuth = <P extends object>(Component: React.ComponentType<P>) => {
       if (!token) {
         handleLogout();
       }
-      if (token && currentPathname === "/login") {
-        router.push("/dashboard");
+      if (token && currentPathname === "/admin/login") {
+        router.push("/admin/dashboard");
       }
     }, [currentPathname]);
 

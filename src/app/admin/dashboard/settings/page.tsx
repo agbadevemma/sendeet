@@ -120,7 +120,7 @@ const SettingsPage = (props: Props) => {
     },
   });
   const profileInputRef = useRef<HTMLInputElement | null>(null);
-  const { handleLogout } = useLogout();
+  const { handleLogout } = useLogout({role:"organization"});
   const [isUploading, setIsUploading] = useState(false);
   const [uploadedProfileImage, setUploadedProfileImage] = useState("");
   const [uploadedCompanyImage, setUploadedCompanyLogoImage] = useState("");

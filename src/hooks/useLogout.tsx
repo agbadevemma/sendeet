@@ -5,11 +5,19 @@ import React from "react";
 import secureLocalStorage from "react-secure-storage";
 import { toast } from "react-toastify";
 
-const useLogout = () => {
+type Props = {
+  role?: string;
+};
+const useLogout = ({ role = "" }: Props) => {
   const router = useRouter();
   const handleLogout = async () => {
-    secureLocalStorage.removeItem("")
-    router.push("/login");
+    if (role == "admin") {
+      secureLocalStorage.removeItem("adminToken");
+      router.replace("/admin/login");
+    } else {
+      secureLocalStorage.removeItem("organizationToken");
+      router.replace("/login");
+    }
   };
   return {
     handleLogout,

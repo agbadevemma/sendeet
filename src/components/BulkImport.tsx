@@ -22,7 +22,7 @@ type Props = {
 const BulkImport = ({ setIsOpen, isOpen }: Props) => {
   const [selectedCode, setSelectedCode] = useState<string>("NG +234");
   const [addContact, { isLoading }] = useAddContactMutation();
-  const { handleLogout } = useLogout();
+  const { handleLogout } = useLogout({role:"organization"});
   const callCodes = countrycallcode.map((item, index) => {
     return {
       value: item.code,

@@ -57,7 +57,7 @@ const Audience = (props: Props) => {
   } = useGetContactsQuery(undefined);
 
   console.log("contacts", error);
-  const { handleLogout } = useLogout();
+  const { handleLogout } = useLogout({role:"organization"});
   useEffect(() => {
     setAudienceData(data);
     if (error) {

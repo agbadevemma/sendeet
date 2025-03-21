@@ -11,9 +11,8 @@ const organizationWithAuth = <P extends object>(
 ) => {
   const WrappedComponent = (props: P) => {
     const currentPathname = usePathname();
-    const { handleLogout } = useLogout();
+    const { handleLogout } = useLogout({ role: "organization" });
     const router = useRouter();
-    console.log("currentPathname", currentPathname);
 
     useEffect(() => {
       const token = secureLocalStorage.getItem("organizationToken");
