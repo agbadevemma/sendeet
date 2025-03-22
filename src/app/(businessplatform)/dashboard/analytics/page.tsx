@@ -1,5 +1,4 @@
 "use client";
-
 import AdminBarChart from "@/components/admin/AdminBarChart";
 import AnalyticsModal from "@/components/AnalyticsModal";
 import Button from "@/components/buttons/Button";

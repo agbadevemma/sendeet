@@ -1,3 +1,4 @@
+"use client"
 import ArrowDown from "@/icons/arrow-down";
 import ArrowUp from "@/icons/arrow-up";
 import ArrowUp2 from "@/icons/arrow-up2";

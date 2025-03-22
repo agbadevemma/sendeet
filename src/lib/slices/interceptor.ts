@@ -32,7 +32,9 @@ const baseQueryWithAuth: BaseQueryFn<
   // If 401 error, trigger the logout API
   if (result?.error?.status === 401) {
     await api.dispatch(authApi.endpoints.logout.initiate());
-    window.location.reload();
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    }
   }
 
   return result;
