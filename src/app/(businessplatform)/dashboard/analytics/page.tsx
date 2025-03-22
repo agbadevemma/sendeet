@@ -28,9 +28,8 @@ import donut from "../../../../images/donut.svg";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ChevronDown from "@/icons/cheveron-down";
 import HelpCircle from "@/icons/help-circle";
-// import ProgressChart from "@/components/ProgressChart";
-import Card from "@/components/Card";
 
+import Card from "@/components/Card";
 import dynamic from "next/dynamic";
 
 const ProgressChart = dynamic(
@@ -39,7 +38,7 @@ const ProgressChart = dynamic(
 );
 
 type Props = {};
-console.log("Running on server:", typeof window); // Debugging
+
 
 const Analytics = (props: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
