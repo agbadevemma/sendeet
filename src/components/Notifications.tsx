@@ -43,7 +43,7 @@ const Notifications = (props: Props) => {
         iconComponent={<BellBorder color="black" />}
         onClick={toggleDropdown}
       />
-      <div className="w-full lg:w-fit z-[50] px-1 lg:px-0 absolute right-0 lg:right-10">
+      <div className="w-full  lg:w-fit z-[50] px-1 lg:px-0 absolute right-0 lg:right-10">
         {isOpen && (
           <div className="border-[#E4E7EC] border-solid border lg:max-w-[440px] w-full max-h-[516px] rounded-2xl flex flex-col items-center bg-white pt-8 mt-6">
             <div className="px-4 flex w-full items-start justify-between">

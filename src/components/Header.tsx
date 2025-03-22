@@ -33,7 +33,7 @@ const Header = ({ setIsOpen }: Props) => {
       >
         <div
           onClick={() => setIsOpen((prev) => !prev)}
-          className="block xl:hidden"
+          className="block md:hidden"
         >
           <AlignJustify color="black" />
         </div>

@@ -1,7 +1,9 @@
 import ChevronDown from "@/icons/cheveron-down";
 import ChevronUp from "@/icons/cheveron-up";
 import Link from "next/link";
+import { Tooltip } from "react-tooltip";
 import { usePathname } from "next/navigation";
+import "react-tooltip/dist/react-tooltip.css";
 
 const IconLink = ({
   href,
@@ -34,11 +36,13 @@ const IconLink = ({
     <Link
       href={href}
       onClick={onClick}
+      data-tooltip-id="my-tooltip"
+      data-tooltip-content={label}
       className={`w-full ${
         isActive && route
           ? " text-white bg-[#1D2739]"
           : " ease-in-out duration-500 text-gray-50"
-      } cursor-pointer rounded-lg  justify-between py-3 px-2 flex items-center text-white`}
+      } cursor-pointer rounded-lg w-full  md:w-fit xl:w-full justify-between py-3 px-2 flex items-center text-white`}
     >
       <div className="gap-3 flex items-center">
         {" "}
@@ -47,7 +51,14 @@ const IconLink = ({
           height={20}
           width={20}
         />
-        <span className="text-[13px] whitespace-nowrap">{label}</span>
+        <span className="text-[13px] md:hidden xl:block whitespace-nowrap">
+          {label}
+        </span>
+        <Tooltip
+        id="my-tooltip"
+        place="bottom"
+        className="!z-[1000] xl:hidden !px-1.5 !py-1.5 !absolute !text-[12px] !text-black !bg-white !rounded-lg"
+      />
       </div>
 
       {Number(notifyValue) > 0 && (
@@ -57,13 +68,14 @@ const IconLink = ({
       )}
       {!route && (
         <div
-          className={` transition-transform duration-500 ${
+          className={` md:hidden xl:block transition-transform duration-500 ${
             isOpenDropDown ? "transform rotate-180" : ""
           } `}
         >
           <ChevronDown color="#F0F1F3" height={20} width={20} />
         </div>
       )}
+   
     </Link>
   );
 };

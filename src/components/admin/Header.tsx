@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { Dispatch, SetStateAction } from "react";
 
 import SearchIcon from "@/icons/search-icon";
@@ -15,7 +15,6 @@ import SearchInput from "../SearchInput";
 import Avatar from "../Avatar";
 import AdminAvatar from "./AdminAvatar";
 
-
 type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
@@ -26,26 +25,26 @@ const Header = ({ setIsOpen }: Props) => {
       <div className="w-full  py-[14px] px-4 md:px-7 lg:px-[28px] flex   lg:gap-0 items-center border-b border-grey-100 justify-between">
         <div
           onClick={() => setIsOpen((prev) => !prev)}
-          className="block xl:hidden"
+          className="block md:hidden"
         >
           <AlignJustify color="black" />
         </div>
         <SearchInput
           placeholder="Search keyword..."
-          className="hidden lg:block"
+          className="hidden lg:block "
           icon={<SearchIcon color={"#858D9D"} />}
         />
 
-        <div className=" flex gap-1.5 lg:gap-3 items-center">
+        <div className=" flex gap-1.5 lg:gap-3 items-center ml-auto">
           {/* <Button
             text="Getting Started"
             icon_style="leading-icon"
             size="sm"
             iconComponent={<LightingBorderIcon color="black" />}
           /> */}
-          <Notifications/>
-         {/* <Avatar /> */}
-         <AdminAvatar />
+          <Notifications />
+          {/* <Avatar /> */}
+          <AdminAvatar />
         </div>
       </div>
     </div>

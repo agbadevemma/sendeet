@@ -2,6 +2,7 @@
 import AdminBarChart from "@/components/admin/AdminBarChart";
 import NotificationModal from "@/components/admin/NotificationModal";
 import Button from "@/components/buttons/Button";
+import Card from "@/components/Card";
 import Graph from "@/components/Graph";
 import ArrowDown from "@/icons/arrow-down";
 import ArrowUp from "@/icons/arrow-up";
@@ -53,100 +54,34 @@ const AdminDashboard = (props: Props) => {
           </div>
         </div>
         <div className="grid lg:grid-cols-2 xl:grid-cols-4 w-full gap-4 mt-12">
-          <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-sm">Total Users</span>
-              <span className="text-[#344054] text-xl font-semibold">0</span>
-              {/* <div className="flex items-center gap-[6px]  ">
-                <div className="px-1 rounded-[10px] text-xs flex  items-center gap-[2px] text-error-600 bg-error-50">
-                  <ArrowDown height={12} width={12} color="#971B17" /> 1%
-                </div>
-                <span className="text-error-600 text-xs">vs last week</span>
-              </div> */}
-
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <UserGroup color="#667085" height={20} width={20} />
-            </div>
-          </div>
-          <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-sm">Active Users</span>
-              <span className="text-[#344054] text-xl font-semibold">0</span>
-
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-              {/* <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <UserTick height={20} width={20} color="#667085" />
-            </div>
-          </div>
-          <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-sm">Total Businesses</span>
-              <span className="text-[#344054] text-xl font-semibold">0</span>
-
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-              {/* <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <Building5 color="#667085" height={20} width={20} />
-            </div>
-          </div>{" "}
-          <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-sm">Total Subscribers</span>
-              <span className="text-[#344054] text-xl font-semibold">0</span>
-
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-              {/* <div className="flex text-success-600 items-center gap-[6px] ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-            </div>
-            <div className="rounded-full p-[10px] flex-nowrap border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <UserAdd color="#667085" height={20} width={20} />
-            </div>
-          </div>{" "}
+          <Card
+            title="Total Users"
+            value="0"
+            percentage="0"
+            className="py-6"
+            mainIcon={<UserGroup color="#667085" height={20} width={20} />}
+          />
+          <Card
+            title="Active Users"
+            value="0"
+            percentage="0"
+            className="py-6"
+            mainIcon={<UserTick height={20} width={20} color="#667085" />}
+          />{" "}
+          <Card
+            title="Total Businesses"
+            value="0"
+            percentage="0"
+            className="py-6"
+            mainIcon={<Building5 color="#667085" height={20} width={20} />}
+          />
+          <Card
+            title="Total Subscribers"
+            value="0"
+            percentage="0"
+            className="py-6"
+            mainIcon={<UserAdd color="#667085" height={20} width={20} />}
+          />
           {/* <div className="p-4 flex items-center justify-between  w-full  border gap-4 rounded-xl border-[#E4E7EC]  border-solid  ">
             <div className="flex flex-col gap-2">
               <span className="text text-sm">Total Opt outs</span>

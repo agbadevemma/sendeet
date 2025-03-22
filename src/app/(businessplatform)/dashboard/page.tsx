@@ -31,6 +31,7 @@ import { chartDataOpt } from "@/utils/data";
 import Image from "next/image";
 import Link from "next/link";
 import illustration from "../../../images/illustration2.svg";
+import Card from "@/components/Card";
 
 type Props = {};
 
@@ -77,27 +78,24 @@ const page = (props: Props) => {
       <div className="mt-[27px]  w-full">
         <div className="flex  flex-col-reverse  lg:flex-row  gap-6 lg:gap-4 xl:gap-6 w-full">
           <div className="flex lg:w-1/2  flex-col  gap-5   ">
-            <div className="p-4 hidden   w-full lg:flex items-center justify-between border-solid bg-white border border-[#E4E7EC] rounded-xl ">
-              <div className="flex flex-col gap-2">
-                <span className="text text-sm">Total Messages Sent</span>
-                <span className="text-[#344054] text-lg xl:text-xl font-semibold">
-                  0
-                </span>
-                <div className="flex items-center gap-[6px]">
-                  <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                    -%
+            <div className="hidden   w-full lg:flex items-center justify-between  rounded-xl ">
+              <Card
+                title="Total Messages Sent"
+                value="0"
+                percentage="0"
+                className="p-4"
+                coloredbackground="!border-none !p-0"
+                mainIcon={
+                  <div className="flex gap-4 items-center">
+                    {onboarding === "step1" && (
+                      <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                    )}
+                    <div className="rounded-full p-[10px] border border-solid border-[#E4E7EC]">
+                      <Message color="#667085" />
+                    </div>
                   </div>
-                  <span className="text-grey-400 text-xs">No data</span>
-                </div>
-              </div>
-              <div className="flex gap-4 items-center">
-                {onboarding == "step1" && (
-                  <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
-                )}
-                <div className="rounded-full p-[10px] border border-solid border-[#E4E7EC]">
-                  <Message color="#667085" />
-                </div>
-              </div>
+                }
+              />
             </div>
             <div className="relative w-full z-[50]">
               <div className="px-4 py-[22px] bg-white  w-full  border rounded-xl">
@@ -225,28 +223,23 @@ const page = (props: Props) => {
               </div>
 
               <div className="relative  w-full group inline-block">
-                <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white  border-[#E4E7EC]  border-solid  ">
-                  <div className="flex flex-col gap-2 w-full">
-                    <span className="text text-sm">Delivered</span>
-                    <span className="text-[#344054] text-lg xl:text-xl font-semibold">
-                      0
-                    </span>
-                    <div className="flex items-center gap-[6px]">
-                      <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                        -%
+                <Card
+                  title="Delivered"
+                  value="0"
+                  percentage="0"
+                  className="p-4"
+                  coloredbackground="!border-none !p-0"
+                  mainIcon={
+                    <div className="flex items-center gap-4">
+                      {onboarding == "step1" && (
+                        <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                      )}
+                      <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
+                        <TickDouble color="#667085" />
                       </div>
-                      <span className="text-grey-400 text-xs">No data</span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    {onboarding == "step1" && (
-                      <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
-                    )}
-                    <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-                      <TickDouble color="#667085" />
-                    </div>
-                  </div>
-                </div>
+                  }
+                />
                 <OnboardCard
                   step="Step 1 of 4"
                   title="Key Metrics Panel"
@@ -257,52 +250,43 @@ const page = (props: Props) => {
                   onNext={() => dispatch(setOnboarding("step2"))}
                 />
               </div>
-              <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-                {" "}
-                <div className="flex flex-col gap-2">
-                  <span className="text text-sm">Open Rate</span>
-                  <span className="text-[#344054] text-lg xl:text-xl font-semibold">
-                    0%
-                  </span>
-                  <div className="flex items-center gap-[6px]">
-                    <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                      -%
+              <Card
+                  title="Open Rate"
+                  value="0"
+                  percentage="0"
+                  className="p-4"
+                  coloredbackground="!border-none !p-0"
+                  mainIcon={
+                    <div className="flex items-center gap-4">
+                    {onboarding == "step1" && (
+                      <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                    )}
+                    <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
+                      <Eye color="#667085" />
                     </div>
-                    <span className="text-grey-400 text-xs">No data</span>
                   </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  {onboarding == "step1" && (
-                    <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
-                  )}
-                  <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-                    <Eye color="#667085" />
-                  </div>
-                </div>
-              </div>
-              <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid   ">
-                {" "}
-                <div className="flex flex-col gap-2">
-                  <span className="text text-sm">Click Rate</span>
-                  <span className="text-[#344054] text-lg xl:text-xl font-semibold ">
-                    0%
-                  </span>
-                  <div className="flex items-center gap-[6px]">
-                    <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054] flex items-center justify-center flex-shrink-0">
-                      -%
+                  }
+                />
+              
+              <Card
+                  title="Click Rate"
+                  value="0"
+                  percentage="0"
+                  className="p-4"
+                  coloredbackground="!border-none !p-0"
+                  mainIcon={
+                    <div className="flex items-center gap-4">
+                    {onboarding == "step1" && (
+                      <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
+                    )}
+                    <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
+                      <HandClick  color="#667085" />
                     </div>
-                    <span className="text-grey-400 text-xs">No data</span>
                   </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  {onboarding == "step1" && (
-                    <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
-                  )}
-                  <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC]  flex items-center justify-center flex-shrink-0">
-                    <HandClick color="#667085" />
-                  </div>
-                </div>
-              </div>
+                  }
+                />
+              
+              
             </div>
 
             <div className="p-5  w-full border rounded-xl h-full bg-white">

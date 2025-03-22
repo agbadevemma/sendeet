@@ -29,6 +29,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import ChevronDown from "@/icons/cheveron-down";
 import HelpCircle from "@/icons/help-circle";
 import ProgressChart from "@/components/ProgressChart";
+import Card from "@/components/Card";
 
 type Props = {};
 
@@ -210,107 +211,39 @@ const Analytics = (props: Props) => {
           </button>
         </div>
         <div className="flex flex-col lg:flex-row gap-2 xl:gap-4">
-          <div className=" p-2 py-4  xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-[13px]">Total Opens</span>
-              <span className="text-[#344054]  text-sm xl:text-xl font-semibold">
-                0
-              </span>
-              {/* <div className="flex text-success-600 items-center gap-[6px]  ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium text-xs">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <Eye height={20} width={20} color="#667085" />
-            </div>
-          </div>
-          <div className="p-2 xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-[13px]">Opt Ins</span>
-              <span className="text-[#344054]  text-sm xl:text-xl font-semibold">
-                0
-              </span>
-              {/* <div className="flex text-success-600 items-center gap-[6px]  ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium text-xs">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <TickDouble height={20} width={20} color="#667085" />
-            </div>
-          </div>
-          <div className="p-2 xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-[13px]">Opt Outs</span>
-              <span className=" text-[#344054] text-sm xl:text-xl font-semibold">
-                0%
-              </span>
+          <Card
+            title="Total Opens"
+            value="0"
+            className1="text-grey-900"
+            percentage="0"
+            className="py-6"
+            mainIcon={<Eye height={20} width={20} color="#667085" />}
+          />
+          <Card
+            title="Opt Ins"
+            value="0"
+            className1="text-grey-900"
+            percentage="0"
+            className="py-6"
+            mainIcon={<TickDouble height={20} width={20} color="#667085" />}
+          />
+          <Card
+            title="Opt Outs"
+            value="0"
+            className1="text-grey-900"
+            percentage="0"
+            className="py-6"
+            mainIcon={<Multiply height={20} width={20} color="#667085" />}
+          />
 
-              {/* <div className="flex text-success-600 items-center gap-[6px]  ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium text-xs">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <Multiply height={20} width={20} color="#667085" />
-            </div>
-          </div>{" "}
-          <div className="p-2 xl:p-4  flex items-center justify-between  w-full border gap-2 xl:gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-[13px]">Average Engagement Rate</span>
-              <span className="text-[#344054]  text-sm xl:text-xl font-semibold">
-                0
-              </span>
-              {/* <div className="flex text-success-600 items-center gap-[6px]  ">
-                {" "}
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium text-xs">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <Engagement height={20} width={20} color="#667085" />
-            </div>
-          </div>
+          <Card
+            title="Average Engagement Rate"
+            value="0"
+            className1="text-grey-900"
+            percentage="0"
+            className="py-6"
+            mainIcon={<Engagement height={20} width={20} color="#667085" />}
+          />
         </div>
       </div>
       <div className="w-full mt-5">

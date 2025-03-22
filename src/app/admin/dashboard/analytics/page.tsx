@@ -33,7 +33,7 @@ import Pagination from "@/components/Pagination";
 import AnalyticsModal from "@/components/AnalyticsModal";
 import AdminAnalyticModal from "@/components/admin/AdminAnalyticModal";
 import AnalyticsData from "@/components/AnalyticsData";
-
+import Card from "@/components/Card";
 
 type Props = {};
 
@@ -176,7 +176,7 @@ const Analytics = (props: Props) => {
     { name: "Images", value: 0 },
     { name: "Audio", value: 0 },
     { name: "Video", value: 0 },
-    { name: "Others", value: 0},
+    { name: "Others", value: 0 },
   ];
   interface MergedDataItem extends DataItem {
     color: string;
@@ -230,97 +230,36 @@ const Analytics = (props: Props) => {
             <PencilEdit color="#00AAF7" height={24} width={24} />
           </button>
         </div>
-        <div className="flex flex-col lg:flex-row gap-4">
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-[13px]">Total Opens</span>
-              <span className="text-[#344054] text-xl font-semibold">0</span>
-              {/* <div className="flex text-success-600 items-center gap-[6px] ">
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <Eye height={20} width={20} color="#667085" />
-            </div>
-          </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-[13px]">Opt Ins</span>
-              <span className="text-[#344054] text-xl font-semibold">0</span>
-              {/* <div className="flex text-success-600 items-center gap-[6px] ">
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <TickDouble height={20} width={20} color="#667085" />
-            </div>
-          </div>
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-[13px]">Opt Outs</span>
-              <span className="text-[#344054] text-xl font-semibold">
-                89.9%
-              </span>
-              {/* <div className="flex text-success-600 items-center gap-[6px] ">
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <Multiply height={20} width={20} color="#667085" />
-            </div>
-          </div>{" "}
-          <div className="p-4 flex items-center justify-between  w-full border gap-4 rounded-xl bg-white border-[#E4E7EC]  border-solid  ">
-            <div className="flex flex-col gap-2">
-              <span className="text text-[13px]">Average Engagement Rate</span>
-              <span className="text-[#344054] text-xl font-semibold">0</span>
-              {/* <div className="flex text-success-600 items-center gap-[6px] ">
-                <div className="px-1 rounded-[10px] text-xs flex w-fit items-center gap-[2px] text-success-600 bg-success-50">
-                  <ArrowUp color="#12B76A" height={12} width={12} />
-                  <span className="font-medium">2%</span>
-                </div>
-                <span className=" text-xs">vs lastweek</span>
-              </div> */}
-              <div className="flex items-center gap-[6px]">
-                <div className="px-1 rounded-[10px] text-xs  bg-gray-100 text-[#344054]">
-                  -%
-                </div>
-                <span className="text-grey-400 text-xs">No data</span>
-              </div>
-            </div>
-            <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-              <Engagement height={20} width={20} color="#667085" />
-            </div>
-          </div>
+
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+          <Card
+            title="Total Opens"
+            value="0"
+            percentage="0"
+            className="py-6"
+            mainIcon={<Eye color="#667085" height={20} width={20} />}
+          />
+          <Card
+            title="Opt Ins"
+            value="0"
+            percentage="0"
+            className="py-6"
+            mainIcon={<Eye color="#667085" height={20} width={20} />}
+          />{" "}
+          <Card
+            title="Opt Outs"
+            value="0"
+            percentage="0"
+            className="py-6"
+            mainIcon={<Multiply color="#667085" height={20} width={20} />}
+          />
+          <Card
+            title="Average Engagement Rate"
+            value="0"
+            percentage="0"
+            className="py-6"
+            mainIcon={<Engagement color="#667085" height={20} width={20} />}
+          />
         </div>
       </div>
       <div className="w-full mt-5">
