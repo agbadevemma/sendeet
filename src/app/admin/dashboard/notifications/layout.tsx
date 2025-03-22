@@ -19,33 +19,11 @@ type Props = {};
 
 const Notifications = ({ children }: { children: React.ReactNode }) => {
   const { notificationModal } = useAppSelector((state) => state.miscellaneous);
-  const handleTabClick = (selectedId: number) => {
-    setTabs((prev) =>
-      prev.map((tab) => ({ ...tab, isActive: tab.id == selectedId }))
-    );
-  };
-  const pathName = usePathname();
-  const [tabs, setTabs] = useState<Array<TabItem>>([
-    // { id: 1, title: "Overview", isActive: true, href: "/admin/dashboard/notifications" },
-    {
-      id: 2,
-      title: "History",
-      isActive: false,
-      href: "/admin/dashboard/notifications/history",
-    },
-    {
-      id: 3,
-      title: "Settings",
-      isActive: false,
-      href: "/admin/dashboard/notifications/settings",
-    },
-  ]);
+
   return (
     <div>
-      <NotificationModal />
-      {notificationModal ? (
-        <AdminDashboard />
-      ) : (
+      {/* <NotificationModal /> */}
+      
         <div className=" flex flex-col ">
           <div className="flex  flex-col md:flex-row gap-6 lg:gap-0 justify-between lg:items-center ">
             <div className="flex items-center gap-4">
@@ -70,42 +48,11 @@ const Notifications = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
 
-          <div className="w-full flex gap-3">
-            <div className="flex  mt-[25px] w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
-              <div className="flex overflow-auto px-1 lg:px-11 gap-8 lg:gap-12  h-[62px] items-end">
-                {tabs.map((tab, index) => (
-                  <Link
-                    href={tab.href}
-                    key={tab.id}
-                    onClick={() => handleTabClick(tab.id)}
-                    className={`flex  gap-[7px]  justify-center cursor-pointer items-center pb-4  ${
-                      tab.href === pathName
-                        ? "border-b-2  border-b-primary-400"
-                        : "border-b-2 border-b-transparent"
-                    }`}
-                  >
-                    <span
-                      className={`
-                  text-sm 
-                    ${
-                      tab.href === pathName
-                        ? "text-primary-400"
-                        : "text-grey-800"
-                    }`}
-                    >
-                      {tab.title}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-
           <div className="flex flex-1  h-full mt-4 w-full bg-white border border-[#E4E7EC] rounded-xl flex-col  ">
             {children}
           </div>
         </div>
-      )}
+    
     </div>
   );
 };

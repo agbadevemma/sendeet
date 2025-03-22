@@ -10,8 +10,6 @@ type deliveryOption = {
   label: string;
 };
 
-
-
 export const industryOptions: Option[] = industries.industries.map(
   (industry) => {
     return { value: industry, label: industry };
@@ -243,10 +241,22 @@ export interface Step1Data {
 }
 
 export const timeZones: Option[] = [
-  { value: "UTC +01:00: West Africa Time (WAT)", label: "UTC +01:00: West Africa Time (WAT)" },
-  { value: "EST (Eastern Standard Time)", label: "EST (Eastern Standard Time)" },
-  { value: "PST (Pacific Standard Time)", label: "PST (Pacific Standard Time)" },
-  { value: "CET (Central European Time)", label: "CET (Central European Time)" },
+  {
+    value: "UTC +01:00: West Africa Time (WAT)",
+    label: "UTC +01:00: West Africa Time (WAT)",
+  },
+  {
+    value: "EST (Eastern Standard Time)",
+    label: "EST (Eastern Standard Time)",
+  },
+  {
+    value: "PST (Pacific Standard Time)",
+    label: "PST (Pacific Standard Time)",
+  },
+  {
+    value: "CET (Central European Time)",
+    label: "CET (Central European Time)",
+  },
   { value: "JST (Japan Standard Time)", label: "JST (Japan Standard Time)" },
 ];
 
@@ -469,15 +479,13 @@ export const organizations: Organization[] = [
   // },
 ];
 
-
 export type OrganizationAdmin = {
   id: string;
-  organizationName: string,
+  organizationName: string;
   industry: string;
   totalCampaigns: string;
   totalCreditsUsed: string;
   optInRate: string;
-
 };
 
 export const adminOrganizations: OrganizationAdmin[] = [
@@ -566,8 +574,7 @@ export const adminOrganizations: OrganizationAdmin[] = [
 export type OrganizationCredit = {
   id: number;
   organizationName: string;
-  industry
-  : string;
+
   creditBalance: string;
   lastPurchase: string;
   creditStatus: "Normal" | "Low";
@@ -578,7 +585,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 1,
   //   organizationName: "Tech Innovators Inc.",
-  //   industry: "Technology",
+
   //   creditBalance: "2300",
   //   lastPurchase: "01/15/24",
   //   creditStatus: "Normal",
@@ -586,7 +593,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 2,
   //   organizationName: "Green Solutions Ltd.",
-  //   industry: "Environmental Services",
+
   //   creditBalance: "1800",
   //   lastPurchase: "02/10/24",
   //   creditStatus: "Normal",
@@ -594,7 +601,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 3,
   //   organizationName: "Healthcare United",
-  //   industry: "Healthcare",
+
   //   creditBalance: "3200",
   //   lastPurchase: "01/25/24",
   //   creditStatus: "Low",
@@ -602,7 +609,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 4,
   //   organizationName: "Bright Minds Education",
-  //   industry: "Education",
+
   //   creditBalance: "500",
   //   lastPurchase: "02/05/24",
   //   creditStatus: "Normal",
@@ -610,7 +617,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 5,
   //   organizationName: "Global Freight Corp.",
-  //   industry: "Logistics",
+
   //   creditBalance: "2750",
   //   lastPurchase: "01/30/24",
   //   creditStatus: "Normal",
@@ -618,7 +625,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 6,
   //   organizationName: "Solar Power Network",
-  //   industry: "Energy",
+
   //   creditBalance: "1200",
   //   lastPurchase: "02/01/24",
   //   creditStatus: "Low",
@@ -626,7 +633,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 7,
   //   organizationName: "Visionary Designs Co.",
-  //   industry: "Creative Arts",
+
   //   creditBalance: "2100",
   //   lastPurchase: "01/20/24",
   //   creditStatus: "Normal",
@@ -634,7 +641,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 8,
   //   organizationName: "Pinnacle Finance Group",
-  //   industry: "Finance",
+
   //   creditBalance: "4000",
   //   lastPurchase: "02/12/24",
   //   creditStatus: "Normal",
@@ -642,7 +649,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 9,
   //   organizationName: "Urban Living Architects",
-  //   industry: "Construction",
+
   //   creditBalance: "950",
   //   lastPurchase: "01/28/24",
   //   creditStatus: "Low",
@@ -650,7 +657,7 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 10,
   //   organizationName: "Fresh Farm Organics",
-  //   industry: "Agriculture",
+
   //   creditBalance: "1500",
   //   lastPurchase: "02/08/24",
   //   creditStatus: "Normal",
@@ -823,9 +830,6 @@ export const mockCampaignData: Campaign[] = [
   // },
 ];
 
-
-
-
 export interface ChartData {
   name: string;
   subscribers?: number;
@@ -865,13 +869,13 @@ export const chartDataOpt: ChartData[] = [
   { name: "Dec", optin: 0, optout: 0, amt: 0 },
 ];
 
-export interface Alert  {
-  id:number;
+export interface Alert {
+  id: number;
   alertType: string;
   date: string;
   recipient: string;
   status: "Acknowledged" | "Pending";
-};
+}
 
 export const mockAlertData: Alert[] = [
   // {
@@ -1087,7 +1091,7 @@ export interface AudienceData2 {
 // ];
 
 export interface ApiInterfaceTable {
-  id: number
+  id: number;
   name: string;
   value: string;
   lastUsed: string;
@@ -1102,5 +1106,4 @@ export const apiTable: ApiInterfaceTable[] = [
     lastUsed: "2025-01-01",
     created: "2024-06-01",
   },
-
 ];

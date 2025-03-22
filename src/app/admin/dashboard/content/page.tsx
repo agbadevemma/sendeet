@@ -393,7 +393,7 @@ const Content = (props: Props) => {
               <Image src={illustration} alt="img" className="mx-auto" />
               <p className="text-lg font-semibold">No Content Yet</p>
               <p className="text-[#475367] text-sm max-w-[260px] w-full mt-1">
-                It looks like no campaigns Performance data isa available .
+                It looks like no campaigns performance data is available
               </p>
             </div>
           )}

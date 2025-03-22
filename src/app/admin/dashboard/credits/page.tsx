@@ -73,7 +73,6 @@ const Overview = (props: Props) => {
   const getFilteredOrganizations = () => {
     const searchableFields: (keyof OrganizationCredit)[] = [
       "organizationName",
-      "industry",
       "lastPurchase",
     ];
 
@@ -188,22 +187,7 @@ const Overview = (props: Props) => {
                   </div>
                 </div>
               </th>
-              <th className="p-2">
-                <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
-                  Industry
-                  <div
-                    onClick={() => handleSort("industry")}
-                    className={` transition-transform duration-300   ${
-                      sortConfig?.key === "industry" &&
-                      sortConfig.direction === "asc"
-                        ? "transform rotate-180"
-                        : ""
-                    }`}
-                  >
-                    <ArrowUp color={"#5D6679"} />
-                  </div>
-                </div>
-              </th>
+              
               <th className="p-2">
                 <div className="flex items-center text-nowrap gap-2  text-[#5D6679] text-sm font-medium w-full cursor-pointer">
                   Credit Balance
@@ -256,16 +240,14 @@ const Overview = (props: Props) => {
                   key={org.id}
                   className="border-b cursor-pointer border-b-grey-50 hover:bg-gray-50"
                 >
-                  <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pl-6">
+                  <td className="text-sm text-nowrap  font-medium flex  gap-2 items-center text-grey-800 p-4 pr-0 pl-6">
                     <Checkbox
                       checked={selectedItems.includes(index)}
                       onClick={() => handleSelectItem(index)}
                     />
                     {org.organizationName}
                   </td>
-                  <td className="text-sm font-medium text-grey-800 p-2 pr-8">
-                    {org.industry}
-                  </td>
+                
                   <td className="text-sm font-medium text-grey-800 p-2">
                     {org.creditBalance}
                   </td>
@@ -285,7 +267,7 @@ const Overview = (props: Props) => {
                     </div>
                   </td>
                   <td className="text-sm font-medium gap-2 text-grey-800 p-2 flex items-center">
-                    <Link
+                    {/* <Link
                       href={``}
                     >
                       {" "}
@@ -295,7 +277,7 @@ const Overview = (props: Props) => {
                         iconComponent={<Eye color="#858D9D" />}
                         text="Edit"
                       />
-                    </Link>
+                    </Link> */}
                     <Button
                       size="sm"
                       onClick={() => setIsModalOpen(true)}
