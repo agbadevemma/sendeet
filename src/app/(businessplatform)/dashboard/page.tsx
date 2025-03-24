@@ -32,6 +32,7 @@ import Image from "next/image";
 import Link from "next/link";
 import illustration from "../../../images/illustration2.svg";
 import Card from "@/components/Card";
+import InfoTooltip from "@/components/sharedComponents/InfoTooltip";
 
 type Props = {};
 
@@ -99,11 +100,9 @@ const page = (props: Props) => {
             </div>
             <div className="relative w-full z-[50]">
               <div className="px-4 py-[22px] bg-white  w-full  border rounded-xl">
-                <div className="text-lg font-medium flex items-center gap-2">
+                <div className="text-lg font-medium flex items-center gap-1">
                   Quick Actions
-                  <span className="cursor-pointer">
-                    <HelpCircle color="" />
-                  </span>
+                  <InfoTooltip tooltipcontent="quick actions needed" />
                   {onboarding === "step2" && (
                     <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
                   )}
@@ -251,13 +250,13 @@ const page = (props: Props) => {
                 />
               </div>
               <Card
-                  title="Open Rate"
-                  value="0"
-                  percentage="0"
-                  className="p-4"
-                  coloredbackground="!border-none !p-0"
-                  mainIcon={
-                    <div className="flex items-center gap-4">
+                title="Open Rate"
+                value="0"
+                percentage="0"
+                className="p-4"
+                coloredbackground="!border-none !p-0"
+                mainIcon={
+                  <div className="flex items-center gap-4">
                     {onboarding == "step1" && (
                       <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
                     )}
@@ -265,37 +264,33 @@ const page = (props: Props) => {
                       <Eye color="#667085" />
                     </div>
                   </div>
-                  }
-                />
-              
+                }
+              />
+
               <Card
-                  title="Click Rate"
-                  value="0"
-                  percentage="0"
-                  className="p-4"
-                  coloredbackground="!border-none !p-0"
-                  mainIcon={
-                    <div className="flex items-center gap-4">
+                title="Click Rate"
+                value="0"
+                percentage="0"
+                className="p-4"
+                coloredbackground="!border-none !p-0"
+                mainIcon={
+                  <div className="flex items-center gap-4">
                     {onboarding == "step1" && (
                       <div className="animate-pinging duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
                     )}
                     <div className="rounded-full p-[10px] border border-solid border-grey-[#E4E7EC] flex items-center justify-center flex-shrink-0">
-                      <HandClick  color="#667085" />
+                      <HandClick color="#667085" />
                     </div>
                   </div>
-                  }
-                />
-              
-              
+                }
+              />
             </div>
 
             <div className="p-5  w-full border rounded-xl h-full bg-white">
               <div className="flex  justify-between items-center gap-4">
                 <div className="text-sm lg:text-lg font-medium flex items-center gap-2 relative">
                   Audience Growth
-                  <span className="cursor-pointer">
-                    <HelpCircle color="" />
-                  </span>
+                  <InfoTooltip tooltipcontent="audience growth needed" />
                   {onboarding === "step3" && (
                     <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
                   )}
@@ -352,9 +347,10 @@ const page = (props: Props) => {
           <div className="flex flex-col w-full">
             <div className="text-lg font-medium flex items-center gap-2">
               Recent Campaign Performance
-              <span className="cursor-pointer">
+              {/* <span className="cursor-pointer">
                 <HelpCircle color="" />
-              </span>
+              </span> */}
+              <InfoTooltip tooltipcontent="quick actions needed" />
               {onboarding === "step4" && (
                 <div className="animate-pinging ml-4 duration-500 block h-2.5  w-2.5 rounded-full ring-2 ring-[#E6F7FE] bg-[#B0E5FD]"></div>
               )}

@@ -31,6 +31,7 @@ import HelpCircle from "@/icons/help-circle";
 
 import Card from "@/components/Card";
 import dynamic from "next/dynamic";
+import InfoTooltip from "@/components/sharedComponents/InfoTooltip";
 
 const ProgressChart = dynamic(
   () => import("../../../../components/ProgressChart"),
@@ -38,7 +39,6 @@ const ProgressChart = dynamic(
 );
 
 type Props = {};
-
 
 const Analytics = (props: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -261,9 +261,7 @@ const Analytics = (props: Props) => {
                 <p className="text-lg lg:text-md  xl:text-lg font-medium ">
                   Campaign Performance
                 </p>
-                <span className="cursor-pointer">
-                  <HelpCircle color="#98A2B3" />
-                </span>
+                <InfoTooltip tooltipcontent="quick actions needed" />
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-grey-500 text-sm font-medium">
@@ -381,16 +379,18 @@ const Analytics = (props: Props) => {
         <div className="w-full flex   lg:flex-row flex-col  rounded-lg  gap-4  ">
           {/* <EngagementDashboard /> */}
           <div className="w-full border-[#EAECF0] bg-white border p-8 py-4 flex flex-col rounded-lg ">
-            <p className="text-lg mb-4 font-medium">
-              Engagement by Time of Day
-            </p>{" "}
+            <div className="text-lg mb-4 font-medium flex items-center">
+              <span> Engagement by Time of Day </span>
+              <InfoTooltip tooltipcontent="Engagment by day needed" />
+            </div>{" "}
             <HeatmapChart />
           </div>
           <div className="w-full flex flex-col gap-8 lg:w-[40%] px-4 lg:px-2.5 xl:px-4 py-2 pt-4 border-[#EAECF0] bg-white items-start border  rounded-lg ">
             <div className="flex justify-between items-center w-full mb-4">
-              <p className=" text-lg lg:text-base xl:text-lg  font-medium">
-                Audience Metrics
-              </p>
+              <div className=" text-lg lg:text-base xl:text-lg  flex items-center  font-medium">
+                <span> Audience Metrics</span>
+                <InfoTooltip tooltipcontent="Audience Metrics needed" />
+              </div>
               <Button text="12 Months" className="p-4 lg:!p-1.5 xl:p-4" />
             </div>
             <div className="flex justify-between items-center w-full">
@@ -420,7 +420,10 @@ const Analytics = (props: Props) => {
       </div>
       <div className="w-full mt-5 bg-white rounded-[12px] border border-solid border-[#E4E7EC]">
         <div className="flex flex-col lg:flex-row lg:gap-4 px-6 py-4 gap-8 lg:items-center  justify-between">
-          <div className="text-lg font-medium">Top Performing Campaigns</div>
+          <div className="text-lg font-medium flex items-center ">
+            <span>Top Performing Campaigns</span>
+            <InfoTooltip tooltipcontent="Top Performing Campaigns needed" />
+          </div>
 
           <div className="shadow-xs flex items-center">
             <SearchInput
@@ -433,7 +436,7 @@ const Analytics = (props: Props) => {
         </div>
         <div className="w-full overflow-x-auto px-4">
           <table className="w-full b">
-            <thead className="text-grey-600  rounded sticky top-0 z-10">
+            <thead className="text-grey-600  rounded sticky top-0 z-2">
               <tr className="bg-[#F9FAFB]">
                 <th className="pl-6 pr-2 py-2 rounded-s-lg">
                   <div className="flex items-center text-nowrap gap-2 text-[#5D6679] text-sm font-medium w-full cursor-pointer">

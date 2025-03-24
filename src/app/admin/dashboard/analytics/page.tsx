@@ -34,6 +34,7 @@ import AnalyticsModal from "@/components/AnalyticsModal";
 import AdminAnalyticModal from "@/components/admin/AdminAnalyticModal";
 import AnalyticsData from "@/components/AnalyticsData";
 import Card from "@/components/Card";
+import InfoTooltip from "@/components/sharedComponents/InfoTooltip";
 
 type Props = {};
 
@@ -268,9 +269,10 @@ const Analytics = (props: Props) => {
             <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
               <div className="flex gap-2 items-center">
                 <p className="text-lg  font-medium ">Campaign Performance</p>
-                <span className="cursor-pointer">
+                {/* <span className="cursor-pointer">
                   <HelpCircle color="#98A2B3" />
-                </span>
+                </span> */}
+                <InfoTooltip tooltipcontent="quick actions needed" />
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-grey-500 text-sm font-medium">

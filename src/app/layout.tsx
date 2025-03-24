@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GlobalLoading from "@/components/GlobalLoading";
 import Providers from "@/lib/providers";
+import "react-tooltip/dist/react-tooltip.css";
 
 const inter = Inter({
   subsets: ["latin"],

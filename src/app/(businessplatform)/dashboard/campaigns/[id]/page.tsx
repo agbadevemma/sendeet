@@ -5,6 +5,7 @@ import CampaignActionsModal from "@/components/CampaignActionsModal";
 import CampaignPerformanceChart from "@/components/CampaignPerformanceChart";
 import HeatmapChart from "@/components/HeatmapChart";
 import ExploreCard from "@/components/onboarding/ExploreCard";
+import InfoTooltip from "@/components/sharedComponents/InfoTooltip";
 import SuccessToast from "@/components/SuccessToast";
 import ArrowUp from "@/icons/arrow-up";
 import Bin from "@/icons/bin";
@@ -268,7 +269,8 @@ const CampaignId = (props: Props) => {
                 <p className="text-md font-medium ">
                   Campaign Performance
                 </p>{" "}
-                <HelpCircle color="#98A2B3" height={16} width={16} />
+                {/* <HelpCircle color="#98A2B3" height={16} width={16} /> */}
+                <InfoTooltip tooltipcontent="quick actions needed" />
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-grey-500 text-sm font-medium">
@@ -398,7 +400,8 @@ const CampaignId = (props: Props) => {
                 <p className="text-[18px] font-medium w-full">
                   Engagement Details
                 </p>
-                <HelpCircle color="#98A2B3" />
+                {/* <HelpCircle color="#98A2B3" /> */}
+                <InfoTooltip tooltipcontent="quick actions needed" />
               </div>
               <Button size="md" text="12 Months" className="!px-4 !py-[10px]" />
             </div>
@@ -431,7 +434,8 @@ const CampaignId = (props: Props) => {
             <p className="text-[18px] font-medium w-fit ">
               Engagement by Time of Day
             </p>
-            <HelpCircle color="#98A2B3" />
+            {/* <HelpCircle color="#98A2B3" /> */}
+            <InfoTooltip tooltipcontent="Engagement By day needed" />
           </div>
           <HeatmapChart />
         </div>

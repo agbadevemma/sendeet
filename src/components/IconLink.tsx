@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Tooltip } from "react-tooltip";
 import { usePathname } from "next/navigation";
-import "react-tooltip/dist/react-tooltip.css";
+// import "react-tooltip/dist/react-tooltip.css";
 
 const IconLink = ({
   href,
@@ -29,7 +29,7 @@ const IconLink = ({
     >
       <IconComponent color={isActive ? "#00AAF7" : "#858D9D"} />
       <span className="text-sm md:hidden xl:block">{label}</span>
-      <Tooltip id="my-tooltip"  place="bottom"   className="!z-[1000] xl:hidden !px-1.5 !py-1.5 !absolute !text-[13px] !bg-[#101828] !rounded-lg"/>
+      <Tooltip id="my-tooltip"  place="bottom"   className="!z-[1000] xl:!hidden !px-1.5 !py-1.5 !absolute !text-[13px] !bg-[#101828] !rounded-lg"/>
     </Link>
   );
 };
