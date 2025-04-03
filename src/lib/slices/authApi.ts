@@ -15,7 +15,7 @@ interface LoginResponse {
 interface SignupRequest {
   email: string;
   password: string;
-  role: string;
+  role?: string;
 }
 interface BusinessUpdateRequest {
   businessRegistrationNumber: string;
@@ -37,7 +37,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     signup: builder.mutation<LoginResponse, SignupRequest>({
       query: (userData) => ({
-        url: "/signup",
+        url: "/register-business",
         method: "POST",
         body: userData,
       }),
@@ -60,7 +60,7 @@ export const authApi = createApi({
     }),
     resendOtp: builder.mutation({
       query: (email: string) => ({
-        url: "/resendOTP", 
+        url: "/resend-otp", 
         method: "POST",
         body: { email },
       }),
@@ -68,7 +68,7 @@ export const authApi = createApi({
     }),
     verifyOtp: builder.mutation({
       query: (otp: string) => ({
-        url: "/verifyOTP", 
+        url: "/verify", 
         method: "POST",
         body: { otp },
       }),
