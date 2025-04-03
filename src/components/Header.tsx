@@ -44,7 +44,7 @@ const Header = ({ setIsOpen }: Props) => {
             icon={<SearchIcon color={"#858D9D"} />}
           />
         )}
-        <div className=" flex gap-1.5 lg:gap-3 items-center">
+        <div className=" flex gap-1.5 lg:gap-3 items-center md:ml-auto">
           {/* <Button
             text="Getting Started"
             icon_style="leading-icon"
