@@ -26,9 +26,6 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
 
   return (
     <div className=" bg-white">
-
-
-      
       <div
         onClick={() => setIsOpen((prev) => !prev)}
         className={`w-full bg-black/20 z-[500] fixed md:static  transition-all duration-500  ${
@@ -59,9 +56,14 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
                   className="rounded-lg"
                 />
                 <div className="flex flex-col ml-3 md:hidden xl:block">
-                  <p className="text-xs font-semibold">
-                    {data?.business[0].companyName ?? "Testing Company"}
-                  </p>
+                  {data?.business && data.business.length > 0 ? (
+                    <p className="text-xs font-semibold">
+                      {data.business[0].companyName}
+                    </p>
+                  ) : (
+                    <p className="text-xs font-semibold">Testing Company</p>
+                  )}
+
                   <p className="text-xs font-semibold text-grey-600">
                     Team - 1 Member
                   </p>
