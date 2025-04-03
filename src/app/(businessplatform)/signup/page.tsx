@@ -37,7 +37,7 @@ const Signup = (props: Props) => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const data = await signup({ ...values, role: "business" }).unwrap();
+        const data = await signup({ ...values}).unwrap();
         console.log("value", data);
         toast.success(<SuccessToast2 message={"Success"} />, {
           style: {

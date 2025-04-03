@@ -41,8 +41,8 @@ const LoginPage = (props: Props) => {
       console.log("Form data:", values);
       try {
         const data = await login(values).unwrap();
-        console.log("data", data.data.token);
-
+        console.log("data", data.data);
+        secureLocalStorage.setItem("userData", data);
         secureLocalStorage.setItem("organizationToken", data.data.token);
         toast.success(<SuccessToast2 message={data?.message} />, {
           style: {

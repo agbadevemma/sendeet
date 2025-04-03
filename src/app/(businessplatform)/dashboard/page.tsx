@@ -33,6 +33,9 @@ import Link from "next/link";
 import illustration from "../../../images/illustration2.svg";
 import Card from "@/components/Card";
 import InfoTooltip from "@/components/sharedComponents/InfoTooltip";
+import { useEffect } from "react";
+import secureLocalStorage from "react-secure-storage";
+import { useGetUserDetailsQuery } from "@/lib/slices/userApi";
 
 type Props = {};
 
@@ -43,11 +46,19 @@ const page = (props: Props) => {
     (state) => state.miscellaneous
   );
   const stepsArray = ["step1", "step2", "step3"];
+  const { data } = useGetUserDetailsQuery(undefined);
 
-  // useEffect(() => {
-  //   dispatch(setExplore("credit"));
+  const firstTimeLogin = secureLocalStorage.getItem("userData");
+  console.log("firstTimeLogin", data?.firstLogin);
 
-  // }, []);
+  useEffect(() => {
+    if (data?.firstLogin) {
+      dispatch(setOnboarding("welcome"));
+      // dispatch(setExplore("credit"));
+    }
+
+  }, [data]);
+
 
   return (
     <div className="w-full pb-32">
@@ -98,7 +109,7 @@ const page = (props: Props) => {
                 }
               />
             </div>
-            <div className="relative w-full z-[50]">
+            <div className="relative w-full z-[10]">
               <div className="px-4 py-[22px] bg-white  w-full  border rounded-xl">
                 <div className="text-lg font-medium flex items-center gap-1">
                   Quick Actions
@@ -244,7 +255,7 @@ const page = (props: Props) => {
                   title="Key Metrics Panel"
                   bodyClassName="mt-0 delay-500 top-[8rem]  left-4"
                   description="Here, you can monitor key metrics like messages sent, delivery rates, and audience growth at a glance."
-                  arrowClassName="-translate-x-1/2 -top-1.5 left-1/2  "
+                  arrowClassName="-translate-x-1/2 -top-1.5 shadow-2xl left-1/2  "
                   currentStep="step1"
                   onNext={() => dispatch(setOnboarding("step2"))}
                 />
@@ -297,7 +308,7 @@ const page = (props: Props) => {
                   <OnboardCard
                     step="Step 3 of 4"
                     title="Audience Growth"
-                    bodyClassName="mt-4 delay-500  left-[15rem]  -top-[9rem]"
+                    bodyClassName="mt-4 delay-500  left-[15rem] max-w-[500px]  -top-[9rem]"
                     description="Track your opt-in and opt-out trends here. Adjust the time period to see monthly or yearly stats."
                     arrowClassName="-translate-x-1/2 !left-0 top-1/2 "
                     currentStep="step3"

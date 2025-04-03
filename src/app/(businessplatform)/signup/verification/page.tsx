@@ -58,8 +58,8 @@ const Verification = () => {
       // toast.error("Error verifying OTP");
       toast.error(
         <ErrorToast
-          subMessage={err?.data?.error}
-          message={"Error"}
+          // subMessage={err?.data?.error}
+          message={err?.data?.message}
         />,
         {
           icon: false, // Optional: Disable default icon

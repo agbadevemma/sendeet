@@ -86,14 +86,14 @@ const SettingsPage = (props: Props) => {
   const [updateUser, { isLoading: updating }] = useUpdateUserMutation();
   const [updateBusiness, { isLoading: udatingBusiness }] =
     useUpdateBusinessMutation();
-
+  const business = data?.business || [];
   const formik = useFormik({
     initialValues: {
       firstName: data?.firstName || "",
       lastName: data?.lastName ?? "",
       email: data?.email ?? "",
-      brn: data?.business[0].businessRegistrationNumber ?? "",
-      companyName: data?.business[0].companyName ?? "",
+      brn: business[0]?.businessRegistrationNumber ?? "",
+      companyName: business[0]?.companyName ?? "",
     },
     validationSchema: validationSchemaUserDetials,
     enableReinitialize: true,
