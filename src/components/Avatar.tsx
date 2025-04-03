@@ -159,9 +159,16 @@ const Avatar = (props: Props) => {
 
           <div className="flex flex-col mt-6 gap-1">
             <div className="flex gap-2">
-              <span className="text-base font-medium">
-                {data?.business[0]?.companyName}
-              </span>
+       
+              {data?.business && data.business.length > 0 ? (
+                <span className="text-base font-medium">
+                  {data?.business[0]?.companyName}
+                </span>
+              ) : (
+                <span className="text-base font-medium">
+                 Testing company
+                </span>
+              )}
               <span className="text-sm flex items-center justify-center rounded-2xl px-3 bg-[#E0F2FE] text-[#065986] font-medium">
                 NGO
               </span>
