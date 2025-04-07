@@ -38,11 +38,17 @@ export default function DashboardLayout({
     },
     {
       id: 3,
+      title: "Billing & Plans",
+      isActive: false,
+      href: "/dashboard/settings/plans",
+    },
+    {
+      id: 5,
       title: "Preferences",
       isActive: false,
       href: "/dashboard/settings/preferences",
     },
-    { id: 4, title: "API", isActive: false, href: "/dashboard/settings/api" },
+    { id: 5, title: "API", isActive: false, href: "/dashboard/settings/api" },
   ]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -101,7 +107,7 @@ export default function DashboardLayout({
       </div>
       <div className="flex  mt-[25px] w-full bg-white border border-[#E4E7EC] rounded-xl flex-col">
         <div className="flex overflow-auto mx-auto md:mx-0 md:px-6 lg:px-11 gap-8 lg:gap-12  h-[62px] items-end">
-          {tabs.map((tab, index) => (
+          {tabs.map((tab) => (
             <Link
               href={tab.href}
               key={tab.id}
