@@ -55,16 +55,25 @@ const ExploreCard = ({
           {explore == "credit" ? (
             <Link href={"/dashboard/campaigns"}>
               <Button
-                text="Try It"
+                text="Try Its"
                 type="primary"
                 className="!px-4"
                 onClick={onNext}
               />
             </Link>
-          ) : explore == "singlecontact" ? (
+          ) : explore == "startcampaign" ? (
             <Link href={"/dashboard/audience"}>
               <Button
-                text="Try It"
+                text="Try Itssds"
+                type="primary"
+                className="!px-4"
+                onClick={onNext}
+              />
+            </Link>
+          ) :explore == "singlecontact" ? (
+            <Link href={"/dashboard/audience"}>
+              <Button
+                text="Try Its"
                 type="primary"
                 className="!px-4"
                 onClick={onNext}
@@ -73,7 +82,7 @@ const ExploreCard = ({
           ) : explore == "bulkcontact" ? (
             <Link href={"/dashboard/credits"}>
               <Button
-                text="Try It"
+                text="Try Its"
                 type="primary"
                 className="!px-4"
                 onClick={onNext}
@@ -81,7 +90,7 @@ const ExploreCard = ({
             </Link>
           ) : (
             <Button
-              text="Try It"
+              text="Try Its"
               type="primary"
               className="!px-4"
               onClick={onNext}

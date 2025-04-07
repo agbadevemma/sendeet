@@ -29,14 +29,16 @@ const OnboardCard = ({
   const dispatch = useAppDispatch();
   const onboarding = useAppSelector((state) => state.miscellaneous.onboarding);
   return (
+    <div>
+
     <div className={` ${onboarding === currentStep  ? "visible" : "invisible"}`}>
       <div
-        className={`absolute  p-5 py-8  ${bodyClassName} bg-white z-[80] shadow-3xl rounded-lg w-[20rem] transition-all ease-in-out  duration-500 ${
+        className={`absolute z-[25]  p-5 py-8  ${bodyClassName} bg-white z-[80] shadow-2xl rounded-lg w-[20rem] transition-all ease-in-out  duration-500 ${
           onboarding === currentStep ? "opacity-100" : "opacity-0"
         }`}
       >
         <div
-          className={`absolute left-1/2 ${arrowClassName} w-3 h-3 bg-white rotate-45`}
+          className={`absolute left-1/2 ${arrowClassName} w-3 h-3 z-[80] bg-white rotate-45`}
         ></div>
         <p className="text-[#858D9D] text-[13.5px]">{step}</p>
         <p className="mt-4 text-[15px] font-semibold">{title}</p>
@@ -65,6 +67,7 @@ const OnboardCard = ({
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
