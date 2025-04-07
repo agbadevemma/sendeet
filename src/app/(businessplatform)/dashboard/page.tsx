@@ -168,6 +168,7 @@ const page = (props: Props) => {
                     <ExploreCard
                       arrowClassName="-translate-x-1/2  top-1/2 !left-0 "
                       currentStep="credit"
+                      href="/dashboard/campaigns"
                       bodyClassName="-right-[22rem] -top-[2rem]"
                       description="Click here to purchase credits to send out campaigns!"
                       onNext={() => dispatch(setExplore("startcampaign"))}

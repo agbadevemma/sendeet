@@ -163,6 +163,7 @@ const Credits = (props: Props) => {
             <ExploreCard
               arrowClassName="-translate-x-1/2  !left-auto  !-top-1.5 !right-1 "
               currentStep="sendcampaign"
+              href=""
               bodyClassName="top-[0rem]  !-left-[10rem]  mt-14  "
               description="Running low on credits? Click here to purchase more and keep your campaigns running smoothly!"
               onNext={() => dispatch(setExplore(null))}

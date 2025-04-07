@@ -255,6 +255,7 @@ const Campaign = (props: Props) => {
             <ExploreCard
               arrowClassName="-translate-x-1/2  !left-auto  !-top-1 !right-0 "
               currentStep="startcampaign"
+              href="/dashboard/audience"
               bodyClassName="top-[0rem]  !-left-[14rem] mt-12"
               description="Create a new campaign to engage your audience."
               onNext={() => dispatch(setExplore("singlecontact"))}

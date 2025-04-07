@@ -308,6 +308,7 @@ const Audience = (props: Props) => {
                 <ExploreCard
                   arrowClassName="-translate-x-1/2  !left-auto  !top-2  !-right-2.5 "
                   currentStep="singlecontact"
+                  href="/dashboard/audience"
                   bodyClassName="top-[0rem]  !-left-[21rem] "
                   description="Quickly add a new contact to your audience list manually."
                   onNext={() => dispatch(setExplore("bulkcontact"))}
@@ -325,6 +326,7 @@ const Audience = (props: Props) => {
                 <ExploreCard
                   arrowClassName="-translate-x-1/2  !left-auto  !-top-1.5 !right-1 "
                   currentStep="bulkcontact"
+                  href="/dashboard/credits"
                   bodyClassName="top-[0rem]  !-left-[10rem]  mt-14  "
                   description="Quickly add a new contact to your audience list manually."
                   onNext={() => dispatch(setExplore("bulkcontact"))}
@@ -345,7 +347,6 @@ const Audience = (props: Props) => {
             <div className="rounded-xl mt-7 xl:px-8 py-4    h-full w-full border bg-white border-[#E4E7EC] p-2  gap-4 flex lg:flex-row flex-col items-center justify-between ">
               <div className="flex items-center  gap-3 lg:gap-4">
                 <span className="font-medium text-sm text-[#667085]">
-                  {" "}
                   {selectedItems.length} Audience Selected
                 </span>
                 <Button
