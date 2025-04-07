@@ -16,6 +16,7 @@ type Props = {
     | "singlecontact"
     | "bulkcontact"
     | "sendcampaign"; // Example: "step1"
+  href: string;
   description: string; // Example: "Here, you can monitor key metrics..."
   onSkip?: () => void; // Callback for "Skip Tour" button
   onNext?: () => void; // Callback for "Next" button
@@ -25,6 +26,7 @@ const ExploreCard = ({
   currentStep,
   title,
   description,
+  href,
   arrowClassName,
   bodyClassName,
   onSkip,
@@ -52,50 +54,14 @@ const ExploreCard = ({
             type="primary"
             onClick={() => dispatch(setExplore(null))}
           />
-          {explore == "credit" ? (
-            <Link href={"/dashboard/campaigns"}>
-              <Button
-                text="Try Its"
-                type="primary"
-                className="!px-4"
-                onClick={onNext}
-              />
-            </Link>
-          ) : explore == "startcampaign" ? (
-            <Link href={"/dashboard/audience"}>
-              <Button
-                text="Try Itssds"
-                type="primary"
-                className="!px-4"
-                onClick={onNext}
-              />
-            </Link>
-          ) :explore == "singlecontact" ? (
-            <Link href={"/dashboard/audience"}>
-              <Button
-                text="Try Its"
-                type="primary"
-                className="!px-4"
-                onClick={onNext}
-              />
-            </Link>
-          ) : explore == "bulkcontact" ? (
-            <Link href={"/dashboard/credits"}>
-              <Button
-                text="Try Its"
-                type="primary"
-                className="!px-4"
-                onClick={onNext}
-              />
-            </Link>
-          ) : (
+          <Link href={href}>
             <Button
-              text="Try Its"
+              text="Try It"
               type="primary"
               className="!px-4"
               onClick={onNext}
             />
-          )}
+          </Link>
         </div>
       </div>
     </div>
