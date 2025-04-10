@@ -76,7 +76,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
           {label}
         </label>
         <div
-          className={`flex justify-between items-center gap-2 rounded-lg px-3.5 py-2.5 border ${error ? "border-[#D42620]" : "border-grey-100"
+          className={`flex justify-between items-center gap-2 rounded-lg px-2.5 py-2.5 border ${error ? "border-[#D42620]" : "border-grey-100"
             } ${isOpen
               ? "shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05),_0px_0px_0px_4px_#E6F7FE]  border-[#8AD8FB]"
               : "shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)]  "
@@ -84,19 +84,19 @@ const SelectField: React.FC<SelectFieldProps> = ({
           onClick={onToggle}
         >
           <div
-            className={`text-md w-full flex gap-2  items-center whitespace-nowrap ${selectedOption ? "text-[#344054]" : "text-[#B9BDC7]"
+            className={`text-sm w-full flex gap-1.5  items-center whitespace-nowrap ${selectedOption ? "text-[#344054]" : "text-[#B9BDC7]"
               }`}
           >
             {icon && <span>{icon}</span>}
             {!colored && (
-              <span className={selectedOptionclassName}>{selectedOption ? selectedOption.label : placeholder}</span>
+              <span className={`${selectedOptionclassName} text-sm`}>{selectedOption ? selectedOption.label : placeholder}</span>
             )}
             {colored && (
               <span>
                 {selectedOption ? (
-                  <div className="bg-[#ECFDF3] text-success-700 px-2 py-0.5 gap-1 text-sm font-medium flex items-center rounded-lg ">
+                  <div className="bg-[#ECFDF3]  text-success-700 px-2 py-0.5 gap-1 text-sm font-medium flex items-center rounded-lg ">
                     {" "}
-                    <span className="h-2 w-2 rounded-full bg-[#12B76A]"></span>{" "}
+                    <span className="h-2 w-2 rounded-full  text-sm bg-[#12B76A]"></span>{" "}
                     {selectedOption.label}
                   </div>
                 ) : (
@@ -125,7 +125,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
                 }   justify-between items-center hover:bg-[#F9FAFB] hover:text-primary-600 cursor-pointer text-[#344054] `}
               onClick={() => handleSelect(option.value)}
             >
-              <span className={optionLabelClassName}>{option.label}</span>
+              <span className={`${optionLabelClassName} text-sm`}>{option.label}</span>
               <span>
                 {option.value === value ? <Image src={check} alt="icon" /> : ""}
               </span>

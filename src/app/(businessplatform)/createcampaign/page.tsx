@@ -75,7 +75,8 @@ const Setup = (props: Props) => {
   };
 
   return (
-    <div className=" px-4 w">
+   <div className="max-w-[640px] lg:ml-[14%] w-full">
+     <div className=" px-4 w-full  ">
       <p className="text-lg  font-semibold  border-b borer-[#D0D3D9]  pb-6">
         1. Setup Campaign Details
       </p>
@@ -189,6 +190,7 @@ const Setup = (props: Props) => {
         </div>
       </form>
     </div>
+   </div>
   );
 };
 

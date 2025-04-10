@@ -22,6 +22,8 @@ import secureLocalStorage from "react-secure-storage";
 import { uploadFile } from "@/lib/slices/uploadApi";
 import fileType from "@/images/filetype.svg";
 import useLogout from "@/hooks/useLogout";
+import Phone from "@/components/Phone";
+import ToggleButton from "@/components/ToggleButton";
 
 type Props = {};
 
@@ -33,7 +35,10 @@ const Compose = (props: Props) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>("");
   const [dragging, setDragging] = useState<boolean>(false);
-  const { handleLogout } = useLogout({role:"organization"});
+  const [toggleHeader, setToggleHeader] = useState<boolean>(false);
+  const [toggleActionButton, setToggleActionButton] = useState<boolean>(false);
+  const [toggleFooter, setToggleFooter] = useState<boolean>(false);
+  const { handleLogout } = useLogout({ role: "organization" });
   interface Step2Data {
     message: string[];
     actionButtons: string[];
@@ -47,17 +52,13 @@ const Compose = (props: Props) => {
   const [textEditorInputValues, setTextEditorInputValues] = useState<string[]>(
     storedData?.message ?? [""]
   );
-  console.log(
-    "secureLocalStorage",
-    secureLocalStorage.getItem("step2")
-  );
+  console.log("secureLocalStorage", secureLocalStorage.getItem("step2"));
 
   const handleChangeText = (index: number, value: string) => {
     const newtextEditorInputValues = [...textEditorInputValues];
     newtextEditorInputValues[index] = value; // Update the value at the specified index
     setTextEditorInputValues(newtextEditorInputValues);
   };
-
 
   const handleAddTextEditInput = () => {
     setTextEditorInputValues((prev) => [...prev, ""]); // Append an empty string for the new input
@@ -238,11 +239,10 @@ const Compose = (props: Props) => {
     router.push("/createcampaign/schedule");
   };
   return (
-    <div>
+    <div className="max-w-[1050px] lg:ml-[4%] px-4  w-full flex  items-start gap-20 mb-10">
       {/* modal  ${
          isModalOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}*/}
-
       <div
         onClick={() => setisModal((prev) => !prev)}
         className={`fixed p-2 lg:p-5 lg:pb-0 z-[100] bg-black/20 inset-0 flex justify-end modal transition-all duration-500  ${
@@ -272,10 +272,22 @@ const Compose = (props: Props) => {
           />
         </div>
       </div>
-      <div className=" px-4">
+      <div className=" w-full">
         <p className="text-lg font-semibold  border-b borer-[#D0D3D9]  pb-6">
           2.Compose Message
         </p>
+        <div className="flex flex-col mt-4 w-full  border-b pb-4 ">
+          <div className="flex  w-fit items-center gap-2">
+            <span className="text-grey-700"> Header </span>
+            <ToggleButton
+              onToggle={() => setToggleHeader(!toggleHeader)}
+              isToggled={toggleHeader}
+            />
+          </div>
+          <p className="text-grey-700 text-xs mt-1  ">
+            Add a short line of text at the top of the message or an image
+          </p>
+        </div>
 
         {typeof window !== undefined &&
           textEditorInputValues.map((item, index) => (
@@ -284,7 +296,7 @@ const Compose = (props: Props) => {
                 htmlFor=""
                 className="text-[#344054] mt-8 mb-3 text-base font-medium"
               >
-                Message {index + 1}
+                Body
               </label>
               <div className="flex flex-col gap-y-14 mb-10">
                 <TextEditor
@@ -427,11 +439,27 @@ const Compose = (props: Props) => {
             </ul>
           )}
           <div className="mt-8">
-            <p className="text-[#344054]  text-sm font-medium">
-              Action button{" "}
-              <span className="text-sm font-normal">(optional)</span>
-            </p>
-            <DragDropContext onDragEnd={handleDragEnd}>
+            <div className="flex flex-col mt-4 w-full  border-y py-4 ">
+              <div className="flex  w-fit items-center gap-2">
+                <span className="text-grey-700 text-sm">Action Button</span>
+                <ToggleButton
+                  onToggle={() => setToggleHeader(!toggleHeader)}
+                  isToggled={toggleHeader}
+                />
+              </div>
+
+              <div className="flex  w-fit items-center gap-2 mt-4">
+                <span className="text-grey-700 text-sm">Footer</span>
+                <ToggleButton
+                  onToggle={() => setToggleHeader(!toggleHeader)}
+                  isToggled={toggleHeader}
+                />
+              </div>
+              <p className="text-grey-700 text-sm mt-4">
+                Add a short line of text at the bottom of the message
+              </p>
+            </div>
+            {/* <DragDropContext onDragEnd={handleDragEnd}>
               <Droppable droppableId="droppable">
                 {(provided) => (
                   <div
@@ -476,12 +504,11 @@ const Compose = (props: Props) => {
                       </Draggable>
                     ))}
                     {provided.placeholder}{" "}
-                    {/* This placeholder helps with the layout during dragging */}
                   </div>
                 )}
               </Droppable>
-            </DragDropContext>
-            <div
+            </DragDropContext> */}
+            {/* <div
               onClick={handleAddInput}
               className="flex items-center gap-2 mt-4"
             >
@@ -490,9 +517,9 @@ const Compose = (props: Props) => {
                 <Plus color="#989FAD" />
               </div>
               <Multiply color="" height={24} width={24} />
-            </div>
+            </div> */}
           </div>
-          <div className="flex items-center justify-between mt-8 pt-8 border-t border-t-[#D0D3D9] mb-8">
+          <div className="flex items-center justify-between  mb-8">
             <Button
               text="Save to drafts"
               type="secondary"
@@ -510,6 +537,8 @@ const Compose = (props: Props) => {
           </div>
         </div>
       </div>
+      <div className="h-[592px] bg-grey-100 w-px mt-32 hidden lg:block"></div>
+      <Phone />
     </div>
   );
 };

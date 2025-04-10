@@ -56,7 +56,7 @@ export default function CreateLayout({
 
         <div className="flex flex-col w-full  justify-start items-start ">
           <div
-            className={`w-full flex  border-b border-b-[#D0D3D9]  px-4 lg:px-0 
+            className={`w-full flex  border-b border-b-[#D0D3D9] py-0.5  px-4 lg:px-0 
             ${pathname === "/createcampaign/review" ? "lg:pl-[8%]   " : "lg:pl-[14%] "}
             `}
           >
@@ -85,7 +85,7 @@ export default function CreateLayout({
                 )}
 
                 <span
-                  className={` font-medium ${
+                  className={` font-medium text-sm ${
                     pathname === "/createcampaign"
                       ? "text-primary-700"
                       : "text-grey-800"
@@ -96,7 +96,7 @@ export default function CreateLayout({
               </div>
               <ChevronRight color="#989FAD" width={16} height={16} />
               <div
-                className={`px-3 py-2 items-center gap-2 rounded-3xl flex border ${
+                className={`px-3 py-2 items-center gap-2 text-sm rounded-3xl flex border ${
                   pathname === "/createcampaign/compose"
                     ? "border-primary-500 bg-primary-50"
                     : "border-grey-100"
@@ -114,7 +114,7 @@ export default function CreateLayout({
                   />
                 )}
                 <span
-                  className={` font-medium ${
+                  className={` font-medium  text-sm ${
                     pathname === "/createcampaign/compose"
                       ? "text-primary-700"
                       : "text-grey-800"
@@ -125,7 +125,7 @@ export default function CreateLayout({
               </div>
               <ChevronRight color="#989FAD" width={16} height={16} />
               <div
-                className={`px-3 py-2 items-center gap-2 rounded-3xl flex border ${
+                className={`px-3 py-2 items-center gap-2 rounded-3xl flex border text-sm ${
                   pathname === "/createcampaign/schedule"
                     ? "border-primary-500 bg-primary-50"
                     : "border-grey-100"
@@ -143,7 +143,7 @@ export default function CreateLayout({
                   />
                 )}
                 <span
-                  className={` font-medium ${
+                  className={` font-medium text-sm ${
                     pathname === "/createcampaign/schedule"
                       ? "text-primary-700"
                       : "text-grey-800"
@@ -172,7 +172,7 @@ export default function CreateLayout({
                   />
                 )}
                 <span
-                  className={` font-medium ${
+                  className={` font-medium text-sm ${
                     pathname === "/createcampaign/review"
                       ? "text-primary-700"
                       : "text-grey-800"
@@ -184,13 +184,8 @@ export default function CreateLayout({
             </div>
           </div>{" "}
           <div
-            className={`${
-              pathname !== "/createcampaign/review"
-                ? "max-w-[640px] lg:ml-[14%]  w-full  "
-                : "lg:ml-[8%]"
-            }  mt-8 bg-[#FCFCFD] min-h-screen  `}
+            className={` w-full mt-8 bg-[#FCFCFD] min-h-screen  `}
           >
-            {" "}
             {children}
           </div>
         </div>
@@ -198,3 +193,9 @@ export default function CreateLayout({
     </div>
   );
 }
+
+// pathname !== "/createcampaign/review"
+// ? "max-w-[640px] lg:ml-[14%]  w-full  "
+// : ${
+//   "lg:ml-[8%]"
+// }

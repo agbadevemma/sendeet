@@ -2,6 +2,7 @@
 import Button from "@/components/buttons/Button";
 import SearchInput from "@/components/SearchInput";
 import SubscriptionPlans from "@/components/SubscriptionPlans";
+import SubscriptionSuccess from "@/components/SubscriptionSuccess";
 import Upgrade from "@/components/Upgrade";
 import ArrowUpRight from "@/icons/arrow-up-right";
 import FilterAlt from "@/icons/filter-alt";
@@ -17,6 +18,8 @@ const Plans = (props: Props) => {
   };
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
   const [isOpenUpgradeModal, setIsOpenUpgradeModal] = useState(false);
+  const [isSubscriptionSuccessModal, setIsSubscriptionSuccessModal] =
+    useState(false);
   const [selectedBilling, setSelectedBilling] = useState<Billing>({
     planName: "",
     planDescription: "",
@@ -35,6 +38,11 @@ const Plans = (props: Props) => {
         isOpen={isOpenUpgradeModal}
         setIsOpen={setIsOpenUpgradeModal}
         selectedBilling={selectedBilling}
+        setIsSubscriptionSuccessModal={setIsSubscriptionSuccessModal}
+      />
+      <SubscriptionSuccess
+        setIsOpen={setIsSubscriptionSuccessModal}
+        isOpen={isSubscriptionSuccessModal}
       />
       {/* body */}
       <div className="w-full flex flex-col gap-1  rounded-xl py-2  shadow-md bg-white  pt-4">
