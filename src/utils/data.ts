@@ -24,10 +24,10 @@ export const employeeCountOptions: Option[] = [
 ];
 
 export const messageTypeOptions: Option[] = [
-  { value: "Marketing", label: "Marketing" },
-  { value: "Utility", label: "Utility" },
-  { value: "Authentication", label: "Authentication" },
-  { value: "Service", label: "Service" },
+  { value: "Marketing", label: "Marketing - $0.0516/message." },
+  { value: "Utility", label: "Utility - $0.0067/message" },
+  { value: "Authentication", label: "Authentication - $0.0287/message." },
+  { value: "Service", label: "Service - $0.031/message" },
 ];
 
 export const issueTypeOptions: Option[] = [
@@ -186,51 +186,51 @@ export const initialTransactions: Transaction[] = [
 // export const initialTransactions: Transaction[] = [];
 
 export const initialCampaign: CampaignInterface[] = [
-  // {
-  //   id: 1,
-  //   campaign: "Tech requirements for Fund A.pdf",
-  //   clicked: "75%",
-  //   date: "02/10/24",
-  //   delivered: "30",
-  //   open: "10",
-  //   status: "Draft",
-  // },
-  // {
-  //   id: 2,
-  //   campaign: "Financial Analysis for Fund B.pdf",
-  //   clicked: "89.5%",
-  //   date: "03/10/24",
-  //   delivered: "50",
-  //   open: "20",
-  //   status: "Active",
-  // },
-  // {
-  //   id: 3,
-  //   campaign: "Market Research Report.pdf",
-  //   clicked: "92%",
-  //   date: "04/10/24",
-  //   delivered: "60",
-  //   open: "18",
-  //   status: "Active",
-  // },
-  // {
-  //   id: 4,
-  //   campaign: "Investment Strategy Overview.pdf",
-  //   clicked: "85%",
-  //   date: "05/10/24",
-  //   delivered: "55",
-  //   open: "25",
-  //   status: "Active",
-  // },
-  // {
-  //   id: 5,
-  //   campaign: "Tech requirements for Fund C.pdf",
-  //   clicked: "78%",
-  //   date: "06/10/24",
-  //   delivered: "45",
-  //   open: "15",
-  //   status: "Completed",
-  // },
+  {
+    id: 1,
+    campaign: "Tech requirements for Fund A.pdf",
+    clicked: "75%",
+    date: "02/10/24",
+    delivered: "30",
+    open: "10",
+    status: "Draft",
+  },
+  {
+    id: 2,
+    campaign: "Financial Analysis for Fund B.pdf",
+    clicked: "89.5%",
+    date: "03/10/24",
+    delivered: "50",
+    open: "20",
+    status: "Active",
+  },
+  {
+    id: 3,
+    campaign: "Market Research Report.pdf",
+    clicked: "92%",
+    date: "04/10/24",
+    delivered: "60",
+    open: "18",
+    status: "Active",
+  },
+  {
+    id: 4,
+    campaign: "Investment Strategy Overview.pdf",
+    clicked: "85%",
+    date: "05/10/24",
+    delivered: "55",
+    open: "25",
+    status: "Active",
+  },
+  {
+    id: 5,
+    campaign: "Tech requirements for Fund C.pdf",
+    clicked: "78%",
+    date: "06/10/24",
+    delivered: "45",
+    open: "15",
+    status: "Completed",
+  },
 ];
 
 export interface Step1Data {
@@ -585,7 +585,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 1,
   //   organizationName: "Tech Innovators Inc.",
-
   //   creditBalance: "2300",
   //   lastPurchase: "01/15/24",
   //   creditStatus: "Normal",
@@ -593,7 +592,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 2,
   //   organizationName: "Green Solutions Ltd.",
-
   //   creditBalance: "1800",
   //   lastPurchase: "02/10/24",
   //   creditStatus: "Normal",
@@ -601,7 +599,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 3,
   //   organizationName: "Healthcare United",
-
   //   creditBalance: "3200",
   //   lastPurchase: "01/25/24",
   //   creditStatus: "Low",
@@ -609,7 +606,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 4,
   //   organizationName: "Bright Minds Education",
-
   //   creditBalance: "500",
   //   lastPurchase: "02/05/24",
   //   creditStatus: "Normal",
@@ -617,7 +613,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 5,
   //   organizationName: "Global Freight Corp.",
-
   //   creditBalance: "2750",
   //   lastPurchase: "01/30/24",
   //   creditStatus: "Normal",
@@ -625,7 +620,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 6,
   //   organizationName: "Solar Power Network",
-
   //   creditBalance: "1200",
   //   lastPurchase: "02/01/24",
   //   creditStatus: "Low",
@@ -633,7 +627,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 7,
   //   organizationName: "Visionary Designs Co.",
-
   //   creditBalance: "2100",
   //   lastPurchase: "01/20/24",
   //   creditStatus: "Normal",
@@ -641,7 +634,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 8,
   //   organizationName: "Pinnacle Finance Group",
-
   //   creditBalance: "4000",
   //   lastPurchase: "02/12/24",
   //   creditStatus: "Normal",
@@ -649,7 +641,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 9,
   //   organizationName: "Urban Living Architects",
-
   //   creditBalance: "950",
   //   lastPurchase: "01/28/24",
   //   creditStatus: "Low",
@@ -657,7 +648,6 @@ export const organizationCredits: OrganizationCredit[] = [
   // {
   //   id: 10,
   //   organizationName: "Fresh Farm Organics",
-
   //   creditBalance: "1500",
   //   lastPurchase: "02/08/24",
   //   creditStatus: "Normal",

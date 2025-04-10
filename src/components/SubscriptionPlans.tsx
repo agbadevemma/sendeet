@@ -52,13 +52,13 @@ const SubscriptionPlans = ({
       <div
         onClick={() => setIsOpen(false)}
         className={`pt-[6%] top-0 left-0 z-50 h-screen overflow-auto p-4 w-full flex md:items-center md:justify-center bg-gray-500/20 backdrop-blur-sm fixed overflow   ${
-          !isOpen ? "visible" : "invisible"
+          isOpen ? "visible" : "invisible"
         } `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
           className={`flex flex-col w-full max-w-5xl rounded-lg shadow-md h-full  md:h-fit  p-4 bg-white ease-in-out transition-all duration-700  ${
-            !isOpen ? "opacity-[100%] " : " opacity-0"
+            isOpen ? "opacity-[100%] " : " opacity-0"
           }`}
         >
           <div className="flex items-center justify-between w-full border-b border-b-grey-50 py-4">
@@ -136,6 +136,7 @@ const SubscriptionPlans = ({
               btntext="Current Plan"
               priceFrequency="per month"
               onClick={() => {
+                setIsOpen(false);
                 setIsOpenUpgradeModal(true);
                 setSelectedBilling({
                   planName: "Free",
@@ -149,6 +150,7 @@ const SubscriptionPlans = ({
               price="N25,500"
               priceFrequency="per month"
               onClick={() => {
+                setIsOpen(false);
                 setIsOpenUpgradeModal(true);
                 setSelectedBilling({
                   planName: "Sapphire plan",
@@ -162,6 +164,7 @@ const SubscriptionPlans = ({
               price="N75,000"
               priceFrequency="per month"
               onClick={() => {
+                setIsOpen(false);
                 setIsOpenUpgradeModal(true);
                 setSelectedBilling({
                   planName: "Emerald",
@@ -175,6 +178,7 @@ const SubscriptionPlans = ({
               price="N25,500"
               priceFrequency="per month"
               onClick={() => {
+                setIsOpen(false);
                 setIsOpenUpgradeModal(true);
                 setSelectedBilling({
                   planName: "Diamond plan",
